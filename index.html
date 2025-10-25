@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soulscape AI Filmathon 2026 | The Largest AI Film Sprint in US</title>
+    <meta name="description" content="100+ Storytellers Around the World. 120 hours of creativity. Join the movement where filmmaking becomes a thought-engineering project for everyone.">
+    <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg">
+    <style>
+        /* ===== 字体导入 ===== */
+        @import url('https://fonts.cdnfonts.com/css/garet');
+        @import url('https://fonts.cdnfonts.com/css/horizon-2');
+        @import url('https://fonts.cdnfonts.com/css/monument-extended');
+        @import url('https://fonts.cdnfonts.com/css/tt-norms');
+
+        /* ===== CSS变量定义 ===== */
+        :root {
+            /* 颜色 - 基于彩虹渐变主题 */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --brand-primary: #00d9ff;
+            --brand-secondary: #ff00e5;
+            --brand-accent: #00ff88;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+
+            /* 间距 */
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            --spacing-4xl: 96px;
+
+            /* 圆角 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 阴影 */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(0, 217, 255, 0.3);
+
+            /* 布局 */
+            --max-width: 1400px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== 动画定义 ===== */
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.6); }
+        }
+
+        @keyframes textFadeIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes introFadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* ===== Intro Splash Screen ===== */
+        .intro-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            animation: introFadeOut 1s ease-out 2.5s forwards;
+        }
+
+        .intro-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('openpage.png') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        .intro-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                rgba(0, 217, 255, 0.15) 0%,
+                rgba(255, 0, 229, 0.15) 50%,
+                rgba(0, 255, 136, 0.15) 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+            z-index: 2;
+        }
+
+        .intro-text {
+            position: relative;
+            z-index: 10;
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(28px, 3vw, 42px);
+            font-weight: 300;
+            color: white;
+            text-align: center;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+            animation: textFadeIn 2s ease-out 0.5s both;
+
+            /* Center the text container */
+            width: 85%;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 768px) {
+            .intro-text {
+                width: 90%;
+                font-size: clamp(20px, 4.5vw, 32px);
+                font-weight: 300;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro-text {
+                width: 90%;
+                font-size: clamp(16px, 5vw, 24px);
+                letter-spacing: 0.3px;
+                font-weight: 300;
+                line-height: 1.5;
+            }
+        }
+
+        /* ===== Hero Section ===== */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                rgba(0, 217, 255, 0.05) 0%,
+                rgba(255, 0, 229, 0.05) 50%,
+                rgba(0, 255, 136, 0.05) 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 10s ease infinite;
+            z-index: 1;
+        }
+
+        .hero-dark-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(10, 10, 10, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1400px;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                gap: 20px;
+                top: 42%;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        .hero-register-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #f48529 !important;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'TT Norms', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.3),
+                0 8px 16px rgba(244, 133, 41, 0.4),
+                0 12px 24px rgba(244, 133, 41, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hero-register-btn:hover {
+            background: #ff9545 !important;
+            transform: translateY(-3px);
+            box-shadow:
+                0 6px 8px rgba(0, 0, 0, 0.35),
+                0 12px 20px rgba(244, 133, 41, 0.5),
+                0 18px 32px rgba(244, 133, 41, 0.3);
+        }
+
+        .hero-discord-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #5865F2 !important;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'TT Norms', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hero-discord-btn:hover {
+            background: #7289DA !important;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.5);
+        }
+
+        .hero-main-title {
+            font-family: 'Monument Extended', sans-serif;
+            font-weight: 300;
+            line-height: 1;
+            margin: 0;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+            /* The title will always fill 100% of its container */
+            /* The container (.hero-content) is set to 80% of viewport */
+            width: 100%;
+            white-space: nowrap;
+
+            /* Use viewport-based units to scale font size based on container width */
+            /* Since container is 80vw, we calculate based on that */
+            /* 14 characters in "SOULSCAPE 2026" including space */
+            /* Font size = container width / (character count * character width ratio) */
+            font-size: min(5.7vw, 110px);
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .hero-main-title {
+                font-size: min(7.5vw, 55px);
+                letter-spacing: -0.02em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-main-title {
+                font-size: min(7vw, 45px);
+                letter-spacing: -0.03em;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .hero-main-title {
+                font-size: min(6.5vw, 40px);
+                letter-spacing: -0.04em;
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'TT Norms', sans-serif;
+            font-size: clamp(16px, 2vw, 24px);
+            color: white;
+            margin: 0;
+            line-height: 1.5;
+            font-weight: 300;
+            text-align: center;
+            white-space: nowrap;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hero-subtitle {
+                font-size: clamp(14px, 3.5vw, 18px);
+                white-space: normal;
+                line-height: 1.6;
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-subtitle {
+                font-size: clamp(12px, 4vw, 16px);
+            }
+        }
+
+
+        .hero-description {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'TT Norms', sans-serif;
+            font-size: clamp(18px, 2vw, 24px);
+            color: white;
+            text-align: center;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 11;
+        }
+
+        @media (max-width: 768px) {
+            .hero-description {
+                bottom: 80px;
+                font-size: clamp(14px, 3vw, 20px);
+                letter-spacing: 1px;
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 36px;
+            background: #c44569;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-family: 'Garet', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            margin-top: var(--spacing-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            background: #d55a87;
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* ===== Scroll Down Indicator ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-3xl);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-indicator {
+                bottom: 40px;
+            }
+        }
+
+        .scroll-text {
+            font-family: 'TT Norms', sans-serif;
+            font-size: clamp(14px, 1.5vw, 20px);
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-text {
+                font-size: clamp(11px, 3vw, 16px);
+                letter-spacing: 1px;
+            }
+        }
+
+        .scroll-arrow {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            opacity: 0.6;
+        }
+
+        /* ===== Navigation ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: var(--spacing-md) var(--spacing-lg);
+            }
+        }
+
+        .navbar.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .navbar-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .navbar-register-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: #f48529 !important;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'TT Norms', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.25),
+                0 4px 12px rgba(244, 133, 41, 0.3),
+                0 8px 16px rgba(244, 133, 41, 0.15);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .navbar-register-btn:hover {
+            background: #ff9545 !important;
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.3),
+                0 6px 16px rgba(244, 133, 41, 0.4),
+                0 12px 20px rgba(244, 133, 41, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-register-btn {
+                padding: 8px 20px;
+                font-size: 11px;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-register-btn {
+                padding: 8px 16px;
+                font-size: 10px;
+            }
+        }
+
+        /* ===== Video Section ===== */
+        .video-section {
+            width: 100%;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .video-section video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-control-btn {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-control-btn:hover {
+            background: rgba(0, 217, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        .video-control-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .video-play-btn {
+            left: 20px;
+        }
+
+        .video-unmute-btn {
+            left: 70px;
+        }
+
+        .video-fullscreen-btn {
+            right: 20px;
+        }
+
+        .video-control-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(244, 133, 41, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                0 8px 20px rgba(244, 133, 41, 0.4);
+        }
+
+        .video-play-overlay:hover {
+            background: rgba(255, 149, 69, 0.95);
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.35),
+                0 12px 28px rgba(244, 133, 41, 0.5);
+        }
+
+        .video-play-overlay svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            margin-left: 4px;
+        }
+
+        .video-play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ===== Stats Preview Section ===== */
+        .stats-preview {
+            width: 100%;
+            background: var(--bg-primary);
+            padding: var(--spacing-4xl) var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .stats-preview {
+                padding: var(--spacing-2xl) var(--spacing-md);
+            }
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .stat-item {
+                padding: var(--spacing-md);
+                gap: var(--spacing-sm);
+            }
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(0, 217, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 300;
+            line-height: 1;
+            color: #f48529;
+        }
+
+        @media (max-width: 768px) {
+            .stat-number {
+                font-size: clamp(36px, 10vw, 64px);
+                font-weight: 300;
+            }
+        }
+
+        .stat-label {
+            font-family: 'TT Norms', sans-serif;
+            font-size: clamp(13px, 1.3vw, 16px);
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .stat-label {
+                font-size: clamp(12px, 3vw, 16px);
+                letter-spacing: 0.5px;
+            }
+        }
+
+        .stat-item-featured {
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .stat-main {
+            display: flex;
+            align-items: baseline;
+            gap: var(--spacing-sm);
+        }
+
+        @media (max-width: 768px) {
+            .stat-main {
+                gap: var(--spacing-sm);
+            }
+        }
+
+        .stat-subtitle {
+            font-family: 'TT Norms', sans-serif;
+            font-size: clamp(11px, 1.2vw, 14px);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .stat-subtitle {
+                font-size: clamp(10px, 2.5vw, 13px);
+                letter-spacing: 0.5px;
+            }
+        }
+
+        /* ===== Content Sections ===== */
+        .content-section {
+            padding: var(--spacing-4xl) var(--spacing-lg);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ===== Mission Section ===== */
+        .mission-section {
+            background: var(--bg-primary);
+        }
+
+        .mission-text {
+            font-size: clamp(18px, 2.5vw, 28px);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto var(--spacing-3xl);
+            font-style: italic;
+        }
+
+        .mission-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .highlight-card {
+            padding: var(--spacing-xl);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--brand-primary);
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 36px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .highlight-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .highlight-text {
+            font-size: 16px;
+            color: var(--text-tertiary);
+            line-height: 1.6;
+        }
+
+        /* ===== Schedule Section ===== */
+        .schedule-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .schedule-day {
+            margin-bottom: var(--spacing-3xl);
+            padding-left: var(--spacing-2xl);
+            border-left: 3px solid var(--brand-primary);
+            position: relative;
+        }
+
+        .schedule-day::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--brand-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--brand-primary);
+        }
+
+        .day-title {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--brand-primary);
+        }
+
+        .day-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .schedule-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .schedule-item {
+            padding: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-time {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--brand-accent);
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .item-description {
+            font-size: 15px;
+            color: var(--text-tertiary);
+            line-height: 1.6;
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-xl);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--brand-primary);
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 28px;
+            color: var(--brand-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            margin-top: var(--spacing-md);
+            font-size: 16px;
+            color: var(--text-tertiary);
+            line-height: 1.7;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* ===== CTA Section ===== */
+        .cta-section {
+            padding: var(--spacing-4xl) var(--spacing-lg);
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .cta-section .section-title {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            padding: var(--spacing-3xl) var(--spacing-lg);
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-logo-main {
+            font-family: 'Monument Extended', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-logo-sub {
+            font-family: 'TT Norms', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-tertiary);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-link {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--brand-primary);
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: var(--spacing-xl);
+        }
+
+        /* ===== Scroll Animations ===== */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .mission-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-day {
+                padding-left: var(--spacing-lg);
+            }
+
+            .navbar-content {
+                justify-content: space-between;
+                padding: 0 var(--spacing-md);
+            }
+
+            .navbar-logo {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Splash Screen -->
+    <div class="intro-splash" id="introSplash">
+        <div class="intro-background"></div>
+        <div class="intro-text">
+            The World's First Global AI Film Sprint for Every Storyteller
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-content">
+            <div class="navbar-logo">Soulscape</div>
+            <a href=" " class="luma-checkout--button navbar-register-btn" data-luma-action="checkout" data-luma-event-id="evt-WMGIggCwdEgG1HC">Visit</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="SoulscapeLandingPage.png" alt="Hero Background" class="hero-bg">
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-dark-overlay"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-main-title">SOULSCAPE 2026</h1>
+            <p class="hero-subtitle">Your life is script, Your Heart is the Director</p>
+            <div class="hero-buttons">
+                <a href=" " class="luma-checkout--button hero-register-btn" data-luma-action="checkout" data-luma-event-id="evt-WMGIggCwdEgG1HC">Visit</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Global AI Film Sprint</span>
+            <div class="scroll-arrow">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section scroll-animate">
+        <video id="promoVideo" loop playsinline>
+            <source src="Soulscape 2026 Trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="playOverlay" class="video-play-overlay">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </div>
+        <button id="playBtn" class="video-control-btn video-play-btn" title="Play">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+        <button id="muteBtn" class="video-control-btn video-unmute-btn" title="Mute">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" style="opacity:0.3"/>
+            </svg>
+        </button>
+        <button id="fullscreenBtn" class="video-control-btn video-fullscreen-btn" title="Fullscreen">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+            </svg>
+        </button>
+    </section>
+
+    <!-- Stats Preview Section -->
+    <section class="stats-preview scroll-animate">
+        <div class="section-header">
+            <span class="section-label">Preview</span>
+        </div>
+        <div class="stats-container">
+            <div class="stat-item stat-item-featured">
+                <div class="stat-main">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Participants</span>
+                </div>
+                <span class="stat-subtitle">World Largest AI Film Sprint</span>
+            </div>
+            <div class="stat-item stat-item-featured">
+                <div class="stat-main">
+                    <span class="stat-number">120</span>
+                    <span class="stat-label">Hours</span>
+                </div>
+                <span class="stat-subtitle">Turn the World of Imaginations into Reality</span>
+            </div>
+            <div class="stat-item stat-item-featured">
+                <div class="stat-main">
+                    <span class="stat-number">$150k</span>
+                    <span class="stat-label">Total Prize</span>
+                </div>
+                <span class="stat-subtitle">Every Story Deserves to Be Seen</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="content-section mission-section scroll-animate">
+        <div class="section-header">
+            <span class="section-label">Our Belief</span>
+            <h2 class="section-title">This Isn't a Competition. It's a Movement.</h2>
+        </div>
+
+        <div class="mission-text">
+            "We believe that in the AI era, filmmaking is a thought-engineering project for everyone, not a privilege for the few. Our goal isn't to find the next master. We are here to provide a stage for those with a story in their hearts, but who lack the tools and resources to turn their dreams into reality."
+        </div>
+
+        <div class="mission-highlights">
+            <div class="highlight-card">
+                <div class="highlight-icon">🎬</div>
+                <h3 class="highlight-title">Your Life is the Script</h3>
+                <p class="highlight-text">Every experience you've lived is a story waiting to be told.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">❤️</div>
+                <h3 class="highlight-title">Your Heart is the Director</h3>
+                <p class="highlight-text">Authentic emotion is the soul of your film.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🌟</div>
+                <h3 class="highlight-title">Every Story Will Be Seen</h3>
+                <p class="highlight-text">Find your audience. Be heard, not just seen.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🤝</div>
+                <h3 class="highlight-title">Community Growth</h3>
+                <p class="highlight-text">Collaborate, Co-create. Find your allies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="content-section scroll-animate">
+        <div class="section-header">
+            <span class="section-label">To The Storytellers</span>
+            <h2 class="section-title">Here's to the Storytellers</h2>
+        </div>
+
+        <div class="mission-text" style="font-size: 20px; line-height: 2;">
+            The quiet observers.<br>
+            The everyday dreamers.<br>
+            The ones with a world inside them, waiting to be seen.<br><br>
+            While some may see them as just a face in the crowd,<br>
+            We see a universe of imagination.<br><br>
+            You can tell them their stories are too small, their dreams too big,<br>
+            but the only thing you can't do is stop them from feeling.<br><br>
+            Because they connect us.<br>
+            They remind us what it means to be human.<br><br>
+            Some may say a great movie needs a great camera.<br>
+            We say it needs a great soul.<br><br>
+            We're not here to find the next master.<br>
+            We're here to give every story a light, and every storyteller has a voice.
+        </div>
+
+        <div style="text-align: center; margin-top: 48px;">
+            <a href="https://discord.gg/2JvKsbckG" class="hero-discord-btn" target="_blank" rel="noopener noreferrer">Join the Community</a>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="content-section scroll-animate">
+        <div class="section-header">
+            <span class="section-label">5-Day Journey</span>
+            <h2 class="section-title">Film Sprint Agenda</h2>
+            <p class="section-description">A carefully designed journey from belief to finished film</p>
+        </div>
+
+        <div class="schedule-timeline">
+            <!-- Day 1 -->
+            <div class="schedule-day">
+                <h3 class="day-title">Day 1</h3>
+                <p class="day-subtitle">The Foundation of Thought and the Fusion of Tools</p>
+
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <div class="item-time">10:00 AM - 1:00 PM</div>
+                        <div class="item-title">Arrival & "The Belief Archive"</div>
+                        <div class="item-description">Record the stories and beliefs you want to express through film. AI will instantly generate a "thought filmstrip" that serves as your entry pass.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">1:00 PM - 4:00 PM</div>
+                        <div class="item-title">"Belief Resonance" & Team Formation</div>
+                        <div class="item-description">Form teams based on shared values and story themes through an informal mixer.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">4:00 PM - 6:00 PM</div>
+                        <div class="item-title">"The Belief Toolkit" Workshop</div>
+                        <div class="item-description">AI Visual Poetry: Transforming emotions into visuals with prompts. Master the core functions of AI video tools.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">7:00 PM - 10:00 PM</div>
+                        <div class="item-title">Theme Reveal & Script "Engineering"</div>
+                        <div class="item-description">A "Forum of Belief" where filmmaking masters and AI thought leaders announce the event's theme. Begin prototyping your stories.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Days 2-4 -->
+            <div class="schedule-day">
+                <h3 class="day-title">Days 2-4</h3>
+                <p class="day-subtitle">The Belief Engineering Sprint (72 Hours of Uninterrupted Creation)</p>
+                <p class="day-subtitle" style="font-style: italic; font-size: 16px; margin-top: 8px;">"This isn't a silent exam. This is a collaborative journey."</p>
+
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <div class="item-time">All Day</div>
+                        <div class="item-title">Creative Marathon</div>
+                        <div class="item-description">The venue transforms into a "Thought Lab," open 24/7 for teams to create. Optional parallel workshops available throughout. Work alongside fellow storytellers, share ideas, and build together in a supportive environment.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">Day 2 AM</div>
+                        <div class="item-title">Narrative Mapping Workshop</div>
+                        <div class="item-description">How to use AI to structure your story from a human perspective. Learn to craft compelling narratives that resonate with audiences while leveraging AI tools for efficient story development.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">Day 2 PM</div>
+                        <div class="item-title">Emotional Palette Workshop</div>
+                        <div class="item-description">How to create mood and atmosphere with AI. Master the art of visual storytelling by using AI to generate imagery that captures the emotional core of your narrative.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">Day 3</div>
+                        <div class="item-title">Sound and Soul Workshop</div>
+                        <div class="item-description">How to use AI to assist with scoring and sound design. Discover how audio can elevate your film's emotional impact and learn to work with AI music generation and sound design tools.</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">Day 4</div>
+                        <div class="item-title">Prototype Presentation Workshop</div>
+                        <div class="item-description">Refine your core message and prepare for the final showcase. Learn storytelling techniques for presenting your work effectively and receive feedback from mentors and peers.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="schedule-day">
+                <h3 class="day-title">Day 5</h3>
+                <p class="day-subtitle">The Cultural Launch</p>
+
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <div class="item-time">10:00 AM - 12:00 PM</div>
+                        <div class="item-title">Submission & Judging</div>
+                        <div class="item-description">Teams submit their finished films and a "Creator's Statement."</div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-time">3:00 PM - 6:00 PM</div>
+                        <div class="item-title">Grand Screening & Awards Ceremony</div>
+                        <div class="item-description">All films will be screened in a professional theater. The "Cultural Prototype Awards" will be presented, honoring works that have successfully "engineered" powerful beliefs into film.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Attend Section -->
+    <section class="content-section scroll-animate">
+        <div class="section-header">
+            <span class="section-label">Why Join</span>
+            <h2 class="section-title">Why Attend?</h2>
+        </div>
+
+        <div class="mission-highlights">
+            <div class="highlight-card">
+                <div class="highlight-icon">💡</div>
+                <h3 class="highlight-title">Here's to the new
+                    storytellers</h3>
+                <p class="highlight-text">We believe in the ones who see things differently. Creativity can change the world.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🚀</div>
+                <h3 class="highlight-title">Make Your Masterpiece</h3>
+                <p class="highlight-text">A five-day sprint where we'll help you engineer your vision into a film.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🎓</div>
+                <h3 class="highlight-title">Be the Director</h3>
+                <p class="highlight-text">We're democratizing
+                    filmmaking, putting the power of a studio in your hands.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">✨</div>
+                <h3 class="highlight-title">Find Your Voice</h3>
+                <p class="highlight-text">We're here to give every
+                    story a light, and every storyteller has a voice.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section scroll-animate">
+        <div class="section-header">
+            <span class="section-label">Questions</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Do I need filmmaking experience?</div>
+                <div class="faq-answer">No! This event is designed for everyone with a story to tell, regardless of technical experience. We'll provide workshops to help you master AI filmmaking tools quickly.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What equipment do I need?</div>
+                <div class="faq-answer">Just bring your laptop and your creativity. We'll provide access to AI video tools and all necessary resources for creating your film.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do I need to have a team?</div>
+                <div class="faq-answer">You can come solo or with a team. We'll have a team formation session on Day 1 where you can connect with others who share your vision and values.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What kind of stories can I tell?</div>
+                <div class="faq-answer">Any story that comes from your heart. Whether it's personal, fictional, documentary-style, or experimental—if it means something to you, we want to see it.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is this a competition?</div>
+                <div class="faq-answer">This isn't a competition—it's a movement. While we'll have awards, our focus is on providing a stage for every storyteller and building a community of creators.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens after the event?</div>
+                <div class="faq-answer">Your journey doesn't end here; it's just the beginning. Your film will be showcased to our community, but more importantly, you'll gain the opportunity to continue developing your project alongside Hollywood filmmakers. Exceptional projects may even be acquired for professional film production. Furthermore, top AI filmmakers will have a chance to join Hollywood's world-class studios.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section scroll-animate" id="apply">
+        <div class="section-header">
+            <h2 class="section-title" style="color: white;">Ready to Tell Your Story?</h2>
+            <p class="section-description" style="color: rgba(255, 255, 255, 0.8);">
+                Join 100+ storytellers from around the world. Let's create something extraordinary together.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-main">Soulscape</div>
+                <div class="footer-logo-sub">Your Story, Your Cinema</div>
+            </div>
+            <p class="footer-text">
+                A movement by storytellers, for storytellers.
+            </p>
+            <div class="footer-links">
+            </div>
+            <div class="copyright">
+                © 2026 Soulscape AI Film Sprint. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intro splash screen control
+        const introSplash = document.getElementById('introSplash');
+
+        // Remove intro splash after animation completes
+        setTimeout(() => {
+            if (introSplash) {
+                introSplash.remove();
+            }
+        }, 3500); // Remove after 3.5 seconds (2.5s display + 1s fade out)
+
+        // Navbar scroll visibility
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Video manual play control
+        const promoVideo = document.getElementById('promoVideo');
+        const playBtn = document.getElementById('playBtn');
+        const playOverlay = document.getElementById('playOverlay');
+        const muteBtn = document.getElementById('muteBtn');
+
+        // Ensure video starts unmuted
+        promoVideo.muted = false;
+
+        // Play icon
+        const playIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+        </svg>`;
+
+        // Pause icon
+        const pauseIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>`;
+
+        // Function to toggle play/pause
+        function togglePlayPause() {
+            if (promoVideo.paused) {
+                promoVideo.play();
+                playBtn.innerHTML = pauseIcon;
+                playBtn.title = 'Pause';
+                playOverlay.classList.add('hidden');
+            } else {
+                promoVideo.pause();
+                playBtn.innerHTML = playIcon;
+                playBtn.title = 'Play';
+                playOverlay.classList.remove('hidden');
+            }
+        }
+
+        // Play button click
+        if (playBtn) {
+            playBtn.addEventListener('click', togglePlayPause);
+        }
+
+        // Play overlay click
+        if (playOverlay) {
+            playOverlay.addEventListener('click', togglePlayPause);
+        }
+
+        // Video click to toggle play/pause
+        if (promoVideo) {
+            promoVideo.addEventListener('click', togglePlayPause);
+        }
+
+        // SVG icons for mute button states
+        const mutedIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>`;
+
+        const unmutedIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" style="opacity:0.3"/>
+        </svg>`;
+
+        // Mute button functionality
+        if (muteBtn && promoVideo) {
+            muteBtn.addEventListener('click', () => {
+                if (promoVideo.muted) {
+                    promoVideo.muted = false;
+                    muteBtn.innerHTML = unmutedIcon;
+                    muteBtn.title = 'Mute';
+                } else {
+                    promoVideo.muted = true;
+                    muteBtn.innerHTML = mutedIcon;
+                    muteBtn.title = 'Unmute';
+                }
+            });
+        }
+
+        // SVG icons for fullscreen button states
+        const enterFullscreenIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </svg>`;
+
+        const exitFullscreenIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+        </svg>`;
+
+        // Fullscreen button functionality
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        if (fullscreenBtn && promoVideo) {
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    // Enter fullscreen
+                    if (promoVideo.requestFullscreen) {
+                        promoVideo.requestFullscreen();
+                    } else if (promoVideo.webkitRequestFullscreen) {
+                        promoVideo.webkitRequestFullscreen();
+                    } else if (promoVideo.msRequestFullscreen) {
+                        promoVideo.msRequestFullscreen();
+                    }
+                } else {
+                    // Exit fullscreen
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            });
+
+            // Update button icon when fullscreen state changes
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.innerHTML = exitFullscreenIcon;
+                    fullscreenBtn.title = 'Exit Fullscreen';
+                } else {
+                    fullscreenBtn.innerHTML = enterFullscreenIcon;
+                    fullscreenBtn.title = 'Fullscreen';
+                }
+            });
+
+            // For webkit browsers
+            document.addEventListener('webkitfullscreenchange', () => {
+                if (document.webkitFullscreenElement) {
+                    fullscreenBtn.innerHTML = exitFullscreenIcon;
+                    fullscreenBtn.title = 'Exit Fullscreen';
+                } else {
+                    fullscreenBtn.innerHTML = enterFullscreenIcon;
+                    fullscreenBtn.title = 'Fullscreen';
+                }
+            });
+        }
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Close other items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for CTA buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
+</body>
+</html>
