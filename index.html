@@ -11,6 +11,10 @@
       content="100+ Storytellers Around the World. 120 hours of creativity. Join the movement where filmmaking becomes a thought-engineering project for everyone."
     />
     <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
     <style>
       /* ===== 字体导入 ===== */
       @import url("https://fonts.cdnfonts.com/css/garet");
@@ -592,6 +596,24 @@
           0 12px 20px rgba(244, 133, 41, 0.2);
       }
 
+      .social-icons {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-right: 20px;
+      }
+
+      .social-icons a {
+        color: var(--text-primary);
+        font-size: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        color: #f48529;
+        transform: translateY(-2px);
+      }
+
       @media (max-width: 768px) {
         .navbar-register-btn {
           padding: 8px 20px;
@@ -1170,6 +1192,26 @@
     <nav class="navbar" id="navbar">
       <div class="navbar-content">
         <div class="navbar-logo">Soulscape</div>
+        <div class="social-icons">
+          <a
+            href="https://www.instagram.com/soulscapefilm/"
+            target="_blank"
+            title="Instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a
+            href="https://x.com/soulscapefilm"
+            target="_blank"
+            title="X (Twitter)"
+            ><i class="fa-brands fa-x-twitter"></i
+          ></a>
+          <a href="https://discord.gg/2JvKsbckG" target="_blank" title="Discord"
+            ><i class="fab fa-discord"></i
+          ></a>
+          <a href="https://luma.com/soulscape?k=cd" target="_blank" title="Luma"
+            ><i class="fa-solid fa-calendar"></i></i
+          ></a>
+        </div>
         <a
           href=" "
           class="luma-checkout--button navbar-register-btn"
