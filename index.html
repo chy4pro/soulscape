@@ -662,6 +662,7 @@
         width: 100%;
         height: auto;
         display: block;
+        object-fit: cover;
       }
 
       .video-control-btn {
@@ -1182,8 +1183,38 @@
 
       /* ===== Responsive ===== */
       @media (max-width: 768px) {
+        .content-section {
+          padding: var(--spacing-2xl) var(--spacing-md);
+        }
+
+        .mission-text {
+          font-size: clamp(16px, 4vw, 20px);
+          line-height: 1.6 !important;
+          margin-bottom: var(--spacing-2xl);
+        }
+
         .mission-highlights {
           grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .highlight-card {
+          padding: var(--spacing-md);
+        }
+
+        .highlight-icon {
+          font-size: 24px;
+          margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight-title {
+          font-size: 16px;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .highlight-text {
+          font-size: 14px;
+          line-height: 1.5;
         }
 
         .schedule-day {
@@ -1733,49 +1764,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Attend Section -->
-    <section class="content-section scroll-animate">
-      <div class="section-header">
-        <span class="section-label">Why Join</span>
-        <h2 class="section-title">We don't chase algorithms; we chase resonance.</h2>
-      </div>
-
-      <div class="mission-highlights">
-        <div class="highlight-card">
-          <div class="highlight-icon">💡</div>
-          <h3 class="highlight-title">Here's to the new storytellers</h3>
-          <p class="highlight-text">
-            We believe in the ones who see things differently. Creativity can
-            change the world.
-          </p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🚀</div>
-          <h3 class="highlight-title">Make Your Masterpiece</h3>
-          <p class="highlight-text">
-            A five-day sprint where we'll help you engineer your vision into a
-            film.
-          </p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🎓</div>
-          <h3 class="highlight-title">Be the Director</h3>
-          <p class="highlight-text">
-            We're democratizing filmmaking, putting the power of a studio in
-            your hands.
-          </p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">✨</div>
-          <h3 class="highlight-title">Find Your Voice</h3>
-          <p class="highlight-text">
-            We're here to give every story a light, and every storyteller has a
-            voice.
-          </p>
         </div>
       </div>
     </section>
