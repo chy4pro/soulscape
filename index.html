@@ -2228,6 +2228,30 @@
         });
       });
 
+      // gtag tracking for Luma checkout buttons
+      const lumaButtons = document.querySelectorAll(".luma-checkout--button");
+      if (lumaButtons.length) {
+        lumaButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (typeof gtag === "function") {
+              const location = button.classList.contains(
+                "navbar-register-btn"
+              )
+                ? "navbar"
+                : button.classList.contains("hero-register-btn")
+                ? "hero"
+                : "unknown";
+
+              gtag("event", "luma_button_click", {
+                event_category: "CTA",
+                event_label: button.dataset.lumaEventId || "unknown",
+                button_location: location,
+              });
+            }
+          });
+        });
+      }
+
       // Smooth scroll for CTA buttons
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
