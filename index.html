@@ -2232,7 +2232,7 @@
       const lumaButtons = document.querySelectorAll(".luma-checkout--button");
       if (lumaButtons.length) {
         lumaButtons.forEach((button) => {
-          button.addEventListener("click", (exitFullscreenIcon) => {
+          button.addEventListener("click", () => {
             if (typeof gtag === "function") {
               const location = button.classList.contains(
                 "navbar-register-btn"
@@ -2246,17 +2246,8 @@
                 event_category: "CTA",
                 event_label: "register",
                 button_location: location,
-                event_callback: () => {
-        // 在这里执行跳转会保证事件送出去
-        window.location.href = button.href;
-      }
-              });// 阻止默认跳转，等 callback
-    e.preventDefault();
-
-    // fallback：万一 callback 没触发也不会卡死
-    setTimeout(() => {
-      window.location.href = button.href;
-    }, 300);
+                transport_type: "beacon" // ★★ 重点！避免事件在跳转/动作中丢失
+              });
             }
           });
         });
