@@ -916,6 +916,86 @@
         margin: 0 auto;
       }
 
+      /* ===== Image Gallery Section ===== */
+      .image-gallery-section {
+        width: 100%;
+        background: var(--bg-primary);
+        padding: var(--spacing-4xl) 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-wrapper {
+        position: relative;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        cursor: grab;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .gallery-wrapper.grabbing {
+        cursor: grabbing;
+      }
+
+      .gallery-scroll {
+        display: flex;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-xl);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item {
+        flex-shrink: 0;
+        width: 400px;
+        height: 300px;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        transition: transform 0.3s ease;
+        user-select: none;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        z-index: 10;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+      }
+
+      @media (max-width: 768px) {
+        .gallery-item {
+          width: 280px;
+          height: 210px;
+        }
+      }
+
       /* ===== Mission Section ===== */
       .mission-section {
         background: var(--bg-primary);
@@ -1388,6 +1468,15 @@
             <span class="stat-label">Total Prize</span>
           </div>
           <span class="stat-subtitle">Every Story Deserves to Be Seen</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Gallery Section -->
+    <section class="image-gallery-section scroll-animate">
+      <div class="gallery-wrapper" id="galleryWrapper">
+        <div class="gallery-scroll" id="galleryScroll">
+          <!-- Images will be dynamically inserted here by JavaScript in random order -->
         </div>
       </div>
     </section>
@@ -2250,6 +2339,113 @@
           }
         });
       });
+
+      // Image Gallery - Random order, auto scroll and drag to scroll
+      const galleryScroll = document.getElementById('galleryScroll');
+      const galleryWrapper = document.getElementById('galleryWrapper');
+
+      if (galleryScroll && galleryWrapper) {
+        // Create array of image numbers and shuffle
+        const imageNumbers = Array.from({length: 20}, (_, i) => i + 1);
+
+        // Fisher-Yates shuffle algorithm
+        for (let i = imageNumbers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+        }
+
+        // Insert images in random order
+        imageNumbers.forEach(num => {
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.innerHTML = `<img src="Soulscape 2025.10 mixer/${num}.png" alt="Gallery Image ${num}">`;
+          galleryScroll.appendChild(item);
+        });
+
+        // Auto scroll functionality
+        let isUserInteracting = false;
+        let interactionTimeout;
+        let animationId;
+
+        function autoScroll() {
+          if (!isUserInteracting) {
+            galleryWrapper.scrollLeft += 1;
+
+            // Reset to start when reaching the end
+            if (galleryWrapper.scrollLeft >= galleryWrapper.scrollWidth - galleryWrapper.clientWidth - 10) {
+              galleryWrapper.scrollLeft = 0;
+            }
+          }
+          animationId = requestAnimationFrame(autoScroll);
+        }
+
+        function pauseAutoScroll(duration = 3000) {
+          isUserInteracting = true;
+          clearTimeout(interactionTimeout);
+          interactionTimeout = setTimeout(() => {
+            isUserInteracting = false;
+          }, duration);
+        }
+
+        // Start auto scroll using requestAnimationFrame for smooth animation
+        animationId = requestAnimationFrame(autoScroll);
+
+        // Pause on hover over gallery
+        galleryWrapper.addEventListener('mouseenter', () => {
+          isUserInteracting = true;
+        });
+
+        galleryWrapper.addEventListener('mouseleave', () => {
+          pauseAutoScroll(500); // Short delay before resuming
+        });
+
+        // Drag to scroll functionality
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        galleryWrapper.addEventListener('mousedown', (e) => {
+          isDown = true;
+          galleryWrapper.classList.add('grabbing');
+          startX = e.pageX - galleryWrapper.offsetLeft;
+          scrollLeft = galleryWrapper.scrollLeft;
+          pauseAutoScroll();
+        });
+
+        galleryWrapper.addEventListener('mouseleave', () => {
+          isDown = false;
+          galleryWrapper.classList.remove('grabbing');
+        });
+
+        galleryWrapper.addEventListener('mouseup', () => {
+          isDown = false;
+          galleryWrapper.classList.remove('grabbing');
+        });
+
+        galleryWrapper.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - galleryWrapper.offsetLeft;
+          const walk = (x - startX) * 2;
+          galleryWrapper.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch support for mobile
+        let touchStartX;
+        let touchScrollLeft;
+
+        galleryWrapper.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].pageX - galleryWrapper.offsetLeft;
+          touchScrollLeft = galleryWrapper.scrollLeft;
+          pauseAutoScroll();
+        });
+
+        galleryWrapper.addEventListener('touchmove', (e) => {
+          const x = e.touches[0].pageX - galleryWrapper.offsetLeft;
+          const walk = (x - touchStartX) * 2;
+          galleryWrapper.scrollLeft = touchScrollLeft - walk;
+        });
+      }
     </script>
     <script
       id="luma-checkout"
