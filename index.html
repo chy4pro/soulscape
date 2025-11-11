@@ -2345,20 +2345,23 @@
       const galleryWrapper = document.getElementById('galleryWrapper');
 
       if (galleryScroll && galleryWrapper) {
-        // Create array of image numbers and shuffle
-        const imageNumbers = Array.from({length: 20}, (_, i) => i + 1);
+        // Create array of image file names from the new gallery
+        const imageFiles = ['10.png', '11.png', '111.png', '12.png', '14.png', '166.png',
+                           '18.png', '2.png', '20.png', '200.png', '24.png', '3.png',
+                           '33.png', '4.png', '55.png', '6.png', '66.png', '8.png',
+                           '88.png', '9.png', '99.png'];
 
         // Fisher-Yates shuffle algorithm
-        for (let i = imageNumbers.length - 1; i > 0; i--) {
+        for (let i = imageFiles.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+          [imageFiles[i], imageFiles[j]] = [imageFiles[j], imageFiles[i]];
         }
 
         // Insert images in random order
-        imageNumbers.forEach(num => {
+        imageFiles.forEach(fileName => {
           const item = document.createElement('div');
           item.className = 'gallery-item';
-          item.innerHTML = `<img src="Soulscape 2025.10 mixer/${num}.png" alt="Gallery Image ${num}">`;
+          item.innerHTML = `<img src="Soulscape Gallery/Soulscape官网活动照片照片展示合集/${fileName}" alt="Gallery Image ${fileName}">`;
           galleryScroll.appendChild(item);
         });
 
@@ -2369,7 +2372,7 @@
 
         function autoScroll() {
           if (!isUserInteracting) {
-            galleryWrapper.scrollLeft += 1;
+            galleryWrapper.scrollLeft += 0.5;
 
             // Reset to start when reaching the end
             if (galleryWrapper.scrollLeft >= galleryWrapper.scrollWidth - galleryWrapper.clientWidth - 10) {
