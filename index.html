@@ -9,7 +9,7 @@
     </title>
     <meta
       name="description"
-      content="100+ Storytellers Around the World. 120 hours of creativity. Join the movement where filmmaking becomes a thought-engineering project for everyone."
+      content="200+ Storytellers Around the World. 120 hours of creativity. Join the movement where filmmaking becomes a thought-engineering project for everyone."
     />
     <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
     <link
@@ -916,6 +916,86 @@
         margin: 0 auto;
       }
 
+      /* ===== Image Gallery Section ===== */
+      .image-gallery-section {
+        width: 100%;
+        background: var(--bg-primary);
+        padding: var(--spacing-4xl) 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-wrapper {
+        position: relative;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        cursor: grab;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .gallery-wrapper::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .gallery-wrapper.grabbing {
+        cursor: grabbing;
+      }
+
+      .gallery-scroll {
+        display: flex;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-xl);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item {
+        flex-shrink: 0;
+        width: 400px;
+        height: 300px;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        transition: transform 0.3s ease;
+        user-select: none;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        z-index: 10;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+      }
+
+      @media (max-width: 768px) {
+        .gallery-item {
+          width: 280px;
+          height: 210px;
+        }
+      }
+
       /* ===== Mission Section ===== */
       .mission-section {
         background: var(--bg-primary);
@@ -1259,7 +1339,7 @@
             title="X (Twitter)"
             ><i class="fa-brands fa-x-twitter"></i
           ></a>
-          <a href="https://discord.gg/2JvKsbckG" target="_blank" title="Discord"
+          <a href="https://discord.gg/75QUdbYY9B" target="_blank" title="Discord"
             ><i class="fab fa-discord"></i
           ></a>
           <a href="https://luma.com/soulscape?k=cd" target="_blank" title="Luma"
@@ -1368,7 +1448,7 @@
       <div class="stats-container">
         <div class="stat-item stat-item-featured">
           <div class="stat-main">
-            <span class="stat-number">100+</span>
+            <span class="stat-number">200+</span>
             <span class="stat-label">Participants</span>
           </div>
           <span class="stat-subtitle">World Largest AI Film Sprint</span>
@@ -1392,6 +1472,15 @@
       </div>
     </section>
 
+    <!-- Image Gallery Section -->
+    <section class="image-gallery-section scroll-animate">
+      <div class="gallery-wrapper" id="galleryWrapper">
+        <div class="gallery-scroll" id="galleryScroll">
+          <!-- Images will be dynamically inserted here by JavaScript in random order -->
+        </div>
+      </div>
+    </section>
+
     <!-- Mission Section -->
     <section class="content-section mission-section scroll-animate">
       <div class="section-header">
@@ -1411,7 +1500,7 @@
 
       <div style="text-align: center; margin-top: 24px">
         <a
-          href="https://discord.gg/2JvKsbckG"
+          href="https://discord.gg/75QUdbYY9B"
           class="hero-discord-btn"
           target="_blank"
           rel="noopener noreferrer"
@@ -1826,7 +1915,7 @@
           Ready to Tell Your Story?
         </h2>
         <p class="section-description" style="color: rgba(255, 255, 255, 0.8)">
-          Join 100+ storytellers from around the world. Let's create something
+          Join 200+ storytellers from around the world. Let's create something
           extraordinary together.
         </p>
       </div>
@@ -2250,6 +2339,116 @@
           }
         });
       });
+
+      // Image Gallery - Random order, auto scroll and drag to scroll
+      const galleryScroll = document.getElementById('galleryScroll');
+      const galleryWrapper = document.getElementById('galleryWrapper');
+
+      if (galleryScroll && galleryWrapper) {
+        // Create array of image file names from the new gallery
+        const imageFiles = ['10.png', '11.png', '111.png', '12.png', '14.png', '166.png',
+                           '18.png', '2.png', '20.png', '200.png', '24.png', '3.png',
+                           '33.png', '4.png', '55.png', '6.png', '66.png', '8.png',
+                           '88.png', '9.png', '99.png'];
+
+        // Fisher-Yates shuffle algorithm
+        for (let i = imageFiles.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [imageFiles[i], imageFiles[j]] = [imageFiles[j], imageFiles[i]];
+        }
+
+        // Insert images in random order
+        imageFiles.forEach(fileName => {
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.innerHTML = `<img src="Soulscape Gallery/Soulscape官网活动照片照片展示合集/${fileName}" alt="Gallery Image ${fileName}">`;
+          galleryScroll.appendChild(item);
+        });
+
+        // Auto scroll functionality
+        let isUserInteracting = false;
+        let interactionTimeout;
+        let animationId;
+
+        function autoScroll() {
+          if (!isUserInteracting) {
+            galleryWrapper.scrollLeft += 0.5;
+
+            // Reset to start when reaching the end
+            if (galleryWrapper.scrollLeft >= galleryWrapper.scrollWidth - galleryWrapper.clientWidth - 10) {
+              galleryWrapper.scrollLeft = 0;
+            }
+          }
+          animationId = requestAnimationFrame(autoScroll);
+        }
+
+        function pauseAutoScroll(duration = 3000) {
+          isUserInteracting = true;
+          clearTimeout(interactionTimeout);
+          interactionTimeout = setTimeout(() => {
+            isUserInteracting = false;
+          }, duration);
+        }
+
+        // Start auto scroll using requestAnimationFrame for smooth animation
+        animationId = requestAnimationFrame(autoScroll);
+
+        // Pause on hover over gallery
+        galleryWrapper.addEventListener('mouseenter', () => {
+          isUserInteracting = true;
+        });
+
+        galleryWrapper.addEventListener('mouseleave', () => {
+          pauseAutoScroll(500); // Short delay before resuming
+        });
+
+        // Drag to scroll functionality
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        galleryWrapper.addEventListener('mousedown', (e) => {
+          isDown = true;
+          galleryWrapper.classList.add('grabbing');
+          startX = e.pageX - galleryWrapper.offsetLeft;
+          scrollLeft = galleryWrapper.scrollLeft;
+          pauseAutoScroll();
+        });
+
+        galleryWrapper.addEventListener('mouseleave', () => {
+          isDown = false;
+          galleryWrapper.classList.remove('grabbing');
+        });
+
+        galleryWrapper.addEventListener('mouseup', () => {
+          isDown = false;
+          galleryWrapper.classList.remove('grabbing');
+        });
+
+        galleryWrapper.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - galleryWrapper.offsetLeft;
+          const walk = (x - startX) * 2;
+          galleryWrapper.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch support for mobile
+        let touchStartX;
+        let touchScrollLeft;
+
+        galleryWrapper.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].pageX - galleryWrapper.offsetLeft;
+          touchScrollLeft = galleryWrapper.scrollLeft;
+          pauseAutoScroll();
+        });
+
+        galleryWrapper.addEventListener('touchmove', (e) => {
+          const x = e.touches[0].pageX - galleryWrapper.offsetLeft;
+          const walk = (x - touchStartX) * 2;
+          galleryWrapper.scrollLeft = touchScrollLeft - walk;
+        });
+      }
     </script>
     <script
       id="luma-checkout"
