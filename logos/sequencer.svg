@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 366 366">
+  <defs>
+    <style>
+      .sq { rx: 18; ry: 18; }
+    </style>
+  </defs>
+  <rect class="sq" width="110" height="110" x="0" y="0" fill="#e3fafc"/>
+  <rect class="sq" width="110" height="110" x="128" y="0" fill="#d4f8fb"/>
+  <rect class="sq" width="110" height="110" x="256" y="0" fill="#c7f5fc"/>
+  <rect class="sq" width="110" height="110" x="0" y="128" fill="#9ef0fb"/>
+  <rect class="sq" width="110" height="110" x="128" y="128" fill="#8ceefc"/>
+  <rect class="sq" width="110" height="110" x="256" y="128" fill="#7bebfd"/>
+  <rect class="sq" width="110" height="110" x="0" y="256" fill="#65eaff"/>
+  <rect class="sq" width="110" height="110" x="128" y="256" fill="#5ae6ff"/>
+  <rect class="sq" width="110" height="110" x="256" y="256" fill="#51e4ff"/>
+</svg>
