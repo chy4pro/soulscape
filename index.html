@@ -916,8 +916,121 @@
         margin: 0 auto;
       }
 
+      /* ===== Barriers Section ===== */
+      .barriers-section {
+        position: relative;
+        background: radial-gradient(circle at 15% 20%, rgba(0, 217, 255, 0.12), transparent 35%),
+          radial-gradient(circle at 85% 10%, rgba(255, 0, 229, 0.12), transparent 40%),
+          radial-gradient(circle at 40% 90%, rgba(0, 255, 136, 0.08), transparent 45%),
+          #0a0a0a;
+        border-block: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .barriers-divider {
+        height: 1px;
+        width: 100%;
+        margin: var(--spacing-xl) 0;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0)
+        );
+      }
+
+      .barriers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-lg);
+        align-items: start;
+      }
+
+      .barrier-card {
+        padding: var(--spacing-xl) var(--spacing-lg);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(4px);
+      }
+
+      .barrier-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(16px, 2vw, 20px);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-md);
+        letter-spacing: 0.4px;
+      }
+
+      .barrier-icon {
+        color: var(--brand-accent);
+        font-size: 18px;
+      }
+
+      .barrier-emoji {
+        font-size: 18px;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+      }
+
+      .barrier-copy {
+        color: var(--text-secondary);
+        font-size: clamp(14px, 1.6vw, 16px);
+        line-height: 1.7;
+      }
+
+      .barrier-tagline {
+        margin: var(--spacing-3xl) auto 0;
+        text-align: center;
+        font-family: "Monument Extended", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        gap: var(--spacing-sm);
+        align-items: baseline;
+        font-size: clamp(26px, 5vw, 46px);
+        padding: var(--spacing-md) var(--spacing-lg);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(255, 0, 229, 0.08));
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .barrier-tagline-prefix {
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 768px) {
+        .barrier-card {
+          padding: var(--spacing-lg);
+        }
+
+        .barrier-title {
+          align-items: flex-start;
+        }
+
+        .barrier-tagline {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
       /* ===== Partners Section ===== */
       .partners-section {
+        position: relative;
+        background: linear-gradient(120deg, #0c0c0f 0%, #0a0a0a 50%, #0c0a0e 100%);
+        border-block: 1px solid rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+      }
+
+      .partners-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
         background: radial-gradient(
             circle at 20% 20%,
             rgba(0, 217, 255, 0.08),
@@ -927,53 +1040,52 @@
             circle at 80% 10%,
             rgba(255, 0, 229, 0.08),
             transparent 40%
-          ),
-          #0c0c0c;
-        border-block: 1px solid rgba(255, 255, 255, 0.05);
+          );
+        pointer-events: none;
       }
 
       .partner-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: clamp(20px, 4vw, 48px);
-        margin-top: var(--spacing-xl);
+        gap: clamp(28px, 6vw, 72px);
+        margin-top: 0;
+        position: relative;
+        z-index: 1;
       }
 
       .partner-card {
-        padding: var(--spacing-sm) var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-lg);
         background: transparent;
         border: none;
-        border-radius: var(--radius-md);
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: var(--spacing-sm);
+        justify-content: center;
         transition: transform 0.2s ease, opacity 0.2s ease;
         opacity: 0.9;
       }
 
       .partner-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-2px);
         opacity: 1;
       }
 
       .partner-logo {
-        width: 180px;
-        height: 80px;
+        width: clamp(130px, 14vw, 190px);
+        height: 72px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: var(--radius-md);
       }
 
       .partner-logo img,
       .partner-logo svg {
         max-width: 100%;
-        max-height: 72px;
+        max-height: 60px;
         object-fit: contain;
-        filter: brightness(0) saturate(0) invert(0.93) sepia(6%) hue-rotate(325deg)
-          drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+        filter: brightness(0) saturate(0) invert(0.94) sepia(4%) hue-rotate(12deg)
+          drop-shadow(0 6px 18px rgba(0, 0, 0, 0.4));
+        opacity: 0.92;
       }
 
       .partner-fallback-label {
@@ -996,35 +1108,6 @@
         opacity: 0.85;
       }
 
-      .partner-name {
-        font-size: 18px;
-        font-weight: 700;
-        text-align: center;
-        color: var(--text-primary);
-        letter-spacing: 0.5px;
-      }
-
-      .partner-tag {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        text-align: center;
-      }
-
-      .partner-help-text {
-        margin-top: var(--spacing-lg);
-        text-align: center;
-        color: var(--text-tertiary);
-        font-size: 14px;
-      }
-
-      .partners-section .section-title {
-        color: #e7dac5;
-      }
-
-      .partners-section .section-label {
-        background: rgba(255, 233, 210, 0.08);
-        color: #e7dac5;
-      }
 
       /* ===== Image Gallery Section ===== */
       .image-gallery-section {
@@ -1726,7 +1809,7 @@
     </section>
 
     <!-- What We Provide Section -->
-    <section class="content-section scroll-animate">
+    <section class="content-section barriers-section scroll-animate">
       <div class="section-header">
         <span class="section-label">What We Provide</span>
         <h2 class="section-title">We Remove the Barriers. You Bring the Vision.</h2>
@@ -1735,6 +1818,44 @@
         </p>
       </div>
 
+      <div class="barriers-divider" aria-hidden="true"></div>
+
+      <div class="barriers-grid">
+        <div class="barrier-card">
+          <div class="barrier-title">
+            <span class="barrier-icon">&nearr;</span>
+            <span>Global Travel Covered</span>
+            <span class="barrier-emoji" aria-hidden="true">🚆</span>
+          </div>
+          <p class="barrier-copy">
+            We will offer reimbursements to underprivileged participants traveling from distant locations so you can arrive ready to create.
+          </p>
+        </div>
+
+        <div class="barrier-card">
+          <div class="barrier-title">
+            <span class="barrier-icon">&nearr;</span>
+            <span>Accommodations Covered</span>
+            <span class="barrier-emoji" aria-hidden="true">🏨</span>
+          </div>
+          <p class="barrier-copy">
+            For underprivileged storytellers, students, and youth storytellers, we will provide hotel accommodations—or tents and sleeping bags—so you can stay overnight at the venue.
+          </p>
+        </div>
+
+        <div class="barrier-card">
+          <div class="barrier-title">
+            <span class="barrier-icon">&nearr;</span>
+            <span>Meals Provided</span>
+            <span class="barrier-emoji" aria-hidden="true">🍔</span>
+          </div>
+          <p class="barrier-copy">
+            For all storytellers, we will provide three meals per day plus unlimited snacks during the event to keep your energy up.
+          </p>
+        </div>
+      </div>
+
+   
     </section>
 
     <!-- Partners Section -->
@@ -1743,80 +1864,93 @@
       id="partners"
     >
       <div class="section-header">
-        <span class="section-label">Partners</span>
-        <h2 class="section-title">Building the AI Film Ecosystem Together</h2>
-        <p class="section-description">
-          Tools, studios, and platforms that are pushing the future of AI-first
-          filmmaking. These partners help our storytellers move faster from
-          idea to cinematic moment.
-        </p>
+        <span class="section-label">Partner With</span>
+        <h2 class="section-title">Powering the AI Filmathon</h2>
       </div>
 
       <div class="partner-grid">
         <div class="partner-card">
-          <div class="partner-logo" data-name="Hailuo">
+          <a
+            class="partner-logo"
+            data-name="Hailuo"
+            href="https://hailuoai.video/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="logos/hailuo.svg" alt="Hailuo logo" loading="lazy" />
-            <span class="partner-fallback-label">Hailuo</span>
-          </div>
-          <div class="partner-name">Hailuo</div>
-          <div class="partner-tag">Story-to-screen AI video engine</div>
+          </a>
         </div>
 
         <div class="partner-card">
-          <div class="partner-logo" data-name="Vidu">
+          <a
+            class="partner-logo"
+            data-name="Vidu"
+            href="https://www.vidu.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="logos/vidu.svg" alt="Vidu logo" loading="lazy" />
-            <span class="partner-fallback-label">Vidu</span>
-          </div>
-          <div class="partner-name">Vidu</div>
-          <div class="partner-tag">Cinematic generation for fast iteration</div>
+          </a>
         </div>
 
         <div class="partner-card">
-          <div class="partner-logo" data-name="YouArt">
+          <a
+            class="partner-logo"
+            data-name="YouArt"
+            href="https://youart.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="logos/youart.svg" alt="YouArt logo" loading="lazy" />
-            <span class="partner-fallback-label">YouArt</span>
-          </div>
-          <div class="partner-name">YouArt</div>
-          <div class="partner-tag">Visual storytelling playground</div>
+          </a>
         </div>
 
         <div class="partner-card">
-          <div class="partner-logo" data-name="Imastudio">
+          <a
+            class="partner-logo"
+            data-name="Imastudio"
+            href="https://imastudio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="logos/imastudio.svg"
               alt="Imastudio logo"
               loading="lazy"
             />
-            <span class="partner-fallback-label">Imastudio</span>
-          </div>
-          <div class="partner-name">Imastudio</div>
-          <div class="partner-tag">AI-first production workflow tools</div>
+          </a>
         </div>
 
         <div class="partner-card">
-          <div class="partner-logo" data-name="Atlas Cloud">
+          <a
+            class="partner-logo"
+            data-name="Atlas Cloud"
+            href="https://www.atlascloud.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="logos/atlas-cloud.svg"
               alt="Atlas Cloud logo"
               loading="lazy"
             />
-            <span class="partner-fallback-label">Atlas Cloud</span>
-          </div>
-          <div class="partner-name">Atlas Cloud</div>
-          <div class="partner-tag">Rendering and delivery at scale</div>
+          </a>
         </div>
 
         <div class="partner-card">
-          <div class="partner-logo" data-name="Sequencer">
+          <a
+            class="partner-logo"
+            data-name="Sequencer"
+            href="https://sequencer.media/film"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="logos/sequencer.svg"
               alt="Sequencer logo"
               loading="lazy"
             />
-            <span class="partner-fallback-label">Sequencer</span>
-          </div>
-          <div class="partner-name">Sequencer</div>
-          <div class="partner-tag">AI movie sequencing and editing</div>
+          </a>
         </div>
       </div>
 
