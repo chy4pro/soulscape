@@ -5,11 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Soulscape AI Filmathon 2026 | The Largest AI Film Sprint in US
+      Soulscape AI Filmathon 2026 | AI Movie Film Festival & Largest AI Film
+      Sprint in US
     </title>
     <meta
       name="description"
-      content="200+ Storytellers Around the World. 120 hours of creativity. Join the movement where filmmaking becomes a thought-engineering project for everyone."
+      content="Join Soulscape AI Filmathon 2026, the AI movie film festival and largest AI film sprint in the US—200+ storytellers, 120 hours of creativity, and a global community turning imagination into film."
+    />
+    <meta
+      name="keywords"
+      content="AI film festival, AI movie festival, AI filmathon, AI film sprint, Soulscape, filmmaking sprint, AI storytelling"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Soulscape AI Filmathon 2026 | AI Movie Film Festival" />
+    <meta
+      property="og:description"
+      content="Experience the AI movie film festival that gathers storytellers worldwide for 120 hours of creation. Soulscape AI Filmathon 2026 empowers every voice."
+    />
+    <meta property="og:image" content="soulscapeicon.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Soulscape AI Filmathon" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Soulscape AI Filmathon 2026 | AI Movie Film Festival" />
+    <meta
+      name="twitter:description"
+      content="Join the largest AI film sprint in the US. 200+ storytellers, 120 hours, limitless imagination."
     />
     <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
     <link
@@ -26,9 +46,9 @@
       /* ===== CSS变量定义 ===== */
       :root {
         /* 颜色 - 基于彩虹渐变主题 */
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #1a1a1a;
-        --bg-tertiary: #2a2a2a;
+        --bg-primary: #000000;
+        --bg-secondary: #000000;
+        --bg-tertiary: #000000;
         --brand-primary: #00d9ff;
         --brand-secondary: #ff00e5;
         --brand-accent: #00ff88;
@@ -251,14 +271,9 @@
       .hero-gradient-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 217, 255, 0.05) 0%,
-          rgba(255, 0, 229, 0.05) 50%,
-          rgba(0, 255, 136, 0.05) 100%
-        );
+        background: rgba(0, 0, 0, 0.35);
         background-size: 200% 200%;
-        animation: gradient-shift 10s ease infinite;
+        animation: none;
         z-index: 1;
       }
 
@@ -919,11 +934,7 @@
       /* ===== Barriers Section ===== */
       .barriers-section {
         position: relative;
-        background: radial-gradient(circle at 15% 20%, rgba(0, 217, 255, 0.12), transparent 35%),
-          radial-gradient(circle at 85% 10%, rgba(255, 0, 229, 0.12), transparent 40%),
-          radial-gradient(circle at 40% 90%, rgba(0, 255, 136, 0.08), transparent 45%),
-          #0a0a0a;
-        border-block: 1px solid rgba(255, 255, 255, 0.08);
+        background: #000000;
         overflow: hidden;
       }
 
@@ -996,7 +1007,7 @@
         padding: var(--spacing-md) var(--spacing-lg);
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: var(--radius-lg);
-        background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(255, 0, 229, 0.08));
+        background: #000000;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
       }
 
@@ -1022,8 +1033,7 @@
       /* ===== Partners Section ===== */
       .partners-section {
         position: relative;
-        background: linear-gradient(120deg, #0c0c0f 0%, #0a0a0a 50%, #0c0a0e 100%);
-        border-block: 1px solid rgba(255, 255, 255, 0.05);
+        background: #000000;
         overflow: hidden;
       }
 
@@ -1031,16 +1041,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(
-            circle at 20% 20%,
-            rgba(0, 217, 255, 0.08),
-            transparent 35%
-          ),
-          radial-gradient(
-            circle at 80% 10%,
-            rgba(255, 0, 229, 0.08),
-            transparent 40%
-          );
+        background: none;
         pointer-events: none;
       }
 
@@ -1817,8 +1818,6 @@
           We want your focus to be on one thing: your story. To empower you to bring your universe of imagination to life, we are removing the practical barriers.
         </p>
       </div>
-
-      <div class="barriers-divider" aria-hidden="true"></div>
 
       <div class="barriers-grid">
         <div class="barrier-card">
