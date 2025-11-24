@@ -919,11 +919,7 @@
       /* ===== Barriers Section ===== */
       .barriers-section {
         position: relative;
-        background: radial-gradient(circle at 15% 20%, rgba(0, 217, 255, 0.12), transparent 35%),
-          radial-gradient(circle at 85% 10%, rgba(255, 0, 229, 0.12), transparent 40%),
-          radial-gradient(circle at 40% 90%, rgba(0, 255, 136, 0.08), transparent 45%),
-          #0a0a0a;
-        border-block: 1px solid rgba(255, 255, 255, 0.08);
+        background: #0a0a0a;
         overflow: hidden;
       }
 
@@ -1022,26 +1018,8 @@
       /* ===== Partners Section ===== */
       .partners-section {
         position: relative;
-        background: linear-gradient(120deg, #0c0c0f 0%, #0a0a0a 50%, #0c0a0e 100%);
-        border-block: 1px solid rgba(255, 255, 255, 0.05);
+        background: #0a0a0a;
         overflow: hidden;
-      }
-
-      .partners-section::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-            circle at 20% 20%,
-            rgba(0, 217, 255, 0.08),
-            transparent 35%
-          ),
-          radial-gradient(
-            circle at 80% 10%,
-            rgba(255, 0, 229, 0.08),
-            transparent 40%
-          );
-        pointer-events: none;
       }
 
       .partner-grid {
@@ -2691,10 +2669,10 @@
 
       if (galleryScroll && galleryWrapper) {
         // Create array of image file names from the new gallery
-        const imageFiles = ['10.png', '11.png', '111.png', '12.png', '14.png', '166.png',
-                           '18.png', '2.png', '20.png', '200.png', '24.png', '3.png',
-                           '33.png', '4.png', '55.png', '6.png', '66.png', '8.png',
-                           '88.png', '9.png', '99.png'];
+        const imageFiles = ['10.jpg', '11.jpg', '111.jpg', '12.jpg', '14.jpg', '166.jpg',
+                           '18.jpg', '2.jpg', '20.jpg', '200.jpg', '24.jpg', '3.jpg',
+                           '33.jpg', '4.jpg', '55.jpg', '6.jpg', '66.jpg', '8.jpg',
+                           '88.jpg', '9.jpg', '99.jpg'];
 
         // Fisher-Yates shuffle algorithm
         for (let i = imageFiles.length - 1; i > 0; i--) {
@@ -2706,7 +2684,7 @@
         imageFiles.forEach(fileName => {
           const item = document.createElement('div');
           item.className = 'gallery-item';
-          item.innerHTML = `<img src="Soulscape Gallery/Soulscape官网活动照片照片展示合集/${fileName}" alt="Gallery Image ${fileName}">`;
+          item.innerHTML = `<img src="Soulscape Gallery/${fileName}" alt="Gallery Image ${fileName}">`;
           galleryScroll.appendChild(item);
         });
 
