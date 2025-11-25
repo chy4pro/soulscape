@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6BEM05VT4Q');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sponsor Soulscape AI Filmathon 2026</title>
+    <meta
+      name="description"
+      content="Partner with Soulscape to empower 200+ storytellers. Join us in making filmmaking accessible for everyone."
+    />
+    <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
+    <style>
+      /* ===== 字体导入 ===== */
+      @import url("https://fonts.cdnfonts.com/css/garet");
+      @import url("https://fonts.cdnfonts.com/css/horizon-2");
+      @import url("https://fonts.cdnfonts.com/css/monument-extended");
+      @import url("https://fonts.cdnfonts.com/css/tt-norms");
+
+      /* ===== CSS变量定义 ===== */
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #2a2a2a;
+        --brand-primary: #00d9ff;
+        --brand-secondary: #ff00e5;
+        --brand-accent: #00ff88;
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.85);
+        --text-tertiary: rgba(255, 255, 255, 0.6);
+
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+        --spacing-3xl: 64px;
+        --spacing-4xl: 96px;
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-full: 9999px;
+
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.4);
+
+        --max-width: 1400px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Helvetica Neue", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        overflow-x: hidden;
+        line-height: 1.7;
+        font-size: 16px;
+      }
+
+      /* ===== Navigation ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        padding: var(--spacing-lg) var(--spacing-xl);
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .navbar-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      /* ===== Hero Section ===== */
+      .hero-section {
+        position: relative;
+        width: 100%;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(var(--spacing-4xl) + 60px) var(--spacing-xl) var(--spacing-4xl);
+        background: var(--bg-primary);
+      }
+
+      .hero-content {
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(36px, 6vw, 64px);
+        font-weight: 300;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-lg);
+        color: white;
+        text-transform: uppercase;
+      }
+
+      .hero-subtitle {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(18px, 2.5vw, 24px);
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* ===== Content Section ===== */
+      .content-section {
+        padding: var(--spacing-4xl) var(--spacing-lg);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+      }
+
+      .section-label {
+        display: inline-block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(0, 217, 255, 0.1);
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--brand-primary);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .section-title {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-lg);
+        color: var(--text-primary);
+      }
+
+      .section-description {
+        font-size: clamp(16px, 2vw, 20px);
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* ===== Benefits Grid ===== */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-3xl);
+      }
+
+      .benefit-card {
+        padding: var(--spacing-xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .benefit-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-primary);
+        transform: translateY(-5px);
+      }
+
+      .benefit-icon {
+        font-size: 32px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .benefit-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+      }
+
+      .benefit-text {
+        font-size: 16px;
+        color: var(--text-tertiary);
+        line-height: 1.6;
+      }
+
+      /* ===== Form Section ===== */
+      .form-section {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: var(--spacing-3xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-xl);
+      }
+
+      .form-group {
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        width: 100%;
+        padding: var(--spacing-md);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: var(--brand-primary);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-submit {
+        width: 100%;
+        padding: var(--spacing-md) var(--spacing-xl);
+        background: #f48529;
+        color: white;
+        border: none;
+        border-radius: var(--radius-full);
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-submit:hover {
+        background: #ff9545;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(244, 133, 41, 0.4);
+      }
+
+      /* ===== Footer ===== */
+      .footer {
+        padding: var(--spacing-3xl) var(--spacing-lg);
+        background: var(--bg-primary);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      .footer-text {
+        font-size: 14px;
+        color: var(--text-tertiary);
+      }
+
+      @media (max-width: 768px) {
+        .form-section {
+          padding: var(--spacing-xl);
+        }
+
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-logo">Soulscape</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Partner With Us</h1>
+        <p class="hero-subtitle">
+          Join us in empowering 200+ storytellers to bring their visions to life.
+          Your support makes filmmaking accessible for everyone.
+        </p>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Why Sponsor</span>
+        <h2 class="section-title">Sponsorship Benefits</h2>
+        <p class="section-description">
+          Partner with the world's largest AI film sprint and reach a global community of creative storytellers, technologists, and innovators.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🌍</div>
+          <h3 class="benefit-title">Global Exposure</h3>
+          <p class="benefit-text">
+            Reach 200+ participants from around the world and showcase your brand to a diverse, engaged audience.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🎬</div>
+          <h3 class="benefit-title">Creative Community</h3>
+          <p class="benefit-text">
+            Connect with storytellers, filmmakers, and AI enthusiasts who are shaping the future of content creation.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">💡</div>
+          <h3 class="benefit-title">Innovation Leadership</h3>
+          <p class="benefit-text">
+            Position your brand at the forefront of AI-powered creativity and demonstrate thought leadership.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h3 class="benefit-title">Social Impact</h3>
+          <p class="benefit-text">
+            Support democratizing filmmaking and help remove barriers for underprivileged storytellers.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">📢</div>
+          <h3 class="benefit-title">Brand Visibility</h3>
+          <p class="benefit-text">
+            Logo placement on website, event materials, social media, and all participant communications.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3 class="benefit-title">Targeted Marketing</h3>
+          <p class="benefit-text">
+            Direct access to a highly engaged audience interested in AI, creativity, and technology.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Get Started</span>
+        <h2 class="section-title">Sponsorship Application</h2>
+        <p class="section-description">
+          Fill out the form below and we'll get back to you within 48 hours to discuss partnership opportunities.
+        </p>
+      </div>
+
+      <div class="form-section">
+        <form id="sponsorForm">
+          <div class="form-group">
+            <label class="form-label" for="companyName">Company Name *</label>
+            <input
+              type="text"
+              id="companyName"
+              class="form-input"
+              required
+              placeholder="Your Company"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contactName">Contact Name *</label>
+            <input
+              type="text"
+              id="contactName"
+              class="form-input"
+              required
+              placeholder="John Doe"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              required
+              placeholder="contact@company.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              class="form-input"
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="sponsorshipLevel">Sponsorship Interest *</label>
+            <select id="sponsorshipLevel" class="form-select" required>
+              <option value="">Select sponsorship level</option>
+              <option value="title">Title Sponsor ($50k+)</option>
+              <option value="platinum">Platinum Sponsor ($25k-$50k)</option>
+              <option value="gold">Gold Sponsor ($10k-$25k)</option>
+              <option value="silver">Silver Sponsor ($5k-$10k)</option>
+              <option value="custom">Custom Package</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Tell Us About Your Goals *</label>
+            <textarea
+              id="message"
+              class="form-textarea"
+              required
+              placeholder="What are you hoping to achieve through this sponsorship? What aspects of Soulscape align with your brand values?"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Submit Application</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        © 2026 Soulscape AI Film Sprint. All rights reserved.
+      </p>
+    </footer>
+
+    <script>
+      document.getElementById('sponsorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your interest! We will contact you within 48 hours.');
+        this.reset();
+      });
+    </script>
+  </body>
+</html>

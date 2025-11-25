@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6BEM05VT4Q');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Your Film | Soulscape AI Filmathon 2026</title>
+    <meta
+      name="description"
+      content="Submit your AI-powered film to Soulscape 2026. Share your story with the world and compete for $150k in prizes."
+    />
+    <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
+    <style>
+      /* ===== 字体导入 ===== */
+      @import url("https://fonts.cdnfonts.com/css/garet");
+      @import url("https://fonts.cdnfonts.com/css/horizon-2");
+      @import url("https://fonts.cdnfonts.com/css/monument-extended");
+      @import url("https://fonts.cdnfonts.com/css/tt-norms");
+
+      /* ===== CSS变量定义 ===== */
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-tertiary: #2a2a2a;
+        --brand-primary: #00d9ff;
+        --brand-secondary: #ff00e5;
+        --brand-accent: #00ff88;
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.85);
+        --text-tertiary: rgba(255, 255, 255, 0.6);
+
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+        --spacing-3xl: 64px;
+        --spacing-4xl: 96px;
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-full: 9999px;
+
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.4);
+
+        --max-width: 1400px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Helvetica Neue", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        overflow-x: hidden;
+        line-height: 1.7;
+        font-size: 16px;
+      }
+
+      /* ===== Navigation ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        padding: var(--spacing-lg) var(--spacing-xl);
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .navbar-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      /* ===== Hero Section ===== */
+      .hero-section {
+        position: relative;
+        width: 100%;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(var(--spacing-4xl) + 60px) var(--spacing-xl) var(--spacing-4xl);
+        background: var(--bg-primary);
+      }
+
+      .hero-content {
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(36px, 6vw, 64px);
+        font-weight: 300;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-lg);
+        color: white;
+        text-transform: uppercase;
+      }
+
+      .hero-subtitle {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(18px, 2.5vw, 24px);
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* ===== Content Section ===== */
+      .content-section {
+        padding: var(--spacing-4xl) var(--spacing-lg);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+      }
+
+      .section-label {
+        display: inline-block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(0, 217, 255, 0.1);
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--brand-primary);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .section-title {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-lg);
+        color: var(--text-primary);
+      }
+
+      .section-description {
+        font-size: clamp(16px, 2vw, 20px);
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* ===== Requirements Grid ===== */
+      .requirements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-3xl);
+      }
+
+      .requirement-card {
+        padding: var(--spacing-xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .requirement-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-primary);
+        transform: translateY(-5px);
+      }
+
+      .requirement-icon {
+        font-size: 32px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .requirement-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+      }
+
+      .requirement-text {
+        font-size: 16px;
+        color: var(--text-tertiary);
+        line-height: 1.6;
+      }
+
+      /* ===== Prize Section ===== */
+      .prize-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-3xl);
+      }
+
+      .prize-card {
+        padding: var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .prize-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-accent);
+        transform: translateY(-5px);
+      }
+
+      .prize-place {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--brand-accent);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .prize-amount {
+        font-family: "Monument Extended", sans-serif;
+        font-size: 36px;
+        font-weight: 300;
+        color: #f48529;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .prize-description {
+        font-size: 14px;
+        color: var(--text-tertiary);
+      }
+
+      /* ===== Form Section ===== */
+      .form-section {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: var(--spacing-3xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-xl);
+      }
+
+      .form-group {
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        width: 100%;
+        padding: var(--spacing-md);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: var(--brand-primary);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-file {
+        padding: var(--spacing-lg);
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px dashed rgba(255, 255, 255, 0.2);
+        border-radius: var(--radius-md);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-file:hover {
+        border-color: var(--brand-primary);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .form-file input[type="file"] {
+        display: none;
+      }
+
+      .file-label {
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .form-submit {
+        width: 100%;
+        padding: var(--spacing-md) var(--spacing-xl);
+        background: #f48529;
+        color: white;
+        border: none;
+        border-radius: var(--radius-full);
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-submit:hover {
+        background: #ff9545;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(244, 133, 41, 0.4);
+      }
+
+      /* ===== Footer ===== */
+      .footer {
+        padding: var(--spacing-3xl) var(--spacing-lg);
+        background: var(--bg-primary);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      .footer-text {
+        font-size: 14px;
+        color: var(--text-tertiary);
+      }
+
+      @media (max-width: 768px) {
+        .form-section {
+          padding: var(--spacing-xl);
+        }
+
+        .requirements-grid,
+        .prize-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-logo">Soulscape</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Submit Your Film</h1>
+        <p class="hero-subtitle">
+          Your Life is the Script. Your Heart is the Director.
+          Share your story with the world and compete for $150k in prizes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Submission Guidelines</span>
+        <h2 class="section-title">Film Requirements</h2>
+        <p class="section-description">
+          Review the guidelines below before submitting your film. All submissions must meet these criteria to be eligible.
+        </p>
+      </div>
+
+      <div class="requirements-grid">
+        <div class="requirement-card">
+          <div class="requirement-icon">⏱️</div>
+          <h3 class="requirement-title">Duration</h3>
+          <p class="requirement-text">
+            Films must be between 1-10 minutes in length. Short-form content is preferred.
+          </p>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-icon">🤖</div>
+          <h3 class="requirement-title">AI-Powered</h3>
+          <p class="requirement-text">
+            Must use AI tools in the creation process. This can include video generation, editing, music, or scripting.
+          </p>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-icon">🎬</div>
+          <h3 class="requirement-title">Original Content</h3>
+          <p class="requirement-text">
+            Films must be original works created during the 120-hour sprint period.
+          </p>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-icon">📝</div>
+          <h3 class="requirement-title">Creator Statement</h3>
+          <p class="requirement-text">
+            Include a brief statement (100-300 words) explaining your creative process and the story behind your film.
+          </p>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-icon">📹</div>
+          <h3 class="requirement-title">Format</h3>
+          <p class="requirement-text">
+            Submit in MP4 format with minimum 1080p resolution. Maximum file size: 2GB.
+          </p>
+        </div>
+
+        <div class="requirement-card">
+          <div class="requirement-icon">🎵</div>
+          <h3 class="requirement-title">Rights Clearance</h3>
+          <p class="requirement-text">
+            You must own or have permission to use all audio, video, and other content in your submission.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prize Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Awards</span>
+        <h2 class="section-title">Total Prize Pool: $150k</h2>
+        <p class="section-description">
+          Winners will be selected based on storytelling, creativity, technical execution, and emotional impact.
+        </p>
+      </div>
+
+      <div class="prize-grid">
+        <div class="prize-card">
+          <div class="prize-place">Grand Prize</div>
+          <div class="prize-amount">$50k</div>
+          <p class="prize-description">Best Overall Film</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Second Place</div>
+          <div class="prize-amount">$30k</div>
+          <p class="prize-description">Runner-Up</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Third Place</div>
+          <div class="prize-amount">$20k</div>
+          <p class="prize-description">Third Place Winner</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Audience Choice</div>
+          <div class="prize-amount">$15k</div>
+          <p class="prize-description">Most Popular Film</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Best Story</div>
+          <div class="prize-amount">$10k</div>
+          <p class="prize-description">Best Narrative</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Best Visual</div>
+          <div class="prize-amount">$10k</div>
+          <p class="prize-description">Best Cinematography</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Rising Star</div>
+          <div class="prize-amount">$5k</div>
+          <p class="prize-description">First-Time Filmmaker</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Innovation Award</div>
+          <div class="prize-amount">$5k</div>
+          <p class="prize-description">Most Creative Use of AI</p>
+        </div>
+
+        <div class="prize-card">
+          <div class="prize-place">Impact Award</div>
+          <div class="prize-amount">$5k</div>
+          <p class="prize-description">Social Impact Message</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submission Form Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Submit Now</span>
+        <h2 class="section-title">Film Submission Form</h2>
+        <p class="section-description">
+          Fill out the form below to submit your film. Make sure all information is accurate before submitting.
+        </p>
+      </div>
+
+      <div class="form-section">
+        <form id="submissionForm">
+          <div class="form-group">
+            <label class="form-label" for="filmTitle">Film Title *</label>
+            <input
+              type="text"
+              id="filmTitle"
+              class="form-input"
+              required
+              placeholder="Enter your film title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="directorName">Director Name *</label>
+            <input
+              type="text"
+              id="directorName"
+              class="form-input"
+              required
+              placeholder="Your name or team name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              required
+              placeholder="your.email@example.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="duration">Film Duration *</label>
+            <input
+              type="text"
+              id="duration"
+              class="form-input"
+              required
+              placeholder="e.g., 3 minutes 45 seconds"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="genre">Genre *</label>
+            <select id="genre" class="form-select" required>
+              <option value="">Select a genre</option>
+              <option value="drama">Drama</option>
+              <option value="comedy">Comedy</option>
+              <option value="documentary">Documentary</option>
+              <option value="experimental">Experimental</option>
+              <option value="animation">Animation</option>
+              <option value="scifi">Science Fiction</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aiTools">AI Tools Used *</label>
+            <input
+              type="text"
+              id="aiTools"
+              class="form-input"
+              required
+              placeholder="e.g., Runway, Midjourney, Suno"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="synopsis">Film Synopsis *</label>
+            <textarea
+              id="synopsis"
+              class="form-textarea"
+              required
+              placeholder="Brief summary of your film (100-300 words)"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="statement">Creator Statement *</label>
+            <textarea
+              id="statement"
+              class="form-textarea"
+              required
+              placeholder="Describe your creative process and what inspired this story (100-300 words)"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="filmUrl">Film URL *</label>
+            <input
+              type="url"
+              id="filmUrl"
+              class="form-input"
+              required
+              placeholder="https://vimeo.com/your-film or https://youtube.com/your-film"
+            />
+            <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
+              Upload your film to Vimeo or YouTube and provide the link here.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Thumbnail Image (Optional)</label>
+            <div class="form-file">
+              <input type="file" id="thumbnail" accept="image/*" />
+              <label for="thumbnail" class="file-label">
+                Click to upload thumbnail image (JPG or PNG, max 5MB)
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">Submit Film</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        © 2026 Soulscape AI Film Sprint. All rights reserved.
+      </p>
+    </footer>
+
+    <script>
+      document.getElementById('submissionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your submission! We will review your film and contact you soon.');
+        this.reset();
+      });
+
+      // File upload label update
+      document.getElementById('thumbnail').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name;
+        if (fileName) {
+          this.nextElementSibling.textContent = `Selected: ${fileName}`;
+        }
+      });
+    </script>
+  </body>
+</html>
