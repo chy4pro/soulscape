@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6BEM05VT4Q');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join the Council of Mentors | Soulscape AI Filmathon 2026</title>
+    <meta
+      name="description"
+      content="Be a mentor at the world's largest AI film sprint. Help us kill the 'Slop' and find the Soul."
+    />
+    <link rel="icon" href="soulscapeicon.jpg" type="image/jpeg" />
+    <style>
+      @import url("https://fonts.cdnfonts.com/css/monument-extended");
+      @import url("https://fonts.cdnfonts.com/css/tt-norms");
+
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --brand-primary: #00d9ff;
+        --brand-secondary: #ff00e5;
+        --brand-accent: #00ff88;
+        --brand-orange: #f48529;
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.85);
+        --text-tertiary: rgba(255, 255, 255, 0.6);
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+        --spacing-3xl: 64px;
+        --spacing-4xl: 96px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-full: 9999px;
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+        --max-width: 1200px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "TT Norms", -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.7;
+        font-size: 16px;
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        padding: var(--spacing-lg) var(--spacing-xl);
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .navbar-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(var(--spacing-4xl) + 60px) var(--spacing-xl) var(--spacing-4xl);
+        background: var(--bg-primary);
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 900px;
+      }
+
+      .hero-label {
+        display: inline-block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(0, 217, 255, 0.1);
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--brand-primary);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .hero-title {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: var(--spacing-md);
+        color: white;
+        line-height: 1.2;
+      }
+
+      .hero-location {
+        font-size: 16px;
+        color: var(--text-tertiary);
+        margin-bottom: var(--spacing-2xl);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .hero-subtitle {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(20px, 3vw, 32px);
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: var(--spacing-lg);
+        color: white;
+      }
+
+      .hero-tagline {
+        font-size: clamp(18px, 2.5vw, 24px);
+        font-style: italic;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Stats Section */
+      .stats-section {
+        background: var(--bg-primary);
+        padding: var(--spacing-3xl) var(--spacing-xl);
+      }
+
+      .stats-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-lg);
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--spacing-xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .stat-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-primary);
+        transform: translateY(-5px);
+      }
+
+      .stat-number {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 300;
+        color: var(--brand-orange);
+        line-height: 1;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .stat-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      /* Content Section */
+      .content-section {
+        padding: var(--spacing-4xl) var(--spacing-xl);
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+      }
+
+      .section-label {
+        display: inline-block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: rgba(0, 217, 255, 0.1);
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--brand-primary);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .section-title {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: var(--spacing-lg);
+        color: white;
+      }
+
+      .section-description {
+        font-size: clamp(16px, 2vw, 20px);
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Mission Text */
+      .mission-text {
+        font-size: clamp(18px, 2.5vw, 24px);
+        line-height: 1.9;
+        color: var(--text-secondary);
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto var(--spacing-2xl);
+      }
+
+      .mission-highlight {
+        display: inline-block;
+        padding: var(--spacing-md) var(--spacing-xl);
+        background: linear-gradient(120deg, rgba(0, 217, 255, 0.1), rgba(255, 0, 229, 0.1));
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-lg);
+        margin-top: var(--spacing-xl);
+      }
+
+      .mission-highlight-text {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(18px, 3vw, 28px);
+        font-weight: 300;
+        text-transform: uppercase;
+        color: white;
+      }
+
+      /* Role Cards */
+      .role-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
+      }
+
+      .role-card {
+        padding: var(--spacing-xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .role-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-primary);
+        transform: translateY(-5px);
+      }
+
+      .role-number {
+        font-family: "Monument Extended", sans-serif;
+        font-size: 48px;
+        font-weight: 300;
+        color: var(--brand-orange);
+        margin-bottom: var(--spacing-md);
+        line-height: 1;
+      }
+
+      .role-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .role-description {
+        font-size: 16px;
+        color: var(--text-tertiary);
+        line-height: 1.7;
+      }
+
+      /* Benefits Grid */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
+      }
+
+      .benefit-card {
+        padding: var(--spacing-xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .benefit-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--brand-accent);
+        transform: translateY(-5px);
+      }
+
+      .benefit-icon {
+        font-size: 36px;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .benefit-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .benefit-text {
+        font-size: 15px;
+        color: var(--text-tertiary);
+        line-height: 1.7;
+      }
+
+      /* Quote Section */
+      .quote-section {
+        padding: var(--spacing-4xl) var(--spacing-xl);
+        text-align: center;
+        background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(0, 217, 255, 0.05) 50%, var(--bg-primary) 100%);
+      }
+
+      .quote-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .quote-text {
+        font-size: clamp(20px, 3vw, 32px);
+        font-style: italic;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: var(--spacing-2xl);
+      }
+
+      .quote-divider {
+        width: 60px;
+        height: 3px;
+        background: var(--brand-orange);
+        margin: 0 auto var(--spacing-2xl);
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: var(--spacing-4xl) var(--spacing-xl);
+        text-align: center;
+        background: var(--bg-primary);
+      }
+
+      .cta-content {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(24px, 4vw, 40px);
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: var(--spacing-lg);
+        color: white;
+      }
+
+      .cta-text {
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-2xl);
+        line-height: 1.8;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: var(--spacing-md) var(--spacing-2xl);
+        background: var(--brand-orange);
+        color: white;
+        text-decoration: none;
+        border-radius: var(--radius-full);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(244, 133, 41, 0.4);
+      }
+
+      .cta-button:hover {
+        background: #ff9545;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(244, 133, 41, 0.5);
+      }
+
+      .cta-contact {
+        margin-top: var(--spacing-xl);
+        font-size: 15px;
+        color: var(--text-tertiary);
+      }
+
+      /* Footer */
+      .footer {
+        padding: var(--spacing-3xl) var(--spacing-xl);
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-text {
+        font-size: 14px;
+        color: var(--text-tertiary);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+
+        .role-grid,
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-section {
+          min-height: auto;
+          padding: calc(var(--spacing-3xl) + 60px) var(--spacing-lg) var(--spacing-3xl);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-logo">Soulscape</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <span class="hero-label">Exclusive Invitation</span>
+        <h1 class="hero-title">Soulscape 2026: The Global AI Film Sprint</h1>
+        <p class="hero-location">San Francisco | Silicon Valley | March 2026</p>
+        <h2 class="hero-subtitle">Join the Council of Mentors</h2>
+        <p class="hero-tagline">"Help us kill the 'Slop' and find the Soul."</p>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Days of Creation</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">$100K+</span>
+          <span class="stat-label">Prize Pool</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">200+</span>
+          <span class="stat-label">Global Storytellers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">The Mission</span>
+        <h2 class="section-title">We Are The Resistance</h2>
+      </div>
+      <p class="mission-text">
+        The AI video space is noisy. Feeds flooded with low-effort, algorithmic "content" that looks cool but feels empty. Soulscape is building the world's largest "Anti-Slop" movement. We believe AI isn't just for viral clips—it's for cinema.
+      </p>
+      <p class="mission-text">
+        We are gathering 200 of the world's most innovative storytellers in SF to prove it. Backed by Top Model Vendors (Minimax/Hailuo) & Veterans from Lionsgate/Oscar-nominated teams.
+      </p>
+      <div style="text-align: center;">
+        <div class="mission-highlight">
+          <span class="mission-highlight-text">Find the Hidden Gems</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Your Role Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Your Role</span>
+        <h2 class="section-title">The Gatekeeper of Taste</h2>
+        <p class="section-description">
+          We are inviting a select group of the most respected creators to form our Council of Mentors. We don't need you to teach the basics. We need your Eye. Your job is to filter the noise and find the Top 20.
+        </p>
+      </div>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="role-number">01</div>
+          <h3 class="role-title">Set the Standard</h3>
+          <p class="role-description">
+            You will review submissions and select the Top 20 Finalists. You decide what "Quality" looks like in 2026.
+          </p>
+        </div>
+        <div class="role-card">
+          <div class="role-number">02</div>
+          <h3 class="role-title">Amplify the Movement</h3>
+          <p class="role-description">
+            A public endorsement of the Soulscape mission (we provide assets). Show your audience you stand for quality.
+          </p>
+        </div>
+        <div class="role-card">
+          <div class="role-number">03</div>
+          <h3 class="role-title">Community Impact</h3>
+          <p class="role-description">
+            Host a virtual Q&A or breakdown session for our Discord community (8,000+ members). Optional but encouraged.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Join Section -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-label">Why Join</span>
+        <h2 class="section-title">What's In It For You</h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">👑</div>
+          <h4 class="benefit-title">Authority</h4>
+          <p class="benefit-text">
+            Solidify your status not just as a creator, but as a leader defining the future of the medium.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🔮</div>
+          <h4 class="benefit-title">Access</h4>
+          <p class="benefit-text">
+            Be the first to see the wildest, most creative workflows before they hit Twitter/X.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h4 class="benefit-title">Connection</h4>
+          <p class="benefit-text">
+            Join a private network of fellow top-tier creators and industry pros.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🏆</div>
+          <h4 class="benefit-title">Legacy</h4>
+          <p class="benefit-text">
+            Be recognized as a "Founding Mentor" in our press releases and the Grand Premiere in San Francisco.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+      <div class="quote-content">
+        <div class="quote-divider"></div>
+        <p class="quote-text">
+          "The tool is the engine. The human is the director. Help us find the best drivers."
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Shape the Future?</h2>
+        <p class="cta-text">
+          We're looking for creators who care about the craft. Who want to help define what AI filmmaking means before the mainstream decides for us.
+        </p>
+        <a href="index.html" class="cta-button">Visit Our Website</a>
+        <p class="cta-contact">Contact: Keith Zhang</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        © 2026 Soulscape AI Film Sprint. All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>
