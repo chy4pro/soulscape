@@ -62,6 +62,40 @@
         color: var(--text-primary);
         line-height: 1.7;
         font-size: 16px;
+        overflow-x: hidden;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* Navigation */
@@ -90,33 +124,73 @@
         font-weight: 700;
         color: white;
         text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .navbar-logo:hover {
+        opacity: 0.8;
       }
 
       /* Hero Section */
       .hero-section {
-        min-height: 70vh;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: calc(var(--spacing-4xl) + 60px) var(--spacing-xl) var(--spacing-4xl);
         background: var(--bg-primary);
         text-align: center;
+        position: relative;
+        overflow: hidden;
       }
+
+      /* Floating particles background */
+      .hero-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+      .particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; }
+      .particle:nth-child(3) { left: 35%; top: 30%; animation-delay: 2s; }
+      .particle:nth-child(4) { left: 50%; top: 70%; animation-delay: 0.5s; }
+      .particle:nth-child(5) { left: 65%; top: 25%; animation-delay: 1.5s; }
+      .particle:nth-child(6) { left: 80%; top: 55%; animation-delay: 2.5s; }
+      .particle:nth-child(7) { left: 90%; top: 15%; animation-delay: 0.8s; }
+      .particle:nth-child(8) { left: 15%; top: 80%; animation-delay: 1.8s; }
 
       .hero-content {
         max-width: 900px;
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-out;
       }
 
       .hero-label {
         display: inline-block;
         padding: var(--spacing-sm) var(--spacing-md);
-        background: rgba(0, 217, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--radius-full);
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--brand-primary);
+        color: var(--text-secondary);
         margin-bottom: var(--spacing-lg);
       }
 
@@ -153,13 +227,54 @@
         font-style: italic;
         color: var(--text-secondary);
         max-width: 600px;
-        margin: 0 auto;
+        margin: 0 auto var(--spacing-2xl);
+      }
+
+      /* Scroll indicator */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: pulse 2s ease-in-out infinite;
+        cursor: pointer;
+      }
+
+      .scroll-indicator span {
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-tertiary);
+      }
+
+      .scroll-arrow {
+        width: 24px;
+        height: 24px;
+        border-right: 2px solid var(--text-tertiary);
+        border-bottom: 2px solid var(--text-tertiary);
+        transform: rotate(45deg);
       }
 
       /* Stats Section */
       .stats-section {
         background: var(--bg-primary);
-        padding: var(--spacing-3xl) var(--spacing-xl);
+        padding: var(--spacing-4xl) var(--spacing-xl);
+        position: relative;
+      }
+
+      .stats-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
       }
 
       .stats-container {
@@ -167,33 +282,52 @@
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: var(--spacing-lg);
+        gap: var(--spacing-xl);
       }
 
       .stat-item {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: var(--spacing-xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-lg);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 133, 41, 0.05);
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+      }
+
+      .stat-item:hover::before {
+        transform: translateY(0);
       }
 
       .stat-item:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--brand-primary);
-        transform: translateY(-5px);
+        border-color: rgba(244, 133, 41, 0.3);
+        transform: translateY(-8px);
       }
 
       .stat-number {
         font-family: "Monument Extended", sans-serif;
-        font-size: clamp(36px, 5vw, 56px);
+        font-size: clamp(32px, 5vw, 48px);
         font-weight: 300;
         color: var(--brand-orange);
         line-height: 1;
         margin-bottom: var(--spacing-sm);
+        position: relative;
+        z-index: 1;
       }
 
       .stat-label {
@@ -201,8 +335,10 @@
         font-weight: 500;
         color: var(--text-secondary);
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
         text-align: center;
+        position: relative;
+        z-index: 1;
       }
 
       /* Content Section */
@@ -220,13 +356,14 @@
       .section-label {
         display: inline-block;
         padding: var(--spacing-sm) var(--spacing-md);
-        background: rgba(0, 217, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: var(--radius-full);
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--brand-primary);
+        color: var(--text-tertiary);
         margin-bottom: var(--spacing-md);
       }
 
@@ -259,11 +396,17 @@
 
       .context-highlight {
         display: inline-block;
-        padding: var(--spacing-md) var(--spacing-xl);
-        background: linear-gradient(120deg, rgba(0, 217, 255, 0.1), rgba(255, 0, 229, 0.1));
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: var(--spacing-lg) var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--radius-lg);
         margin-top: var(--spacing-xl);
+        transition: all 0.3s ease;
+      }
+
+      .context-highlight:hover {
+        border-color: rgba(244, 133, 41, 0.5);
+        transform: scale(1.02);
       }
 
       .context-highlight-text {
@@ -274,14 +417,28 @@
         color: white;
       }
 
+      /* Divider */
+      .section-divider {
+        width: 60px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: var(--spacing-4xl) auto;
+      }
+
       /* Event Info */
       .event-info {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-lg);
         padding: var(--spacing-2xl);
         margin-top: var(--spacing-2xl);
         text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .event-info:hover {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
       }
 
       .event-info-text {
@@ -298,28 +455,52 @@
       /* Invitation Cards */
       .invitation-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-xl);
         margin-top: var(--spacing-2xl);
       }
 
       .invitation-card {
-        padding: var(--spacing-xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-lg);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .invitation-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--brand-orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      .invitation-card:hover::after {
+        transform: scaleX(1);
       }
 
       .invitation-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--brand-primary);
-        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
       }
 
       .invitation-icon {
         font-size: 36px;
         margin-bottom: var(--spacing-md);
+        transition: transform 0.3s ease;
+      }
+
+      .invitation-card:hover .invitation-icon {
+        transform: scale(1.1);
       }
 
       .invitation-title {
@@ -352,32 +533,56 @@
 
       .role-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-xl);
         margin-top: var(--spacing-2xl);
       }
 
       .role-card {
-        padding: var(--spacing-xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-lg);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .role-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--brand-orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      .role-card:hover::after {
+        transform: scaleX(1);
       }
 
       .role-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--brand-primary);
-        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
       }
 
       .role-number {
         font-family: "Monument Extended", sans-serif;
-        font-size: 48px;
+        font-size: 56px;
         font-weight: 300;
-        color: var(--brand-orange);
+        color: rgba(244, 133, 41, 0.3);
         margin-bottom: var(--spacing-md);
         line-height: 1;
+        transition: color 0.3s ease;
+      }
+
+      .role-card:hover .role-number {
+        color: var(--brand-orange);
       }
 
       .role-title {
@@ -396,10 +601,15 @@
       .role-note {
         text-align: center;
         margin-top: var(--spacing-2xl);
-        padding: var(--spacing-lg);
-        background: rgba(244, 133, 41, 0.1);
-        border: 1px solid rgba(244, 133, 41, 0.3);
+        padding: var(--spacing-lg) var(--spacing-xl);
+        background: rgba(244, 133, 41, 0.05);
+        border: 1px solid rgba(244, 133, 41, 0.2);
         border-radius: var(--radius-lg);
+        transition: all 0.3s ease;
+      }
+
+      .role-note:hover {
+        border-color: rgba(244, 133, 41, 0.4);
       }
 
       .role-note-text {
@@ -411,33 +621,53 @@
       .role-note-highlight {
         color: var(--brand-orange);
         font-weight: 600;
+        font-style: normal;
       }
 
       /* Benefits Grid */
       .benefits-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-xl);
         margin-top: var(--spacing-2xl);
       }
 
       .benefit-card {
-        padding: var(--spacing-xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: var(--spacing-2xl);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-lg);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: flex-start;
       }
 
       .benefit-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--brand-accent);
-        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(8px);
       }
 
       .benefit-icon {
-        font-size: 36px;
-        margin-bottom: var(--spacing-md);
+        font-size: 32px;
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: var(--radius-md);
+        transition: transform 0.3s ease;
+      }
+
+      .benefit-card:hover .benefit-icon {
+        transform: scale(1.1);
+      }
+
+      .benefit-content {
+        flex: 1;
       }
 
       .benefit-title {
@@ -457,12 +687,25 @@
       .quote-section {
         padding: var(--spacing-4xl) var(--spacing-xl);
         text-align: center;
-        background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(0, 217, 255, 0.05) 50%, var(--bg-primary) 100%);
+        background: var(--bg-primary);
+        position: relative;
       }
 
       .quote-content {
         max-width: 800px;
         margin: 0 auto;
+        position: relative;
+      }
+
+      .quote-mark {
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.03);
+        font-family: Georgia, serif;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 1;
       }
 
       .quote-text {
@@ -470,14 +713,8 @@
         font-style: italic;
         color: var(--text-secondary);
         line-height: 1.6;
-        margin-bottom: var(--spacing-2xl);
-      }
-
-      .quote-divider {
-        width: 60px;
-        height: 3px;
-        background: var(--brand-orange);
-        margin: 0 auto var(--spacing-2xl);
+        position: relative;
+        z-index: 1;
       }
 
       /* CTA Section */
@@ -485,11 +722,24 @@
         padding: var(--spacing-4xl) var(--spacing-xl);
         text-align: center;
         background: var(--bg-primary);
+        position: relative;
+      }
+
+      .cta-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
       }
 
       .cta-content {
         max-width: 700px;
         margin: 0 auto;
+        padding-top: var(--spacing-2xl);
       }
 
       .cta-title {
@@ -520,26 +770,35 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(244, 133, 41, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.4s ease;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
       }
 
       .cta-button:hover {
-        background: #ff9545;
         transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba(244, 133, 41, 0.5);
-      }
-
-      .cta-contact {
-        margin-top: var(--spacing-xl);
-        font-size: 15px;
-        color: var(--text-tertiary);
+        box-shadow: 0 8px 30px rgba(244, 133, 41, 0.4);
       }
 
       /* Footer */
       .footer {
         padding: var(--spacing-3xl) var(--spacing-xl);
         text-align: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .footer-text {
@@ -548,20 +807,34 @@
       }
 
       /* Responsive */
-      @media (max-width: 768px) {
-        .stats-container {
+      @media (max-width: 968px) {
+        .invitation-grid,
+        .role-grid {
           grid-template-columns: 1fr;
         }
 
-        .invitation-grid,
-        .role-grid,
         .benefits-grid {
           grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .stats-container {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-lg);
         }
 
         .hero-section {
           min-height: auto;
           padding: calc(var(--spacing-3xl) + 60px) var(--spacing-lg) var(--spacing-3xl);
+        }
+
+        .scroll-indicator {
+          display: none;
+        }
+
+        .benefit-card {
+          flex-direction: column;
         }
       }
     </style>
@@ -576,6 +849,16 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
+      <div class="hero-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
       <div class="hero-content">
         <span class="hero-label">Distinguished Invitation</span>
         <h1 class="hero-title">Soulscape 2026: The Global AI Film Sprint</h1>
@@ -583,21 +866,25 @@
         <h2 class="hero-subtitle">The Council of Visionaries</h2>
         <p class="hero-tagline">"Shaping the Ethical Future of AI in Cinema."</p>
       </div>
+      <div class="scroll-indicator" onclick="document.querySelector('.stats-section').scrollIntoView({behavior: 'smooth'})">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+      </div>
     </section>
 
     <!-- Stats Section -->
     <section class="stats-section">
       <div class="stats-container">
-        <div class="stat-item">
+        <div class="stat-item animate-on-scroll">
           <span class="stat-number">Top 10</span>
           <span class="stat-label">Finalist Films</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-item animate-on-scroll">
           <span class="stat-number">Top 3</span>
           <span class="stat-label">Winners You Crown</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">100+</span>
+        <div class="stat-item animate-on-scroll">
+          <span class="stat-number">200+</span>
           <span class="stat-label">Elite Storytellers</span>
         </div>
       </div>
@@ -605,67 +892,71 @@
 
     <!-- Context Section -->
     <section class="content-section">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-label">The Context</span>
         <h2 class="section-title">Soul vs. Slop</h2>
       </div>
-      <p class="context-text">
+      <p class="context-text animate-on-scroll">
         We are witnessing an explosion of AI capability, but a starvation of resonance. The industry is at a crossroads: Will AI become a factory for "content slop," or a new instrument for the human soul?
       </p>
-      <p class="context-text">
+      <p class="context-text animate-on-scroll">
         Soulscape is the answer. We are building a movement to ensure that as tools become democratized, storytelling quality remains paramount.
       </p>
-      <div style="text-align: center;">
+      <div style="text-align: center;" class="animate-on-scroll">
         <div class="context-highlight">
           <span class="context-highlight-text">Guardians of the Craft</span>
         </div>
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- The Event Section -->
     <section class="content-section">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-label">The Event</span>
         <h2 class="section-title">The Birthplace of Cinematic IP</h2>
         <p class="section-description">
-          In March 2026, Soulscape will gather 100+ of the world's most talented storytellers in San Francisco for a 5-day immersive film sprint.
+          In March 2026, Soulscape will gather 200+ of the world's most talented storytellers in San Francisco for a 5-day immersive film sprint.
         </p>
       </div>
-      <div class="event-info">
+      <div class="event-info animate-on-scroll">
         <p class="event-info-text">
           This is not a hackathon; it is <span class="event-info-highlight">the birthplace of the next generation of cinematic IP</span>, supported by the City of San Francisco and major tech partners.
         </p>
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- The Invitation Section -->
     <section class="content-section">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-label">The Invitation</span>
         <h2 class="section-title">Be a Distinguished Mentor</h2>
         <p class="section-description">
           We are inviting a select group of industry icons—Directors, Producers, and Tech Pioneers—to serve as the "Founding Visionaries" for this movement.
         </p>
       </div>
-      <p class="role-intro">
+      <p class="role-intro animate-on-scroll">
         We are offering you a front-row seat to shape the future. While our Creator Mentors select the finalists, <span class="role-intro-highlight">we need you to crown the champions</span>.
       </p>
       <div class="invitation-grid">
-        <div class="invitation-card">
+        <div class="invitation-card animate-on-scroll">
           <div class="invitation-icon">⚖️</div>
           <h3 class="invitation-title">Shape Ethics</h3>
           <p class="invitation-description">
             Help us define the boundaries and best practices for the ethical use of AI in filmmaking before standards are set by others.
           </p>
         </div>
-        <div class="invitation-card">
+        <div class="invitation-card animate-on-scroll">
           <div class="invitation-icon">🔍</div>
           <h3 class="invitation-title">Discover Talent</h3>
           <p class="invitation-description">
             Get early access to raw, untapped talent and groundbreaking workflows. Discover the next generation of showrunners before they hit the mainstream.
           </p>
         </div>
-        <div class="invitation-card">
+        <div class="invitation-card animate-on-scroll">
           <div class="invitation-icon">🎯</div>
           <h3 class="invitation-title">Lead the Narrative</h3>
           <p class="invitation-description">
@@ -675,28 +966,30 @@
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Your Involvement Section -->
     <section class="content-section">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-label">Your Involvement</span>
         <h2 class="section-title">High Impact, Low Friction</h2>
       </div>
       <div class="role-grid">
-        <div class="role-card">
+        <div class="role-card animate-on-scroll">
           <div class="role-number">01</div>
           <h3 class="role-title">The Grand Jury</h3>
           <p class="role-description">
             Review the Top 10 Finalist Films and select the Top 3 Winners for the Grand Premiere in San Francisco.
           </p>
         </div>
-        <div class="role-card">
+        <div class="role-card animate-on-scroll">
           <div class="role-number">02</div>
           <h3 class="role-title">Ethical Guidance</h3>
           <p class="role-description">
             Help us define the boundaries and best practices for the "Human-First" use of AI in filmmaking.
           </p>
         </div>
-        <div class="role-card">
+        <div class="role-card animate-on-scroll">
           <div class="role-number">03</div>
           <h3 class="role-title">Talent Discovery</h3>
           <p class="role-description">
@@ -704,56 +997,61 @@
           </p>
         </div>
       </div>
-      <div class="role-note">
+      <div class="role-note animate-on-scroll">
         <p class="role-note-text">
           Your role: <span class="role-note-highlight">Bestow the final honor and validate the industry standards</span>
         </p>
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Why Partner Section -->
     <section class="content-section">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-label">Why Partner</span>
         <h2 class="section-title">Shape the Legacy</h2>
       </div>
       <div class="benefits-grid">
-        <div class="benefit-card">
+        <div class="benefit-card animate-on-scroll">
           <div class="benefit-icon">🏛️</div>
-          <h4 class="benefit-title">Lead the Narrative</h4>
-          <p class="benefit-text">
-            Position yourself as a guardian of "Creative Equity," guiding the industry toward art rather than algorithms.
-          </p>
+          <div class="benefit-content">
+            <h4 class="benefit-title">Lead the Narrative</h4>
+            <p class="benefit-text">
+              Position yourself as a guardian of "Creative Equity," guiding the industry toward art rather than algorithms.
+            </p>
+          </div>
         </div>
-        <div class="benefit-card">
+        <div class="benefit-card animate-on-scroll">
           <div class="benefit-icon">🌉</div>
-          <h4 class="benefit-title">Bridge the Gap</h4>
-          <p class="benefit-text">
-            Connect with the bleeding edge of Silicon Valley innovation while upholding the traditions of cinema.
-          </p>
+          <div class="benefit-content">
+            <h4 class="benefit-title">Bridge the Gap</h4>
+            <p class="benefit-text">
+              Connect with the bleeding edge of Silicon Valley innovation while upholding the traditions of cinema.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Quote Section -->
     <section class="quote-section">
-      <div class="quote-content">
-        <div class="quote-divider"></div>
+      <div class="quote-content animate-on-scroll">
+        <div class="quote-mark">"</div>
         <p class="quote-text">
-          "AI is changing everything. Soulscape is your opportunity to guide how it happens."
+          AI is changing everything. Soulscape is your opportunity to guide how it happens.
         </p>
       </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta-section">
-      <div class="cta-content">
+      <div class="cta-content animate-on-scroll">
         <h2 class="cta-title">Join the Council of Visionaries</h2>
         <p class="cta-text">
           The future of AI filmmaking is being written now. Be one of the distinguished voices that shapes it.
         </p>
         <a href="index.html" class="cta-button">Visit Our Website</a>
-        <p class="cta-contact">Contact: Keith Zhang</p>
       </div>
     </section>
 
@@ -763,5 +1061,37 @@
         © 2026 Soulscape AI Film Sprint. All rights reserved.
       </p>
     </footer>
+
+    <script>
+      // Scroll animation observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 100);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Parallax effect on scroll for particles
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+          const speed = 0.1 + (index * 0.02);
+          particle.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+      });
+    </script>
   </body>
 </html>
