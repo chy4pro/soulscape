@@ -710,9 +710,96 @@
           flex-direction: column;
         }
       }
+      /* Spotlight Effect */
+      .stat-item, .role-card, .benefit-card {
+        background: rgba(255, 255, 255, 0.02); /* Ensure base background is set/restated if needed */
+      }
+
+      .stat-item::before, .role-card::before, .benefit-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+          rgba(255, 255, 255, 0.1),
+          transparent 40%
+        );
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .stat-item:hover::before, .role-card:hover::before, .benefit-card:hover::before {
+        opacity: 1;
+      }
+      /* Loading Screen */
+      .loader-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+      }
+
+      .loader-content {
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .loader-percent {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(60px, 10vw, 120px);
+        color: white;
+        font-weight: 300;
+        display: block;
+        transform: translateY(100%);
+        animation: revealText 0.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+      }
+
+      .loader-text {
+        font-family: "TT Norms", sans-serif;
+        color: var(--text-tertiary);
+        margin-top: var(--spacing-md);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-size: 14px;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 0.3s forwards;
+      }
+
+      @keyframes revealText {
+        to { transform: translateY(0); }
+      }
+
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+
+      body.loaded .loader-screen {
+        transform: translateY(-100%);
+      }
     </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div class="loader-screen">
+      <div class="loader-content">
+        <span class="loader-percent">0%</span>
+        <div class="loader-text">Initializing Soulscape</div>
+      </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
       <div class="navbar-content">
@@ -923,6 +1010,47 @@
           const speed = 0.1 + (index * 0.02);
           particle.style.transform = `translateY(${scrolled * speed}px)`;
         });
+      });
+    </script>
+    <!-- Spotlight Effect Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll('.stat-item, .role-card, .benefit-card');
+        
+        cards.forEach(card => {
+          card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+          });
+        });
+      });
+    </script>
+    <!-- Loader Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const percentEl = document.querySelector('.loader-percent');
+        const loader = document.querySelector('.loader-screen');
+        let progress = 0;
+
+        // Simulate loading time
+        const interval = setInterval(() => {
+          progress += Math.floor(Math.random() * 4) + 1;
+          if (progress > 100) progress = 100;
+          
+          percentEl.textContent = `${progress}%`;
+
+          if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              document.body.classList.add('loaded');
+              // Trigger hero animations after loader moves (optional sync)
+            }, 500);
+          }
+        }, 20); // Adjust speed here
       });
     </script>
   </body>

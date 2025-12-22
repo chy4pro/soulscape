@@ -1086,6 +1086,139 @@
         opacity: 0.85;
       }
 
+      /* ===== Mentor/Juror Section ===== */
+      .mentor-section {
+        padding: var(--spacing-4xl) var(--spacing-xl);
+        background: var(--bg-primary);
+      }
+
+      .mentor-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(40px, 8vw, 80px);
+        margin-top: var(--spacing-2xl);
+      }
+
+      .mentor-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 200px;
+      }
+
+      .mentor-avatar {
+        width: clamp(120px, 20vw, 160px);
+        height: clamp(120px, 20vw, 160px);
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+
+      .mentor-avatar::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        padding: 3px;
+        background: linear-gradient(135deg, transparent, transparent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .mentor-card:hover .mentor-avatar {
+        transform: scale(1.05);
+        border-color: #f48529;
+        box-shadow: 0 0 30px rgba(244, 133, 41, 0.3);
+      }
+
+      .mentor-card:hover .mentor-avatar::before {
+        background: linear-gradient(135deg, #f48529, #ff6b6b);
+        opacity: 1;
+      }
+
+      .mentor-avatar img {
+        width: 250%;
+        height: 250%;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: filter 0.4s ease;
+      }
+
+      /* Individual positioning for each mentor's headshot */
+      .mentor-avatar img.jesse-z {
+        object-position: center;
+        transform: translate(-30%, -7%);
+      }
+
+      .mentor-avatar img.federico-l {
+        object-position: center;
+        transform: translate(-30%, -13%);
+      }
+
+      .mentor-card:hover .mentor-avatar img {
+        filter: grayscale(0%);
+      }
+
+      .mentor-info {
+        margin-top: var(--spacing-lg);
+      }
+
+      .mentor-name {
+        font-family: "Monument Extended", sans-serif;
+        font-size: clamp(14px, 2vw, 18px);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-sm);
+        letter-spacing: 0.5px;
+      }
+
+      .mentor-title {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(12px, 1.5vw, 14px);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .mentor-council {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(11px, 1.2vw, 12px);
+        color: #f48529;
+        margin-top: 4px;
+        letter-spacing: 0.5px;
+      }
+
+      @media (max-width: 768px) {
+        .mentor-section {
+          padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+
+        .mentor-grid {
+          gap: clamp(30px, 6vw, 50px);
+        }
+
+        .mentor-card {
+          max-width: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .mentor-grid {
+          gap: 24px;
+        }
+
+        .mentor-card {
+          max-width: 130px;
+        }
+      }
 
       /* ===== Image Gallery Section ===== */
       .image-gallery-section {
@@ -1941,6 +2074,38 @@
         </div>
       </div>
 
+    </section>
+
+    <!-- Founding Council Section -->
+    <section class="content-section mentor-section scroll-animate" id="council">
+      <div class="section-header">
+        <span class="section-label">Founding Council</span>
+        <h2 class="section-title">Meet Our Visionary Leaders</h2>
+      </div>
+
+      <div class="mentor-grid">
+        <div class="mentor-card">
+          <div class="mentor-avatar">
+            <img src="mentor/mmexport1766075548272.jpg" alt="Jesse Z." loading="lazy" class="jesse-z" />
+          </div>
+          <div class="mentor-info">
+            <div class="mentor-name">Jesse Z.</div>
+            <div class="mentor-title">Founding Juror</div>
+            <div class="mentor-council">Council of Visionaries</div>
+          </div>
+        </div>
+
+        <div class="mentor-card">
+          <div class="mentor-avatar">
+            <img src="mentor/mmexport1766075553157.jpg" alt="Federico Luglio" loading="lazy" class="federico-l" />
+          </div>
+          <div class="mentor-info">
+            <div class="mentor-name">Federico Luglio</div>
+            <div class="mentor-title">Founding Mentor, EU</div>
+            <div class="mentor-council">Council of Mentors</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Community Thoughts Section -->
