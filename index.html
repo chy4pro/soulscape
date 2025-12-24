@@ -1096,8 +1096,61 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: flex-start;
         gap: clamp(40px, 8vw, 80px);
         margin-top: var(--spacing-2xl);
+      }
+
+      .mentor-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+      }
+
+      .mentor-group-title {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(11px, 1.3vw, 13px);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .mentor-group-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(30px, 6vw, 50px);
+      }
+
+      .mentor-more {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(11px, 1.2vw, 13px);
+        color: var(--text-tertiary);
+        font-style: italic;
+        opacity: 0.5;
+        margin-top: var(--spacing-sm);
+      }
+
+      .mentor-divider {
+        width: 1px;
+        height: 180px;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
+        align-self: center;
+      }
+
+      @media (max-width: 768px) {
+        .mentor-divider {
+          width: 60%;
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+          margin: var(--spacing-lg) 0;
+        }
+
+        .mentor-grid {
+          flex-direction: column;
+          align-items: center;
+        }
       }
 
       .mentor-card {
@@ -1174,10 +1227,19 @@
       .mentor-name {
         font-family: "Monument Extended", sans-serif;
         font-size: clamp(14px, 2vw, 18px);
-        font-weight: 600;
+        font-weight: 400;
         color: var(--text-primary);
         margin-bottom: var(--spacing-sm);
         letter-spacing: 0.5px;
+      }
+
+      .mentor-bio {
+        font-family: "TT Norms", sans-serif;
+        font-size: clamp(11px, 1.2vw, 13px);
+        color: var(--text-tertiary);
+        line-height: 1.5;
+        margin-top: var(--spacing-sm);
+        max-width: 200px;
       }
 
       .mentor-title {
@@ -2084,26 +2146,45 @@
       </div>
 
       <div class="mentor-grid">
-        <div class="mentor-card">
-          <div class="mentor-avatar">
-            <img src="mentor/mmexport1766075548272.jpg" alt="Jesse Z." loading="lazy" class="jesse-z" />
+        <!-- Council of Visionaries (Jurors) -->
+        <div class="mentor-group">
+          <div class="mentor-group-title">Council of Visionaries</div>
+          <div class="mentor-group-members">
+            <div class="mentor-card">
+              <div class="mentor-avatar">
+                <img src="mentor/mmexport1766075548272.jpg" alt="Jesse Z." loading="lazy" class="jesse-z" />
+              </div>
+              <div class="mentor-info">
+                <div class="mentor-name">Jesse Z.</div>
+                <div class="mentor-title">Founding Juror</div>
+                <div class="mentor-council">Council of Visionaries</div>
+                <div class="mentor-bio">Oscar-shortlisted & Emmy-nominated filmmaker. Founder of Storyverse AI.</div>
+              </div>
+            </div>
           </div>
-          <div class="mentor-info">
-            <div class="mentor-name">Jesse Z.</div>
-            <div class="mentor-title">Founding Juror</div>
-            <div class="mentor-council">Council of Visionaries</div>
-          </div>
+          <div class="mentor-more">more coming...</div>
         </div>
 
-        <div class="mentor-card">
-          <div class="mentor-avatar">
-            <img src="mentor/mmexport1766075553157.jpg" alt="Federico Luglio" loading="lazy" class="federico-l" />
+        <!-- Divider -->
+        <div class="mentor-divider"></div>
+
+        <!-- Council of Mentors -->
+        <div class="mentor-group">
+          <div class="mentor-group-title">Council of Mentors</div>
+          <div class="mentor-group-members">
+            <div class="mentor-card">
+              <div class="mentor-avatar">
+                <img src="mentor/mmexport1766075553157.jpg" alt="Federico Luglio" loading="lazy" class="federico-l" />
+              </div>
+              <div class="mentor-info">
+                <div class="mentor-name">Federico Luglio</div>
+                <div class="mentor-title">Founding Mentor, EU</div>
+                <div class="mentor-council">Council of Mentors</div>
+                <div class="mentor-bio">Award-winning director. Founder of AIMA (AI Movie Awards).</div>
+              </div>
+            </div>
           </div>
-          <div class="mentor-info">
-            <div class="mentor-name">Federico Luglio</div>
-            <div class="mentor-title">Founding Mentor, EU</div>
-            <div class="mentor-council">Council of Mentors</div>
-          </div>
+          <div class="mentor-more">more coming...</div>
         </div>
       </div>
     </section>
