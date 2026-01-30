@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSCAPE 2026 | Google x Soulscape Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Inter:wght@400;700&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        /* Deeper, richer black base */
+        --void: #020204; 
+        --flare: #FFFFFF;
+        /* Refined Palette based on reference images */
+        /* Strong warm orange/gold leak */
+        --leak-warm: rgba(255, 120, 30, 0.4); 
+        /* Deep indigo/purple shadows */
+        --leak-cool: rgba(40, 20, 120, 0.3);
+        /* Subtle prismatic streak colors */
+        --prism-streak: linear-gradient(90deg, rgba(66, 133, 244, 0.2), rgba(155, 81, 224, 0.2), rgba(251, 188, 5, 0.2));
+      }
+
+      body {
+        background-color: var(--void);
+        color: var(--flare);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      .font-serif-italic {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+      }
+
+      .font-mono-technical {
+        font-family: 'Geist Mono', monospace;
+        letter-spacing: 0.05em;
+      }
+
+      /* --- DYNAMIC FILM ATMOSPHERE --- */
+
+      .grain-overlay {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 40;
+        mix-blend-mode: overlay;
+        animation: grainShift 4s steps(6) infinite;
+      }
+
+      @keyframes grainShift {
+        0% { transform: translate(0, 0); }
+        20% { transform: translate(-2%, 1%); }
+        40% { transform: translate(1%, -2%); }
+        60% { transform: translate(-1%, 2%); }
+        80% { transform: translate(2%, -1%); }
+        100% { transform: translate(0, 0); }
+      }
+
+      .light-leak-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .leak {
+        position: absolute;
+        mix-blend-mode: screen; 
+      }
+
+      .leak-warm-corner {
+        top: -40%;
+        right: -40%;
+        width: 120vw;
+        height: 120vw;
+        background: radial-gradient(circle at center, var(--leak-warm) 0%, rgba(255, 50, 0, 0.1) 50%, transparent 75%);
+        filter: blur(100px);
+        opacity: 0.8;
+        animation: warmBreath 20s ease-in-out infinite alternate;
+      }
+      @keyframes warmBreath {
+          0% { transform: scale(1); opacity: 0.8; }
+          100% { transform: scale(1.05); opacity: 0.6; }
+      }
+
+      .leak-cool-base {
+        bottom: -30%;
+        left: -30%;
+        width: 100vw;
+        height: 100vw;
+        background: radial-gradient(circle at center, var(--leak-cool) 0%, rgba(10, 0, 50, 0.1) 60%, transparent 85%);
+        filter: blur(120px);
+        opacity: 0.5;
+        animation: coolShift 30s ease-in-out infinite alternate;
+      }
+      @keyframes coolShift {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(5%, -5%) scale(1.1); }
+      }
+
+      .leak-prism-streak {
+        top: 50%;
+        left: 50%;
+        width: 200vw;
+        height: 20vw; 
+        background: var(--prism-streak);
+        filter: blur(80px);
+        opacity: 0.25;
+        transform-origin: center;
+        animation: streakRotate 45s linear infinite alternate;
+      }
+      @keyframes streakRotate {
+         0% { transform: translate(-50%, -50%) rotate(-35deg) scaleY(1); }
+         100% { transform: translate(-50%, -50%) rotate(-25deg) scaleY(1.3); }
+      }
+
+
+      /* --- UI Elements --- */
+
+      /* FIX: Removed 'transition: all' to prevent conflict with GSAP opacity animations */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03); 
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+        border: 0.5px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        /* Only transition properties that GSAP isn't touching */
+        transition: background-color 0.6s, border-color 0.6s, box-shadow 0.6s, transform 0.6s;
+      }
+
+      .glass-card:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 40px rgba(66, 133, 244, 0.15);
+      }
+
+      #cursor-flare {
+        position: fixed;
+        width: 70px;
+        height: 70px;
+        background: radial-gradient(circle, rgba(255,250,240,0.9) 0%, rgba(200,220,255,0.2) 50%, rgba(0,0,0,0) 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.1;
+        mix-blend-mode: plus-lighter;
+        z-index: 999;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease, transform 0.1s ease-out;
+      }
+      
+      #cursor-dot {
+          position: fixed;
+          width: 4px;
+          height: 4px;
+          background: rgba(255, 250, 240, 0.9); 
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 1000;
+          transform: translate(-50%, -50%);
+          transition: transform 0.1s ease-out;
+      }
+
+      .titan-glow:hover {
+        box-shadow: 0 0 60px rgba(255, 150, 50, 0.15), inset 0 0 20px rgba(66, 133, 244, 0.1);
+      }
+      
+      ::selection {
+          background: rgba(255, 130, 40, 0.3); 
+          color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain-overlay"></div>
+    <div class="light-leak-container">
+        <div class="leak leak-warm-corner"></div>
+        <div class="leak leak-cool-base"></div>
+        <div class="leak leak-prism-streak"></div>
+    </div>
+    
+    <div id="cursor-flare"></div>
+    <div id="cursor-dot"></div>
+
+
+    <section class="h-screen flex flex-col justify-center items-center relative px-6 overflow-hidden">
+        <div class="z-10 text-center relative">
+            <p class="font-mono-technical tracking-[0.3em] text-xs uppercase opacity-50 mb-8 text-orange-200/70">A Soulscape x Gemini Proposal</p>
+            
+            <h1 class="font-serif-italic text-7xl md:text-9xl mb-6 drop-shadow-2xl opacity-0" id="hero-title" style="text-shadow: 0 0 40px rgba(0,0,0,0.5);">Mind Versus Pixel</h1>
+            
+            <div class="needle-line w-0 h-[1px] bg-white/30 mx-auto mb-8 opacity-0" id="hero-line"></div>
+            
+            <div id="hero-details">
+                <p class="font-mono-technical text-sm tracking-[0.15em] opacity-0 uppercase mb-2">Global AI Film Sprint — San Francisco</p>
+                <p class="font-mono-technical text-xs tracking-[0.2em] opacity-0 uppercase text-blue-100">April 13th — April 15th, 2026</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-12 left-10 hidden md:block opacity-0" id="hero-sub">
+            <div class="h-[1px] w-10 bg-white/20 mb-4"></div>
+            <p class="font-mono-technical text-[10px] text-gray-300 max-w-xs uppercase leading-relaxed opacity-60">
+                The Ecosystem Layer is Open. <br> Claim the Foundational Throne.
+            </p>
+        </div>
+        
+        <div class="absolute bottom-12 animate-pulse opacity-20 right-10 md:right-auto md:left-1/2 md:-translate-x-1/2 pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </section>
+
+    <section class="min-h-screen py-24 px-10 md:px-24 border-t border-white/5 relative flex flex-col justify-center">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+            <div>
+                <h2 class="font-mono-technical tracking-[0.2em] text-xs text-blue-300/70 mb-12 uppercase">Page 01 // The Landscape</h2>
+                <h3 class="font-serif-italic text-5xl mb-8 leading-tight drop-shadow-lg">The "Super Bowl" of AI Cinema.</h3>
+                <p class="text-lg opacity-70 leading-relaxed mb-12 font-light text-gray-300 section-text">
+                    While the video layer is crowded with generators, the <strong>Ecosystem Layer</strong> remains vacant. Soulscape 2026 is the premier battleground where 200 of the top 1% of global creators define the standards of high-fidelity storytelling.
+                </p>
+                
+                <div class="space-y-6 text-sm font-mono-technical opacity-60">
+                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
+                        <span>Luma / PixVerse / Hailuo</span>
+                        <span class="italic opacity-50 text-xs">Video Gen Layer</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
+                        <span>Adobe / Freepik</span>
+                        <span class="italic opacity-50 text-xs">Creative Tools</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
+                        <span>Pixar / Netflix / Disney</span>
+                        <span class="italic opacity-50 text-xs">Industry Validation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-12 relative flex flex-col justify-center overflow-hidden group">
+                 <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                <h4 class="font-mono-technical text-xs mb-6 uppercase opacity-50 tracking-wider relative z-10">The Strategic Play</h4>
+                <p class="text-3xl font-serif-italic leading-snug relative z-10 section-text">
+                    "Google has the unique ability to own the <span class="text-blue-300 relative">End-to-End Creative OS<span class="absolute -bottom-1 left-0 w-full h-[1px] bg-blue-400/30"></span></span>. Own the logic (Gemini), the motion (Veo), and the workflow."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="min-h-screen py-24 px-10 md:px-24 relative overflow-hidden">
+      <div class="mb-24 relative z-10">
+        <h3 class="font-mono-technical text-xs tracking-[0.2em] uppercase mb-4 opacity-60">02 // ROI & Growth</h3>
+        <h2 class="text-6xl font-serif-italic">The Campus Invasion & Stress Test</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+        <div class="border-l-2 border-white/10 pl-8 py-2 hover:border-orange-500/40 transition-colors duration-500 group">
+          <h4 class="font-bold text-lg mb-4 group-hover:text-orange-100 transition-colors">University Tour</h4>
+          <p class="opacity-50 text-sm leading-relaxed mb-8 section-text">Habits are formed in the classroom. We are hitting Stanford, UCB, USC, Columbia, and NYU to embed the "Google Flow."</p>
+          <ul class="text-[10px] font-mono-technical space-y-3 opacity-40 uppercase tracking-wider">
+            <li>> FEB: UCB/Stanford Launch</li>
+            <li>> MAR: USC Narrative Lab</li>
+            <li>> APR: LMU Final Sprint</li>
+          </ul>
+        </div>
+        
+        <div class="border-l-2 border-white/10 pl-8 py-2 hover:border-blue-500/40 transition-colors duration-500 relative group">
+          <h4 class="font-bold text-lg mb-4 group-hover:text-blue-100 transition-colors">The Stress Test</h4>
+          <p class="opacity-50 text-sm leading-relaxed mb-8 section-text">200 elite power users spending 48 to 72 hours in a pressure cooker. This is R&D at a scale impossible in a lab.</p>
+          
+          <div class="bg-white/5 h-[2px] w-full mt-4 overflow-hidden relative">
+            <div class="bg-gradient-to-r from-orange-500 to-blue-500 h-full w-3/4 relative">
+                <div class="absolute top-0 right-0 h-full w-20 bg-gradient-to-r from-transparent to-white/50 blur-[2px] animate-pulse"></div>
+            </div>
+          </div>
+          <p class="text-[9px] mt-3 font-mono-technical opacity-40 tracking-[0.2em] text-blue-300">GEMINI NARRATIVE LATENCY TEST: ACTIVE</p>
+        </div>
+        
+        <div class="border-l-2 border-white/10 pl-8 py-2 hover:border-white/40 transition-colors duration-500">
+          <h4 class="font-bold text-lg mb-4">Soul Over Slop</h4>
+          <p class="opacity-50 text-sm leading-relaxed mb-6 section-text">Distance Google from "AI slop." We align your models with cinema quality and professional workflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="min-h-screen py-32 px-10 md:px-24 relative border-t border-white/5">
+      <div class="text-center mb-24">
+        <h2 class="text-6xl font-serif-italic mb-6">The Selection</h2>
+        <p class="font-mono-technical opacity-40 text-xs tracking-[0.3em]">SECURE THE FOUNDATIONAL LAYER</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start" id="tier-container">
+        <div class="glass-card p-8 flex flex-col justify-between hover:opacity-100 transition-all duration-500 hover:-translate-y-2">
+          <div>
+            <h3 class="font-mono-technical text-xs mb-10 tracking-widest opacity-60">GUARDIAN PARTNER</h3>
+            <p class="text-5xl mb-8 font-serif-italic text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50">$20k</p>
+            <ul class="text-sm opacity-50 space-y-5 font-light leading-relaxed">
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Logo on Ecosystem Wall</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>API Credit Distribution</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Discord Bounty Challenge</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="glass-card p-10 border-blue-400/20 relative overflow-hidden titan-glow scale-105 z-10">
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-transparent opacity-50 pointer-events-none"></div>
+          <div class="absolute top-0 right-0 bg-blue-500/80 backdrop-blur-md text-[9px] px-4 py-2 font-mono-technical tracking-widest text-white">RECOMMENDED</div>
+          
+          <div class="relative z-10">
+            <h3 class="font-mono-technical text-sm mb-10 tracking-widest text-blue-200">THE TITAN PARTNER</h3>
+            <p class="text-6xl mb-8 font-serif-italic text-transparent bg-clip-text bg-gradient-to-br from-blue-200 via-white to-blue-200">$100k</p>
+            <ul class="text-sm space-y-5 font-light leading-relaxed opacity-80">
+              <li class="flex items-start">
+                <span class="mr-3 text-blue-300 mt-1">✦</span>
+                <span><strong>Exclusive Foundational Partner:</strong> Blocks OpenAI/Anthropic presence.</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-blue-300 mt-1">✦</span>
+                <span><strong>Powered by Google:</strong> Full workflow branding (Story + Video).</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-blue-300 mt-1">✦</span>
+                <span><strong>Veo Mainstage:</strong> Priority showcase for Veo capabilities.</span>
+              </li>
+              <li class="flex items-start">
+                <span class="mr-3 text-blue-300 mt-1">✦</span>
+                <span><strong>Keynote Slot:</strong> Leadership presentation.</span>
+              </li>
+            </ul>
+          </div>
+          <button class="relative z-10 mt-14 w-full py-5 bg-white/90 text-black font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-white/10 hover:text-white transition-all duration-300 overflow-hidden group">
+              <span class="relative z-10">Claim the Throne</span>
+              <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 group-hover:translate-x-0 transition-transform duration-500 ease-out z-0 opacity-80"></div>
+          </button>
+        </div>
+        
+        <div class="glass-card p-8 flex flex-col justify-between hover:opacity-100 transition-all duration-500 hover:-translate-y-2">
+          <div>
+            <h3 class="font-mono-technical text-xs mb-10 tracking-widest opacity-60">OLYMPIAN PARTNER</h3>
+            <p class="text-5xl mb-8 font-serif-italic text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50">$50k</p>
+            <ul class="text-sm opacity-50 space-y-5 font-light leading-relaxed">
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Official Storytelling Partner</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>University Tour Guest Feature</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Physical Demo Station in SF</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Narrative Stress Test Data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-40 text-center relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-white/10"></div>
+        <h4 class="font-mono-technical text-[10px] opacity-30 mb-6 tracking-[0.2em] pt-12">DECISION TIMELINE</h4>
+        <div class="text-4xl font-serif-italic mb-4 text-blue-100">February 18th, 2026</div>
+        <p class="text-xs font-mono-technical opacity-50 tracking-wider">Main stage lineup finalization. Slot currently held for Google.</p>
+      </div>
+    </section>
+
+    <footer class="py-32 px-10 border-t border-white/5 flex flex-col items-center relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-64 bg-indigo-950/40 blur-[150px] pointer-events-none z-0"></div>
+      
+      <h2 class="text-4xl font-serif-italic mb-12 z-10 relative">Ready to sync?</h2>
+      <a href="mailto:keith.zhang@soulscapefilm.com" class="z-10 relative text-[10px] font-mono-technical tracking-[0.3em] border border-white/20 px-12 py-6 hover:bg-white hover:text-black hover:border-transparent transition-all duration-300 group overflow-hidden relative">
+          <span class="relative z-10">SCHEDULE 15-MINUTE SYNC</span>
+           <div class="absolute inset-0 -translate-y-full bg-white group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+      </a>
+      <p class="mt-24 opacity-20 text-[9px] font-mono-technical tracking-[0.2em] z-10 relative">SOULSCAPE NARRATIVE OS © 2026 • SAN FRANCISCO</p>
+    </footer>
+
+    <script>
+      // GSAP Animations
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Hero Entrance Sequence
+      window.addEventListener('load', () => {
+        const tl = gsap.timeline();
+        tl.to("#hero-line", {
+          width: "6rem",
+          opacity: 1,
+          duration: 1.5,
+          ease: "expo.inOut"
+        })
+        .to("#hero-title", {
+          opacity: 1,
+          filter: "blur(0px)",
+          scale: 1,
+          y: 0,
+          duration: 1.4,
+          ease: "power3.out"
+        }, "-=0.8")
+        .to("#hero-details p", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power2.out"
+        }, "-=0.6")
+        .to("#hero-sub", {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.inOut"
+        }, "-=0.5");
+      });
+
+      // Subtle Parallax Reveal on Scroll
+      // FIX: Added 'h4' and 'p' explicitly to the selector list to ensure the text inside the glass card animates
+      gsap.utils.toArray('section:not(:first-child)').forEach(section => {
+        gsap.from(section.querySelectorAll('h2, h3, h4, p, .section-text, .glass-card, li, .border-l-2'), {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            end: "bottom top",
+            toggleActions: "play none none reverse"
+          },
+          opacity: 0,
+          y: 40,
+          filter: "blur(5px)",
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "cubic-bezier(0.16, 1, 0.3, 1)"
+        });
+      });
+
+      // Custom Cursor Logic
+      const cursorFlare = document.getElementById('cursor-flare');
+      const cursorDot = document.getElementById('cursor-dot');
+      
+      gsap.set(cursorFlare, {xPercent: -50, yPercent: -50});
+      gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
+      
+      let xTo = gsap.quickTo(cursorFlare, "x", {duration: 0.4, ease: "power3"}),
+          yTo = gsap.quickTo(cursorFlare, "y", {duration: 0.4, ease: "power3"});
+      let xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"}),
+          yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
+
+      window.addEventListener('mousemove', (e) => {
+        xTo(e.clientX);
+        yTo(e.clientY);
+        xToDot(e.clientX);
+        yToDot(e.clientY);
+      });
+
+      // Cursor Interactive States
+      const interactiveElements = document.querySelectorAll('a, button, .glass-card, .cursor-crosshair');
+      
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(cursorFlare, {
+            scale: 1.5,
+            opacity: 0.2,
+            backgroundColor: "rgba(255, 180, 100, 0.5)", 
+            duration: 0.3
+          });
+           gsap.to(cursorDot, { scale: 0.5, backgroundColor: "rgba(255, 200, 150, 1)", duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(cursorFlare, {
+            scale: 1,
+            opacity: 0.1,
+            backgroundColor: "rgba(255,250,240,0.9)",
+            duration: 0.3
+          });
+          gsap.to(cursorDot, { scale: 1, backgroundColor: "rgba(255, 250, 240, 0.9)", duration: 0.3 });
+        });
+      });
+
+      // Tier Focus Interaction
+      const cards = document.querySelectorAll('#tier-container .glass-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          cards.forEach(c => {
+            if (c !== card) {
+                gsap.to(c, {opacity: 0.3, scale: 0.98, filter: "blur(2px)", duration: 0.4});
+            }
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          cards.forEach(c => {
+              gsap.to(c, {opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4});
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
