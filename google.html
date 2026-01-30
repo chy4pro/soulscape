@@ -42,6 +42,15 @@
         letter-spacing: 0.05em;
       }
 
+      /* Custom Fast Pulse Animation for Urgency */
+      @keyframes fastPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      .animate-fast-pulse {
+        animation: fastPulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
       /* --- DYNAMIC FILM ATMOSPHERE --- */
 
       .grain-overlay {
@@ -233,20 +242,34 @@
                     While the video layer is crowded with generators, the <strong>Ecosystem Layer</strong> remains vacant. Soulscape 2026 is the premier battleground where 200 of the top 1% of global creators define the standards of high-fidelity storytelling.
                 </p>
                 
-                <div class="space-y-6 text-sm font-mono-technical opacity-60">
-                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
-                        <span>Luma / PixVerse / Hailuo</span>
-                        <span class="italic opacity-50 text-xs">Video Gen Layer</span>
+                <div class="space-y-8 text-sm font-mono-technical opacity-90">
+                    
+                    <div class="border-l-2 border-orange-500 pl-4 py-2">
+                        <span class="text-xs tracking-widest opacity-50 uppercase block mb-1">Confirmed Model Partner</span>
+                        <div class="text-lg font-bold text-white">MiniMax (Hailuo AI)</div>
+                        <div class="text-[10px] opacity-60">The Unicorn of Video Gen</div>
                     </div>
-                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
-                        <span>Adobe / Freepik</span>
-                        <span class="italic opacity-50 text-xs">Creative Tools</span>
+
+                    <div class="border-l-2 border-blue-400 pl-4 py-2">
+                        <span class="text-xs tracking-widest opacity-50 uppercase block mb-1">Industry Validation (Jury/Mentors)</span>
+                        <div class="text-sm text-white leading-relaxed">
+                            Veterans from <span class="text-blue-200">Pixar, Disney, Netflix, Hollywood</span>
+                        </div>
+                        <div class="text-[10px] opacity-60 mt-1">Ensuring Cinematic Standard & Brand Safety</div>
                     </div>
-                    <div class="flex justify-between border-b border-white/10 pb-3 hover:opacity-100 transition-opacity cursor-crosshair">
-                        <span>Pixar / Netflix / Disney / Oscar / Emmy </span>
-                        <span class="italic opacity-50 text-xs">Industry Validation</span>
+
+                    <div class="border-l-2 border-red-500/80 pl-4 py-2 relative overflow-hidden">
+                        <span class="text-xs tracking-widest opacity-70 uppercase block mb-1 text-red-200">In Strategic Dialogue / Ecosystem</span>
+                        <div class="text-xs text-gray-300 leading-relaxed">
+                            Adobe, Luma Dream Machine, ElevenLabs, Freepik, Higgsfield, PixVerse...
+                        </div>
+                        <div class="text-[9px] text-orange-400 mt-2 tracking-wider uppercase font-bold animate-fast-pulse">
+                            >> Ecosystem assembling rapidly
+                        </div>
+                         <div class="absolute inset-0 bg-red-500/5 pointer-events-none"></div>
                     </div>
                 </div>
+
             </div>
 
             <div class="glass-card p-12 relative flex flex-col justify-center overflow-hidden group">
@@ -310,7 +333,7 @@
             <ul class="text-sm opacity-50 space-y-5 font-light leading-relaxed">
               <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Logo on Ecosystem Wall</li>
               <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>API Credit Distribution</li>
-              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Discord Bounty Challenge</li>
+              <li class="flex items-center"><span class="w-1 h-1 bg-white/50 rounded-full mr-3"></span>Community Bounty Challenge</li>
             </ul>
           </div>
         </div>
