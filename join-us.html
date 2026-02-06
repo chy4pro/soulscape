@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSCAPE 2026 | Council of Mentors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Inter:wght@400;700&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --void: #020204;
+            --flare: #FFFFFF;
+            --leak-warm: rgba(255, 120, 30, 0.4);
+            --leak-cool: rgba(40, 20, 120, 0.3);
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--flare);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .font-mono-technical {
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* FX */
+        .grain-overlay {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 40;
+            mix-blend-mode: overlay;
+            animation: grainShift 4s steps(6) infinite;
+        }
+
+        @keyframes grainShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-2%, 1%);
+            }
+        }
+
+        .light-leak-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .leak-purple {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle at 80% 80%, rgba(100, 50, 255, 0.25), transparent 70%);
+            opacity: 0.6;
+            animation: breathe 8s infinite alternate;
+        }
+
+        @keyframes breathe {
+            from {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Input Styles */
+        .glass-input-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .glass-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.25rem;
+            color: white;
+            transition: all 0.4s ease;
+            border-radius: 0;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-bottom-color: #a855f7;
+            background: linear-gradient(to bottom, transparent 95%, rgba(168, 85, 247, 0.1) 100%);
+        }
+
+        .glass-input-label {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            font-family: 'Geist Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .glass-input:focus+.glass-input-label,
+        .glass-input:not(:placeholder-shown)+.glass-input-label {
+            top: -1.2rem;
+            font-size: 0.7rem;
+            color: #a855f7;
+        }
+
+        /* Chips (Tools) using AIFFI minimal style */
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chip.selected {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #a855f7;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Radio Cards (Mission) */
+        .mission-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mission-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .mission-card.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Submit Button */
+        .submit-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: none;
+        }
+
+        .submit-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Cursor & Overlay */
+        #cursor-flare {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(180, 150, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+
+        .developing-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+
+        .developing-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .stamp {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 4rem;
+            color: #a855f7;
+            border: 4px solid #a855f7;
+            padding: 1rem 3rem;
+            transform: rotate(-5deg) scale(1.5);
+            opacity: 0;
+        }
+
+        .stamp.animate {
+            animation: stampIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes stampIn {
+            to {
+                transform: rotate(-5deg) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="grain-overlay"></div>
+    <div class="light-leak-container">
+        <div class="leak-purple"></div>
+    </div>
+    <div id="cursor-flare"></div>
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Left: Context -->
+        <aside
+            class="w-full md:w-5/12 p-10 md:p-20 flex flex-col justify-between md:h-screen md:sticky md:top-0 border-r border-white/5 bg-black/20 backdrop-blur-sm z-10">
+            <div>
+                <a href="/"
+                    class="text-xs font-mono-technical tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity mb-20 block">←
+                    BACK TO SOULSCAPE</a>
+
+                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">The Mentor<br><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white/50">Alliance</span>
+                </h1>
+
+                <div class="space-y-6 max-w-md">
+                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">
+                        For the futurists, tool-builders, and workflow masters.
+                    </p>
+                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">
+                        Not just an attendee, but a node. Join the network that will stress-test the Google Ecosystem
+                        and define the new canon.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-20 md:mt-0">
+                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30 text-purple-200">SIGNAL UPLINK:
+                    ACTIVE</div>
+            </div>
+        </aside>
+
+        <!-- Right: Form -->
+        <main class="w-full md:w-7/12 p-10 md:p-24 relative z-10">
+            <form id="mentor-form" class="max-w-xl mx-auto pt-10">
+                <input type="hidden" name="track" value="Mentor" />
+
+                <!-- Identity -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">01 // SIGNAL SOURCE
+                    </div>
+
+                    <div class="glass-input-container">
+                        <input type="text" id="handle" name="handle" class="glass-input" placeholder=" " required />
+                        <label for="handle" class="glass-input-label">Handle / Name</label>
+                    </div>
+
+                    <div class="glass-input-container">
+                        <input type="text" id="primaryPlatform" name="primaryPlatform" class="glass-input"
+                            placeholder=" " required />
+                        <label for="primaryPlatform" class="glass-input-label">Primary Platform (e.g. Twitter,
+                            YouTube)</label>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="glass-input-container">
+                            <input type="number" id="followerCount" name="followerCount" class="glass-input"
+                                placeholder=" " required />
+                            <label for="followerCount" class="glass-input-label">Reach (Followers)</label>
+                        </div>
+                        <div class="glass-input-container">
+                            <input type="url" id="portfolioLink" name="portfolioLink" class="glass-input"
+                                placeholder=" " />
+                            <label for="portfolioLink" class="glass-input-label">Portfolio URL</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools (Multi-select) -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // ARSENAL (TOOLS)
+                    </div>
+                    <div class="chip-group" id="tool-chips">
+                        <div class="chip" data-value="Midjourney">Midjourney</div>
+                        <div class="chip" data-value="Runway">Runway</div>
+                        <div class="chip" data-value="Luma">Luma</div>
+                        <div class="chip" data-value="Sora">Sora</div>
+                        <div class="chip" data-value="ComfyUI">ComfyUI</div>
+                        <div class="chip" data-value="Pika">Pika</div>
+                        <div class="chip" data-value="ElevenLabs">ElevenLabs</div>
+                        <div class="chip" data-value="Blender">Blender</div>
+                        <div class="chip" data-value="Other">Other</div>
+                    </div>
+                    <input type="hidden" name="tools" id="tools-input">
+                </div>
+
+                <!-- Superpower (Radio) -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">03 // SUPERPOWER</div>
+                    <div class="space-y-4">
+                        <label class="flex items-center space-x-4 cursor-pointer group">
+                            <input type="radio" name="superpower" value="Visual Aesthetics"
+                                class="opacity-0 w-0 h-0 peer" required>
+                            <div
+                                class="w-4 h-4 rounded-full border border-white/30 peer-checked:bg-purple-500 peer-checked:border-purple-500 transition-colors">
+                            </div>
+                            <span
+                                class="font-mono-technical text-sm opacity-60 peer-checked:opacity-100 transition-opacity">Visual
+                                Aesthetics (Style Transfer, Compositing)</span>
+                        </label>
+                        <label class="flex items-center space-x-4 cursor-pointer group">
+                            <input type="radio" name="superpower" value="Workflow/Pipeline"
+                                class="opacity-0 w-0 h-0 peer">
+                            <div
+                                class="w-4 h-4 rounded-full border border-white/30 peer-checked:bg-purple-500 peer-checked:border-purple-500 transition-colors">
+                            </div>
+                            <span
+                                class="font-mono-technical text-sm opacity-60 peer-checked:opacity-100 transition-opacity">Workflow
+                                Architecture (ComfyUI, API)</span>
+                        </label>
+                        <label class="flex items-center space-x-4 cursor-pointer group">
+                            <input type="radio" name="superpower" value="Story/Script" class="opacity-0 w-0 h-0 peer">
+                            <div
+                                class="w-4 h-4 rounded-full border border-white/30 peer-checked:bg-purple-500 peer-checked:border-purple-500 transition-colors">
+                            </div>
+                            <span
+                                class="font-mono-technical text-sm opacity-60 peer-checked:opacity-100 transition-opacity">Narrative
+                                & Script</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Mission (Cards) -->
+                <div class="mb-24">
+                    <div class="font-mono-technical text-xs text-white mb-8 tracking-widest">04 // MISSION TYPE</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="mission-group">
+                        <div class="mission-card" onclick="selectMission(this, 'Workflow Sensei')">
+                            <h4 class="font-bold text-white mb-2">Workflow Sensei</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">I will host workshops and break down technical
+                                barriers.</p>
+                        </div>
+                        <div class="mission-card" onclick="selectMission(this, 'Field Commander')">
+                            <h4 class="font-bold text-white mb-2">Field Commander</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">I will be in SF to guide teams on the ground.
+                            </p>
+                        </div>
+                        <div class="mission-card" onclick="selectMission(this, 'Signal Booster')">
+                            <h4 class="font-bold text-white mb-2">Signal Booster</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">I will amplify the movement online.</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="missionCard" id="mission-input" required>
+                </div>
+
+                <!-- Proof -->
+                <div class="mb-24 relative">
+                    <div class="font-mono-technical text-xs text-red-400 mb-8 tracking-widest">05 // PROOF OF WORK</div>
+                    <textarea name="proudWorkLink" rows="2"
+                        class="w-full bg-transparent border-b border-white/20 text-lg font-mono-technical focus:outline-none focus:border-red-500/50 transition-colors resize-none"
+                        placeholder="Link your best piece (URL)"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <div class="flex items-center justify-between mt-12">
+                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">
+                        DATA WILL BE ENCRYPTED AND SENT TO THE SOULSCAPE CORE.
+                    </div>
+                    <button type="submit" class="submit-circle group">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            class="group-hover:translate-x-1 transition-transform">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="black" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="form-error" class="hidden text-red-400 font-mono-technical text-xs mt-6 text-right">
+                    SIGNAL LOST. RETRY.
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <!-- Overlay -->
+    <div class="developing-overlay" id="dev-overlay">
+        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Syncing
+            Database...</div>
+        <div class="stamp" id="stamp">ACCEPTED</div>
+        <div class="font-serif-italic text-white mt-8 opacity-0 transition-opacity duration-1000 delay-500"
+            id="success-msg">Stand by for orders.</div>
+    </div>
+
+    <script>
+        // Tool Selection Logic
+        const toolChips = document.querySelectorAll('.chip');
+        const toolsInput = document.getElementById('tools-input');
+        let selectedTools = [];
+
+        toolChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('selected');
+                const val = chip.dataset.value;
+                if (selectedTools.includes(val)) {
+                    selectedTools = selectedTools.filter(t => t !== val);
+                } else {
+                    selectedTools.push(val);
+                }
+                toolsInput.value = selectedTools.join(', ');
+            });
+        });
+
+        // Mission Selection Logic
+        function selectMission(card, value) {
+            document.querySelectorAll('.mission-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.getElementById('mission-input').value = value;
+        }
+
+        // Form Submit
+        const form = document.getElementById('mentor-form');
+        const endpoint = "https://lark-bitable-form.reg-5d2.workers.dev/submit";
+        const overlay = document.getElementById('dev-overlay');
+        const stamp = document.getElementById('stamp');
+        const successMsg = document.getElementById('success-msg');
+        const errorMsg = document.getElementById('form-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!document.getElementById('mission-input').value) {
+                alert('Please select a Mission Type.');
+                return;
+            }
+
+            overlay.classList.add('visible');
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(endpoint, { method: "POST", body: formData });
+                if (response.ok) {
+                    setTimeout(() => {
+                        stamp.classList.add('animate');
+                        successMsg.style.opacity = '1';
+                    }, 800);
+                } else {
+                    overlay.classList.remove('visible');
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                overlay.classList.remove('visible');
+                errorMsg.classList.remove('hidden');
+            }
+        });
+
+        // Cursor
+        const cursor = document.getElementById('cursor-flare');
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1; cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
+</body>
+
+</html>

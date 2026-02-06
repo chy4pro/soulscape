@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSCAPE 2026 | Speaker Application</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Inter:wght@400;700&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --void: #020204;
+            --flare: #FFFFFF;
+            --leak-warm: rgba(255, 120, 30, 0.4);
+            --leak-cool: rgba(40, 20, 120, 0.3);
+            --prism-streak: linear-gradient(90deg, rgba(66, 133, 244, 0.2), rgba(155, 81, 224, 0.2), rgba(251, 188, 5, 0.2));
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--flare);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+            /* Custom cursor everywhere */
+        }
+
+        /* Fonts */
+        .font-serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .font-mono-technical {
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* Background FX (From Soulscape) */
+        .grain-overlay {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 40;
+            mix-blend-mode: overlay;
+            animation: grainShift 4s steps(6) infinite;
+        }
+
+        @keyframes grainShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            20% {
+                transform: translate(-2%, 1%);
+            }
+
+            40% {
+                transform: translate(1%, -2%);
+            }
+
+            60% {
+                transform: translate(-1%, 2%);
+            }
+
+            80% {
+                transform: translate(2%, -1%);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .light-leak-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .leak {
+            position: absolute;
+            mix-blend-mode: screen;
+            filter: blur(100px);
+        }
+
+        .leak-warm {
+            top: -40%;
+            right: -40%;
+            width: 120vw;
+            height: 120vw;
+            background: radial-gradient(circle, var(--leak-warm) 0%, transparent 70%);
+            opacity: 0.8;
+            animation: breathe 20s infinite alternate;
+        }
+
+        .leak-cool {
+            bottom: -30%;
+            left: -30%;
+            width: 100vw;
+            height: 100vw;
+            background: radial-gradient(circle, var(--leak-cool) 0%, transparent 80%);
+            opacity: 0.5;
+            animation: breathe 30s infinite alternate-reverse;
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* AIFFI-Style Glass Forms */
+        .glass-input-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .glass-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.25rem;
+            color: white;
+            transition: all 0.4s ease;
+            border-radius: 0;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-bottom-color: rgba(255, 120, 30, 0.8);
+            background: linear-gradient(to bottom, transparent 95%, rgba(255, 120, 30, 0.1) 100%);
+        }
+
+        .glass-input-label {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            font-family: 'Geist Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .glass-input:focus+.glass-input-label,
+        .glass-input:not(:placeholder-shown)+.glass-input-label {
+            top: -1.2rem;
+            font-size: 0.7rem;
+            color: rgba(255, 120, 30, 0.8);
+        }
+
+        /* Radio Tiles (Role Selection) */
+        .radio-tile-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-tile-input {
+            display: none;
+        }
+
+        .radio-tile-label {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .radio-tile-label:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .radio-tile-input:checked+.radio-tile-label {
+            background: rgba(255, 120, 30, 0.1);
+            /* Soulscape Warmth */
+            border-color: rgba(255, 120, 30, 0.6);
+            box-shadow: 0 0 30px rgba(255, 120, 30, 0.1);
+        }
+
+        .radio-tile-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .radio-tile-desc {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Submit Button (AIFFI Circle Style) */
+        .submit-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border: none;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .submit-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .submit-circle svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-circle:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Custom Cursor */
+        #cursor-flare {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255, 250, 240, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Developing Overlay (Stamp) */
+        .developing-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 1000;
+        }
+
+        .developing-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .stamp {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 4rem;
+            color: #ff5a3a;
+            border: 4px solid #ff5a3a;
+            padding: 1rem 3rem;
+            transform: rotate(-10deg) scale(1.5);
+            opacity: 0;
+        }
+
+        .stamp.animate {
+            animation: stampIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes stampIn {
+            to {
+                transform: rotate(-10deg) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- FX Layers -->
+    <div class="grain-overlay"></div>
+    <div class="light-leak-container">
+        <div class="leak leak-warm"></div>
+        <div class="leak leak-cool"></div>
+    </div>
+    <div id="cursor-flare"></div>
+
+    <!-- Main Layout: AIFFI Split (Left Text, Right Form) -->
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Left: Context (Sticky) -->
+        <aside
+            class="w-full md:w-5/12 p-10 md:p-20 flex flex-col justify-between md:h-screen md:sticky md:top-0 border-r border-white/5 bg-black/20 backdrop-blur-sm z-10">
+            <div>
+                <a href="/"
+                    class="text-xs font-mono-technical tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity mb-20 block">←
+                    BACK TO SOULSCAPE</a>
+
+                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">The Visionary<br><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-white/50">Application</span>
+                </h1>
+
+                <div class="space-y-6 max-w-md">
+                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">
+                        We are assembling the 200 architects of the next cinema.
+                    </p>
+                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">
+                        This is not a conference badge. It is a seat at the table where the protocols of AI storytelling
+                        are written.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-20 md:mt-0">
+                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30">BATCH 01 CLOSES FEB 18</div>
+            </div>
+        </aside>
+
+        <!-- Right: Form Area -->
+        <main class="w-full md:w-7/12 p-10 md:p-24 relative z-10">
+            <form id="visionary-form" class="max-w-xl mx-auto pt-10">
+                <input type="hidden" name="track" value="Visionary" />
+
+                <!-- Step 1: Identity -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">01 // IDENTITY</div>
+
+                    <div class="glass-input-container">
+                        <input type="text" id="fullname" name="fullName" class="glass-input" placeholder=" " required />
+                        <label for="fullname" class="glass-input-label">Full Name</label>
+                    </div>
+
+                    <div class="glass-input-container">
+                        <input type="text" id="titlerole" name="Title" class="glass-input" placeholder=" " required />
+                        <label for="titlerole" class="glass-input-label">Current Role / Studio</label>
+                    </div>
+
+                    <div class="glass-input-container">
+                        <input type="url" id="link" name="professionalLink" class="glass-input" placeholder=" " />
+                        <label for="link" class="glass-input-label">IMDb / LinkedIn / Portfolio</label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Role Selection -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // DESIGNATION</div>
+
+                    <div class="radio-tile-group">
+                        <label>
+                            <input type="radio" name="roleSelection" value="Juror" class="radio-tile-input" required
+                                checked>
+                            <div class="radio-tile-label">
+                                <div class="radio-tile-title">The Juror</div>
+                                <div class="radio-tile-desc">SF, March 2026. Reviewing final sprints.</div>
+                            </div>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="roleSelection" value="Advisor" class="radio-tile-input">
+                            <div class="radio-tile-label">
+                                <div class="radio-tile-title">The Advisor</div>
+                                <div class="radio-tile-desc">Remote / Async contribution to the manifesto.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Availability Dropdown (Custom) -->
+                    <div class="mt-12">
+                        <label class="block font-mono-technical text-xs opacity-50 mb-4 uppercase tracking-wider">SF
+                            Availability (Jurors Only)</label>
+                        <select name="sfAvailability"
+                            class="w-full bg-white/5 border border-white/10 text-white p-4 font-mono-technical focus:outline-none focus:border-orange-500/50">
+                            <option value="" class="bg-black">Select Availability...</option>
+                            <option value="Yes" class="bg-black">I will be in SF (March)</option>
+                            <option value="No" class="bg-black">Remote Only</option>
+                            <option value="Maybe" class="bg-black">Uncertain</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 3: Manifesto -->
+                <div class="mb-24">
+                    <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">03 // THE SOUL</div>
+
+                    <div class="relative">
+                        <textarea name="soulOverSlop" rows="4"
+                            class="w-full bg-transparent border-b border-white/20 text-xl font-serif-italic focus:outline-none focus:border-purple-500/50 transition-colors resize-none leading-relaxed"
+                            placeholder="In one sentence, what does 'Soul over Slop' mean to you?" required></textarea>
+                        <div class="absolute bottom-2 right-0 text-[10px] font-mono-technical opacity-30">MAX 180 CHARS
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Area -->
+                <div class="flex items-center justify-between mt-12">
+                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">
+                        BY SUBMITTING, YOU AGREE TO THE PROTOCOLS OF THE SOULSCAPE NARRATIVE OS.
+                    </div>
+
+                    <button type="submit" class="submit-circle group">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="black" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="form-error" class="hidden text-red-400 font-mono-technical text-xs mt-6 text-right">
+                    TRANSMISSION FAILED. RETRY.
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <!-- Developing Overlay -->
+    <div class="developing-overlay" id="dev-overlay">
+        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Establishing
+            Uplink...</div>
+        <div class="stamp" id="stamp">APPROVED</div>
+        <div class="font-serif-italic text-white mt-8 opacity-0 transition-opacity duration-1000 delay-500"
+            id="success-msg">Welcome to the Council.</div>
+    </div>
+
+    <script>
+        // Cursor Logic
+        const cursor = document.getElementById('cursor-flare');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            let dx = mouseX - cursorX;
+            let dy = mouseY - cursorY;
+            cursorX += dx * 0.1;
+            cursorY += dy * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Form Submission Logic
+        const form = document.getElementById('visionary-form');
+        const endpoint = "https://lark-bitable-form.reg-5d2.workers.dev/submit";
+        const overlay = document.getElementById('dev-overlay');
+        const stamp = document.getElementById('stamp');
+        const successMsg = document.getElementById('success-msg');
+        const errorMsg = document.getElementById('form-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Show "Loading" state
+            overlay.classList.add('visible');
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    // Success: Show Stamp
+                    setTimeout(() => {
+                        stamp.classList.add('animate');
+                        successMsg.style.opacity = '1';
+                    }, 800);
+                } else {
+                    // Fail
+                    overlay.classList.remove('visible');
+                    errorMsg.classList.remove('hidden');
+                    console.error('Submission failed');
+                }
+            } catch (err) {
+                overlay.classList.remove('visible');
+                errorMsg.classList.remove('hidden');
+                console.error('Network error', err);
+            }
+        });
+    </script>
+</body>
+
+</html>
