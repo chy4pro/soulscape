@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-6BEM05VT4Q'); </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSCAPE 2026 | The Largest AI Film Sprint in US</title>
+    <meta name="description" content="200+ Storytellers. 60 hours. Define the new canon of AI Cinema." />
+    <link rel="icon" href="https://d33e382l66m7o1.cloudfront.net/soulscape/image/soulscapeicon.jpg" type="image/jpeg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,500;1,600&family=Inter:wght@300;400;600&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --void: #020204;
+            --flare: #FFFFFF;
+            --leak-warm: rgba(255, 120, 30, 0.4);
+            --leak-cool: rgba(40, 20, 120, 0.3);
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--flare);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .font-mono-technical {
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* Minimal Scrollbar */
+        .scrollbar-minimal::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* FX Layers */
+        .grain-overlay {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 40;
+            mix-blend-mode: overlay;
+            animation: grainShift 4s steps(6) infinite;
+        }
+
+        @keyframes grainShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-2%, 1%);
+            }
+        }
+
+        .light-leak-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .leak {
+            position: absolute;
+            mix-blend-mode: screen;
+            filter: blur(120px);
+        }
+
+        .leak-warm {
+            top: -40%;
+            right: -40%;
+            width: 100vw;
+            height: 100vw;
+            background: radial-gradient(circle, var(--leak-warm) 0%, transparent 70%);
+            opacity: 0.6;
+            animation: breathe 15s infinite alternate;
+        }
+
+        .leak-cool {
+            bottom: -30%;
+            left: -30%;
+            width: 90vw;
+            height: 90vw;
+            background: radial-gradient(circle, var(--leak-cool) 0%, transparent 80%);
+            opacity: 0.4;
+            animation: breathe 20s infinite alternate-reverse;
+        }
+
+        @keyframes breathe {
+            from {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Components */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* Minimal border */
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            border-radius: 99px;
+            background: #fff;
+            color: #000;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            border-radius: 99px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* Cursor */
+        #cursor-flare {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, opacity 0.3s ease;
+        }
+
+        .hover-target:hover~#cursor-flare {
+            transform: translate(-50%, -50%) scale(2.5);
+            opacity: 0.4;
+        }
+
+        /* Video Player Custom UI */
+        .video-wrapper:hover .play-btn {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 60s linear infinite;
+            /* Slower for smooth reading */
+            width: max-content;
+            /* Ensure container expands to fit all items */
+        }
+
+        /* Move -50% because content is doubled */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-reverse .marquee-content {
+            animation: marquee-reverse 60s linear infinite;
+        }
+
+        @keyframes marquee-reverse {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Gallery Scroll */
+        /* Gallery Scroll */
+        .gallery-wrapper {
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+
+        #galleryScroll {
+            display: flex;
+            width: max-content;
+            animation: galleryMove 60s linear infinite;
+        }
+
+        #galleryScroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes galleryMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Partners */
+        .partner-logo img {
+            filter: brightness(0) invert(1) opacity(0.6);
+            transition: all 0.4s ease;
+        }
+
+        .partner-logo:hover img {
+            filter: brightness(1) invert(0) opacity(1);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            #cursor-flare {
+                display: none;
+            }
+        }
+
+        /* Opening Overlay */
+        #opening-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 10vh;
+            /* Shifted up from center */
+            pointer-events: none;
+            gap: 0.5rem;
+        }
+
+        .opening-line {
+            opacity: 0;
+            filter: blur(12px);
+            transform: scale(0.95);
+            text-align: center;
+            color: #fff;
+        }
+
+        .opening-line.soul {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .opening-line.over {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: lowercase;
+            letter-spacing: 0.2rem;
+            opacity: 0.5;
+        }
+
+        .opening-line.slop {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            font-weight: 300;
+            filter: blur(0px);
+            transform: scale(1);
+        }
+
+        @media (min-width: 768px) {
+            .opening-line.soul {
+                font-size: 5.5rem;
+            }
+
+            .opening-line.slop {
+                font-size: 3.5rem;
+            }
+
+            .opening-line.over {
+                font-size: 0.9rem;
+            }
+
+            .opening-overlay {
+                gap: 1.2rem;
+            }
+        }
+
+        @keyframes lensPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(255, 120, 30, 0.2);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 120, 30, 0.4);
+                border-color: rgba(255, 120, 30, 0.4);
+            }
+        }
+
+        .lens-glow {
+            animation: lensPulse 3s infinite ease-in-out;
+        }
+
+        .holographic-flicker {
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-orange-500/30">
+
+    <!-- Cinematic Opening -->
+    <div id="opening-overlay">
+        <div class="opening-line soul">Soul</div>
+        <div class="opening-line over">over</div>
+        <div class="opening-line slop">SLOP</div>
+    </div>
+
+    <div class="grain-overlay"></div>
+    <div class="light-leak-container">
+        <div class="leak leak-warm"></div>
+        <div class="leak leak-cool"></div>
+    </div>
+    <div id="cursor-flare"></div>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 left-0 w-full px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 via-black/20 to-transparent backdrop-blur-sm pointer-events-none transition-all duration-300">
+        <a href="/"
+            class="pointer-events-auto font-mono-technical text-sm font-bold tracking-widest opacity-90 hover:opacity-100 uppercase">Soulscape</a>
+
+        <div
+            class="pointer-events-auto hidden md:flex items-center gap-8 font-mono-technical text-[10px] tracking-widest uppercase opacity-80">
+            <a href="#about" class="hover:text-orange-300 transition-colors">Manifesto</a>
+            <a href="#tracks" class="hover:text-orange-300 transition-colors">Lab & Summit</a>
+            <a href="#council" class="hover:text-orange-300 transition-colors">Council</a>
+            <a href="#schedule" class="hover:text-orange-300 transition-colors">Agenda</a>
+
+            <!-- Get Involved Dropdown -->
+            <div class="relative group" x-data="{ open: false }">
+                <button @mouseenter="open = true" @mouseleave="open = false"
+                    class="flex items-center gap-1 hover:text-orange-300 transition-colors py-4">
+                    GET INVOLVED <i class="fas fa-chevron-down text-[8px] opacity-70 transition-transform"
+                        :class="open ? 'rotate-180' : ''"></i>
+                </button>
+
+                <div x-show="open" @mouseenter="open = true" @mouseleave="open = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 translate-y-2"
+                    class="absolute left-1/2 -translate-x-1/2 top-[80%] pt-4 z-50 min-w-[240px]">
+                    <div class="bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 shadow-2xl">
+                        <a href="sponsor.html" target="_blank"
+                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
+                            <div
+                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
+                                Partner with Us</div>
+                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">For
+                                Brands & Studios</div>
+                        </a>
+
+                        <a href="speaker-application.html" target="_blank"
+                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
+                            <div
+                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
+                                Join the Council</div>
+                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">Speakers
+                                & Mentors</div>
+                        </a>
+
+                        <a href="join-us.html" target="_blank"
+                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
+                            <div
+                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
+                                Global Alliance</div>
+                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">
+                                Festivals & Communities</div>
+                        </a>
+
+                        <a href="join-us.html" target="_blank"
+                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors border-t border-white/5 mt-1 pt-3 text-left">
+                            <div
+                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
+                                Volunteer / Crew</div>
+                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">Join the
+                                Team</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pointer-events-auto flex items-center gap-4">
+            <a href="https://discord.gg/75QUdbYY9B" target="_blank"
+                class="hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all">
+                <i class="fab fa-discord text-xs"></i>
+            </a>
+            <a href="#tracks" class="btn-primary py-2 px-6 text-xs font-bold">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-[100dvh] flex flex-col justify-center items-center relative px-6 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/SoulscapeLandingPage.png"
+                alt="Hero Background" class="hero-bg w-full h-full object-cover opacity-60 scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-[var(--void)]"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-5xl pt-0 md:pt-20">
+            <p
+                class="hero-element font-mono-technical text-xs md:text-sm text-orange-200/80 tracking-[0.3em] uppercase mb-8 opacity-0 translate-y-8">
+                Global AI Cinema Lab + Summit</p>
+
+            <h1
+                class="hero-element font-serif-italic text-6xl md:text-9xl leading-[0.9] text-white drop-shadow-2xl mb-6 opacity-0 translate-y-8">
+                Soulscape 2026
+            </h1>
+
+            <p
+                class="hero-element font-mono-technical text-sm md:text-base opacity-70 tracking-widest uppercase mb-12 opacity-0 translate-y-8">
+                We don’t chase algorithms. We chase resonance.
+            </p>
+
+            <div class="hero-element flex items-center justify-center gap-4 mb-12 opacity-0 translate-y-8">
+                <span class="font-mono-technical text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase">April
+                    2026</span>
+                <span class="w-1 h-1 rounded-full bg-orange-400/50"></span>
+                <span class="font-mono-technical text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase">San
+                    Francisco</span>
+            </div>
+
+            <div
+                class="hero-element flex flex-col md:flex-row justify-center items-center gap-6 opacity-0 translate-y-8">
+                <a href="#tracks" class="btn-primary hover-target">Join the Movement</a>
+                <a href="https://discord.gg/75QUdbYY9B" target="_blank" class="btn-secondary hover-target">
+                    <i class="fab fa-discord mr-2"></i> Community
+                </a>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 opacity-50 flex flex-col items-center gap-2 animate-pulse">
+            <span class="font-mono-technical text-[10px] tracking-widest">SCROLL</span>
+            <div class="w-[1px] h-10 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 md:px-20 relative z-10 -mt-20">
+        <div
+            class="max-w-6xl mx-auto glass-card p-2 md:p-4 rounded-3xl shadow-2xl video-wrapper group hover-target relative reveal-video">
+            <div class="relative aspect-video rounded-2xl overflow-hidden bg-black">
+                <video id="promoVideo" class="w-full h-full object-cover cursor-pointer"
+                    poster="https://d33e382l66m7o1.cloudfront.net/soulscape/image/openpage.png" playsinline>
+                    <source src="Soulscape 2026 Trailer.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div
+                        class="w-20 h-20 rounded-full border border-white/60 bg-white/10 backdrop-blur-sm flex items-center justify-center play-btn transition-transform duration-500">
+                        <i class="fas fa-play text-white text-2xl ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Sponsor Bar (Hero Trust Anchor) -->
+    <div
+        class="hidden relative z-20 w-full flex flex-col items-center justify-center -mt-12 mb-12 space-y-8 reveal-sponsors-optic">
+
+        <!-- Level 1: Titan Sponsors -->
+        <div class="text-center">
+            <p
+                class="font-mono-technical text-xs md:text-sm tracking-[0.4em] text-orange-300 uppercase mb-2 opacity-90 drop-shadow-[0_0_10px_rgba(253,186,116,0.6)]">
+                Presented By
+            </p>
+            <div class="flex items-center gap-6 md:gap-10">
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/1.png" alt="Gemini"
+                    class="h-16 md:h-20 w-auto drop-shadow-[0_0_25px_rgba(59,130,246,0.6)] brightness-125 hover:scale-105 transition duration-500">
+
+                <span class="text-gray-600 font-thin text-3xl">✕</span>
+
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/9.png" alt="Adobe"
+                    class="h-16 md:h-20 w-auto drop-shadow-[0_0_25px_rgba(59,130,246,0.6)] brightness-125 hover:scale-105 transition duration-500">
+            </div>
+        </div>
+
+        <!-- Level 2: Olympian Sponsors -->
+        <div class="text-center">
+            <p class="font-mono-technical text-[10px] tracking-[0.3em] text-gray-400 uppercase mb-3">
+                In Association With
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 items-center opacity-90">
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/13.png" alt="Minimax"
+                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/2.png" alt="TapNow"
+                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/3.png" alt="Guardian"
+                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
+                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/4.png" alt="Other"
+                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Stats Grid (High Impact) -->
+    <div class="border-y border-white/10 bg-black/20 backdrop-blur-sm mb-12 py-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+
+                <div class="stat-card hover-target group relative">
+                    <div class="stat-number font-serif-italic text-5xl md:text-8xl text-orange-400 mb-2 group-hover:scale-110 transition-transform duration-300"
+                        data-target="1000">
+                        0+</div>
+                    <div
+                        class="font-mono-technical text-[10px] md:text-xs tracking-[0.2em] opacity-60 uppercase group-hover:opacity-100 transition-opacity">
+                        Attendees</div>
+                </div>
+
+                <div class="stat-card hover-target group relative">
+                    <div class="stat-number font-serif-italic text-5xl md:text-8xl text-purple-400 mb-2 group-hover:scale-110 transition-transform duration-300"
+                        data-target="200">
+                        0</div>
+                    <div
+                        class="font-mono-technical text-[10px] md:text-xs tracking-[0.2em] opacity-60 uppercase group-hover:opacity-100 transition-opacity">
+                        Elite Creators</div>
+                </div>
+
+                <div class="stat-card hover-target group relative">
+                    <div class="stat-number font-serif-italic text-5xl md:text-8xl text-blue-400 mb-2 group-hover:scale-110 transition-transform duration-300"
+                        data-target="20">
+                        0+</div>
+                    <div
+                        class="font-mono-technical text-[10px] md:text-xs tracking-[0.2em] opacity-60 uppercase group-hover:opacity-100 transition-opacity">
+                        Top AI Studios</div>
+                </div>
+
+                <div class="stat-card hover-target group relative">
+                    <div class="stat-number font-serif-italic text-5xl md:text-8xl text-emerald-400 mb-2 group-hover:scale-110 transition-transform duration-300"
+                        data-target="10">
+                        0k+</div>
+                    <div
+                        class="font-mono-technical text-[10px] md:text-xs tracking-[0.2em] opacity-60 uppercase group-hover:opacity-100 transition-opacity">
+                        Prize Pool</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Manifesto / Gallery -->
+    <section id="about" class="pt-12 md:pt-16 pb-16 md:pb-32 bg-gradient-to-b from-transparent to-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6 md:px-20 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="hover-target">
+                    <span
+                        class="inline-block px-3 py-1 rounded-full border border-white/20 text-[10px] font-mono-technical tracking-widest uppercase mb-8">Our
+                        Belief</span>
+                    <h2 class="text-4xl md:text-5xl font-serif-italic leading-tight mb-8">
+                        "This isn't a competition.<br>It's a movement."
+                    </h2>
+                    <div class="space-y-6 text-gray-400 font-light leading-relaxed">
+                        <p>We believe a masterpiece no longer requires a million-dollar camera or a massive crew. It
+                            requires only one thing: A Great Soul.</p>
+                        <p>We are here to bridge the divide between Silicon Valley innovation and Hollywood
+                            storytelling, building a global stage for the visionaries who will define the new canon of
+                            cinema—proving to the world that resonance matters more than algorithms.</p>
+                    </div>
+                    <!-- Image Wrapper -->
+                    <div
+                        class="mt-12 rounded-2xl overflow-hidden glass-card p-2 rotate-2 hover:rotate-0 transition-transform duration-500 relative group/photo">
+                        <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/Soulscape_Gallery/DSC00173-122.jpg"
+                            alt="Community" class="rounded-xl w-full">
+                        <!-- Persistent Floating CTA -->
+                        <a href="join-us.html" target="_blank"
+                            class="absolute bottom-6 right-6 px-6 py-3 bg-black/60 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-3 group/btn hover:bg-white hover:text-black transition-all duration-300 shadow-2xl z-20">
+                            <span class="font-mono-technical text-[10px] tracking-widest uppercase">Join the Team</span>
+                            <i class="fas fa-plus text-[10px] transition-transform group-hover/btn:rotate-90"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Manifesto Video Cards -->
+                <div class="space-y-8">
+                    <div class="glass-card p-6 rounded-2xl md:translate-y-12 hover-target">
+                        <h3 class="font-mono-technical text-xs text-orange-300 uppercase tracking-widest mb-4">The
+                            Storytellers</h3>
+                        <p class="font-serif-italic text-2xl mb-6">"You can tell them their stories are too small, but
+                            you can't stop them from feeling."</p>
+                        <div class="aspect-video bg-black/50 rounded-lg overflow-hidden relative group cursor-pointer"
+                            id="manifestoPlayTrigger">
+                            <video id="manifestoVideo"
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                loop muted playsinline>
+                                <source src="https://d33e382l66m7o1.cloudfront.net/soulscape/Soulscape+Manifesto.mp4"
+                                    type="video/mp4">
+                            </video>
+                            <div
+                                class="absolute bottom-4 left-4 text-[10px] font-mono-technical uppercase bg-black/50 px-2 py-1 rounded">
+                                Watch Manifesto</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover-target">
+                        <h3 class="font-mono-technical text-xs text-blue-300 uppercase tracking-widest mb-4">Beyond the
+                            Screen</h3>
+                        <ul class="space-y-6 font-light text-sm text-gray-300">
+                            <li class="flex gap-4 items-start">
+                                <span class="text-lg">🌍</span>
+                                <div><strong class="text-white block font-mono-technical text-xs uppercase mb-1">Global
+                                        Circuit</strong>London. Spain. Vegas. Your story travels
+                                    beyond the algorithm.
+                                </div>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="text-lg">🤝</span>
+                                <div><strong class="text-white block font-mono-technical text-xs uppercase mb-1">Career
+                                        Access
+                                    </strong>Top AI Studios & Tech Giants scout for the next wave
+                                    of creatives.</div>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="text-lg">🎬</span>
+                                <div><strong
+                                        class="text-white block font-mono-technical text-xs uppercase mb-1">HollywoodSony
+                                        Bridge</strong>Direct mentorship from Pixar, Lionsgate, Sony and Oscar veterans
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+
+        <!-- Infinite Scroll Gallery -->
+        <div class="gallery-wrapper py-10" id="galleryWrapper">
+            <div class="flex gap-6 px-6 min-w-max" id="galleryScroll">
+                <!-- JS will inject images here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- The Soulscape Council Section -->
+    <section id="council" class="py-12 md:py-32 px-6 md:px-20 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-20 text-center">
+                <span
+                    class="inline-block px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono-technical tracking-widest uppercase mb-4">Defining
+                    the New Canon</span>
+                <h2 class="text-5xl md:text-7xl font-serif-italic">The Soulscape Council</h2>
+            </div>
+
+            <!-- Council Veterans Marquee (Text-Based) -->
+            <div class="mb-16">
+                <div class="text-center font-mono-technical text-[10px] uppercase tracking-widest text-white/40 mb-6">
+                    Council Veterans From:</div>
+                <div class="gallery-wrapper border-y border-white/5 bg-white/[0.01] py-3">
+                    <div id="companyMarquee" class="flex gap-12 items-center min-w-max">
+                        <!-- JS Injected Content -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Council Refined Cinematic Accordion Layout -->
+
+            <!-- Tier 1: The Jury (Gold Theme) -->
+            <div class="mb-12 md:mb-24 px-4 md:px-0">
+                <div class="flex items-end justify-between mb-10">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <h3 class="font-mono-technical text-xs text-orange-400 uppercase tracking-widest">01 //
+                                The Jury</h3>
+                            <div class="w-8 h-[1px] bg-orange-400/30"></div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif-italic text-white">Industry Heavyweights</h2>
+                    </div>
+                </div>
+
+                <!-- Jury Accordion Container -->
+                <div class="flex flex-col lg:flex-row h-[600px] lg:h-[600px] w-full gap-2 lg:gap-3 overflow-hidden">
+
+                    <!-- Panel 1: Jesse Z. -->
+                    <div
+                        class="relative w-full lg:w-auto flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/01.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <!-- Compressed: Stacked Name (Vertical Mode: Sideways or Bottom?) -->
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                JESSE<br>Z.
+                            </h4>
+                        </div>
+
+                        <!-- Expanded Content -->
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-orange-400 uppercase tracking-[0.2em]">Founding
+                                    Juror</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Jesse Z.</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Oscar-shortlisted Producer</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Stephan Bugaj -->
+                    <div
+                        class="relative flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/02.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                STEPHAN<br>BUGAJ
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-orange-400 uppercase tracking-[0.2em]">Founding
+                                    Juror</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Stephan Bugaj</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Ex-Pixar / Telltale</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Gabe Michael -->
+                    <div
+                        class="relative flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/03.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                GABE<br>MICHAEL
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-orange-400 uppercase tracking-[0.2em]">Founding
+                                    Juror</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Gabe Michael</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Ex-Meta Creative Dir</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Maria Haras (Visible on mobile now?) User said "quantity remains consistent", so show all on mobile too if possible, or keep same logic -->
+                    <!-- Originally Hidden on mobile: class="hidden md:flex ..." -->
+                    <!-- User said "quantity remains consistent", meaning if desktop has 5, mobile should have 5? -->
+                    <!-- The previous code hid Maria Haras on mobile. I will enable it for mobile now to match "quantity consistent". -->
+                    <div
+                        class="relative flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/04.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                MARIA<br>HARAS
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-orange-400 uppercase tracking-[0.2em]">Curatorial
+                                    Juror</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Maria Haras</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                VP @ 20th TV</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 5: View All -->
+                    <div onclick="openRoster('jury')"
+                        class="relative flex-[0.4] hover:flex-[1.2] transition-all duration-700 group overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] cursor-pointer">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                            <div
+                                class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center mb-3 group-hover:bg-orange-400 transition-colors">
+                                <i
+                                    class="fas fa-arrow-right text-white/30 group-hover:text-white text-xs transform rotate-90 md:rotate-0"></i>
+                            </div>
+                            <span
+                                class="font-mono-technical text-[9px] text-white/30 uppercase tracking-[0.2em] group-hover:text-white transition-colors">View<br>All</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tier 2: The Mentors (Blue Theme) -->
+            <div class="mb-16 md:mb-32 px-4 md:px-0">
+                <div class="flex items-end justify-between mb-10">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <h3 class="font-mono-technical text-xs text-blue-400 uppercase tracking-widest">02 //
+                                The Mentors</h3>
+                            <div class="w-8 h-[1px] bg-blue-400/30"></div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif-italic text-white">Expert Guidance</h2>
+                    </div>
+                </div>
+
+                <!-- Mentor Accordion Container -->
+                <div class="flex flex-col lg:flex-row h-[600px] lg:h-[600px] w-full gap-2 lg:gap-3 overflow-hidden">
+
+                    <!-- Panel 1: Federico Luglio -->
+                    <div
+                        class="relative w-full lg:w-auto flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/06.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                FEDERICO<br>LUGLIO
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-blue-400 uppercase tracking-[0.2em]">Founding
+                                    Mentor</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Federico Luglio</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Award-winning Dir</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Mingto Shing -->
+                    <div
+                        class="relative w-full lg:w-auto flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/07.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                MINGTO<br>SHING
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-blue-400 uppercase tracking-[0.2em]">Founding
+                                    Mentor</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Mingto Shing</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Renowned Director</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: PJ Way -->
+                    <div
+                        class="relative w-full lg:w-auto flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/08.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                PJ<br>WAY
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-blue-400 uppercase tracking-[0.2em]">Founding
+                                    Mentor</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                PJ Way</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Prometheus Productions</p>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Kavan Cardoza -->
+                    <div
+                        class="relative w-full lg:w-auto flex-[0.5] hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden rounded-2xl cursor-pointer border border-white/5">
+                        <div class="absolute inset-0 bg-cover bg-[50%_20%] transition-transform duration-1000 group-hover:scale-105"
+                            style="background-image: url('https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/09.png');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100">
+                        </div>
+
+                        <div
+                            class="absolute bottom-4 left-4 md:bottom-8 md:left-4 md:right-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                            <h4
+                                class="font-mono-technical text-[10px] md:text-[11px] text-white/70 uppercase leading-none tracking-wider">
+                                KAVAN<br>CARDOZA
+                            </h4>
+                        </div>
+
+                        <div
+                            class="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-10 opacity-0 group-hover:opacity-100 translate-y-4 md:translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:duration-500 group-hover:delay-100 text-left min-w-0 md:min-w-[400px]">
+                            <div class="mb-2 md:mb-3">
+                                <span
+                                    class="font-mono-technical text-[10px] md:text-[12px] text-blue-400 uppercase tracking-[0.2em]">Founding
+                                    Mentor</span>
+                            </div>
+                            <h3
+                                class="text-2xl md:text-5xl lg:text-6xl font-serif-italic text-white mb-2 md:mb-3 md:whitespace-nowrap">
+                                Kavan Cardoza</h3>
+                            <p
+                                class="font-mono-technical text-[9px] md:text-[14px] text-white/70 uppercase tracking-[0.15em] leading-relaxed md:whitespace-nowrap">
+                                Top AI Filmmaker</p>
+                        </div>
+                    </div>
+                    <!-- Panel 5: View All -->
+                    <div onclick="openRoster('mentors')"
+                        class="relative w-full lg:w-auto flex-[0.4] hover:flex-[1.2] transition-all duration-700 group overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] cursor-pointer">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                            <div
+                                class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center mb-3 group-hover:bg-blue-400 transition-colors">
+                                <i
+                                    class="fas fa-arrow-right text-white/30 group-hover:text-white text-xs transform rotate-90 md:rotate-0"></i>
+                            </div>
+                            <span
+                                class="font-mono-technical text-[9px] text-white/30 uppercase tracking-[0.2em] group-hover:text-white transition-colors">View<br>All</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tier 3: Speaker & Guests (Grid Layout) -->
+            <div class="mb-12 md:mb-24 px-4 md:px-0 hidden">
+                <div class="mb-10 text-left"> <!-- Left align forced -->
+                    <div class="flex items-center gap-3 mb-2">
+                        <h3 class="font-mono-technical text-xs text-green-400 uppercase tracking-widest">03 //
+                            Speaker & Guests</h3>
+                        <div class="w-8 h-[1px] bg-green-400/30"></div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif-italic text-white">Voices of the New Era</h2>
+                </div>
+
+                <!-- 4-Column Grid -->
+                <!-- Dynamic Speaker Container -->
+                <div id="speakerSectionContent">
+                    <!-- Marquee View (Default) - Static with Manual Scroll -->
+                    <div id="speakerMarqueeView"
+                        class="py-8 border-y border-white/5 bg-white/[0.02] overflow-x-auto scrollbar-minimal">
+                        <div id="speakerMarquee" class="flex gap-6 md:gap-8 px-6 md:px-0 min-w-max items-center">
+                            <!-- JS Injected -->
+                        </div>
+                    </div>
+
+                    <!-- Grid View (Hidden) - 2 Columns on Mobile -->
+                    <div id="speakerGridView" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 hidden">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="flex justify-center mt-12">
+                    <button id="viewSpeakersBtn" onclick="toggleSpeakers()"
+                        class="group relative px-6 py-3 rounded-full border border-green-400/30 bg-green-900/10 hover:bg-green-400/20 transition-all duration-300">
+                        <span class="font-mono-technical text-xs text-green-400 uppercase tracking-widest mr-2">View All
+                            Speakers</span>
+                        <i
+                            class="fas fa-chevron-down text-green-400 text-xs group-hover:translate-y-1 transition-transform"></i>
+                    </button>
+
+                    <script>
+                        const speakers = [
+                            { name: "Jesse Z.", activity: "Founding Juror", role: "Oscar-shortlisted Producer", img: "01.png" },
+                            { name: "Stephan Vladimir Bugaj", activity: "Founding Juror", role: "Ex-Pixar / Telltale", img: "02.png" },
+                            { name: "Gabe Michael", activity: "Founding Juror", role: "Ex-Meta Creative Dir", img: "03.png" },
+                            { name: "Maria Haras", activity: "Founding Juror", role: "VP @ 20th TV", img: "04.png" },
+                            { name: "Khulan Dav", activity: "Founding Juror", role: "AI Creative Workflows", img: "05.png" },
+                            { name: "Federico Luglio", activity: "Founding Mentor", role: "Award-winning Dir", img: "06.png" },
+                            { name: "Mingto Shing", activity: "Founding Mentor", role: "Renowned Director", img: "07.png" },
+                            { name: "PJ Way", activity: "Founding Mentor", role: "Prometheus Productions", img: "08.png" },
+                            { name: "Kavan Cardoza", activity: "Founding Mentor", role: "Top AI Filmmaker", img: "09.png" },
+                            { name: "Anthony Garcia", activity: "Founding Mentor", role: "Ex Apple Marketing Manager", img: "10.png" },
+                            { name: "Allar Haltsonen", activity: "Founding Mentor", role: "Renowned Director", img: "11.png" },
+                            { name: "Casey Meehan", activity: "Founding Mentor", role: "AI Specialist & Creative", img: "12.png" },
+                        ];
+
+                        function initSpeakers() {
+                            const marqueeView = document.getElementById('speakerMarquee');
+                            const gridView = document.getElementById('speakerGridView');
+                            if (!marqueeView || !gridView) return;
+
+                            // 1. Populate Marquee (Single Set for Static)
+                            marqueeView.innerHTML = speakers.map(s => `
+                                <div class="glass-card w-48 md:w-64 aspect-[3/4] rounded-2xl relative overflow-hidden group flex-shrink-0">
+                                    ${s.img ? `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/${s.img}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">` : '<div class="absolute inset-0 bg-white/5 flex items-center justify-center"><i class="fas fa-microphone text-white/10"></i></div>'}
+                                    <div class="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                                        <div class="mb-1 md:mb-2 text-left">
+                                            <span class="font-mono-technical text-[8px] md:text-[11px] text-green-400 uppercase tracking-widest leading-none">${s.activity}</span>
+                                        </div>
+                                        <h4 class="text-base md:text-xl font-serif-italic text-white mb-1 text-left">${s.name}</h4>
+                                        <p class="font-mono-technical text-[9px] md:text-[10px] text-white/50 uppercase leading-tight text-left">${s.role}</p>
+                                    </div>
+                                </div>
+                            `).join('');
+
+                            // 2. Populate Grid
+                            gridView.innerHTML = speakers.map(s => `
+                                <div class="glass-card aspect-[3/4] rounded-2xl relative overflow-hidden group hover-target hover:-translate-y-2 transition-transform duration-300">
+                                    ${s.img ? `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/${s.img}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">` : '<div class="absolute inset-0 bg-white/5 flex items-center justify-center"><i class="fas fa-microphone text-2xl md:text-4xl text-white/10"></i></div>'}
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                                    <div class="absolute inset-x-0 bottom-0 p-4 md:p-8 text-left">
+                                        <div class="mb-1 md:mb-3">
+                                            <span class="font-mono-technical text-[8px] md:text-[12px] text-green-400 uppercase tracking-widest leading-none">${s.activity}</span>
+                                        </div>
+                                        <h4 class="text-lg md:text-3xl font-serif-italic text-white leading-tight mb-1 md:mb-3">${s.name}</h4>
+                                        <p class="font-mono-technical text-[9px] md:text-[13px] text-white/60 uppercase tracking-wider leading-tight md:leading-relaxed">${s.role}</p>
+                                    </div>
+                                </div>
+                            `).join('');
+                        }
+
+                        function toggleSpeakers() {
+                            const marqueeWrapper = document.getElementById('speakerMarqueeView');
+                            const gridView = document.getElementById('speakerGridView');
+                            const btn = document.getElementById('viewSpeakersBtn');
+                            const btnText = btn.querySelector('span');
+                            const btnIcon = btn.querySelector('i');
+
+                            const isExpanded = marqueeWrapper.classList.contains('hidden');
+
+                            if (isExpanded) {
+                                marqueeWrapper.classList.remove('hidden');
+                                gridView.classList.add('hidden');
+                                btnText.innerText = 'VIEW ALL SPEAKERS';
+                                btnIcon.classList.remove('rotate-180');
+                            } else {
+                                marqueeWrapper.classList.add('hidden');
+                                gridView.classList.remove('hidden');
+                                btnText.innerText = 'VIEW LESS';
+                                btnIcon.classList.add('rotate-180');
+                            }
+                        }
+
+                        // Initialize
+                        document.addEventListener('DOMContentLoaded', initSpeakers);
+                    </script>
+                </div>
+            </div>
+
+            <!-- Tier 4: Bridging Cinema & Community -->
+            <div class="mb-12 md:mb-24 px-4 md:px-0 relative z-10">
+                <div class="text-left mb-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <h3 class="font-mono-technical text-xs text-purple-400 uppercase tracking-widest">04 //
+                            Bridging Cinema & Community</h3>
+                        <div class="w-8 h-[1px] bg-purple-400/30"></div>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif-italic text-white leading-relaxed">
+                        Connecting elite festivals with the world's most active creator collectives.
+                    </h3>
+                </div>
+
+                <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden group">
+                    <!-- Background Glow -->
+                    <div
+                        class="absolute -top-10 -right-10 p-12 opacity-10 group-hover:opacity-20 transition-opacity duration-700 rotate-12">
+                        <i class="fas fa-globe-americas text-9xl text-white"></i>
+                    </div>
+
+                    <!-- Unified Grid -->
+                    <div class="relative z-10 flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                        <img src="logos/25.png"
+                            class="h-16 md:h-24 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                        <img src="logos/26.png"
+                            class="h-16 md:h-24 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                        <img src="logos/27.png"
+                            class="h-16 md:h-24 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 5: Soulscape Advocates -->
+            <div id="community" class="mb-12 md:mb-24 scroll-mt-32 px-4 md:px-0 hidden">
+                <div class="mb-8 text-left">
+                    <div class="flex items-center gap-3 mb-2">
+                        <h3 class="font-mono-technical text-xs text-purple-400 uppercase tracking-widest">05 //
+                            Soulscape Advocates</h3>
+                        <div class="w-8 h-[1px] bg-purple-400/30"></div>
+                    </div>
+                </div>
+                <!-- Auto-scrolling Marquee -->
+                <div class="gallery-wrapper py-4 border-y border-white/5 bg-white/[0.02]">
+                    <div id="advocatesMarquee" class="flex gap-12 min-w-max items-center">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Council Footer (Restored Wrapper) -->
+        <div
+            class="mt-16 pt-8 md:mt-32 md:pt-12 border-t border-white/10 text-center relative max-w-2xl mx-auto relative z-10">
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent">
+            </div>
+
+            <p class="font-mono-technical text-[10px] text-white/30 uppercase tracking-[0.2em] mb-4">The
+                Collective Awaits</p>
+            <h3 class="text-4xl md:text-5xl font-serif-italic text-white mb-6">Join the Council</h3>
+            <p class="text-sm text-white/50 font-light max-w-md mx-auto mb-10 leading-relaxed">
+                Positions are limited. Excellence is mandatory.<br>Apply for Candidacy as a Visionary,
+                Mentor, or Speaker.
+            </p>
+
+            <a href="speaker-application.html"
+                class="group relative inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300">
+                <span
+                    class="font-mono-technical text-xs text-white uppercase tracking-widest group-hover:text-white transition-colors">Begin
+                    Application</span>
+                <i
+                    class="fas fa-arrow-right text-xs text-white/50 group-hover:text-white group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Tracks Section -->
+    <section id="tracks"
+        class="py-16 md:py-32 px-6 md:px-20 relative border-t border-white/5 bg-gradient-to-b from-transparent to-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-20 text-center">
+                <span
+                    class="inline-block px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono-technical tracking-widest uppercase mb-4">JOIN
+                    THE MOVEMENT</span>
+                <h2 class="text-5xl md:text-7xl font-serif-italic">Choose Your Experience</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Card 1: The Cinema Lab -->
+                <a href="https://luma.com/soulscape?k=cd"
+                    class="glass-card p-6 md:p-14 rounded-3xl relative overflow-hidden group hover-target block transition-transform duration-500 hover:-translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute top-6 right-6 md:top-10 md:right-10 p-3 rounded-full border border-white/20 group-hover:bg-white group-hover:text-black transition-all">
+                        <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                    </div>
+
+                    <div class="mb-16 relative z-10">
+                        <div class="font-mono-technical text-xs text-orange-400 mb-4 tracking-widest">EXPERIENCE_01
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-serif-italic mb-2 text-white">The Cinema Lab</h3>
+                        <p class="font-mono-technical text-xs opacity-50 uppercase tracking-wider">FOR GLOBAL
+                            STORYTELLERS</p>
+                    </div>
+
+                    <ul class="space-y-4 mb-12 relative z-10 text-gray-400 font-light text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-400 mt-1">●</span> 48-Hour Immersive Cinema Lab.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-400 mt-1">●</span> Direct Mentorship from Hollywood Producers.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-400 mt-1">●</span> Travel & Accommodation Grants (Underprivileged).
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-400 mt-1">●</span> Compete for Awards & Studio Contracts.
+                        </li>
+                    </ul>
+
+                    <span
+                        class="btn-secondary border-orange-400/30 text-orange-400 group-hover:bg-orange-400 group-hover:text-black group-hover:border-orange-400">
+                        APPLY FOR LAB
+                    </span>
+                </a>
+
+                <!-- Card 2: The Summit -->
+                <a href="https://luma.com/soulscape?k=cd"
+                    class="glass-card p-6 md:p-14 rounded-3xl relative overflow-hidden group hover-target block transition-transform duration-500 hover:-translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute top-6 right-6 md:top-10 md:right-10 p-3 rounded-full border border-white/20 group-hover:bg-white group-hover:text-black transition-all">
+                        <i class="fas fa-ticket -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                    </div>
+
+                    <div class="mb-16 relative z-10">
+                        <div class="font-mono-technical text-xs text-blue-400 mb-4 tracking-widest">EXPERIENCE_02</div>
+                        <h3 class="text-4xl md:text-5xl font-serif-italic mb-2 text-white">The Summit</h3>
+                        <p class="font-mono-technical text-xs opacity-50 uppercase tracking-wider">FOR THE VISIONARIES &
+                            INDUSTRY</p>
+                    </div>
+
+                    <ul class="space-y-4 mb-12 relative z-10 text-gray-400 font-light text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 mt-1">●</span> Keynotes & Panels (Tech x Cinema).
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 mt-1">●</span> AI Production Career Fair.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 mt-1">●</span> Studio Booths & Masterclasses.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-400 mt-1">●</span> Grand Premiere & Networking Mixers.
+                        </li>
+                    </ul>
+
+                    <span
+                        class="btn-secondary border-blue-400/30 text-blue-400 group-hover:bg-blue-400 group-hover:text-black group-hover:border-blue-400">
+                        GET TICKETS
+                    </span>
+                </a>
+            </div>
+
+            <!-- Sponsor Link -->
+            <div class="text-center">
+                <a href="sponsor.html"
+                    class="inline-block text-gray-500 hover:text-white transition-colors font-mono-technical text-xs tracking-widest border-b border-gray-500/30 hover:border-white pb-1">
+                    Looking to be A Sponsor or Partner? [Click Here]
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Partner Wall (Guardian & Strategic) -->
+    <!-- Ecosystem Partner Wall (Redesigned 3-Tier Strategy) -->
+    <section id="partners"
+        class="py-16 md:py-32 border-t border-white/5 relative overflow-hidden bg-gradient-to-b from-transparent to-white/[0.02]">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+
+            <!-- TIER 1: THE TRUST ANCHOR (OFFICIAL PARTNERS) -->
+            <!-- Strategy: "Split Power" - High Visibility, Static, Premium -->
+            <div class="mb-16 md:mb-32">
+                <div class="text-center mb-16">
+                    <span
+                        class="hidden inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono-technical tracking-widest uppercase mb-4">
+                        Presented In Partnership With</span>
+                    <h3 class="text-3xl md:text-5xl font-serif-italic text-white">Official Partners</h3>
+                </div>
+
+                <!-- Grid: 3-Col Desktop -->
+                <div class="flex flex-wrap justify-center gap-10 md:gap-20 items-center">
+                    <!-- Pixero -->
+                    <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/7.png"
+                        class="h-16 md:h-20 w-auto object-contain hover:scale-110 transition duration-500 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] brightness-110">
+                    <!-- YouArt -->
+                    <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/2.png"
+                        class="h-16 md:h-20 w-auto object-contain hover:scale-110 transition duration-500 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] brightness-110">
+                    <!-- Storyflow -->
+                    <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/6.png"
+                        class="h-16 md:h-20 w-auto object-contain hover:scale-110 transition duration-500 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] brightness-110">
+                </div>
+            </div>
+
+
+
+            <!-- TIER 3: MEDIA & CREATIVE ECOSYSTEM -->
+            <!-- Strategy: "Muscle & Buzz" - Merged Media + Studios -->
+            <div class="relative">
+                <div class="text-center mb-10">
+                    <h3 class="font-mono-technical text-xs tracking-[0.2em] text-gray-500 uppercase">Media & Strategic
+                        Ecosystem</h3>
+                </div>
+
+                <!-- Centered Logo (Minimax) -->
+                <div class="flex justify-center items-center py-8">
+                    <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/12.png"
+                        class="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+        </div>
+
+        <!-- Partnership CTA (Retained) -->
+        <div class="mt-16 md:mt-32 text-center animate-fade-up delay-200 relative z-20">
+            <div class="inline-block relative group cursor-pointer">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-60 transition duration-500">
+                </div>
+                <a href="mailto:partners@soulscape.com"
+                    class="relative px-8 py-4 bg-black rounded-lg leading-none flex items-center divide-x divide-white/10 border border-white/10 hover:border-white/30 transition-colors">
+                    <span class="flex items-center space-x-5">
+                        <span
+                            class="pr-6 text-gray-300 font-mono-technical text-xs tracking-widest uppercase group-hover:text-white transition-colors">Become
+                            a Partner</span>
+                    </span>
+                    <span
+                        class="pl-6 text-indigo-400 group-hover:text-indigo-300 transition-colors font-mono-technical text-xs tracking-widest uppercase">Apply
+                        Now &rarr;</span>
+                </a>
+            </div>
+            <p class="mt-6 text-[10px] text-gray-500 font-mono-technical tracking-widest uppercase opacity-60">
+                Lead the movement defining the next era of cinema
+            </p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Schedule Agenda -->
+    <section id="schedule" class="py-16 md:py-32 px-6 md:px-20 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-20 text-center">
+                <span
+                    class="inline-block px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono-technical tracking-widest uppercase mb-4">3.5-Day
+                    Journey</span>
+                <h2 class="text-4xl md:text-6xl font-serif-italic">The Agenda</h2>
+            </div>
+
+            <div class="relative border-l border-white/10 ml-4 md:ml-10 space-y-16 py-4 reveal-stagger">
+                <!-- Day 0 -->
+                <div class="relative pl-12 md:pl-20 hover-target group">
+                    <div
+                        class="absolute -left-[5px] top-2 w-[9px] h-[9px] bg-orange-500 rounded-full group-hover:shadow-[0_0_20px_rgba(249,115,22,0.6)] transition-shadow">
+                    </div>
+                    <div class="font-mono-technical text-xs text-orange-400 mb-2 uppercase tracking-widest">Day 0:
+                        Thursday (PM)</div>
+                    <h3 class="text-2xl md:text-3xl font-serif-italic mb-2 text-white">THE IGNITION</h3>
+                    <p class="text-sm md:text-base text-gray-400 font-light mb-4">Check-in & Team Formation / Welcome
+                        Mixer / Keynote: "The Soul Manifesto"</p>
+                    <div class="grid grid-cols-1 gap-4 text-xs font-mono-technical opacity-50">
+                        <div>21:00 — SPRINT BEGINS</div>
+                    </div>
+                </div>
+
+                <!-- Day 1 -->
+                <div class="relative pl-12 md:pl-20 hover-target group">
+                    <div
+                        class="absolute -left-[5px] top-2 w-[9px] h-[9px] bg-white rounded-full group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-shadow">
+                    </div>
+                    <div class="font-mono-technical text-xs text-white mb-2 uppercase tracking-widest">Day 1: Friday
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif-italic mb-2 text-white">THE DEEP DIVE</h3>
+                    <p class="text-sm md:text-base text-gray-400 font-light mb-4">Cinema Lab: Closed-door production &
+                        mentorship. / Summit: Visionary Talks & Tech Demos.</p>
+                    <div class="grid grid-cols-1 gap-4 text-xs font-mono-technical opacity-50">
+                        <div>Evening — "Fail Night" Mixer</div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="relative pl-12 md:pl-20 hover-target group">
+                    <div
+                        class="absolute -left-[5px] top-2 w-[9px] h-[9px] bg-white rounded-full group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-shadow">
+                    </div>
+                    <div class="font-mono-technical text-xs text-white mb-2 uppercase tracking-widest">Day 2: Saturday
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif-italic mb-2 text-white">THE FRICTION</h3>
+                    <p class="text-sm md:text-base text-gray-400 font-light mb-4">Cinema Lab: Editing & Sound Design
+                        Sprint. / Summit: Masterclasses & AI Career Fair.</p>
+                    <div class="grid grid-cols-1 gap-4 text-xs font-mono-technical opacity-50">
+                        <div>23:59 — SUBMISSION DEADLINE</div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="relative pl-12 md:pl-20 hover-target group">
+                    <div
+                        class="absolute -left-[5px] top-2 w-[9px] h-[9px] bg-purple-500 rounded-full group-hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-shadow">
+                    </div>
+                    <div class="font-mono-technical text-xs text-purple-400 mb-2 uppercase tracking-widest">Day 3:
+                        Sunday</div>
+                    <h3 class="text-2xl md:text-3xl font-serif-italic mb-2 text-white">THE REVELATION</h3>
+                    <p class="text-sm md:text-base text-gray-400 font-light mb-4">Morning: "Greenlight Sessions" (Studio
+                        Pitches). / Afternoon: The Grand Premiere & Red Carpet.</p>
+                    <div class="grid grid-cols-1 gap-4 text-xs font-mono-technical opacity-50">
+                        <div>Evening — Awards Ceremony & Afterparty</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="hidden py-16 md:py-32 px-6 md:px-20 border-t border-white/5 bg-white/[0.01]">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif-italic mb-4">Questions?</h2>
+            </div>
+
+            <div class="space-y-4 reveal-stagger">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item group border-b border-white/10 pb-4 cursor-pointer hover-target">
+                    <div class="flex justify-between items-center py-4">
+                        <h3 class="font-mono-technical text-sm uppercase tracking-widest">Do I need filmmaking
+                            experience?</h3>
+                        <span class="text-orange-400 text-xl transition-transform group-[.active]:rotate-45">+</span>
+                    </div>
+                    <div class="h-0 overflow-hidden transition-all duration-300 group-[.active]:h-auto">
+                        <p class="pb-4 text-gray-400 font-light leading-relaxed">No! This event is designed for
+                            everyone. We provide workshops to master AI tools quickly.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item group border-b border-white/10 pb-4 cursor-pointer hover-target">
+                    <div class="flex justify-between items-center py-4">
+                        <h3 class="font-mono-technical text-sm uppercase tracking-widest">Do I need a team?</h3>
+                        <span class="text-orange-400 text-xl transition-transform group-[.active]:rotate-45">+</span>
+                    </div>
+                    <div class="h-0 overflow-hidden transition-all duration-300 group-[.active]:h-auto">
+                        <p class="pb-4 text-gray-400 font-light leading-relaxed">You can come solo or with a team. We
+                            host a team formation session on Day 1.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item group border-b border-white/10 pb-4 cursor-pointer hover-target">
+                    <div class="flex justify-between items-center py-4">
+                        <h3 class="font-mono-technical text-sm uppercase tracking-widest">What equipment do I need?</h3>
+                        <span class="text-orange-400 text-xl transition-transform group-[.active]:rotate-45">+</span>
+                    </div>
+                    <div class="h-0 overflow-hidden transition-all duration-300 group-[.active]:h-auto">
+                        <p class="pb-4 text-gray-400 font-light leading-relaxed">Just a laptop. We provide the AI tools
+                            and compute power.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 md:py-20 border-t border-white/10 bg-black text-center">
+        <div class="font-serif-italic text-2xl md:text-4xl text-white/40 mb-12">Soulscape 2026</div>
+
+        <div class="flex justify-center flex-wrap gap-8 mb-8">
+            <a href="https://discord.gg/75QUdbYY9B"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Discord</a>
+            <a href="https://www.instagram.com/soulscapefilm/"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Instagram</a>
+            <a href="https://x.com/soulscapefilm"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Twitter</a>
+            <a href="mailto:press@soulscape.com"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Press
+                Inquiries</a>
+        </div>
+
+        <div class="font-mono-technical text-[9px] text-white/40 tracking-widest uppercase mb-4">
+            A movement by storytellers, for storytellers.
+        </div>
+        <div class="font-mono-technical text-[9px] text-white/40 tracking-widest uppercase">
+            © 2026 Soulscape AI Film Sprint.
+        </div>
+        <div class="font-mono-technical text-[9px] text-white/50 tracking-widest uppercase mt-4 max-w-2xl mx-auto px-6">
+            Soulscape 2026 is a fiscally sponsored project of Bay Area Innovest, a 501(c)(3) non-profit organization.
+            All donations are tax-deductible.
+        </div>
+    </footer>
+
+    <script>
+        // ===== GSAP SETUP =====
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ===== Specialized Hero-Level Scroll Effects =====
+
+        // 1. Promo Video Cinematic Expansion
+        gsap.fromTo(".reveal-video",
+            { scale: 0.9, filter: "blur(15px)", opacity: 0 },
+            {
+                scale: 1,
+                filter: "blur(0px)",
+                opacity: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".reveal-video",
+                    start: "top 85%",
+                    once: true
+                }
+            }
+        );
+
+        // 2. Hero Sponsors Optic Reveal
+        const sponsorBar = document.querySelector('.reveal-sponsors-optic');
+        if (sponsorBar) {
+            gsap.from(sponsorBar.children, {
+                opacity: 0,
+                y: 20,
+                scale: 0.9,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: sponsorBar,
+                    start: "top 90%",
+                    once: true
+                },
+                onStart: () => {
+                    // Optic Flicker effect on start
+                    gsap.fromTo(sponsorBar,
+                        { filter: "brightness(2) blur(4px)" },
+                        { filter: "brightness(1) blur(0px)", duration: 0.5 }
+                    );
+                }
+            });
+        }
+
+        // ===== Core Timelines =====
+
+        // Hero Entrance Timeline
+        const heroTl = gsap.timeline({
+            paused: true,
+            defaults: { ease: "power3.out" }
+        });
+
+        heroTl.to(".hero-bg", {
+            scale: 1,
+            duration: 2.5,
+            ease: "power2.inOut"
+        })
+            .to(".hero-element", {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.15
+            }, "-=2.0");
+
+        // Cinematic Opening Timeline
+        const openingTl = gsap.timeline({
+            onComplete: () => {
+                const overlay = document.getElementById('opening-overlay');
+                if (overlay) overlay.remove();
+            }
+        });
+
+        openingTl.to(".opening-line.soul", {
+            opacity: 1,
+            filter: "blur(0px)",
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out"
+        })
+            .to(".opening-line.over", {
+                opacity: 0.5,
+                filter: "blur(0px)",
+                scale: 1,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "-=0.5")
+            .to(".opening-line.slop", {
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.out",
+                onStart: () => {
+                    gsap.fromTo(".opening-line.slop",
+                        { opacity: 0.4 },
+                        { opacity: 1, duration: 0.15, repeat: 1, yoyo: true }
+                    );
+                }
+            }, "+=0.2")
+            .to(".opening-line.slop", { opacity: 1, duration: 0.1 })
+            .to(".opening-line", {
+                opacity: 0,
+                filter: "blur(8px)",
+                duration: 0.5,
+                ease: "power2.in",
+                stagger: 0.05
+            }, "+=0.15")
+            .to("#opening-overlay", {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.inOut",
+                onStart: () => {
+                    heroTl.play();
+                }
+            }, "-=0.4");
+
+        // ===== Tailored Scroll Animations (Below Fold) =====
+
+        // 1. Digital Scramble Stats
+        gsap.utils.toArray(".stat-card").forEach((card, i) => {
+            const stat = card.querySelector(".stat-number");
+            const targetVal = parseInt(stat.getAttribute('data-target'));
+            const prefix = stat.innerText.includes('$') ? '$' : '';
+            const suffix = stat.innerText.includes('k') ? 'k+' : (stat.innerText.includes('+') ? '+' : '');
+
+            const scrambleChars = "0123456789";
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    once: true
+                }
+            });
+
+            // Entry Scale
+            tl.from(card, {
+                scale: 0.8,
+                opacity: 0,
+                duration: 1,
+                ease: "back.out(1.7)",
+                onStart: () => {
+                    // Create Radial Pulse
+                    const pulse = document.createElement('div');
+                    pulse.className = 'absolute inset-0 rounded-full border-2 border-white/20 pointer-events-none z-0';
+                    card.appendChild(pulse);
+                    gsap.to(pulse, {
+                        scale: 2.5,
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: "power2.out",
+                        onComplete: () => pulse.remove()
+                    });
+                }
+            });
+
+            // Digital Scramble Effect
+            let proxy = { val: 0 };
+            let lastUpdate = 0;
+
+            tl.to(proxy, {
+                val: targetVal,
+                duration: 0.6, // Very snappy
+                ease: "power2.out",
+                onUpdate: function () {
+                    const now = Date.now();
+
+                    if (this.progress() < 0.25) {
+                        // Only flicker for the first 150ms
+                        if (now - lastUpdate > 75) {
+                            let randomStr = "";
+                            const len = targetVal.toString().length;
+                            for (let j = 0; j < len; j++) {
+                                randomStr += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                            }
+                            stat.innerText = prefix + randomStr + suffix;
+                            lastUpdate = now;
+                        }
+                    } else {
+                        stat.innerText = prefix + targetVal + suffix;
+                    }
+                },
+                onComplete: () => {
+                    stat.innerText = prefix + targetVal + suffix;
+                }
+            }, "-=0.6");
+        });
+
+        // 2. Manifesto Text Blur Reveal
+        gsap.utils.toArray(".reveal-text").forEach(text => {
+            gsap.from(text, {
+                opacity: 0,
+                filter: "blur(10px)",
+                y: 20,
+                duration: 1.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 85%",
+                    once: true
+                }
+            });
+        });
+
+        // 3. Staggered Grid Reveal
+        gsap.utils.toArray(".reveal-stagger").forEach(container => {
+            gsap.from(container.children, {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 85%",
+                    once: true
+                }
+            });
+        });
+
+        // 4. Kinetic Side Reveal
+        gsap.from(".reveal-left", {
+            x: -100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".reveal-left",
+                start: "top 80%",
+                once: true
+            }
+        });
+        gsap.from(".reveal-right", {
+            x: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".reveal-right",
+                start: "top 80%",
+                once: true
+            }
+        });
+
+        // Video Controls
+        const videoWrapper = document.querySelector('.video-wrapper');
+        const promoVideo = document.getElementById('promoVideo');
+        const playBtn = videoWrapper.querySelector('.play-btn');
+
+        if (promoVideo && videoWrapper) {
+            videoWrapper.addEventListener('click', () => {
+                if (promoVideo.paused) {
+                    promoVideo.play();
+                    gsap.to(playBtn, { opacity: 0, scale: 1.5, duration: 0.3 });
+                } else {
+                    promoVideo.pause();
+                    gsap.to(playBtn, { opacity: 1, scale: 1, duration: 0.3 });
+                }
+            });
+        }
+
+        // Gallery Image Injection
+        const galleryScroll = document.getElementById('galleryScroll');
+        if (galleryScroll) {
+            const imageFiles = ['10.jpg', '11.jpg', '12.jpg', '200.jpg', 'DSC00173-122.jpg', 'DSC00010-78.jpg', 'DSC00029-88.jpg', 'DSC09971-57.jpg'];
+
+            // Generate cards function
+            const createCard = (src) => {
+                const div = document.createElement('div');
+                div.className = 'w-64 h-48 md:w-80 md:h-56 flex-shrink-0 rounded-xl overflow-hidden glass-card p-1 hover:scale-105 transition-transform duration-500 cursor-pointer';
+                div.innerHTML = `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/Soulscape_Gallery/${src}" class="w-full h-full object-cover rounded-lg pointer-events-none" loading="lazy">`;
+                return div;
+            };
+
+            // Needs 2 sets for infinite scroll (0 to -50%)
+            // We'll duplicate the original set enough times to look good, then double THAT whole block.
+            // Let's make one "block" be 2 sets of images, then double that block to get 4 total sets.
+            // setA = images * 2
+            // total = setA + setA
+
+            const singleSet = [...imageFiles, ...imageFiles];
+            const doubleSet = [...singleSet, ...singleSet];
+
+            doubleSet.forEach(src => {
+                galleryScroll.appendChild(createCard(src));
+            });
+        }
+
+        // Mentors & Jurors Injection
+        const marqueeContent = document.getElementById('mentorMarquee');
+        if (marqueeContent) {
+            const mentors = [
+                { name: "Jesse Z.", role: "Oscar-shortlisted Producer", img: "01.png" },
+                { name: "Stephan Vladimir Bugaj", role: "Ex-Pixar / Telltale", img: "02.png" },
+                { name: "Gabe Michael", role: "Ex-Meta Creative Dir", img: "03.png" },
+                { name: "Maria Haras", role: "VP @ 20th TV", img: "04.png" },
+                { name: "Khulan Dav", role: "AI Creative Workflows", img: "05.png" },
+                { name: "Federico Luglio", role: "Award-winning Dir", img: "06.png" },
+                { name: "Mingto Shing", role: "Renowned Director", img: "07.png" },
+                { name: "PJ Way", role: "Prometheus Productions", img: "08.png" },
+                { name: "Kavan Cardoza", role: "Top AI Filmmaker", img: "09.png" },
+                { name: "Anthony Garcia", role: "Ex Apple Marketing Manager", img: "10.png" },
+                { name: "Allar Haltsonen", role: "Renowned Director", img: "11.png" },
+                { name: "Casey Meehan", role: "AI Specialist & Creative", img: "12.png" }
+            ];
+
+            const createMentorCard = (mentor) => {
+                const div = document.createElement('div');
+                div.className = 'glass-card w-56 md:w-64 aspect-[3/4] rounded-2xl relative overflow-hidden group flex-shrink-0 snap-center hover-target';
+                div.innerHTML = `
+                    <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/${mentor.img}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-100"></div>
+                    <div class="absolute inset-x-0 bottom-0 p-4">
+                        <h4 class="text-lg font-serif-italic text-white leading-tight mb-1">${mentor.name}</h4>
+                        <p class="font-mono-technical text-[9px] text-blue-400 uppercase tracking-widest">${mentor.role}</p>
+                    </div>
+                `;
+                return div;
+            };
+
+            // Populate Twice for infinite loop in one container
+            const allMentors = [...mentors, ...mentors];
+            allMentors.forEach(mentor => {
+                marqueeContent.appendChild(createMentorCard(mentor));
+            });
+            // Note: Removed cloneNode logic to fix layout stacking/overlap.
+        }
+
+        // Advocates Injection
+        const advocatesMarquee = document.getElementById('advocatesMarquee');
+        if (advocatesMarquee) {
+            // Reuse styling from galleryScroll for animation
+            advocatesMarquee.style.display = 'flex';
+            advocatesMarquee.style.width = 'max-content';
+            advocatesMarquee.style.animation = 'galleryMove 80s linear infinite'; // Slower for text reading
+
+            // Use some mentors + clones as advocates for demo
+            const advocates = [
+                { name: "Bilawal Sidhu" },
+                { name: "Casey Meehan" },
+                { name: "Mitch Bowler" },
+                { name: "Kavan Cardoza" },
+                { name: "Paul Trillo" },
+                { name: "Curry Tian" },
+                { name: "Runway" },
+                { name: "Pika" },
+                { name: "Luma" },
+                { name: "Sora" },
+                { name: "Krea" }
+            ];
+
+            // Create enough duplicates for smooth scroll
+            const fullList = [...advocates, ...advocates, ...advocates, ...advocates];
+
+            fullList.forEach(adv => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity';
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[10px]">Reference</div>
+                    <span class="font-mono-technical text-xs tracking-widest uppercase text-white">${adv.name}</span>
+                 `;
+                // Update with generic avatar if needed, for now text/icon
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10"></div>
+                    <span class="font-mono-technical text-xs tracking-widest uppercase text-white">${adv.name}</span>
+                 `;
+                advocatesMarquee.appendChild(div);
+            });
+        }
+
+
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Close others
+                faqItems.forEach(i => { if (i !== item) i.classList.remove('active'); });
+                item.classList.toggle('active');
+            });
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor-flare');
+        if (cursor && window.matchMedia("(min-width: 768px)").matches) {
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                const dt = 0.15;
+                cursorX += (mouseX - cursorX) * dt;
+                cursorY += (mouseY - cursorY) * dt;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+        }
+    </script>
+    <!-- Roster Modal Overlay -->
+    <div id="rosterModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/90 backlight-grid" onclick="closeRoster()"></div>
+
+        <!-- Content Container -->
+        <div class="absolute inset-0 flex items-center justify-center p-4 md:p-12 pointer-events-none">
+            <div class="w-full max-w-6xl h-full max-h-[90vh] glass-card border border-white/10 rounded-3xl flex flex-col pointer-events-auto transform scale-95 transition-transform duration-300"
+                id="rosterContent">
+
+                <!-- Header -->
+                <div
+                    class="p-8 md:p-10 border-b border-white/10 flex justify-between items-center bg-black/40 rounded-t-3xl">
+                    <div>
+                        <h3 id="rosterSubtitle"
+                            class="font-mono-technical text-xs text-orange-400 uppercase tracking-widest mb-2">The
+                            Roster</h3>
+                        <h2 id="rosterTitle" class="text-3xl md:text-4xl font-serif-italic text-white">Distinguished
+                            Jurors</h2>
+                    </div>
+                    <button onclick="closeRoster()"
+                        class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors group">
+                        <svg class="w-6 h-6 text-white group-hover:rotate-90 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Grid Scroll Area -->
+                <div id="rosterGrid"
+                    class="flex-1 overflow-y-auto p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 scrollbar-minimal">
+                    <!-- Dynamic Content Injected Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Source (Mirrors HTML content for now)
+        const councilData = {
+            jury: [
+                { role: "Founding Juror", name: "Jesse Z.", bio: "Oscar-shortlisted Producer", img: "01.png" },
+                { role: "Founding Juror", name: "Stephan Vladimir Bugaj", bio: "Ex-Pixar / Telltale", img: "02.png" },
+                { role: "Founding Juror", name: "Gabe Michael", bio: "Ex-Meta Creative Dir", img: "03.png" },
+                { role: "Founding Juror", name: "Maria Haras", bio: "VP @ 20th TV", img: "04.png" },
+                { role: "Founding Juror", name: "Khulan Dav", bio: "AI Creative Workflows", img: "05.png" },
+            ],
+            mentors: [
+                { role: "Founding Mentor", name: "Federico Luglio", bio: "Award-winning Dir", img: "06.png" },
+                { role: "Founding Mentor", name: "Mingto Shing", bio: "Renowned Director", img: "07.png" },
+                { role: "Founding Mentor", name: "PJ Way", bio: "Prometheus Productions", img: "08.png" },
+                { role: "Founding Mentor", name: "Kavan Cardoza", bio: "Top AI Filmmaker", img: "09.png" },
+                { role: "Founding Mentor", name: "Anthony Garcia", bio: "Ex Apple Marketing Manager", img: "10.png" },
+                { role: "Founding Mentor", name: "Allar Haltsonen", bio: "Renowned Director", img: "11.png" },
+                { role: "Founding Mentor", name: "Casey Meehan", bio: "AI Specialist & Creative", img: "12.png" },
+            ]
+        };
+
+        function openRoster(type) {
+            const modal = document.getElementById('rosterModal');
+            const content = document.getElementById('rosterContent');
+            const grid = document.getElementById('rosterGrid');
+            const title = document.getElementById('rosterTitle');
+            const subtitle = document.getElementById('rosterSubtitle');
+
+            // Configuration
+            const config = type === 'jury'
+                ? { title: "Distinguished Jurors", sub: "The Jury", color: "text-orange-400", data: councilData.jury }
+                : { title: "Expert Guidance", sub: "The Mentors", color: "text-blue-400", data: councilData.mentors };
+
+            // Set Header
+            title.innerHTML = config.title;
+            subtitle.innerHTML = config.sub;
+            subtitle.className = `font-mono-technical text-xs ${config.color} uppercase tracking-widest mb-2`;
+
+            // Populate Grid
+            grid.innerHTML = config.data.map(item => `
+                <div class="glass-card p-6 rounded-2xl flex items-center gap-6 border border-white/5 hover:border-white/20 transition-colors group">
+                     <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/5 flex-shrink-0 overflow-hidden relative">
+                        ${item.img ? `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/mentor/${item.img}" class="w-full h-full object-cover">` : '<div class="w-full h-full bg-white/10 flex items-center justify-center text-white/20 text-[10px]">IMG</div>'}
+                     </div>
+                     <div class="min-w-0">
+                        <div class="font-mono-technical text-[10px] md:text-[11px] ${config.color} mb-1">${item.role}</div>
+                        <h4 class="text-xl md:text-2xl font-serif-italic text-white mb-1 truncate">${item.name}</h4>
+                        <p class="font-mono-technical text-[9px] md:text-[12px] text-white/40 uppercase tracking-widest leading-relaxed">${item.bio}</p>
+                     </div>
+                </div>
+            `).join('');
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            // Small delay for transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+
+            document.body.style.overflow = 'hidden'; // Lock Scroll
+        }
+
+        function closeRoster() {
+            const modal = document.getElementById('rosterModal');
+            const content = document.getElementById('rosterContent');
+
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Unlock Scroll
+            }, 300);
+        }
+
+
+        // Company Marquee Injection
+        const companyMarquee = document.getElementById('companyMarquee');
+        if (companyMarquee) {
+            companyMarquee.style.display = 'flex';
+            companyMarquee.style.width = 'max-content';
+            companyMarquee.style.animation = 'galleryMove 100s linear infinite'; // Very slow
+
+            const companies = [
+                "NETFLIX", "PIXAR", "SONY PICTURES", "WARNER BROS", "LIONSGATE",
+                "DISNEY", "MGM", "PROMISE", "PROMPTR", "GOSSIP GOBLIN", "PHANTANX", "GOOGLE DEEPMIND"
+            ];
+
+            const companyList = [...companies, ...companies, ...companies, ...companies]; // Loop filler
+
+            companyList.forEach(company => {
+                const div = document.createElement('div');
+                div.className = 'font-mono-technical text-sm md:text-base text-white/40 uppercase tracking-widest whitespace-nowrap';
+                div.innerHTML = `• &nbsp; ${company}`;
+                companyMarquee.appendChild(div);
+            });
+        }
+    </script>
+    <!-- Mobile Cinematic Explorer (Soulscape Lens) -->
+    <div x-data="{ mobileNavOpen: false, getInvolvedOpen: false }" class="md:hidden">
+        <!-- Persistent Floating Lens Trigger -->
+        <button @click="mobileNavOpen = true"
+            class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] px-6 py-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center gap-3 transition-all active:scale-95 shadow-[0_0_30px_rgba(255,120,30,0.15)] lens-glow">
+            <div class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(251,146,60,0.8)]"></div>
+            <span class="font-mono-technical text-[10px] tracking-[0.3em] uppercase text-white/90">Explorer</span>
+        </button>
+
+        <!-- Orbital HUD Bottom Sheet -->
+        <div x-show="mobileNavOpen" x-cloak x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="translate-y-full opacity-0" x-transition:enter-end="translate-y-0 opacity-100"
+            x-transition:leave="transition ease-in duration-400" x-transition:leave-start="translate-y-0 opacity-100"
+            x-transition:leave-end="translate-y-full opacity-0"
+            class="fixed inset-x-0 bottom-0 z-[100] bg-black/80 backdrop-blur-3xl border-t border-white/10 rounded-t-[2.5rem] pointer-events-auto flex flex-col p-8 pt-12 max-h-[90vh] overflow-y-auto scrollbar-minimal">
+
+            <!-- Handle Decor -->
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-white/10 rounded-full"></div>
+
+            <!-- Scanline Effect Overlay -->
+            <div class="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 rounded-t-[2.5rem]"
+                style="background-size: 100% 4px, 3px 100%;"></div>
+
+            <!-- Close HUD Trigger -->
+            <button @click="mobileNavOpen = false; getInvolvedOpen = false"
+                class="absolute top-8 right-8 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 active:bg-white active:text-black active:border-white transition-all z-20">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Navigation Links (HUD Indexing) -->
+            <nav class="flex flex-col gap-8 relative z-20">
+                <a href="#about" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[01]
+                        MANIFESTO</span>
+                    <span class="font-serif-italic text-4xl text-white active:text-orange-300 transition-colors">Our
+                        Belief</span>
+                </a>
+                <a href="#tracks" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[02]
+                        EXPERIENCE</span>
+                    <span class="font-serif-italic text-4xl text-white active:text-orange-300 transition-colors">Lab &
+                        Summit</span>
+                </a>
+                <a href="#council" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[03]
+                        NETWORK</span>
+                    <span class="font-serif-italic text-4xl text-white active:text-orange-300 transition-colors">The
+                        Council</span>
+                </a>
+                <a href="#schedule" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[04]
+                        MOMENTS</span>
+                    <span
+                        class="font-serif-italic text-4xl text-white active:text-orange-300 transition-colors">Agenda</span>
+                </a>
+
+                <!-- Get Involved Accordion -->
+                <div class="flex flex-col">
+                    <button @click="getInvolvedOpen = !getInvolvedOpen" class="group flex flex-col text-left">
+                        <span
+                            class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[05]
+                            CONNECT</span>
+                        <div class="flex items-center gap-3">
+                            <span class="font-serif-italic text-4xl text-white">Get Involved</span>
+                            <i class="fas fa-chevron-down text-sm text-orange-400 transition-transform duration-300"
+                                :class="getInvolvedOpen ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="getInvolvedOpen" x-collapse
+                        class="mt-4 space-y-4 pl-4 border-l border-white/10 bg-white/5 py-4 rounded-r-xl">
+                        <a href="sponsor.html" target="_blank" class="block px-2">
+                            <div class="text-white font-serif-italic text-xl">Partner with Us</div>
+                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Brands &
+                                Studios</div>
+                        </a>
+                        <a href="speaker-application.html" target="_blank" class="block px-2">
+                            <div class="text-white font-serif-italic text-xl">Join the Council</div>
+                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Speakers
+                                & Mentors</div>
+                        </a>
+                        <a href="join-us.html" target="_blank" class="block px-2">
+                            <div class="text-white font-serif-italic text-xl">Global Alliance</div>
+                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Festivals
+                                & Communities</div>
+                        </a>
+                        <a href="join-us.html" target="_blank" class="block px-2">
+                            <div class="text-white font-serif-italic text-xl">Volunteer / Crew</div>
+                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Join the
+                                Team</div>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Terminal Readout Accents -->
+            <div
+                class="mt-12 pt-8 border-t border-white/5 flex justify-between items-end opacity-20 pointer-events-none z-20">
+                <div class="font-mono-technical text-[8px] tracking-[0.2em] uppercase leading-loose">
+                    SYS.LOG: NAV_ACTIVE<br>
+                    LOC: SF_CA_USA
+                </div>
+                <div class="font-mono-technical text-[8px] tracking-[0.2em] uppercase text-right leading-loose">
+                    SOULSCAPE_v1.28<br>
+                    OPTICAL_RESONANCE
+                </div>
+            </div>
+
+            <!-- Background HUD Light FX -->
+            <div class="absolute inset-0 pointer-events-none z-0">
+                <div
+                    class="absolute top-0 right-0 w-[60%] h-[60%] bg-orange-500/10 blur-[100px] rounded-full holographic-flicker">
+                </div>
+                <div class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-blue-500/10 blur-[100px] rounded-full holographic-flicker"
+                    style="animation-delay: -1s;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
