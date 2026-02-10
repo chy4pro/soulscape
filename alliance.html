@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOULSCAPE 2026 | Join the Crew</title>
+    <title>SOULSCAPE 2026 | Global Alliance</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -136,7 +136,7 @@
             color: #a855f7;
         }
 
-        /* Mission Card (Role) */
+        /* Mission Card */
         .mission-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -250,115 +250,108 @@
                 <a href="/"
                     class="text-xs font-mono-technical tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity mb-20 block">←
                     BACK TO SOULSCAPE</a>
-                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">Join the<br><span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white/50">Crew</span>
+                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">Bridge, Not<br><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white/50">Walls</span>
                 </h1>
                 <div class="space-y-6 max-w-md">
-                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">For the
-                        creators, tech wizards, and operations ninjas.</p>
-                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">This isn't just an event;
-                        it's a 48-hour sprint into the future. Get full access, exclusive swag, and network with top
-                        studios.</p>
+                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">Soulscape
+                        is a global movement. We are building a decentralized network to amplify AI cinema in every
+                        corner of the world.</p>
+                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">Whether you run a university
+                        film club, a local tech meetup, or an international film festival—let’s connect our nodes.
+                        Exclusive screening rights, resources, and visibility.</p>
                 </div>
             </div>
             <div class="mt-20 md:mt-0">
-                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30 text-purple-200">CREW
-                    RECRUITMENT: ACTIVE</div>
+                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30 text-purple-200">ALLIANCE
+                    UPLINK: ACTIVE</div>
             </div>
         </aside>
 
         <!-- Right: Form -->
         <main class="w-full md:w-7/12 p-10 md:p-24 relative z-10">
-            <form id="crew-form" class="max-w-xl mx-auto pt-10">
-                <input type="hidden" name="track" value="Crew" />
+            <form id="alliance-form" class="max-w-xl mx-auto pt-10">
+                <input type="hidden" name="track" value="Alliance" />
 
                 <!-- Identity -->
                 <div class="mb-20">
                     <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">01 // IDENTITY</div>
                     <div class="glass-input-container">
-                        <input type="text" id="fullname" name="fullname" class="glass-input" placeholder=" " required />
-                        <label for="fullname" class="glass-input-label">Full Name & Age (18+)</label>
-                    </div>
-                    <div class="glass-input-container">
-                        <input type="tel" id="phone" name="phone" class="glass-input" placeholder=" " required />
-                        <label for="phone" class="glass-input-label">Phone Number (For On-Site Comms)</label>
+                        <input type="text" id="orgName" name="orgName" class="glass-input" placeholder=" " required />
+                        <label for="orgName" class="glass-input-label">Organization Name (e.g., USC AI Club)</label>
                     </div>
                     <div class="glass-input-container">
                         <input type="email" id="email" name="email" class="glass-input" placeholder=" " required />
-                        <label for="email" class="glass-input-label">Email Address</label>
+                        <label for="email" class="glass-input-label">Primary Contact Email</label>
                     </div>
                 </div>
 
-                <!-- Role Interest -->
+                <!-- Type & Size -->
                 <div class="mb-20">
-                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // ROLE & SKILLSET
+                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // CLASSIFICATION
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="role-group">
-                        <div class="mission-card" onclick="toggleSelection(this, 'Media Team')">
-                            <h4 class="font-bold text-white mb-2">Media Team</h4>
-                            <p class="text-xs opacity-50 leading-relaxed">Photo / Video / Editing. Capture the moments.
-                                (Must bring gear)</p>
-                        </div>
-                        <div class="mission-card" onclick="toggleSelection(this, 'Tech Ops')">
-                            <h4 class="font-bold text-white mb-2">Tech Ops</h4>
-                            <p class="text-xs opacity-50 leading-relaxed">Discord Mod / IT Support / Screen Management.
-                            </p>
-                        </div>
-                        <div class="mission-card" onclick="toggleSelection(this, 'Event Ops')">
-                            <h4 class="font-bold text-white mb-2">Event Ops</h4>
-                            <p class="text-xs opacity-50 leading-relaxed">Check-in / Crowd Control / Runner.</p>
-                        </div>
-                        <div class="mission-card" onclick="toggleSelection(this, 'Ambassador')">
-                            <h4 class="font-bold text-white mb-2">Ambassador</h4>
-                            <p class="text-xs opacity-50 leading-relaxed">Campus promotion before the event.</p>
-                        </div>
-                    </div>
-                    <input type="hidden" name="roles" id="roles-input">
 
-                    <div class="mt-8 glass-input-container">
-                        <input type="url" id="portfolio" name="portfolio" class="glass-input" placeholder=" " />
-                        <label for="portfolio" class="glass-input-label">Portfolio Link (Required if Media)</label>
+                    <label
+                        class="block font-mono-technical text-xs opacity-50 mb-4 uppercase tracking-wider">Organization
+                        Type</label>
+                    <div class="grid grid-cols-1 gap-4 mb-8">
+                        <div class="mission-card" onclick="selectType(this, 'University Club')">
+                            <h4 class="font-bold text-white mb-2">University Club / Academic</h4>
+                        </div>
+                        <div class="mission-card" onclick="selectType(this, 'Film Festival')">
+                            <h4 class="font-bold text-white mb-2">Film Festival / Arts Org</h4>
+                        </div>
+                        <div class="mission-card" onclick="selectType(this, 'Online Community')">
+                            <h4 class="font-bold text-white mb-2">Online Community</h4>
+                        </div>
+                        <div class="mission-card" onclick="selectType(this, 'NGO')">
+                            <h4 class="font-bold text-white mb-2">Non-Profit / NGO</h4>
+                        </div>
+                        <input type="hidden" name="orgType" id="type-input">
+                    </div>
+
+                    <label class="block font-mono-technical text-xs opacity-50 mb-4 uppercase tracking-wider">Community
+                        Size</label>
+                    <select name="communitySize"
+                        class="w-full bg-white/5 border border-white/10 text-white p-4 font-mono-technical focus:outline-none focus:border-blue-500/50 mb-8">
+                        <option value="" class="bg-black">Select Size...</option>
+                        <option value="< 1000" class="bg-black">&lt; 1,000 members</option>
+                        <option value="1000 - 10000" class="bg-black">1,000 - 10,000 members</option>
+                        <option value="10000 - 50000" class="bg-black">10,000 - 50,000 members</option>
+                        <option value="50000+" class="bg-black">50,000+ members</option>
+                    </select>
+
+                    <div class="glass-input-container">
+                        <input type="url" id="socialLink" name="socialLink" class="glass-input" placeholder=" " />
+                        <label for="socialLink" class="glass-input-label">Social Media / Community Link</label>
                     </div>
                 </div>
 
-                <!-- Availability -->
+                <!-- Collaboration -->
                 <div class="mb-20">
-                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">03 // AVAILABILITY
+                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">03 // COLLABORATION
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <label class="mission-card flex items-center justify-center text-center">
-                            <input type="radio" name="availability" value="Full 3 Days" class="hidden peer" required>
-                            <span
-                                class="text-white opacity-50 peer-checked:opacity-100 peer-checked:text-purple-400 font-mono-technical text-sm uppercase">Full
-                                3 Days (Preferred)</span>
-                        </label>
-                        <label class="mission-card flex items-center justify-center text-center">
-                            <input type="radio" name="availability" value="Part-time" class="hidden peer">
-                            <span
-                                class="text-white opacity-50 peer-checked:opacity-100 peer-checked:text-purple-400 font-mono-technical text-sm uppercase">Part-time</span>
-                        </label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="collab-group">
+                        <div class="mission-card" onclick="toggleSelection(this, 'Watch Party')">
+                            <h4 class="font-bold text-white mb-2">Host Watch Party</h4>
+                        </div>
+                        <div class="mission-card" onclick="toggleSelection(this, 'Campus Tour')">
+                            <h4 class="font-bold text-white mb-2">Campus Tour / Workshop</h4>
+                        </div>
+                        <div class="mission-card" onclick="toggleSelection(this, 'Cross-Promotion')">
+                            <h4 class="font-bold text-white mb-2">Cross-Promotion</h4>
+                        </div>
+                        <div class="mission-card" onclick="toggleSelection(this, 'Content Partnership')">
+                            <h4 class="font-bold text-white mb-2">Content Partnership</h4>
+                        </div>
                     </div>
+                    <input type="hidden" name="collaboration" id="collab-input">
                 </div>
 
-                <!-- Motivation -->
-                <div class="mb-24 relative">
-                    <div class="font-mono-technical text-xs text-red-400 mb-8 tracking-widest">04 // MOTIVATION</div>
-                    <div class="mb-8">
-                        <textarea name="whySoulscape" rows="2"
-                            class="w-full bg-transparent border-b border-white/20 text-lg font-mono-technical focus:outline-none focus:border-red-500/50 transition-colors resize-none"
-                            placeholder="Why Soulscape?" required></textarea>
-                    </div>
-                    <div>
-                        <textarea name="favoriteTool" rows="1"
-                            class="w-full bg-transparent border-b border-white/20 text-lg font-mono-technical focus:outline-none focus:border-red-500/50 transition-colors resize-none"
-                            placeholder="Favorite AI film or tool right now?"></textarea>
-                    </div>
-                </div>
 
                 <!-- Submit -->
                 <div class="flex items-center justify-between mt-12">
-                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">JOIN OUR PUBLIC DISCORD
-                        IMMEDIATELY AFTER APPLYING.</div>
+                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">JOIN THE NETWORK.</div>
                     <button type="submit" class="submit-circle group">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             class="group-hover:translate-x-1 transition-transform">
@@ -375,46 +368,40 @@
 
     <!-- Overlay -->
     <div class="developing-overlay" id="dev-overlay">
-        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Processing
-            Application...</div>
-        <div class="stamp" id="stamp">RECEIVED</div>
+        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Syncing
+            Nodes...</div>
+        <div class="stamp" id="stamp">CONNECTED</div>
         <div class="font-serif-italic text-white mt-8 opacity-0 transition-opacity duration-1000 delay-500"
-            id="success-msg">Check the Discord link in your email to start.</div>
+            id="success-msg">Join our public Discord to start meeting.</div>
     </div>
 
     <script>
-        // Role Selection Logic (Multi)
-        let selectedRoles = [];
-        const rolesInput = document.getElementById('roles-input');
+        // Org Type Selection (Single)
+        function selectType(card, value) {
+            document.querySelectorAll('input[name="orgType"]').forEach(i => i.value = ''); // Clear logic if needed, but here simple
+            // Clear visual selection
+            const parent = card.parentElement;
+            parent.querySelectorAll('.mission-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.getElementById('type-input').value = value;
+        }
+
+        // Collaboration Selection Logic (Multi)
+        let selectedCollab = [];
+        const collabInput = document.getElementById('collab-input');
 
         function toggleSelection(card, value) {
             card.classList.toggle('selected');
-            if (selectedRoles.includes(value)) {
-                selectedRoles = selectedRoles.filter(v => v !== value);
+            if (selectedCollab.includes(value)) {
+                selectedCollab = selectedCollab.filter(v => v !== value);
             } else {
-                selectedRoles.push(value);
+                selectedCollab.push(value);
             }
-            rolesInput.value = selectedRoles.join(', ');
+            collabInput.value = selectedCollab.join(', ');
         }
 
-        // CSS for Radio Button selection visual (simulating card selection for Radio)
-        const radios = document.querySelectorAll('input[type="radio"]');
-        radios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                // Reset all labels in this group
-                const groupName = radio.name;
-                document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
-                    r.parentElement.classList.remove('selected');
-                });
-                if (radio.checked) {
-                    radio.parentElement.classList.add('selected');
-                }
-            });
-        });
-
-
         // Form Submit
-        const form = document.getElementById('crew-form');
+        const form = document.getElementById('alliance-form');
         const endpoint = "https://lark-bitable-form.reg-5d2.workers.dev/submit";
         const overlay = document.getElementById('dev-overlay');
         const stamp = document.getElementById('stamp');

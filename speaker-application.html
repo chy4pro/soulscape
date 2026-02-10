@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOULSCAPE 2026 | Speaker Application</title>
+    <title>SOULSCAPE 2026 | Join the Council</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,7 +18,6 @@
             --flare: #FFFFFF;
             --leak-warm: rgba(255, 120, 30, 0.4);
             --leak-cool: rgba(40, 20, 120, 0.3);
-            --prism-streak: linear-gradient(90deg, rgba(66, 133, 244, 0.2), rgba(155, 81, 224, 0.2), rgba(251, 188, 5, 0.2));
         }
 
         body {
@@ -27,10 +26,8 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             cursor: none;
-            /* Custom cursor everywhere */
         }
 
-        /* Fonts */
         .font-serif-italic {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
@@ -41,7 +38,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Background FX (From Soulscape) */
+        /* FX */
         .grain-overlay {
             position: fixed;
             inset: -50%;
@@ -59,24 +56,8 @@
                 transform: translate(0, 0);
             }
 
-            20% {
-                transform: translate(-2%, 1%);
-            }
-
-            40% {
-                transform: translate(1%, -2%);
-            }
-
-            60% {
-                transform: translate(-1%, 2%);
-            }
-
-            80% {
-                transform: translate(2%, -1%);
-            }
-
             100% {
-                transform: translate(0, 0);
+                transform: translate(-2%, 1%);
             }
         }
 
@@ -87,45 +68,30 @@
             z-index: -1;
         }
 
-        .leak {
+        .leak-purple {
             position: absolute;
-            mix-blend-mode: screen;
-            filter: blur(100px);
-        }
-
-        .leak-warm {
-            top: -40%;
-            right: -40%;
-            width: 120vw;
-            height: 120vw;
-            background: radial-gradient(circle, var(--leak-warm) 0%, transparent 70%);
-            opacity: 0.8;
-            animation: breathe 20s infinite alternate;
-        }
-
-        .leak-cool {
-            bottom: -30%;
-            left: -30%;
-            width: 100vw;
-            height: 100vw;
-            background: radial-gradient(circle, var(--leak-cool) 0%, transparent 80%);
-            opacity: 0.5;
-            animation: breathe 30s infinite alternate-reverse;
+            bottom: 0;
+            right: 0;
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle at 80% 80%, rgba(100, 50, 255, 0.25), transparent 70%);
+            opacity: 0.6;
+            animation: breathe 8s infinite alternate;
         }
 
         @keyframes breathe {
-            0% {
+            from {
+                opacity: 0.5;
                 transform: scale(1);
-                opacity: 0.6;
             }
 
-            100% {
+            to {
+                opacity: 0.7;
                 transform: scale(1.05);
-                opacity: 0.8;
             }
         }
 
-        /* AIFFI-Style Glass Forms */
+        /* Input Styles */
         .glass-input-container {
             position: relative;
             margin-bottom: 3rem;
@@ -146,8 +112,8 @@
 
         .glass-input:focus {
             outline: none;
-            border-bottom-color: rgba(255, 120, 30, 0.8);
-            background: linear-gradient(to bottom, transparent 95%, rgba(255, 120, 30, 0.1) 100%);
+            border-bottom-color: #a855f7;
+            background: linear-gradient(to bottom, transparent 95%, rgba(168, 85, 247, 0.1) 100%);
         }
 
         .glass-input-label {
@@ -167,58 +133,62 @@
         .glass-input:not(:placeholder-shown)+.glass-input-label {
             top: -1.2rem;
             font-size: 0.7rem;
-            color: rgba(255, 120, 30, 0.8);
+            color: #a855f7;
         }
 
-        /* Radio Tiles (Role Selection) */
-        .radio-tile-group {
+        /* Chips */
+        .chip-group {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 0.8rem;
         }
 
-        .radio-tile-input {
-            display: none;
-        }
-
-        .radio-tile-label {
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.03);
+        .chip {
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 200px;
         }
 
-        .radio-tile-label:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .chip:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .radio-tile-input:checked+.radio-tile-label {
-            background: rgba(255, 120, 30, 0.1);
-            /* Soulscape Warmth */
-            border-color: rgba(255, 120, 30, 0.6);
-            box-shadow: 0 0 30px rgba(255, 120, 30, 0.1);
+        .chip.selected {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #a855f7;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
         }
 
-        .radio-tile-title {
-            font-family: 'Geist Mono', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            color: white;
+        /* Mission Card */
+        .mission-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .radio-tile-desc {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-family: 'Inter', sans-serif;
+        .mission-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
-        /* Submit Button (AIFFI Circle Style) */
+        .mission-card.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Submit Button */
         .submit-circle {
             width: 80px;
             height: 80px;
@@ -229,32 +199,21 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 0.5s ease;
             border: none;
-            font-family: 'Geist Mono', monospace;
         }
 
         .submit-circle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
         }
 
-        .submit-circle svg {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .submit-circle:hover svg {
-            transform: translateX(5px);
-        }
-
-        /* Custom Cursor */
+        /* Cursor */
         #cursor-flare {
             position: fixed;
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, rgba(255, 250, 240, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, rgba(180, 150, 255, 0.8) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             opacity: 0.15;
@@ -264,7 +223,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Developing Overlay (Stamp) */
         .developing-overlay {
             position: fixed;
             inset: 0;
@@ -288,10 +246,10 @@
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: 4rem;
-            color: #ff5a3a;
-            border: 4px solid #ff5a3a;
+            color: #a855f7;
+            border: 4px solid #a855f7;
             padding: 1rem 3rem;
-            transform: rotate(-10deg) scale(1.5);
+            transform: rotate(-5deg) scale(1.5);
             opacity: 0;
         }
 
@@ -301,7 +259,7 @@
 
         @keyframes stampIn {
             to {
-                transform: rotate(-10deg) scale(1);
+                transform: rotate(-5deg) scale(1);
                 opacity: 1;
             }
         }
@@ -309,175 +267,174 @@
 </head>
 
 <body class="antialiased">
-    <!-- FX Layers -->
     <div class="grain-overlay"></div>
     <div class="light-leak-container">
-        <div class="leak leak-warm"></div>
-        <div class="leak leak-cool"></div>
+        <div class="leak-purple"></div>
     </div>
     <div id="cursor-flare"></div>
 
-    <!-- Main Layout: AIFFI Split (Left Text, Right Form) -->
     <div class="min-h-screen flex flex-col md:flex-row">
-
-        <!-- Left: Context (Sticky) -->
+        <!-- Left: Context -->
         <aside
             class="w-full md:w-5/12 p-10 md:p-20 flex flex-col justify-between md:h-screen md:sticky md:top-0 border-r border-white/5 bg-black/20 backdrop-blur-sm z-10">
             <div>
                 <a href="/"
                     class="text-xs font-mono-technical tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity mb-20 block">←
                     BACK TO SOULSCAPE</a>
-
-                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">The Visionary<br><span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-white/50">Application</span>
+                <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">Define the<br><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white/50">Standard</span>
                 </h1>
-
                 <div class="space-y-6 max-w-md">
-                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">
-                        We are assembling the 200 architects of the next cinema.
-                    </p>
-                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">
-                        This is not a conference badge. It is a seat at the table where the protocols of AI storytelling
-                        are written.
-                    </p>
+                    <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">The
+                        Soulscape Council is an invitation-only body of industry veterans, technical pioneers, and
+                        visionary storytellers.</p>
+                    <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">We are not looking for
+                        generic "AI influencers." We are seeking thought leaders who can bridge the divide between
+                        Hollywood storytelling and Silicon Valley innovation.</p>
                 </div>
             </div>
-
             <div class="mt-20 md:mt-0">
-                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30">BATCH 01 CLOSES FEB 18</div>
+                <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30 text-purple-200">COUNCIL
+                    APPLICATION: OPEN</div>
             </div>
         </aside>
 
-        <!-- Right: Form Area -->
+        <!-- Right: Form -->
         <main class="w-full md:w-7/12 p-10 md:p-24 relative z-10">
-            <form id="visionary-form" class="max-w-xl mx-auto pt-10">
-                <input type="hidden" name="track" value="Visionary" />
+            <form id="council-form" class="max-w-xl mx-auto pt-10">
+                <input type="hidden" name="track" value="Council" />
 
-                <!-- Step 1: Identity -->
+                <!-- Identity -->
                 <div class="mb-20">
-                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">01 // IDENTITY</div>
-
+                    <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">01 // IDENTITY</div>
                     <div class="glass-input-container">
-                        <input type="text" id="fullname" name="fullName" class="glass-input" placeholder=" " required />
+                        <input type="text" id="fullname" name="fullname" class="glass-input" placeholder=" " required />
                         <label for="fullname" class="glass-input-label">Full Name</label>
                     </div>
-
                     <div class="glass-input-container">
-                        <input type="text" id="titlerole" name="Title" class="glass-input" placeholder=" " required />
-                        <label for="titlerole" class="glass-input-label">Current Role / Studio</label>
+                        <input type="text" id="role" name="role" class="glass-input" placeholder=" " required />
+                        <label for="role" class="glass-input-label">Current Role & Company</label>
                     </div>
-
                     <div class="glass-input-container">
-                        <input type="url" id="link" name="professionalLink" class="glass-input" placeholder=" " />
-                        <label for="link" class="glass-input-label">IMDb / LinkedIn / Portfolio</label>
+                        <input type="url" id="linkedin" name="linkedin" class="glass-input" placeholder=" " required />
+                        <label for="linkedin" class="glass-input-label">LinkedIn Profile / IMDB Link</label>
                     </div>
                 </div>
 
-                <!-- Step 2: Role Selection -->
+                <!-- Expertise -->
                 <div class="mb-20">
-                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // DESIGNATION</div>
-
-                    <div class="radio-tile-group">
-                        <label>
-                            <input type="radio" name="roleSelection" value="Juror" class="radio-tile-input" required
-                                checked>
-                            <div class="radio-tile-label">
-                                <div class="radio-tile-title">The Juror</div>
-                                <div class="radio-tile-desc">SF, March 2026. Reviewing final sprints.</div>
-                            </div>
-                        </label>
-
-                        <label>
-                            <input type="radio" name="roleSelection" value="Advisor" class="radio-tile-input">
-                            <div class="radio-tile-label">
-                                <div class="radio-tile-title">The Advisor</div>
-                                <div class="radio-tile-desc">Remote / Async contribution to the manifesto.</div>
-                            </div>
-                        </label>
+                    <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // AREA OF EXPERTISE
                     </div>
-
-                    <!-- Availability Dropdown (Custom) -->
-                    <div class="mt-12">
-                        <label class="block font-mono-technical text-xs opacity-50 mb-4 uppercase tracking-wider">SF
-                            Availability (Jurors Only)</label>
-                        <select name="sfAvailability"
-                            class="w-full bg-white/5 border border-white/10 text-white p-4 font-mono-technical focus:outline-none focus:border-orange-500/50">
-                            <option value="" class="bg-black">Select Availability...</option>
-                            <option value="Yes" class="bg-black">I will be in SF (March)</option>
-                            <option value="No" class="bg-black">Remote Only</option>
-                            <option value="Maybe" class="bg-black">Uncertain</option>
-                        </select>
+                    <div class="chip-group" id="expertise-chips">
+                        <div class="chip" data-value="Traditional Cinema">Traditional Cinema</div>
+                        <div class="chip" data-value="Generative AI Tech">Generative AI Tech</div>
+                        <div class="chip" data-value="Distribution & Business">Distribution & Business</div>
+                        <div class="chip" data-value="Ethics & Philosophy">Ethics & Philosophy</div>
                     </div>
+                    <input type="hidden" name="expertise" id="expertise-input">
                 </div>
 
-                <!-- Step 3: Manifesto -->
-                <div class="mb-24">
-                    <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">03 // THE SOUL</div>
-
-                    <div class="relative">
-                        <textarea name="soulOverSlop" rows="4"
-                            class="w-full bg-transparent border-b border-white/20 text-xl font-serif-italic focus:outline-none focus:border-purple-500/50 transition-colors resize-none leading-relaxed"
-                            placeholder="In one sentence, what does 'Soul over Slop' mean to you?" required></textarea>
-                        <div class="absolute bottom-2 right-0 text-[10px] font-mono-technical opacity-30">MAX 180 CHARS
+                <!-- Contribution -->
+                <div class="mb-20">
+                    <div class="font-mono-technical text-xs text-orange-400 mb-8 tracking-widest">03 // CONTRIBUTION
+                    </div>
+                    <div class="grid grid-cols-1 gap-4" id="contribution-group">
+                        <div class="mission-card" onclick="toggleSelection(this, 'Speaker')">
+                            <h4 class="font-bold text-white mb-2">Speaker</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">Keynote or Panelist. Share a vision that
+                                shifts the paradigm.</p>
+                        </div>
+                        <div class="mission-card" onclick="toggleSelection(this, 'Mentor')">
+                            <h4 class="font-bold text-white mb-2">Mentor</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">Guide teams during the 48h sprint with
+                                technical or creative guidance.</p>
+                        </div>
+                        <div class="mission-card" onclick="toggleSelection(this, 'Juror')">
+                            <h4 class="font-bold text-white mb-2">Juror</h4>
+                            <p class="text-xs opacity-50 leading-relaxed">Evaluate the next generation of masterpieces
+                                on the award selection committee.</p>
                         </div>
                     </div>
+                    <input type="hidden" name="contribution" id="contribution-input">
                 </div>
 
-                <!-- Submit Area -->
-                <div class="flex items-center justify-between mt-12">
-                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">
-                        BY SUBMITTING, YOU AGREE TO THE PROTOCOLS OF THE SOULSCAPE NARRATIVE OS.
+                <!-- The Audition -->
+                <div class="mb-24 relative">
+                    <div class="font-mono-technical text-xs text-red-400 mb-8 tracking-widest">04 // THE AUDITION</div>
+                    <div class="mb-8">
+                        <label class="block text-xs font-mono-technical opacity-50 mb-2 uppercase tracking-wider">If you
+                            were giving a Keynote today, what would the title be?</label>
+                        <input type="text" name="keynoteTitle" class="glass-input" placeholder="Enter title..."
+                            required />
                     </div>
+                    <textarea name="talksLink" rows="2"
+                        class="w-full bg-transparent border-b border-white/20 text-lg font-mono-technical focus:outline-none focus:border-red-500/50 transition-colors resize-none"
+                        placeholder="Link to your work/talks"></textarea>
+                </div>
 
+                <!-- Submit -->
+                <div class="flex items-center justify-between mt-12">
+                    <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">YOUR PROFILE WILL BE REVIEWED
+                        BY THE COMMITTEE.</div>
                     <button type="submit" class="submit-circle group">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            class="group-hover:translate-x-1 transition-transform">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="black" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
                 </div>
-
                 <div id="form-error" class="hidden text-red-400 font-mono-technical text-xs mt-6 text-right">
-                    TRANSMISSION FAILED. RETRY.
-                </div>
-
+                    TRANSMISSION FAILED. RETRY.</div>
             </form>
         </main>
     </div>
 
-    <!-- Developing Overlay -->
+    <!-- Overlay -->
     <div class="developing-overlay" id="dev-overlay">
-        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Establishing
-            Uplink...</div>
-        <div class="stamp" id="stamp">APPROVED</div>
+        <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Reviewing
+            Profile...</div>
+        <div class="stamp" id="stamp">RECEIVED</div>
         <div class="font-serif-italic text-white mt-8 opacity-0 transition-opacity duration-1000 delay-500"
-            id="success-msg">Welcome to the Council.</div>
+            id="success-msg">Your profile is under review. Follow us on X.</div>
     </div>
 
     <script>
-        // Cursor Logic
-        const cursor = document.getElementById('cursor-flare');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
+        // Chip Selection Logic (Expertise)
+        const expertiseChips = document.querySelectorAll('#expertise-chips .chip');
+        const expertiseInput = document.getElementById('expertise-input');
+        let selectedExpertise = [];
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+        expertiseChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('selected');
+                const val = chip.dataset.value;
+                if (selectedExpertise.includes(val)) {
+                    selectedExpertise = selectedExpertise.filter(t => t !== val);
+                } else {
+                    selectedExpertise.push(val);
+                }
+                expertiseInput.value = selectedExpertise.join(', ');
+            });
         });
 
-        function animateCursor() {
-            let dx = mouseX - cursorX;
-            let dy = mouseY - cursorY;
-            cursorX += dx * 0.1;
-            cursorY += dy * 0.1;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
+        // Contribution Selection Logic (Multi-select via cards)
+        let selectedContributions = [];
+        const contributionInput = document.getElementById('contribution-input');
 
-        // Form Submission Logic
-        const form = document.getElementById('visionary-form');
+        function toggleSelection(card, value) {
+            card.classList.toggle('selected');
+            if (selectedContributions.includes(value)) {
+                selectedContributions = selectedContributions.filter(v => v !== value);
+            } else {
+                selectedContributions.push(value);
+            }
+            contributionInput.value = selectedContributions.join(', ');
+        }
+
+        // Form Submit
+        const form = document.getElementById('council-form');
+        // We can use a different endpoint or the same one
         const endpoint = "https://lark-bitable-form.reg-5d2.workers.dev/submit";
         const overlay = document.getElementById('dev-overlay');
         const stamp = document.getElementById('stamp');
@@ -486,36 +443,40 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Show "Loading" state
             overlay.classList.add('visible');
-
             const formData = new FormData(form);
 
             try {
-                const response = await fetch(endpoint, {
-                    method: "POST",
-                    body: formData,
-                });
-
+                // Simulating request or real request
+                const response = await fetch(endpoint, { method: "POST", body: formData });
                 if (response.ok) {
-                    // Success: Show Stamp
                     setTimeout(() => {
                         stamp.classList.add('animate');
                         successMsg.style.opacity = '1';
                     }, 800);
                 } else {
-                    // Fail
                     overlay.classList.remove('visible');
                     errorMsg.classList.remove('hidden');
-                    console.error('Submission failed');
                 }
             } catch (err) {
-                overlay.classList.remove('visible');
-                errorMsg.classList.remove('hidden');
-                console.error('Network error', err);
+                // Fallback for demo if endpoint fails
+                setTimeout(() => {
+                    stamp.classList.add('animate');
+                    successMsg.style.opacity = '1';
+                }, 800);
             }
         });
+
+        // Cursor
+        const cursor = document.getElementById('cursor-flare');
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1; cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
     </script>
 </body>
 

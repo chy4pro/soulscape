@@ -457,6 +457,7 @@
                     x-transition:leave-end="opacity-0 translate-y-2"
                     class="absolute left-1/2 -translate-x-1/2 top-[80%] pt-4 z-50 min-w-[240px]">
                     <div class="bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 shadow-2xl">
+                        <!-- Partner -->
                         <a href="sponsor.html" target="_blank"
                             class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
                             <div
@@ -466,16 +467,18 @@
                                 Brands & Studios</div>
                         </a>
 
+                        <!-- Council -->
                         <a href="speaker-application.html" target="_blank"
                             class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
                             <div
                                 class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
                                 Join the Council</div>
-                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">Speakers
-                                & Mentors</div>
+                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">
+                                Speakers, Mentors & Jurors</div>
                         </a>
 
-                        <a href="join-us.html" target="_blank"
+                        <!-- Alliance -->
+                        <a href="alliance.html" target="_blank"
                             class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
                             <div
                                 class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
@@ -484,6 +487,7 @@
                                 Festivals & Communities</div>
                         </a>
 
+                        <!-- Volunteer -->
                         <a href="join-us.html" target="_blank"
                             class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors border-t border-white/5 mt-1 pt-3 text-left">
                             <div
@@ -699,9 +703,8 @@
                             id="manifestoPlayTrigger">
                             <video id="manifestoVideo"
                                 class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                                loop muted playsinline>
-                                <source src="https://d33e382l66m7o1.cloudfront.net/soulscape/Soulscape+Manifesto.mp4"
-                                    type="video/mp4">
+                                src="https://d33e382l66m7o1.cloudfront.net/soulscape/Soulscape+Manifesto.mp4" loop muted
+                                playsinline>
                             </video>
                             <div
                                 class="absolute bottom-4 left-4 text-[10px] font-mono-technical uppercase bg-black/50 px-2 py-1 rounded">
@@ -1325,7 +1328,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <!-- Card 1: The Cinema Lab -->
-                <a href="https://luma.com/soulscape?k=cd"
+                <a href="https://luma.com/48jlkvsu"
                     class="glass-card p-6 md:p-14 rounded-3xl relative overflow-hidden group hover-target block transition-transform duration-500 hover:-translate-y-2">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
@@ -1365,8 +1368,8 @@
                 </a>
 
                 <!-- Card 2: The Summit -->
-                <a href="https://luma.com/soulscape?k=cd"
-                    class="glass-card p-6 md:p-14 rounded-3xl relative overflow-hidden group hover-target block transition-transform duration-500 hover:-translate-y-2">
+                <div
+                    class="glass-card p-6 md:p-14 rounded-3xl relative overflow-hidden block cursor-default opacity-75">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
@@ -1397,11 +1400,10 @@
                         </li>
                     </ul>
 
-                    <span
-                        class="btn-secondary border-blue-400/30 text-blue-400 group-hover:bg-blue-400 group-hover:text-black group-hover:border-blue-400">
-                        GET TICKETS
+                    <span class="btn-secondary border-white/20 text-white/40 cursor-not-allowed">
+                        COMING SOON
                     </span>
-                </a>
+                </div>
             </div>
 
             <!-- Sponsor Link -->
@@ -1899,6 +1901,23 @@
                 } else {
                     promoVideo.pause();
                     gsap.to(playBtn, { opacity: 1, scale: 1, duration: 0.3 });
+                }
+            });
+        }
+
+        // Manifesto Video Logic
+        const manifestoTrigger = document.getElementById('manifestoPlayTrigger');
+        const manifestoVideo = document.getElementById('manifestoVideo');
+
+        if (manifestoTrigger && manifestoVideo) {
+            manifestoTrigger.addEventListener('click', () => {
+                if (manifestoVideo.paused) {
+                    manifestoVideo.muted = false; // Unmute for playback
+                    manifestoVideo.play();
+                    manifestoTrigger.querySelector('div').innerText = 'PAUSE';
+                } else {
+                    manifestoVideo.pause();
+                    manifestoTrigger.querySelector('div').innerText = 'Watch Manifesto';
                 }
             });
         }
