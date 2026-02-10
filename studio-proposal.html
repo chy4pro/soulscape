@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-6BEM05VT4Q'); </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULSCAPE 2026 | Studio Partnership</title>
+    <meta name="description" content="The Ultimate Talent Pipeline & Thought Leadership Platform for Studios." />
+    <link rel="icon" href="https://d33e382l66m7o1.cloudfront.net/soulscape/image/soulscapeicon.jpg" type="image/jpeg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,500;1,600&family=Inter:wght@300;400;600&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --void: #020204;
+            --flare: #FFFFFF;
+            /* Changed accent to a more premium 'Champagne Gold' for B2B/Studio context */
+            --accent-gold: #D4AF37;
+            --accent-subtle: rgba(212, 175, 55, 0.3);
+            --leak-warm: rgba(212, 175, 55, 0.2);
+            --leak-cool: rgba(40, 40, 60, 0.3);
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--flare);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+            /* Custom cursor retained */
+        }
+
+        .font-serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .font-mono-technical {
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* FX Layers (Retained from Original for Consistency) */
+        .grain-overlay {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 40;
+            mix-blend-mode: overlay;
+            animation: grainShift 4s steps(6) infinite;
+        }
+
+        @keyframes grainShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-2%, 1%);
+            }
+        }
+
+        /* Components */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(212, 175, 55, 0.3);
+            /* Gold hover */
+            transform: translateY(-5px);
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2.5rem;
+            border-radius: 99px;
+            background: #fff;
+            color: #000;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-gold:hover {
+            background: var(--accent-gold);
+            color: #000;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Cursor */
+        #cursor-flare {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            mix-blend-mode: exclusion;
+            transition: transform 0.1s ease;
+        }
+
+        #cursor-ring {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .hover-target:hover~#cursor-ring {
+            width: 80px;
+            height: 80px;
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Exclusive Sections */
+        .noise-text {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            filter: blur(3px);
+            user-select: none;
+        }
+
+        .clean-text {
+            color: var(--accent-gold);
+            filter: blur(0);
+        }
+
+        /* Premium Gold Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #fff, #D4AF37, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Funnel Animation Lines */
+        .funnel-line {
+            width: 1px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), var(--accent-gold), rgba(255, 255, 255, 0.1));
+            transition: height 1.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-yellow-500/30">
+
+    <div class="grain-overlay"></div>
+    <div id="cursor-flare"></div>
+    <div id="cursor-ring"></div>
+
+    <nav
+        class="fixed top-0 left-0 w-full px-6 py-6 md:px-12 md:py-8 flex justify-between items-center z-50 mix-blend-difference pointer-events-none">
+        <a href="/"
+            class="pointer-events-auto font-mono-technical text-xs font-bold tracking-[0.2em] uppercase opacity-100 hover:text-yellow-200 transition-colors">
+            Soulscape <span class="text-[0.6em] align-top opacity-60">PARTNER</span>
+        </a>
+        <div class="pointer-events-auto">
+            <a href="mailto:hello@soulscapefilm.com"
+                class="font-mono-technical text-[10px] tracking-[0.2em] border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all uppercase">
+                Contact Studio Relations
+            </a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col justify-center items-center relative px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-[var(--void)] z-10"></div>
+            <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/SoulscapeLandingPage.png"
+                class="w-full h-full object-cover scale-110 blur-sm grayscale opacity-50">
+        </div>
+
+        <div class="relative z-10 text-center max-w-6xl">
+            <div class="hero-reveal opacity-0 translate-y-10 flex flex-col items-center gap-4 mb-8">
+                <span class="w-px h-12 bg-gradient-to-b from-transparent to-yellow-500 mb-4"></span>
+                <p class="font-mono-technical text-[10px] md:text-xs text-yellow-500/80 tracking-[0.4em] uppercase">
+                    San Francisco • April 13-15, 2026
+                </p>
+            </div>
+
+            <h1
+                class="hero-reveal opacity-0 translate-y-10 font-serif-italic text-5xl md:text-8xl lg:text-9xl leading-[0.9] text-white mb-8">
+                The Studio <br> <span class="text-gradient-gold">Partnership.</span>
+            </h1>
+
+            <p
+                class="hero-reveal opacity-0 translate-y-10 font-mono-technical text-xs md:text-sm text-white/60 tracking-[0.2em] uppercase max-w-2xl mx-auto leading-relaxed mb-12">
+                Where the Next Generation of Storytellers is Discovered.<br>
+                <span class="opacity-50 mt-2 block">Production Studios • Streaming Platforms • IP Holders</span>
+            </p>
+
+            <div class="hero-reveal opacity-0 translate-y-10">
+                <a href="#opportunity" class="btn-gold hover-target">Secure Your Pipeline</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+
+            <div class="relative z-10 reveal-text">
+                <div
+                    class="font-mono-technical text-[10px] text-red-400 tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> The Problem
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif-italic mb-6">The Landscape is <br>Flooded with Noise.</h2>
+                <p class="text-gray-400 font-light leading-relaxed mb-8 max-w-md">
+                    The industry is drowning in "AI Slop"—content engineered for algorithms, not emotion.
+                    For a Studio, finding genuine talent in this chaotic noise is impossible.
+                </p>
+                <p
+                    class="font-mono-technical text-xs text-white uppercase tracking-widest border-l-2 border-white/20 pl-4">
+                    Until Now.
+                </p>
+            </div>
+
+            <div class="relative h-[400px] w-full bg-white/5 rounded-2xl overflow-hidden border border-white/10 group cursor-crosshair hover-target"
+                id="noiseContainer">
+                <div
+                    class="absolute inset-0 flex flex-wrap content-center justify-center gap-2 opacity-30 p-8 scale-110">
+                    <span class="noise-text text-4xl font-serif-italic">CONTENT</span>
+                    <span class="noise-text text-2xl font-mono-technical">ALGORITHM</span>
+                    <span class="noise-text text-5xl font-serif-italic">CLICKS</span>
+                    <span class="noise-text text-3xl font-mono-technical">GENERATED</span>
+                    <span class="noise-text text-4xl font-serif-italic">VOLUME</span>
+                    <span class="noise-text text-2xl font-mono-technical">SYNTHETIC</span>
+                    <span class="noise-text text-5xl font-serif-italic">DATA</span>
+                </div>
+
+                <div class="absolute w-48 h-48 bg-black/40 backdrop-blur-none border border-yellow-500/50 rounded-full shadow-[0_0_50px_rgba(212,175,55,0.2)] flex items-center justify-center pointer-events-none transition-transform duration-100 ease-out z-20"
+                    id="lens">
+                    <span class="font-serif-italic text-2xl text-white drop-shadow-lg">Resonance</span>
+                </div>
+
+                <div class="absolute bottom-4 right-4 font-mono-technical text-[9px] text-white/30 uppercase">
+                    [MOVE CURSOR TO FILTER]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-b from-transparent to-white/[0.02] border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-serif-italic leading-tight mb-8 reveal-fade">
+                "We don't chase algorithms.<br>
+                <span class="text-gradient-gold">We chase resonance.</span>"
+            </h2>
+            <div class="w-px h-16 bg-white/10 mx-auto mb-8"></div>
+            <p
+                class="font-mono-technical text-xs md:text-sm text-gray-400 uppercase tracking-[0.15em] leading-loose max-w-2xl mx-auto reveal-fade">
+                Soulscape is the global curation engine. We are dismantling barriers to build a stage where <span
+                    class="text-white">Every Story</span> and <span class="text-white">Every Soul</span> deserves to be
+                seen.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center md:text-left">
+                <span class="font-mono-technical text-[10px] text-yellow-500 tracking-[0.3em] uppercase mb-2 block">The
+                    Filter</span>
+                <h2 class="text-4xl font-serif-italic text-white">Not Just an Event.<br>A Curation Engine.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <div
+                    class="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent">
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl relative group hover-target reveal-stagger">
+                    <div class="font-mono-technical text-[9px] text-gray-500 uppercase tracking-widest mb-4">Step 01 //
+                        Volume</div>
+                    <div
+                        class="text-5xl font-serif-italic text-white mb-2 group-hover:scale-105 transition-transform origin-left">
+                        3,000+</div>
+                    <div class="font-mono-technical text-xs text-white/60 uppercase tracking-widest mb-6">Global
+                        Registrations</div>
+                    <p class="text-sm text-gray-400 font-light">
+                        Broad spectrum outreach across 40+ countries. The raw input of the world's most active AI
+                        creators.
+                    </p>
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-globe text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl relative group hover-target reveal-stagger"
+                    style="border-top: 1px solid rgba(212,175,55,0.3);">
+                    <div class="font-mono-technical text-[9px] text-yellow-500 uppercase tracking-widest mb-4">Step 02
+                        // The Filter</div>
+                    <div
+                        class="text-5xl font-serif-italic text-yellow-400 mb-2 group-hover:scale-105 transition-transform origin-left">
+                        200</div>
+                    <div class="font-mono-technical text-xs text-white/60 uppercase tracking-widest mb-6">Elite
+                        Finalists</div>
+                    <p class="text-sm text-gray-400 font-light">
+                        Rigorous portfolio review and "Micro-Sprints". Only the top 1% are invited to San Francisco.
+                    </p>
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-filter text-2xl text-yellow-500"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl relative group hover-target reveal-stagger">
+                    <div class="font-mono-technical text-[9px] text-gray-500 uppercase tracking-widest mb-4">Step 03 //
+                        The Output</div>
+                    <div
+                        class="text-5xl font-serif-italic text-white mb-2 group-hover:scale-105 transition-transform origin-left">
+                        1</div>
+                    <div class="font-mono-technical text-xs text-white/60 uppercase tracking-widest mb-6">Global Stage
+                    </div>
+                    <p class="text-sm text-gray-400 font-light">
+                        A 48-Hour Immersive Cinema Lab culminating in a Black-Tie Gala at a Historic SF Theater.
+                    </p>
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-star text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="opportunity" class="py-24 md:py-32 px-6 border-t border-white/5 relative bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <span
+                        class="font-mono-technical text-[10px] text-white/40 tracking-[0.3em] uppercase mb-2 block">For
+                        Studios & Platforms</span>
+                    <h2 class="text-4xl md:text-5xl font-serif-italic text-white">The Opportunity</h2>
+                </div>
+                <div
+                    class="font-mono-technical text-[10px] text-right text-gray-500 uppercase tracking-widest max-w-xs">
+                    Access the top 1% of cinema-ready talent.<br>Define the industry narrative.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4 md:h-[600px]">
+
+                <div
+                    class="md:col-span-1 md:row-span-2 glass-card p-8 rounded-3xl flex flex-col justify-between group hover-target relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+
+                    <div class="relative z-10">
+                        <div
+                            class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center mb-6 text-xs font-mono-technical">
+                            01</div>
+                        <h3 class="text-3xl font-serif-italic mb-2">The Talent<br>Pipeline.</h3>
+                        <p class="font-mono-technical text-[10px] text-blue-300 uppercase tracking-widest mb-6">
+                            Recruitment Engine</p>
+
+                        <ul class="space-y-4 text-sm text-gray-400 font-light">
+                            <li class="flex gap-3">
+                                <span class="text-blue-400">●</span>
+                                <span><strong>"First Look" Database:</strong> Top 50 Finalists, Tool Stacks
+                                    (UE5/ComfyUI), & "Open to Work" status.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-400">●</span>
+                                <span><strong>VIP Lounge:</strong> Private booth for on-site chemistry checks.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-400">●</span>
+                                <span><strong>"Hiring Partner" Badge:</strong> Flagged across the event app.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="relative z-10 mt-8">
+                        <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                            <div
+                                class="h-full bg-blue-500 w-0 group-hover:w-full transition-all duration-1000 ease-out">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="md:col-span-2 glass-card p-8 rounded-3xl flex flex-col md:flex-row items-center gap-8 group hover-target relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-transparent to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+
+                    <div class="flex-1 relative z-10">
+                        <div
+                            class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center mb-6 text-xs font-mono-technical">
+                            02</div>
+                        <h3 class="text-3xl font-serif-italic mb-2">Thought Leadership.</h3>
+                        <p class="font-mono-technical text-[10px] text-purple-300 uppercase tracking-widest">Media & PR
+                            Authority</p>
+                    </div>
+
+                    <div
+                        class="flex-1 space-y-4 text-sm text-gray-400 font-light relative z-10 border-l border-white/10 pl-0 md:pl-8">
+                        <p><strong class="text-white block mb-1">Priority Media Pitching</strong>Active pitching of your
+                            execs to Variety, Deadline, TechCrunch.</p>
+                        <p><strong class="text-white block mb-1">Official Wire Inclusion</strong>Featured as "Key
+                            Industry Partner" in global press releases.</p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1 glass-card p-8 rounded-3xl group hover-target relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-transparent to-yellow-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center mb-6 text-xs font-mono-technical">
+                            03</div>
+                        <h3 class="text-2xl font-serif-italic mb-4">Brand Visibility.</h3>
+                        <p class="text-sm text-gray-400 font-light">Red Carpet Logo Placement & Executive Speaking
+                            Slots.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="md:col-span-1 glass-card p-8 rounded-3xl group hover-target relative overflow-hidden bg-white/5">
+                    <div
+                        class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                    </div>
+                    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center">
+                        <h3 class="text-2xl font-serif-italic text-white mb-2">VIP All-Access</h3>
+                        <p class="font-mono-technical text-xs text-gray-400 uppercase tracking-widest">5 Executive
+                            Passes</p>
+                        <p class="text-xs text-gray-500 mt-2">Juror Dinner • Private Mixers</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-6 flex justify-center">
+        <div class="relative w-full max-w-lg group hover-target">
+
+            <div
+                class="absolute -inset-1 bg-gradient-to-r from-yellow-600 via-yellow-300 to-yellow-600 rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+            </div>
+
+            <div
+                class="relative bg-[#050505] border border-white/10 p-10 md:p-14 rounded-2xl flex flex-col items-center text-center overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out">
+                </div>
+
+                <div class="font-mono-technical text-[10px] text-yellow-500 uppercase tracking-[0.4em] mb-6">Exclusive
+                    Partnership</div>
+
+                <h3 class="text-4xl md:text-5xl font-serif-italic text-white mb-4">Studio Partner</h3>
+
+                <div class="text-5xl md:text-6xl font-mono-technical font-light text-white mb-4 tracking-tighter">
+                    $25,000
+                </div>
+
+                <div
+                    class="inline-block px-3 py-1 border border-yellow-500/30 rounded-full text-[10px] font-mono-technical text-yellow-500 uppercase tracking-widest mb-10">
+                    Limit: 3 Studios Only
+                </div>
+
+                <ul class="space-y-3 mb-12 text-sm text-gray-400 font-light text-left w-full max-w-xs mx-auto">
+                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Talent Pipeline Access</span>
+                        <span class="text-white">✔</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Keynote/Panel Slot</span> <span
+                            class="text-white">✔</span></li>
+                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Tier-1 PR Support</span> <span
+                            class="text-white">✔</span></li>
+                    <li class="flex justify-between border-b border-white/5 pb-2"><span>5 VIP All-Access Passes</span>
+                        <span class="text-white">✔</span>
+                    </li>
+                </ul>
+
+                <a href="mailto:hello@soulscapefilm.com?subject=Studio%20Partnership%20Inquiry"
+                    class="btn-gold w-full">Apply for Partnership</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 md:py-20 border-t border-white/10 bg-black text-center relative z-10">
+        <div class="font-serif-italic text-2xl md:text-4xl text-white/40 mb-12">Soulscape 2026</div>
+
+        <div class="flex justify-center flex-wrap gap-8 mb-8">
+            <a href="https://discord.gg/75QUdbYY9B"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Discord</a>
+            <a href="https://www.instagram.com/soulscapefilm/"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Instagram</a>
+            <a href="https://x.com/soulscapefilm"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Twitter</a>
+            <a href="mailto:press@soulscape.com"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Press
+                Inquiries</a>
+        </div>
+
+        <div class="font-mono-technical text-[9px] text-white/40 tracking-widest uppercase mb-4">
+            A movement by storytellers, for storytellers.
+        </div>
+        <div class="font-mono-technical text-[9px] text-white/40 tracking-widest uppercase">
+            © 2026 Soulscape AI Film Sprint.
+        </div>
+        <div class="font-mono-technical text-[9px] text-white/50 tracking-widest uppercase mt-4 max-w-2xl mx-auto px-6">
+            Soulscape 2026 is a fiscally sponsored project of Bay Area Innovest, a 501(c)(3) non-profit organization.
+            All donations are tax-deductible.
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero Reveal
+        const heroTl = gsap.timeline();
+        heroTl.to(".hero-reveal", {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // 2. Interactive Lens (Problem Section)
+        const noiseContainer = document.getElementById('noiseContainer');
+        const lens = document.getElementById('lens');
+
+        if (noiseContainer && lens) {
+            noiseContainer.addEventListener('mousemove', (e) => {
+                const rect = noiseContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Move lens
+                lens.style.transform = `translate(${x - 96}px, ${y - 96}px)`;
+            });
+
+            // Initial center position
+            lens.style.transform = `translate(${noiseContainer.offsetWidth / 2 - 96}px, ${noiseContainer.offsetHeight / 2 - 96}px)`;
+        }
+
+        // 3. Staggered Reveals
+        gsap.utils.toArray(".reveal-fade").forEach(el => {
+            gsap.from(el, {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%"
+                }
+            });
+        });
+
+        gsap.utils.toArray(".reveal-stagger").forEach((el, i) => {
+            gsap.from(el, {
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: el.parentElement,
+                    start: "top 80%"
+                }
+            });
+        });
+
+        // 4. Custom Cursor
+        const cursor = document.getElementById('cursor-flare');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                const dt = 0.15;
+                const ringDt = 0.1;
+
+                cursorX += (mouseX - cursorX) * dt;
+                cursorY += (mouseY - cursorY) * dt;
+
+                ringX += (mouseX - ringX) * ringDt;
+                ringY += (mouseY - ringY) * ringDt;
+
+                if (cursor) {
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+                }
+                if (cursorRing) {
+                    cursorRing.style.left = ringX + 'px';
+                    cursorRing.style.top = ringY + 'px';
+                }
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+        }
+    </script>
+</body>
+
+</html>
