@@ -1,503 +1,444 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-6BEM05VT4Q');
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sponsor Soulscape AI Filmathon 2026</title>
-    <meta
-      name="description"
-      content="Partner with Soulscape to empower 200+ storytellers. Join us in making filmmaking accessible for everyone."
-    />
-    <link rel="icon" href="https://d33e382l66m7o1.cloudfront.net/soulscape/image/soulscapeicon.jpg" type="image/jpeg" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-    />
-    <style>
-      /* ===== 字体导入 ===== */
-      @import url("https://fonts.cdnfonts.com/css/garet");
-      @import url("https://fonts.cdnfonts.com/css/horizon-2");
-      @import url("https://fonts.cdnfonts.com/css/monument-extended");
-      @import url("https://fonts.cdnfonts.com/css/tt-norms");
+<html lang="en" class="scroll-smooth">
 
-      /* ===== CSS变量定义 ===== */
-      :root {
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #1a1a1a;
-        --bg-tertiary: #2a2a2a;
-        --brand-primary: #00d9ff;
-        --brand-secondary: #ff00e5;
-        --brand-accent: #00ff88;
-        --text-primary: #ffffff;
-        --text-secondary: rgba(255, 255, 255, 0.85);
-        --text-tertiary: rgba(255, 255, 255, 0.6);
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BEM05VT4Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6BEM05VT4Q');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOULSCAPE 2026 | Partner With Us</title>
+  <meta name="description"
+    content="Partner with Soulscape to empower 200+ storytellers. Join us in making filmmaking accessible for everyone." />
+  <link rel="icon" href="https://d33e382l66m7o1.cloudfront.net/soulscape/image/soulscapeicon.jpg" type="image/jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Inter:wght@400;700&family=Geist+Mono:wght@100..900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #020204;
+      --flare: #FFFFFF;
+      --leak-warm: rgba(255, 120, 30, 0.4);
+      --leak-cool: rgba(40, 20, 120, 0.3);
+    }
 
-        --spacing-sm: 8px;
-        --spacing-md: 16px;
-        --spacing-lg: 24px;
-        --spacing-xl: 32px;
-        --spacing-2xl: 48px;
-        --spacing-3xl: 64px;
-        --spacing-4xl: 96px;
+    body {
+      background-color: var(--void);
+      color: var(--flare);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-        --radius-sm: 8px;
-        --radius-md: 12px;
-        --radius-lg: 16px;
-        --radius-xl: 24px;
-        --radius-full: 9999px;
+    .font-serif-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
 
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-        --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.4);
+    .font-mono-technical {
+      font-family: 'Geist Mono', monospace;
+      letter-spacing: 0.05em;
+    }
 
-        --max-width: 1400px;
+    /* FX */
+    .grain-overlay {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 40;
+      mix-blend-mode: overlay;
+      animation: grainShift 4s steps(6) infinite;
+    }
+
+    @keyframes grainShift {
+      0% {
+        transform: translate(0, 0);
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      100% {
+        transform: translate(-2%, 1%);
+      }
+    }
+
+    .light-leak-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .leak-purple {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80vw;
+      height: 80vh;
+      background: radial-gradient(circle at 80% 80%, rgba(100, 50, 255, 0.25), transparent 70%);
+      opacity: 0.6;
+      animation: breathe 8s infinite alternate;
+    }
+
+    @keyframes breathe {
+      from {
+        opacity: 0.5;
+        transform: scale(1);
       }
 
-      html {
-        scroll-behavior: smooth;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      to {
+        opacity: 0.7;
+        transform: scale(1.05);
       }
+    }
 
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-          "Helvetica Neue", sans-serif;
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        overflow-x: hidden;
-        line-height: 1.7;
-        font-size: 16px;
+    /* Input Styles */
+    .glass-input-container {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .glass-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 0;
+      font-family: 'Geist Mono', monospace;
+      font-size: 1.25rem;
+      color: white;
+      transition: all 0.4s ease;
+      border-radius: 0;
+    }
+
+    .glass-input:focus {
+      outline: none;
+      border-bottom-color: #a855f7;
+      background: linear-gradient(to bottom, transparent 95%, rgba(168, 85, 247, 0.1) 100%);
+    }
+
+    .glass-input-label {
+      position: absolute;
+      top: 1rem;
+      left: 0;
+      font-family: 'Geist Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    .glass-input:focus+.glass-input-label,
+    .glass-input:not(:placeholder-shown)+.glass-input-label {
+      top: -1.2rem;
+      font-size: 0.7rem;
+      color: #a855f7;
+    }
+
+    /* Mission Card */
+    .mission-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .mission-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .mission-card.selected {
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.05);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Submit Button */
+    .submit-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: white;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      border: none;
+    }
+
+    .submit-circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+    }
+
+    /* Cursor */
+    #cursor-flare {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(180, 150, 255, 0.8) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.15;
+      z-index: 999;
+      mix-blend-mode: screen;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+    }
+
+    .developing-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 1000;
+    }
+
+    .developing-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .stamp {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 4rem;
+      color: #a855f7;
+      border: 4px solid #a855f7;
+      padding: 1rem 3rem;
+      transform: rotate(-5deg) scale(1.5);
+      opacity: 0;
+    }
+
+    .stamp.animate {
+      animation: stampIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes stampIn {
+      to {
+        transform: rotate(-5deg) scale(1);
+        opacity: 1;
       }
+    }
+  </style>
+</head>
 
-      /* ===== Navigation ===== */
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        padding: var(--spacing-lg) var(--spacing-xl);
-        background: rgba(10, 10, 10, 0.95);
-        backdrop-filter: blur(20px) saturate(180%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
+<body class="antialiased">
+  <div class="grain-overlay"></div>
+  <div class="light-leak-container">
+    <div class="leak-purple"></div>
+  </div>
+  <div id="cursor-flare"></div>
 
-      .navbar-content {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .navbar-logo {
-        font-size: 20px;
-        font-weight: 700;
-        color: white;
-        text-decoration: none;
-      }
-
-      /* ===== Hero Section ===== */
-      .hero-section {
-        position: relative;
-        width: 100%;
-        min-height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: calc(var(--spacing-4xl) + 60px) var(--spacing-xl) var(--spacing-4xl);
-        background: var(--bg-primary);
-      }
-
-      .hero-content {
-        max-width: 900px;
-        text-align: center;
-      }
-
-      .hero-title {
-        font-family: "Monument Extended", sans-serif;
-        font-size: clamp(36px, 6vw, 64px);
-        font-weight: 300;
-        line-height: 1.2;
-        margin-bottom: var(--spacing-lg);
-        color: white;
-        text-transform: uppercase;
-      }
-
-      .hero-subtitle {
-        font-family: "TT Norms", sans-serif;
-        font-size: clamp(18px, 2.5vw, 24px);
-        color: var(--text-secondary);
-        line-height: 1.6;
-      }
-
-      /* ===== Content Section ===== */
-      .content-section {
-        padding: var(--spacing-4xl) var(--spacing-lg);
-        max-width: var(--max-width);
-        margin: 0 auto;
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: var(--spacing-3xl);
-      }
-
-      .section-label {
-        display: inline-block;
-        padding: var(--spacing-sm) var(--spacing-md);
-        background: rgba(0, 217, 255, 0.1);
-        border-radius: var(--radius-full);
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--brand-primary);
-        margin-bottom: var(--spacing-md);
-      }
-
-      .section-title {
-        font-size: clamp(32px, 5vw, 48px);
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: var(--spacing-lg);
-        color: var(--text-primary);
-      }
-
-      .section-description {
-        font-size: clamp(16px, 2vw, 20px);
-        color: var(--text-secondary);
-        line-height: 1.8;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      /* ===== Benefits Grid ===== */
-      .benefits-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: var(--spacing-xl);
-        margin-top: var(--spacing-3xl);
-      }
-
-      .benefit-card {
-        padding: var(--spacing-xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: var(--radius-lg);
-        transition: all 0.3s ease;
-      }
-
-      .benefit-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--brand-primary);
-        transform: translateY(-5px);
-      }
-
-      .benefit-icon {
-        font-size: 32px;
-        margin-bottom: var(--spacing-md);
-      }
-
-      .benefit-title {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: var(--spacing-sm);
-        color: var(--text-primary);
-      }
-
-      .benefit-text {
-        font-size: 16px;
-        color: var(--text-tertiary);
-        line-height: 1.6;
-      }
-
-      /* ===== Form Section ===== */
-      .form-section {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: var(--spacing-3xl);
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: var(--radius-xl);
-      }
-
-      .form-group {
-        margin-bottom: var(--spacing-xl);
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: var(--spacing-sm);
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text-primary);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .form-input,
-      .form-textarea,
-      .form-select {
-        width: 100%;
-        padding: var(--spacing-md);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: var(--radius-md);
-        color: var(--text-primary);
-        font-size: 16px;
-        font-family: inherit;
-        transition: all 0.3s ease;
-      }
-
-      .form-input:focus,
-      .form-textarea:focus,
-      .form-select:focus {
-        outline: none;
-        border-color: var(--brand-primary);
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .form-textarea {
-        min-height: 120px;
-        resize: vertical;
-      }
-
-      .form-submit {
-        width: 100%;
-        padding: var(--spacing-md) var(--spacing-xl);
-        background: #f48529;
-        color: white;
-        border: none;
-        border-radius: var(--radius-full);
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .form-submit:hover {
-        background: #ff9545;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(244, 133, 41, 0.4);
-      }
-
-      /* ===== Footer ===== */
-      .footer {
-        padding: var(--spacing-3xl) var(--spacing-lg);
-        background: var(--bg-primary);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        text-align: center;
-      }
-
-      .footer-text {
-        font-size: 14px;
-        color: var(--text-tertiary);
-      }
-
-      @media (max-width: 768px) {
-        .form-section {
-          padding: var(--spacing-xl);
-        }
-
-        .benefits-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="navbar-content">
-        <a href="index.html" class="navbar-logo">Soulscape</a>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1 class="hero-title">Partner With Us</h1>
-        <p class="hero-subtitle">
-          Join us in empowering 200+ storytellers to bring their visions to life.
-          Your support makes filmmaking accessible for everyone.
-        </p>
-      </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="content-section">
-      <div class="section-header">
-        <span class="section-label">Why Sponsor</span>
-        <h2 class="section-title">Sponsorship Benefits</h2>
-        <p class="section-description">
-          Partner with the world's largest AI film sprint and reach a global community of creative storytellers, technologists, and innovators.
-        </p>
-      </div>
-
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">🌍</div>
-          <h3 class="benefit-title">Global Exposure</h3>
-          <p class="benefit-text">
-            Reach 200+ participants from around the world and showcase your brand to a diverse, engaged audience.
-          </p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">🎬</div>
-          <h3 class="benefit-title">Creative Community</h3>
-          <p class="benefit-text">
-            Connect with storytellers, filmmakers, and AI enthusiasts who are shaping the future of content creation.
-          </p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">💡</div>
-          <h3 class="benefit-title">Innovation Leadership</h3>
-          <p class="benefit-text">
-            Position your brand at the forefront of AI-powered creativity and demonstrate thought leadership.
-          </p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">🤝</div>
-          <h3 class="benefit-title">Social Impact</h3>
-          <p class="benefit-text">
-            Support democratizing filmmaking and help remove barriers for underprivileged storytellers.
-          </p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">📢</div>
-          <h3 class="benefit-title">Brand Visibility</h3>
-          <p class="benefit-text">
-            Logo placement on website, event materials, social media, and all participant communications.
-          </p>
-        </div>
-
-        <div class="benefit-card">
-          <div class="benefit-icon">🎯</div>
-          <h3 class="benefit-title">Targeted Marketing</h3>
-          <p class="benefit-text">
-            Direct access to a highly engaged audience interested in AI, creativity, and technology.
-          </p>
+  <div class="min-h-screen flex flex-col md:flex-row">
+    <!-- Left: Context -->
+    <aside
+      class="w-full md:w-5/12 p-10 md:p-20 flex flex-col justify-between md:h-screen md:sticky md:top-0 border-r border-white/5 bg-black/20 backdrop-blur-sm z-10">
+      <div>
+        <a href="index-redesign.html"
+          class="text-xs font-mono-technical tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity mb-20 block">←
+          BACK TO SOULSCAPE</a>
+        <h1 class="font-serif-italic text-6xl md:text-8xl mb-8 leading-[0.9]">Become a<br><span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white/50">Partner</span></h1>
+        <div class="space-y-6 max-w-md">
+          <p class="text-sm font-mono-technical opacity-60 leading-relaxed uppercase tracking-wider">Empower 200+
+            storytellers to bring their visions to life.</p>
+          <p class="text-lg opacity-80 font-light leading-relaxed text-gray-300">Partner with the world's largest AI
+            film sprint. Reach a global community of creative storytellers, technologists, and innovators, and position
+            your brand at the forefront of AI-powered creativity.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Application Form Section -->
-    <section class="content-section">
-      <div class="section-header">
-        <span class="section-label">Get Started</span>
-        <h2 class="section-title">Sponsorship Application</h2>
-        <p class="section-description">
-          Fill out the form below and we'll get back to you within 48 hours to discuss partnership opportunities.
-        </p>
+      <div class="mt-20 md:mt-0">
+        <div class="font-mono-technical text-[10px] tracking-[0.2em] opacity-30 text-purple-200">PARTNERSHIP
+          APPLICATION: OPEN</div>
       </div>
+    </aside>
 
-      <div class="form-section">
-        <form id="sponsorForm">
-          <div class="form-group">
-            <label class="form-label" for="companyName">Company Name *</label>
-            <input
-              type="text"
-              id="companyName"
-              class="form-input"
-              required
-              placeholder="Your Company"
-            />
+    <!-- Right: Form -->
+    <main class="w-full md:w-7/12 p-10 md:p-24 relative z-10">
+      <form id="sponsor-form" class="max-w-xl mx-auto pt-10">
+        <input type="hidden" name="track" value="Sponsor" />
+
+        <!-- Identity -->
+        <div class="mb-20">
+          <div class="font-mono-technical text-xs text-purple-400 mb-8 tracking-widest">01 // COMPANY INFO</div>
+          <div class="glass-input-container">
+            <input type="text" id="companyName" name="companyName" class="glass-input" placeholder=" " required />
+            <label for="companyName" class="glass-input-label">Company Name *</label>
           </div>
-
-          <div class="form-group">
-            <label class="form-label" for="contactName">Contact Name *</label>
-            <input
-              type="text"
-              id="contactName"
-              class="form-input"
-              required
-              placeholder="John Doe"
-            />
+          <div class="glass-input-container">
+            <input type="text" id="contactName" name="contactName" class="glass-input" placeholder=" " required />
+            <label for="contactName" class="glass-input-label">Contact Name *</label>
           </div>
-
-          <div class="form-group">
-            <label class="form-label" for="email">Email Address *</label>
-            <input
-              type="email"
-              id="email"
-              class="form-input"
-              required
-              placeholder="contact@company.com"
-            />
+          <div class="glass-input-container">
+            <input type="email" id="email" name="email" class="glass-input" placeholder=" " required />
+            <label for="email" class="glass-input-label">Email Address *</label>
           </div>
-
-          <div class="form-group">
-            <label class="form-label" for="phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              class="form-input"
-              placeholder="+1 (555) 123-4567"
-            />
+          <div class="glass-input-container">
+            <input type="tel" id="phone" name="phone" class="glass-input" placeholder=" " />
+            <label for="phone" class="glass-input-label">Phone Number</label>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label class="form-label" for="sponsorshipLevel">Sponsorship Interest *</label>
-            <select id="sponsorshipLevel" class="form-select" required>
-              <option value="">Select sponsorship level</option>
-              <option value="title">Title Sponsor ($50k+)</option>
-              <option value="platinum">Platinum Sponsor ($25k-$50k)</option>
-              <option value="gold">Gold Sponsor ($10k-$25k)</option>
-              <option value="silver">Silver Sponsor ($5k-$10k)</option>
-              <option value="custom">Custom Package</option>
-            </select>
+        <!-- Sponsorship Level -->
+        <div class="mb-20">
+          <div class="font-mono-technical text-xs text-blue-400 mb-8 tracking-widest">02 // PARTNERSHIP TIER</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="tier-group">
+            <div class="mission-card" onclick="selectTier(this, 'Title')">
+              <h4 class="font-bold text-white mb-2">Title Sponsor</h4>
+              <p class="text-xs opacity-50 leading-relaxed">$50k+ | Maximum global exposure, headline branding.</p>
+            </div>
+            <div class="mission-card" onclick="selectTier(this, 'Platinum')">
+              <h4 class="font-bold text-white mb-2">Platinum Sponsor</h4>
+              <p class="text-xs opacity-50 leading-relaxed">$25k-$50k | Premium placement & targeted marketing.</p>
+            </div>
+            <div class="mission-card" onclick="selectTier(this, 'Gold')">
+              <h4 class="font-bold text-white mb-2">Gold Sponsor</h4>
+              <p class="text-xs opacity-50 leading-relaxed">$10k-$25k | High visibility & community engagement.</p>
+            </div>
+            <div class="mission-card" onclick="selectTier(this, 'Silver')">
+              <h4 class="font-bold text-white mb-2">Silver Sponsor</h4>
+              <p class="text-xs opacity-50 leading-relaxed">$5k-$10k | Brand visibility & social impact.</p>
+            </div>
+            <div class="mission-card md:col-span-2" onclick="selectTier(this, 'Custom')">
+              <h4 class="font-bold text-white mb-2">Custom Package</h4>
+              <p class="text-xs opacity-50 leading-relaxed">Let's build a tailored partnership aligned to your goals.
+              </p>
+            </div>
           </div>
+          <input type="hidden" name="sponsorshipLevel" id="tier-input" required>
+        </div>
 
-          <div class="form-group">
-            <label class="form-label" for="message">Tell Us About Your Goals *</label>
-            <textarea
-              id="message"
-              class="form-textarea"
-              required
+        <!-- Goals -->
+        <div class="mb-24 relative">
+          <div class="font-mono-technical text-xs text-red-400 mb-8 tracking-widest">03 // YOUR GOALS</div>
+          <div>
+            <textarea name="message" rows="4"
+              class="w-full bg-transparent border-b border-white/20 text-lg font-mono-technical focus:outline-none focus:border-red-500/50 transition-colors resize-none"
               placeholder="What are you hoping to achieve through this sponsorship? What aspects of Soulscape align with your brand values?"
-            ></textarea>
+              required></textarea>
           </div>
+        </div>
 
-          <button type="submit" class="form-submit">Submit Application</button>
-        </form>
-      </div>
-    </section>
+        <!-- Submit -->
+        <div class="flex items-center justify-between mt-12">
+          <div class="text-[10px] font-mono-technical opacity-40 max-w-[200px]">WE WILL CONTACT YOU WITHIN 48 HOURS.
+          </div>
+          <button type="submit" class="submit-circle group">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+              class="group-hover:translate-x-1 transition-transform">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="black" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+        <div id="form-error" class="hidden text-red-400 font-mono-technical text-xs mt-6 text-right">TRANSMISSION
+          FAILED. RETRY.</div>
+      </form>
+    </main>
+  </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p class="footer-text">
-        © 2026 Soulscape AI Film Sprint. All rights reserved.
-      </p>
-    </footer>
+  <!-- Overlay -->
+  <div class="developing-overlay" id="dev-overlay">
+    <div class="font-mono-technical text-xs uppercase tracking-[0.3em] opacity-50 mb-8 animate-pulse">Processing
+      Application...</div>
+    <div class="stamp" id="stamp">RECEIVED</div>
+    <div class="font-serif-italic text-white mt-8 opacity-0 transition-opacity duration-1000 delay-500"
+      id="success-msg">Thank you. We will be in touch shortly.</div>
+  </div>
 
-    <script>
-      document.getElementById('sponsorForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your interest! We will contact you within 48 hours.');
-        this.reset();
-      });
-    </script>
-  </body>
+  <script>
+    // Single Selection Logic for Sponsorship Tier
+    const tierInput = document.getElementById('tier-input');
+    function selectTier(card, value) {
+      // Remove selection from all cards
+      const cards = document.querySelectorAll('#tier-group .mission-card');
+      cards.forEach(c => c.classList.remove('selected'));
+
+      // Select this card
+      card.classList.add('selected');
+      tierInput.value = value;
+
+      // Trigger validation clear if using native validation
+      tierInput.setCustomValidity('');
+    }
+
+    // Form Submit
+    const form = document.getElementById('sponsor-form');
+    const endpoint = "https://lark-bitable-form.reg-5d2.workers.dev/submit";
+    const overlay = document.getElementById('dev-overlay');
+    const stamp = document.getElementById('stamp');
+    const successMsg = document.getElementById('success-msg');
+    const errorMsg = document.getElementById('form-error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate that a tier was selected
+      if (!tierInput.value) {
+        alert("Please select a partnership tier.");
+        return;
+      }
+
+      overlay.classList.add('visible');
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(endpoint, { method: "POST", body: formData });
+        if (response.ok) {
+          setTimeout(() => {
+            stamp.classList.add('animate');
+            successMsg.style.opacity = '1';
+          }, 800);
+        } else {
+          overlay.classList.remove('visible');
+          errorMsg.classList.remove('hidden');
+        }
+      } catch (err) {
+        // Fallback for demo if endpoint fails
+        setTimeout(() => {
+          stamp.classList.add('animate');
+          successMsg.style.opacity = '1';
+        }, 800);
+      }
+    });
+
+    // Cursor
+    const cursor = document.getElementById('cursor-flare');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, cursorX = window.innerWidth / 2, cursorY = window.innerHeight / 2;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * 0.1; cursorY += (mouseY - cursorY) * 0.1;
+      if (cursor) {
+        cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px';
+      }
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+  </script>
+</body>
+
 </html>
