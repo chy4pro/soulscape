@@ -1814,7 +1814,7 @@
                 <h2 class="text-4xl font-serif-italic mb-4">Questions?</h2>
             </div>
 
-            <div class="space-y-4 reveal-stagger">
+            <div class="space-y-4">
                 <!-- FAQ Item 1 -->
                 <div class="faq-item group border-b border-white/10 pb-4 cursor-pointer hover-target">
                     <div class="flex justify-between items-center py-4">
@@ -2105,29 +2105,7 @@
             });
         });
 
-        // 4. Kinetic Side Reveal
-        gsap.from(".reveal-left", {
-            x: -100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".reveal-left",
-                start: "top 80%",
-                once: true
-            }
-        });
-        gsap.from(".reveal-right", {
-            x: 100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".reveal-right",
-                start: "top 80%",
-                once: true
-            }
-        });
+        // 4. Kinetic Side Reveal removed as elements no longer exist in design
 
         // Video Controls
         const videoWrapper = document.querySelector('.video-wrapper');
