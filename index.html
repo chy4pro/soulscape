@@ -591,56 +591,65 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-[100dvh] flex flex-col justify-center items-center relative px-6 overflow-hidden">
+    <section class="h-[100dvh] min-h-[500px] flex flex-col relative px-6 overflow-hidden">
         <!-- Background Video with Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <video src="background.mp4" autoplay loop muted playsinline
-                class="hero-bg w-full h-full object-cover opacity-60 scale-110"></video>
+                class="hero-bg w-full h-full object-cover opacity-60 scale-[1.01]"></video>
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-[var(--void)]"></div>
         </div>
 
-        <div class="relative z-10 text-center max-w-5xl pt-0 md:pt-20">
-            <p
-                class="hero-element font-mono-technical text-xs md:text-sm text-orange-200/80 tracking-[0.3em] uppercase mb-8 opacity-0 translate-y-8">
-                Global AI Cinema Lab + Summit</p>
+        <!-- Top Spacer (Pushes content down to vertically center with the nav) -->
+        <div class="flex-grow pt-24 md:pt-32"></div>
 
-            <h1
-                class="hero-element font-serif-italic text-6xl md:text-9xl leading-[0.9] text-white drop-shadow-2xl mb-6 opacity-0 translate-y-8">
+        <!-- Main Hero Content -->
+        <div class="relative z-10 text-center max-w-5xl mx-auto flex flex-col justify-center items-center w-full">
+            <p class="hero-element font-mono-technical text-[9px] md:text-[11px] text-orange-200/80 tracking-[0.3em] uppercase mb-4 opacity-0 translate-y-8">
+                Global AI Cinema Lab + Summit
+            </p>
+
+            <h1 class="hero-element font-serif-italic text-5xl md:text-8xl lg:text-9xl leading-[0.9] text-white drop-shadow-2xl mb-4 opacity-0 translate-y-8">
                 Soulscape 2026
             </h1>
 
-            <p
-                class="hero-element font-mono-technical text-sm md:text-base opacity-70 tracking-widest uppercase mb-12 opacity-0 translate-y-8">
+            <p class="hero-element font-mono-technical text-[10px] md:text-xs opacity-70 tracking-widest uppercase mb-6 md:mb-8 opacity-0 translate-y-8">
                 We don’t chase algorithms. We chase resonance.
             </p>
 
-            <div class="hero-element flex items-center justify-center gap-4 mb-12 opacity-0 translate-y-8">
-                <span class="font-mono-technical text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase">April
-                    2026</span>
+            <div class="hero-element flex items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10 opacity-0 translate-y-8">
+                <span class="font-mono-technical text-[8px] md:text-[10px] text-white/60 tracking-[0.2em] uppercase">April 2026</span>
                 <span class="w-1 h-1 rounded-full bg-orange-400/50"></span>
-                <span class="font-mono-technical text-[10px] md:text-xs text-white/60 tracking-[0.2em] uppercase">San
-                    Francisco</span>
+                <span class="font-mono-technical text-[8px] md:text-[10px] text-white/60 tracking-[0.2em] uppercase">San Francisco</span>
             </div>
 
-            <div
-                class="hero-element flex flex-col md:flex-row justify-center items-center gap-6 opacity-0 translate-y-8">
-                <a href="#tracks" class="btn-primary hover-target">Join the Movement</a>
-                <a href="https://discord.gg/75QUdbYY9B" target="_blank" class="btn-secondary hover-target">
+            <div class="hero-element flex flex-col md:flex-row justify-center items-center gap-3 md:gap-5 opacity-0 translate-y-8">
+                <a href="#tracks" class="btn-primary py-3 px-8 text-xs hover-target">Join the Movement</a>
+                <a href="https://discord.gg/75QUdbYY9B" target="_blank" class="btn-secondary py-3 px-8 text-xs hover-target">
                     <i class="fab fa-discord mr-2"></i> Community
                 </a>
             </div>
         </div>
 
-        <div
-            class="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 opacity-50 flex flex-col items-center gap-2 animate-pulse">
-            <span class="font-mono-technical text-[10px] tracking-widest">SCROLL</span>
-            <div class="w-[1px] h-10 bg-gradient-to-b from-white to-transparent"></div>
+        <!-- Bottom Spacer (Pushes sponsor to the bottom) -->
+        <div class="flex-grow pb-6"></div>
+
+        <!-- Hero Sponsor Bar -->
+        <div class="relative z-20 w-full flex flex-col items-center justify-center pb-8 pointer-events-auto mt-auto shrink-0">
+            <div class="text-center">
+                <p class="font-mono-technical text-[8px] md:text-[10px] tracking-[0.4em] text-orange-300/80 uppercase mb-2">
+                    PRESENTED BY
+                </p>
+                <div class="flex items-center justify-center">
+                    <img src="logos/tapnow.png" alt="TapNow"
+                        class="h-8 md:h-12 w-auto drop-shadow-xl hover:scale-105 transition duration-500 z-50">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="py-20 px-6 md:px-20 relative z-10 -mt-20">
+    <section class="hidden py-20 px-6 md:px-20 relative z-10 -mt-20">
         <div
-            class="max-w-6xl mx-auto glass-card p-2 md:p-4 rounded-3xl shadow-2xl video-wrapper group hover-target relative reveal-video">
+            class="max-w-6xl mx-auto glass-card p-2 md:p-4 rounded-3xl shadow-2xl video-wrapper group hover-target relative">
             <div class="relative aspect-video rounded-2xl overflow-hidden bg-black">
                 <video id="promoVideo" class="w-full h-full object-cover cursor-pointer"
                     poster="https://d33e382l66m7o1.cloudfront.net/soulscape/image/openpage.png" playsinline>
@@ -656,38 +665,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Hero Sponsor Bar (Hero Trust Anchor) -->
-    <div
-        class="relative z-20 w-full flex flex-col items-center justify-center -mt-12 mb-12 space-y-8 reveal-sponsors-optic">
-
-        <!-- Level 1: Titan Sponsors -->
-        <div class="text-center">
-            <p
-                class="font-mono-technical text-xs md:text-sm tracking-[0.4em] text-orange-300 uppercase mb-2 opacity-90 drop-shadow-[0_0_10px_rgba(253,186,116,0.6)]">
-                Presented By
-            </p>
-            <div class="flex items-center gap-6 md:gap-10">
-                <img src="logos/tapnow.png" alt="TapNow"
-                    class="h-16 md:h-20 w-auto drop-shadow-[0_0_25px_rgba(255,165,0,0.6)] brightness-125 hover:scale-105 transition duration-500">
-            </div>
-        </div>
-
-        <!-- Level 2: Olympian Sponsors -->
-        <div class="hidden text-center">
-            <p class="font-mono-technical text-[10px] tracking-[0.3em] text-gray-400 uppercase mb-3">
-                In Association With
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 items-center opacity-90">
-                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/13.png" alt="Minimax"
-                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
-                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/3.png" alt="Guardian"
-                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
-                <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/4.png" alt="Other"
-                    class="h-10 md:h-12 w-auto hover:opacity-100 transition grayscale hover:grayscale-0">
-            </div>
-        </div>
-    </div>
 
     <!-- Premium Stats Grid (High Impact) -->
     <div class="border-y border-white/10 bg-black/20 backdrop-blur-sm mb-12 py-12 overflow-hidden">
@@ -958,10 +935,10 @@
                     <div>
                         <div class="flex items-center gap-3 mb-2">
                             <h3 class="font-mono-technical text-xs text-orange-400 uppercase tracking-widest">01 //
-                                The Jury</h3>
+                                Industry Executives</h3>
                             <div class="w-8 h-[1px] bg-orange-400/30"></div>
                         </div>
-                        <h2 class="text-4xl md:text-5xl font-serif-italic text-white">Industry Heavyweights</h2>
+                        <h2 class="text-4xl md:text-5xl font-serif-italic text-white">The Jury</h2>
                     </div>
                 </div>
 
@@ -1127,7 +1104,7 @@
             </div>
 
             <!-- Tier 2: The Mentors (Blue Theme) -->
-            <div class="mb-16 md:mb-32 px-4 md:px-0">
+            <div class="hidden mb-16 md:mb-32 px-4 md:px-0">
                 <div class="flex items-end justify-between mb-10">
                     <div>
                         <div class="flex items-center gap-3 mb-2">
@@ -1336,18 +1313,26 @@
                         const speakers = [
                             { name: "Keith Zhang", activity: "Speaker", role: "Soulscape Founder & Executive Producer", img: "keith_zhang.jpg" },
                             { name: "Minh Do", activity: "Speaker", role: "Cofounder at Machine Cinema, Filmmaker", img: "Minh Do.png" },
-                            { name: "Henry Daubrez", activity: "Mentor / Speaker", role: "Top AI Filmmaker", img: "Henry Daubrez.jpeg" },
+                            { name: "Henry Daubrez", activity: "Juror", role: "Top AI Filmmaker", img: "Henry Daubrez.jpeg" },
                             { name: "Jagger Waters", activity: "Narrative Mentor", role: "Award-Winning Storyteller", img: "jagger_waters.png" },
                             { name: "Amy Zhang", activity: "Speaker", role: "Co-founder of Manna AI | FIAPF Accredited-Awarded Filmmaker", img: "amy_zhang.png" },
                             { name: "Jesse Z.", activity: "Founding Juror", role: "Oscar-shortlisted Producer", img: "jesse_z.png" },
                             { name: "Stephan V Bugaj", activity: "Principal Juror", role: "Creative Executive ｜ Ex Pixar & Telltale", img: "stephan_v_bugaj.png" },
                             { name: "Michael Fisk", activity: "Strategic Juror", role: "Global Entertainment Executive | Ex EVP @ Sony & Lionsgate", img: "michael_fisk.png" },
                             { name: "Khulan Dav", activity: "Curatorial Juror", role: "AI Art Director", img: "khulan_dav.png" },
+                            { name: "Renard T. Jenkins", activity: "Juror", role: "ex Warner Senior VP", img: "Renard T. Jenkins.png" },
                             { name: "Khushi Hora", activity: "Creative Technologist", role: "Academy Gold Fellow Producer", img: "khushi_hora.png" },
                             { name: "Robert J. Brooks", activity: "Panelist / Speaker", role: "Executive Producer, Founder", img: "Robert j. Brooks.jpeg" },
-                            { name: "Monica Monique", activity: "Speaker / Judge", role: "VP of Creative Systems @Kartel.ai, AI Evangelist", img: "Monica Monique.jpeg" },
+                            { name: "Monica Monique", activity: "Juror", role: "VP of Creative Systems @Kartel.ai, AI Evangelist", img: "Monica Monique.jpeg" },
                             { name: "Evan Baily", activity: "Speaker", role: "Producer, President @ Consolidated Baily", img: "Evan Baily.jpeg" },
-                            { name: "Mingto Shing", activity: "Speaker", role: "TVB Renowned Director", img: "mingto_shing.png" }
+                            { name: "Mingto Shing", activity: "Speaker", role: "TVB Renowned Director", img: "mingto_shing.png" },
+                            { name: "David Imedo", activity: "Speaker", role: "Film Director & Producer | Exploring AI-Driven Storytelling", img: "David_Imedo.jpg" },
+                            { name: "Kavan Cardoza", activity: "Distinguished Mentor", role: "Creative Filmmaker | Co-Founder of PhantomX", img: "kavan_cardoza.png" },
+                            { name: "Zack London", activity: "Vanguard Mentor", role: "Founder of Gossip Goblin", img: "zack_london.png" },
+                            { name: "Simon Meyer", activity: "Distinguished Mentor", role: "AI Filmmaker | Digital DP", img: "simon_meyer.png" },
+                            { name: "Maria Haras", activity: "Development Mentor", role: "VP @ 20th TV", img: "maria_haras.png" },
+                            { name: "Federico Luglio", activity: "Founding Mentor", role: "Award-Winning Director", img: "federico_luglio.png" },
+                            { name: "PJ Way", activity: "Visionary Mentor", role: "Award Winning Innovator", img: "pj_way.png" }
                         ];
 
                         function initSpeakers() {
@@ -1596,7 +1581,7 @@
                             <span class="text-orange-400 mt-1">●</span> Direct Mentorship from Hollywood Producers.
                         </li>
                         <li class="flex items-start gap-3">
-                            <span class="text-orange-400 mt-1">●</span> Travel & Accommodation Grants.
+                            <span class="text-orange-400 mt-1">●</span> Limited "Dream Fund" for Travel & Stays.
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-orange-400 mt-1">●</span> Compete for Awards & Studio Contracts.
@@ -1859,7 +1844,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 md:py-20 border-t border-white/10 bg-black text-center">
+    
+
+<footer class="py-10 md:py-20 border-t border-white/10 bg-black text-center">
         <div class="font-serif-italic text-2xl md:text-4xl text-white/40 mb-12">Soulscape 2026</div>
 
         <div class="flex justify-center flex-wrap gap-8 mb-8">
@@ -2331,6 +2318,9 @@
                 { role: "Distinguished Juror", name: "Philip Metschan", bio: "Lead Product Designer @ Intangible.ai | Ex Pixar & ILM", img: "philip_metschan.png" },
                 { role: "Strategic Juror", name: "Michael Fisk", bio: "Global Entertainment Executive | Ex EVP @ Sony & Lionsgate", img: "michael_fisk.png" },
                 { role: "Curatorial Juror", name: "Khulan Dav", bio: "AI Art Director", img: "khulan_dav.png" },
+                { role: "Juror", name: "Henry Daubrez", bio: "Top AI Filmmaker", img: "Henry Daubrez.jpeg" },
+                { role: "Juror", name: "Monica Monique", bio: "VP of Creative Systems @Kartel.ai, AI Evangelist", img: "Monica Monique.jpeg" },
+                { role: "Juror", name: "Renard T. Jenkins", bio: "ex Warner Senior VP", img: "Renard T. Jenkins.png" },
             ],
             mentors: [
                 { role: "Distinguished Mentor", name: "Kavan Cardoza", bio: "Creative Filmmaker | Co-Founder of PhantomX", img: "kavan_cardoza.png" },
@@ -2428,7 +2418,7 @@
     <div x-data="{ mobileNavOpen: false, getInvolvedOpen: false }" class="md:hidden">
         <!-- Persistent Floating Lens Trigger -->
         <button @click="mobileNavOpen = true"
-            class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] px-6 py-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center gap-3 transition-all active:scale-95 shadow-[0_0_30px_rgba(255,120,30,0.15)] lens-glow">
+            class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] px-4 md:px-6 py-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center gap-2 md:gap-3 transition-all active:scale-95 shadow-[0_0_30px_rgba(255,120,30,0.15)] lens-glow">
             <div class="w-2 h-2 rounded-full bg-orange-400 animate-pulse shadow-[0_0_10px_rgba(251,146,60,0.8)]"></div>
             <span class="font-mono-technical text-[10px] tracking-[0.3em] uppercase text-white/90">Explorer</span>
         </button>
