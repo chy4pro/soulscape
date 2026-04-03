@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Soulscape 2026 — Creator Attendee Guide</title>
+    <link href="https://d33e382l66m7o1.cloudfront.net/soulscape/image/soulscapeicon.jpg" rel="icon" type="image/jpeg" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,500;1,600&family=Inter:wght@300;400;600&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --void: #020204;
+            --flare: #FFFFFF;
+            --leak-warm: rgba(255, 120, 30, 0.4);
+            --leak-cool: rgba(40, 20, 120, 0.3);
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--flare);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .font-mono-technical {
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        .scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 40;
+            mix-blend-mode: overlay;
+            animation: grainShift 4s steps(6) infinite;
+        }
+
+        @keyframes grainShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-2%, 1%);
+            }
+        }
+
+        .light-leak-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .leak {
+            position: absolute;
+            mix-blend-mode: screen;
+            filter: blur(120px);
+        }
+
+        .leak-warm {
+            top: -40%;
+            right: -40%;
+            width: 100vw;
+            height: 100vw;
+            background: radial-gradient(circle, var(--leak-warm) 0%, transparent 70%);
+            opacity: 0.6;
+            animation: breathe 15s infinite alternate;
+        }
+
+        .leak-cool {
+            bottom: -30%;
+            left: -30%;
+            width: 90vw;
+            height: 90vw;
+            background: radial-gradient(circle, var(--leak-cool) 0%, transparent 80%);
+            opacity: 0.4;
+            animation: breathe 20s infinite alternate-reverse;
+        }
+
+        @keyframes breathe {
+            from {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            border-radius: 99px;
+            background: #fff;
+            color: #000;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        #cursor-flare {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, opacity 0.3s ease;
+        }
+
+        .hover-target:hover~#cursor-flare {
+            transform: translate(-50%, -50%) scale(2.5);
+            opacity: 0.4;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            #cursor-flare {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-orange-500/30">
+    <div class="grain-overlay"></div>
+    <div class="light-leak-container">
+        <div class="leak leak-warm"></div>
+        <div class="leak leak-cool"></div>
+    </div>
+    <div id="cursor-flare"></div>
+
+    <nav
+        class="fixed top-0 left-0 w-full px-6 py-4 md:px-10 md:py-6 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 via-black/20 to-transparent backdrop-blur-sm pointer-events-none transition-all duration-300">
+        <a class="pointer-events-auto font-mono-technical text-sm font-bold tracking-widest opacity-90 hover:opacity-100 uppercase"
+            href="/">Soulscape</a>
+
+        <div class="pointer-events-auto flex items-center gap-4">
+            <a class="hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all"
+                href="https://discord.gg/75QUdbYY9B" target="_blank">
+                <i class="fab fa-discord text-xs"></i>
+            </a>
+            <a class="btn-primary py-2 px-6 text-xs font-bold" href="https://soulscapefilm.com"
+                target="_blank">Home</a>
+        </div>
+    </nav>
+
+    <div class="pt-32 pb-16 px-6 md:px-10 max-w-7xl mx-auto relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center mb-16 hover-target">
+            <span
+                class="inline-block px-3 py-1 rounded-full border border-white/20 text-[10px] font-mono-technical tracking-widest uppercase mb-6 text-orange-400">
+                Creator Attendee Guide
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif-italic leading-tight mb-6">
+                Soulscape 2026
+            </h1>
+            <p class="font-mono-technical text-sm text-gray-400 tracking-widest uppercase mb-4">
+                The World's First AI Cinema Lab
+            </p>
+            <p class="font-serif-italic text-2xl text-orange-300">
+                "Hosted at KQED, San Francisco."
+            </p>
+            <p class="mt-8 max-w-3xl mx-auto text-gray-300 font-light leading-relaxed">
+                Welcome to Soulscape 2026. This guide is here to help you settle in and make the most of your time at the event. 
+                Whether you're joining us for the Cinema Lab, the Summit, or both—everything you need to know about the venue, 
+                getting around, and the neighborhood is right here. Get ready to create. Soul over Slop.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
+            <!-- THE VENUE -->
+            <div class="glass-card p-8 rounded-3xl hover-target">
+                <h2
+                    class="font-mono-technical text-sm text-orange-300 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                    The Venue & Logistics</h2>
+                <ul class="space-y-4 text-gray-300 font-light">
+                    <li><strong class="text-white">Location:</strong> KQED, San Francisco, CA</li>
+                    <li><strong class="text-white">Transit:</strong> Full directions and Muni transit options available on the KQED site.</li>
+                    <li><strong class="text-white">Website:</strong> <a
+                            class="text-orange-400 hover:text-orange-300 transition-colors"
+                            href="https://www.kqed.org/about/visit" target="_blank">kqed.org/about/visit</a></li>
+                </ul>
+            </div>
+            
+            <!-- PARKING -->
+            <div class="glass-card p-8 rounded-3xl hover-target">
+                <h2
+                    class="font-mono-technical text-sm text-purple-300 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                    Transportation Details</h2>
+                <p class="text-gray-300 font-light mb-4">Arrive by <strong>Waymo, Uber, or Lyft</strong> — skip the parking hunt and get straight to work.</p>
+                <ul class="space-y-4 text-gray-300 font-light">
+                    <li><strong class="text-white">On-site parking:</strong> <span class="text-red-400">Not available at KQED</span></li>
+                    <li><strong class="text-white">Parking lots:</strong> None nearby</li>
+                    <li><strong class="text-white">Street parking:</strong> Available on surrounding streets, but often unpredictable.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- HOTEL PARTNERS (Using 3-column Stakes format) -->
+        <div
+            class="glass-card p-8 md:p-12 rounded-3xl mb-16 hover-target bg-gradient-to-br from-white/5 to-transparent relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none">
+            </div>
+            <h2
+                class="font-mono-technical text-sm text-emerald-400 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                Hotel Partners: Exclusive Group Rates</h2>
+            <p class="text-gray-300 font-light mb-8 max-w-3xl">We've secured exclusive group rates at three 4-star hotels in downtown SF. 
+                Use the links below — booking through other channels won't guarantee special pricing. <br><span class="text-red-400 font-bold">Booking deadline: April 6, 2026.</span></p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Hotel 1 -->
+                <div class="border border-white/10 p-6 rounded-2xl bg-black/20 flex flex-col h-full hover-target relative">
+                    <span class="absolute top-6 right-6 font-mono-technical text-[10px] bg-white/10 px-2 py-1 rounded">Option 1</span>
+                    <div class="text-3xl font-serif-italic text-emerald-400 mb-2">$159<span class="text-sm font-sans text-gray-400 not-italic">/ night</span></div>
+                    <h3 class="font-mono-technical text-xs text-white uppercase mb-2">Marriott Marquis</h3>
+                    <p class="text-xs text-gray-400 mb-4 line-clamp-3">780 Mission St<br>1.43 miles from venue<br>Total w/ fees & taxes: ~$222.81/night</p>
+                    
+                    <ul class="text-xs text-gray-400 font-light space-y-2 mb-6 flex-grow">
+                        <li>• Free Basic WiFi</li>
+                        <li>• $20 F&B credit</li>
+                        <li>• Two cable car passes</li>
+                        <li>• 39-story landmark</li>
+                    </ul>
+                    <a href="https://book.passkey.com/e/51238168" target="_blank" class="text-xs font-mono-technical text-emerald-400 uppercase tracking-wider border border-emerald-400/30 rounded py-2 text-center hover:bg-emerald-400/10 transition">Book Soulscape Rate</a>
+                </div>
+
+                <!-- Hotel 2 -->
+                <div class="border border-white/10 p-6 rounded-2xl bg-black/20 flex flex-col h-full hover-target relative">
+                    <span class="absolute top-6 right-6 font-mono-technical text-[10px] bg-white/10 px-2 py-1 rounded">Option 2</span>
+                    <div class="text-3xl font-serif-italic text-emerald-400 mb-2">$189<span class="text-sm font-sans text-gray-400 not-italic">/ night +tax</span></div>
+                    <h3 class="font-mono-technical text-xs text-white uppercase mb-2">Hyatt Regency SOMA</h3>
+                    <p class="text-xs text-gray-400 mb-4 line-clamp-3">50 Third Street<br>1.53 miles from venue<br>Total w/ tax: ~$222/night</p>
+                    
+                    <ul class="text-xs text-gray-400 font-light space-y-2 mb-6 flex-grow">
+                        <li>• Destination Fee WAIVED</li>
+                        <li>• Free WiFi</li>
+                        <li>• Free Fitness Center</li>
+                        <li>• 48-hour cancellation</li>
+                    </ul>
+                    <a href="https://www.hyatt.com/events/en-US/group-booking/SFORD/G-SOUL" target="_blank" class="text-xs font-mono-technical text-emerald-400 uppercase tracking-wider border border-emerald-400/30 rounded py-2 text-center hover:bg-emerald-400/10 transition">Book Soulscape Rate</a>
+                </div>
+
+                <!-- Hotel 3 -->
+                <div class="border border-white/10 p-6 rounded-2xl bg-black/20 flex flex-col h-full hover-target relative">
+                    <span class="absolute top-6 right-6 font-mono-technical text-[10px] bg-white/10 px-2 py-1 rounded">Option 3</span>
+                    <div class="text-3xl font-serif-italic text-emerald-400 mb-2">$120<span class="text-sm font-sans text-gray-400 not-italic">/ night +tax</span></div>
+                    <h3 class="font-mono-technical text-xs text-white uppercase mb-2">The Marker Union Sq.</h3>
+                    <p class="text-xs text-gray-400 mb-4 line-clamp-3">501 Geary St<br>1.54 miles from venue<br>Total w/ tax: $141.23/night</p>
+                    
+                    <ul class="text-xs text-gray-400 font-light space-y-2 mb-6 flex-grow">
+                        <li>• Lowest Base Rate</li>
+                        <li>• Destination Fee WAIVED</li>
+                        <li>• Complimentary PATH water</li>
+                        <li>• Historic boutique property</li>
+                    </ul>
+                    <a href="https://be.synxis.com/?adult=1&arrive=2026-04-09&chain=10237&child=0&currency=USD&depart=2026-04-12&group=0407KQED&hotel=46490&level=hotel&locale=en-US&productcurrency=USD&rooms=1" target="_blank" class="text-xs font-mono-technical text-emerald-400 uppercase tracking-wider border border-emerald-400/30 rounded py-2 text-center hover:bg-emerald-400/10 transition">Book Soulscape Rate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
+            <!-- NEIGHBORHOOD GUIDE 1 -->
+            <div class="glass-card p-8 rounded-3xl hover-target">
+                <h2
+                    class="font-mono-technical text-sm text-yellow-300 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                    The Setup: Breakfast & Coffee</h2>
+                <div class="space-y-6 text-gray-300 font-light">
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-bread-slice text-yellow-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">Tartine Manufactory</strong>
+                            <span class="text-xs text-orange-300 font-mono-technical uppercase tracking-wider block mb-2">595 Alabama (at 18th) • Local Icon</span>
+                            Grab a loaf of the best bread in SF. Great for breakfast too — the babka is incredible.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-mug-hot text-yellow-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">Sightglass Coffee</strong>
+                            <span class="text-xs text-orange-300 font-mono-technical uppercase tracking-wider block mb-2">3014 20th St • Best in Hood</span>
+                            Best coffee nearby. Try the vanilla iced coffee. Leans light roast.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-mug-hot text-yellow-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">The Coffee Movement</strong>
+                            <span class="text-xs text-gray-500 font-mono-technical uppercase tracking-wider block mb-2">2814 19th St</span>
+                            Seasonal Orange Cream Latte is a must when the weather is warm.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-sandwich text-yellow-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">Atlas Cafe</strong>
+                            <span class="text-xs text-gray-500 font-mono-technical uppercase tracking-wider block mb-2">3049 20th St</span>
+                            Sandwiches, salads, coffee, and beer. Turkey sandwich or chicken goddess salad.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEIGHBORHOOD GUIDE 2 -->
+            <div class="glass-card p-8 rounded-3xl hover-target">
+                <h2
+                    class="font-mono-technical text-sm text-blue-300 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                    The Break: Lunch, Dinner & Drinks</h2>
+                <div class="space-y-6 text-gray-300 font-light">
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-beer text-blue-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">Southern Pacific Brewing</strong>
+                            <span class="text-xs text-blue-300 font-mono-technical uppercase tracking-wider block mb-2">620 Treat • KQED Staff Fave</span>
+                            The neighborhood's go-to for groups. Great craft beer, solid food, tons of outdoor seating.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-utensils text-blue-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">Farmhouse Thai</strong>
+                            <span class="text-xs text-emerald-300 font-mono-technical uppercase tracking-wider block mb-2">710 Florida • Upscale</span>
+                            The fried chicken is legendary. Outdoor parklet. The kind of place you take people to impress them.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-pepper-hot text-blue-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">El Faro</strong>
+                            <span class="text-xs text-yellow-500 font-mono-technical uppercase tracking-wider block mb-2">2399 Folsom St • SF Legend</span>
+                            Where the first retail burrito in San Francisco was sold — September 26, 1961.
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="flex gap-4">
+                        <i class="fas fa-star text-blue-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">San Ho Won</strong>
+                            <span class="text-xs text-gray-500 font-mono-technical uppercase tracking-wider block mb-2">2170 Bryant St • Dinner Only</span>
+                            Esquire Best New Restaurant 2022. Reservation required. Absolutely worth it.
+                        </div>
+                    </div>
+                     <!-- Item -->
+                     <div class="flex gap-4">
+                        <i class="fas fa-glass-martini text-blue-400 mt-1 w-4"></i>
+                        <div>
+                            <strong class="text-white block">True Laurel</strong>
+                            <span class="text-xs text-orange-300 font-mono-technical uppercase tracking-wider block mb-2">Near Alabama St • James Beard</span>
+                            Featured on KQED Food's Check, Please! Bay Area S17. A SF institution for cocktails.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXTENDED DIRECTORY -->
+        <div class="glass-card p-8 rounded-3xl hover-target mb-16">
+            <h2 class="font-mono-technical text-sm text-green-300 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
+                <i class="fas fa-list-ul mr-2"></i> Expanded Directory: More Neighborhood Spots</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Column 1: Food -->
+                <div class="space-y-4 text-gray-300 font-light">
+                    <h3 class="font-mono-technical text-[10px] text-gray-400 uppercase tracking-widest mb-3">Quick Bites & Food</h3>
+                    <div class="flex gap-4">
+                        <i class="fas fa-store text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Gus's Community Market</strong>2111 Harrison St<br>Acai bowls, poke, roast chicken, salad bar.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-hamburger text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Two Sons Sandwiches</strong>2249 17th St<br>Seriously good sandwiches. A neighborhood gem.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-bread-slice text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Chuck's Takeaway</strong>3332 18th St<br>Bánh mì by the Slanted Door chef. Extremely tasty.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-leaf text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Next Level Burger</strong>450 Rhode Island St<br>100% plant-based. Inside Whole Foods.</div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Cafes & Mexican -->
+                <div class="space-y-4 text-gray-300 font-light">
+                    <h3 class="font-mono-technical text-[10px] text-gray-400 uppercase tracking-widest mb-3">Cafes & Mexican</h3>
+                    <div class="flex gap-4">
+                        <i class="fas fa-pepper-hot text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">El Metate & El Tepa</strong>Bryant & Folsom<br>Two reliable local spots for tortas, tacos, and no-frills burritos.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-truck text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Mora Taco Truck</strong>Potrero & 17th<br>Generously stuffed burritos. Go for carnitas or al pastor.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-coffee text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">The Coffee Shop</strong>2761 21st St<br>Great baked goods and solid coffee near Bryant.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-seedling text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Stable Cafe</strong>2128 Folsom St<br>Beautiful garden patio. Perfect for a breakfast meeting.</div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Asian & Bars -->
+                <div class="space-y-4 text-gray-300 font-light">
+                    <h3 class="font-mono-technical text-[10px] text-gray-400 uppercase tracking-widest mb-3">Asian Dining & Bars</h3>
+                    <div class="flex gap-4">
+                        <i class="fas fa-fish text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Bon, Nene & Live Sushi</strong><br>Japanese-French comfort food and great quick bento boxes.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-bowl-rice text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Aedan Koji Kitchen</strong>613 York St<br>Beautiful bento boxes and donburi. Outstanding quality.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-wine-glass text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Bar Gemini & Quik Dog</strong><br>Upscale wine bar, plus great food/cocktails to go.</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-chess-board text-green-400 mt-1 w-4"></i>
+                        <div class="text-xs"><strong class="text-white block text-sm">Asiento Tapas Bar</strong>2730 21st (at Bryant)<br>A KQED classic. Big windows, tapas, and board games.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="text-center pb-8 border-t border-white/10 pt-8 mt-16">
+            <p class="font-mono-technical text-xs tracking-widest text-gray-500 uppercase mb-2">SOULSCAPE 2026</p>
+            <p class="text-[10px] text-gray-600 font-light">Logistics subject to change — verify hours directly with venues.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
