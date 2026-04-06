@@ -529,6 +529,7 @@
             <a href="#council" class="hover:text-orange-300 transition-colors">Council</a>
             <a href="#schedule" class="hover:text-orange-300 transition-colors">Agenda</a>
             <a href="#tracks" class="hover:text-orange-300 transition-colors">Lab & Summit</a>
+            <a href="KQED_Attendee_Guide.html" class="hover:text-orange-300 transition-colors text-orange-200">Attendee Guide</a>
 
             <!-- Get Involved Dropdown -->
             <div class="relative group" x-data="{ open: false }">
@@ -1591,10 +1592,14 @@
                 </a>
             </div>
 
-            <!-- Sponsor Link -->
-            <div class="text-center">
+            <!-- Guide & Sponsor Links -->
+            <div class="text-center flex flex-col gap-4 items-center">
+                <a href="KQED_Attendee_Guide.html" target="_blank"
+                    class="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-orange-400/30 bg-orange-400/10 text-orange-400 hover:bg-orange-400 hover:text-black hover:border-orange-400 transition-all font-mono-technical text-xs tracking-widest uppercase shadow-[0_0_15px_rgba(251,146,60,0.15)]">
+                    <i class="fas fa-map-location-dot"></i> View Attendee Guide
+                </a>
                 <a href="sponsor.html"
-                    class="inline-block text-gray-500 hover:text-white transition-colors font-mono-technical text-xs tracking-widest border-b border-gray-500/30 hover:border-white pb-1">
+                    class="inline-block text-gray-500 hover:text-white transition-colors font-mono-technical text-xs tracking-widest border-b border-gray-500/30 hover:border-white pb-1 mt-4">
                     Looking to be A Sponsor or Partner? [Click Here]
                 </a>
             </div>
@@ -1849,6 +1854,8 @@
         <div class="font-serif-italic text-2xl md:text-4xl text-white/40 mb-12">Soulscape 2026</div>
 
         <div class="flex justify-center flex-wrap gap-8 mb-8">
+            <a href="KQED_Attendee_Guide.html"
+                class="font-mono-technical text-[10px] tracking-[0.2em] text-orange-400 hover:text-white transition-colors uppercase">Attendee Guide</a>
             <a href="https://discord.gg/75QUdbYY9B"
                 class="font-mono-technical text-[10px] tracking-[0.2em] text-white/60 hover:text-white transition-colors uppercase">Discord</a>
             <a href="https://www.instagram.com/soulscapefilm/"
@@ -2518,6 +2525,11 @@
                         EXPERIENCE</span>
                     <span class="font-serif-italic text-4xl text-white active:text-orange-300 transition-colors">Lab &
                         Summit</span>
+                </a>
+                <a href="KQED_Attendee_Guide.html" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[05]
+                        LOGISTICS</span>
+                    <span class="font-serif-italic text-4xl text-emerald-400 active:text-orange-300 transition-colors">Attendee Guide</span>
                 </a>
 
                 <!-- Get Involved Accordion -->
