@@ -139,43 +139,6 @@ body {
   50% { transform: translate(-45%, -55%) scale(1.1); opacity: 0.5; }
 }
 
-/* Intro overlay */
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  background: var(--void);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.05em;
-  animation: introFade 1.4s 2.2s forwards;
-}
-.intro-word {
-  font-family: var(--serif);
-  font-size: clamp(42px, 10vw, 140px);
-  font-weight: 300;
-  letter-spacing: -3px;
-  line-height: 0.9;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: introWord 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-.intro-word.italic {
-  font-style: italic;
-  color: var(--warm);
-}
-.intro-word:nth-child(1) { animation-delay: 0.3s; }
-.intro-word:nth-child(2) { animation-delay: 0.6s; }
-.intro-word:nth-child(3) { animation-delay: 0.9s; }
-@keyframes introWord {
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes introFade {
-  to { opacity: 0; visibility: hidden; }
-}
-
 /* Top bar */
 .topbar {
   position: fixed;
@@ -192,7 +155,7 @@ body {
   -webkit-backdrop-filter: blur(24px) saturate(140%);
   border-bottom: 1px solid var(--border);
   opacity: 0;
-  animation: fadeDown 1s 2.8s ease both;
+  animation: fadeDown 0.8s 0.1s ease both;
 }
 .tb-brand {
   font-family: var(--mono);
@@ -239,21 +202,18 @@ body {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 1.8px;
-  color: var(--success);
+  color: var(--text-mid);
   text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 500;
 }
-.tb-right::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--success);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--success);
-  animation: pulseDot 2s ease-in-out infinite;
+.tb-right .tb-countdown .val {
+  color: var(--warm);
+  font-weight: 500;
+  margin-left: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Content wrapper */
@@ -278,7 +238,7 @@ body {
   color: var(--warm);
   margin-bottom: 36px;
   opacity: 0;
-  animation: fadeDown 1s 2.9s ease both;
+  animation: fadeDown 0.8s 0.2s ease both;
   display: inline-flex;
   align-items: center;
   gap: 16px;
@@ -300,7 +260,7 @@ body {
   letter-spacing: -3px;
   margin-bottom: 32px;
   opacity: 0;
-  animation: fadeDown 1.2s 3.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: fadeDown 1s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .hero h1 em {
   font-style: italic;
@@ -316,7 +276,7 @@ body {
   line-height: 1.75;
   font-weight: 400;
   opacity: 0;
-  animation: fadeDown 1s 3.3s ease both;
+  animation: fadeDown 0.8s 0.5s ease both;
 }
 .hero-meta {
   display: flex;
@@ -324,7 +284,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   opacity: 0;
-  animation: fadeDown 1s 3.5s ease both;
+  animation: fadeDown 0.8s 0.65s ease both;
 }
 .meta-chip {
   display: inline-flex;
@@ -365,7 +325,7 @@ body {
   flex-direction: column;
   gap: 22px;
   opacity: 0;
-  animation: fadeIn 1s 3.6s both;
+  animation: fadeIn 0.8s 0.8s both;
 }
 .rail-item {
   display: flex;
@@ -622,68 +582,144 @@ body {
 }
 
 /* Dropzone */
+/* Dropzone — clean technical frame with corner brackets, no blur */
 .dropzone {
-  border: 1.5px dashed var(--border);
-  padding: 80px 32px;
+  position: relative;
+  display: block;
+  padding: 72px 40px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.4s;
-  position: relative;
-  background: var(--glass);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
 }
+/* Top-left corner bracket */
 .dropzone::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, var(--warm-soft) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s;
+  top: -1px;
+  left: -1px;
+  width: 36px;
+  height: 36px;
+  border-top: 2px solid var(--warm);
+  border-left: 2px solid var(--warm);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
 }
-.dropzone:hover {
-  border-color: var(--warm);
+/* Bottom-right corner bracket */
+.dropzone::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 36px;
+  height: 36px;
+  border-bottom: 2px solid var(--warm);
+  border-right: 2px solid var(--warm);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
 }
-.dropzone:hover::before { opacity: 1; }
+.dropzone:hover,
 .dropzone.dragover {
-  border-color: var(--warm);
-  border-style: solid;
-  transform: scale(1.01);
+  border-color: rgba(255, 120, 30, 0.35);
+  background: rgba(255, 120, 30, 0.035);
+  box-shadow:
+    inset 0 0 100px rgba(255, 120, 30, 0.05),
+    0 0 40px rgba(255, 120, 30, 0.12);
 }
-.dropzone.dragover::before { opacity: 1; }
+.dropzone:hover::before,
+.dropzone:hover::after,
+.dropzone.dragover::before,
+.dropzone.dragover::after {
+  width: 56px;
+  height: 56px;
+}
+.dropzone.dragover {
+  transform: scale(1.005);
+}
+
+/* Circular icon with up-arrow, pure CSS */
 .dz-icon {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 54px;
-  color: var(--warm);
-  margin-bottom: 20px;
-  opacity: 0.85;
-  font-weight: 300;
+  width: 68px;
+  height: 68px;
+  border: 1.5px solid var(--warm);
+  border-radius: 50%;
+  margin: 0 auto 26px;
   position: relative;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-size: 0;
 }
+.dz-icon::before {
+  /* arrow shaft */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 26px;
+  background: var(--warm);
+  transition: background 0.3s;
+}
+.dz-icon::after {
+  /* arrow head */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -95%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--warm);
+  border-left: 2px solid var(--warm);
+  transition: all 0.3s;
+}
+.dropzone:hover .dz-icon,
+.dropzone.dragover .dz-icon {
+  background: var(--warm);
+  box-shadow: 0 0 32px rgba(255, 120, 30, 0.45);
+}
+.dropzone:hover .dz-icon::before,
+.dropzone.dragover .dz-icon::before {
+  background: var(--void);
+}
+.dropzone:hover .dz-icon::after,
+.dropzone.dragover .dz-icon::after {
+  border-top-color: var(--void);
+  border-left-color: var(--void);
+}
+
 .dz-text {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 18px;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  position: relative;
+  letter-spacing: 0.3px;
+  line-height: 1.25;
 }
 .dz-sub {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--text-dim);
-  position: relative;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 2.1;
 }
+.dz-sub .sep {
+  color: var(--text-faint);
+  margin: 0 10px;
+}
+
 .dropzone input[type=file] {
   position: absolute;
   inset: 0;
   opacity: 0;
   cursor: pointer;
+  z-index: 2;
 }
 
 /* File info */
@@ -1238,19 +1274,11 @@ body {
 <div class="leak leak-cool"></div>
 <div class="leak leak-mid"></div>
 
-<div class="intro" id="intro">
-  <div class="intro-word">soul</div>
-  <div class="intro-word">over</div>
-  <div class="intro-word italic">slop.</div>
-</div>
-
 <div class="topbar">
   <div class="tb-brand">Soulscape &bull; 2026</div>
-  <div class="tb-center">
+  <div class="tb-right">
     <span class="tb-countdown" id="countdown">T-MINUS <span class="val">--:--:--</span></span>
-    <span>SYS.LOG / SUBMISSION_PORTAL</span>
   </div>
-  <div class="tb-right"><span>STATUS&nbsp;/&nbsp;</span>LIVE</div>
 </div>
 
 <div class="wrap">
@@ -1361,9 +1389,12 @@ body {
       </div>
 
       <label class="dropzone" id="dropzone">
-        <div class="dz-icon">&#x2767;</div>
-        <div class="dz-text">Drop your film here or click to browse</div>
-        <div class="dz-sub">.mp4 H.264 or .mov &nbsp;&bull;&nbsp; 1920&times;1080 &nbsp;&bull;&nbsp; 29.97 / 59.94p &nbsp;&bull;&nbsp; Max 5:00 &nbsp;&bull;&nbsp; Up to 5 GB</div>
+        <div class="dz-icon"></div>
+        <div class="dz-text">Drop your film here<br>or click to browse</div>
+        <div class="dz-sub">
+          .MP4 H.264 &nbsp;/&nbsp; .MOV <span class="sep">·</span> 1920&times;1080 <span class="sep">·</span> Up to 5 GB<br>
+          29.97p &nbsp;/&nbsp; 59.94p <span class="sep">·</span> Max 5:00
+        </div>
         <input type="file" id="file-input" accept=".mp4,.mov,video/mp4,video/quicktime">
       </label>
 
@@ -2046,12 +2077,6 @@ setTimeout(() => {
   resetChecklist();
   validateForm();
 }, 100);
-
-// Remove intro overlay from DOM after animation
-setTimeout(() => {
-  const intro = document.getElementById('intro');
-  if (intro) intro.remove();
-}, 4200);
 </script>
 
 </body>
