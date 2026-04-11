@@ -1439,12 +1439,12 @@ body.uploading .hero {
         <div class="err">Your film needs a title</div>
       </div>
 
-      <div class="field" id="f-logline">
+      <div class="field" id="f-description">
         <label>
-          <span>Logline <span style="color:var(--text-faint);font-size:9px;">&bull; Optional</span></span>
-          <span class="char-count" id="logline-count">0 / 240</span>
+          <span>Description <span style="color:var(--text-faint);font-size:9px;">&bull; Optional</span></span>
+          <span class="char-count" id="description-count">0 / 240</span>
         </label>
-        <textarea id="logline" placeholder="In one breath — what world did you build?" maxlength="240" data-maxlen="240"></textarea>
+        <textarea id="description" placeholder="In one breath — what world did you build?" maxlength="240" data-maxlen="240"></textarea>
         <div class="hint">Used in the Grand Premiere program &bull; Keep it tight</div>
       </div>
 
@@ -1969,7 +1969,7 @@ function validateForm() {
 }
 
 // Input listeners
-['team', 'discord', 'email', 'title', 'logline', 'tool'].forEach(id => {
+['team', 'discord', 'email', 'title', 'description', 'tool'].forEach(id => {
   const el = document.getElementById(id);
   if (el) {
     el.addEventListener('input', validateForm);
@@ -2135,7 +2135,7 @@ async function handleSubmit() {
       discord: document.getElementById('discord').value.trim(),
       email: document.getElementById('email').value.trim(),
       title: document.getElementById('title').value.trim(),
-      logline: document.getElementById('logline').value.trim(),
+      description: document.getElementById('description').value.trim(),
       tool: document.getElementById('tool').value,
       filename: selectedFile.name,
       specs: {

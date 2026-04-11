@@ -11,7 +11,32 @@ export interface GoogleEnv {
   GOOGLE_CLIENT_SECRET: string;
   GOOGLE_REFRESH_TOKEN: string;
   GOOGLE_DRIVE_FOLDER_ID: string;
+  /** Optional — if set, finalize appends a submission row to this sheet */
+  GOOGLE_SHEET_ID?: string;
 }
+
+/** Column headers for the submissions sheet. Used both for initial row
+ *  seeding and to make the append order explicit. Order must stay in
+ *  sync with the values built in finalize.ts. */
+export const SUBMISSION_SHEET_HEADERS = [
+  "Submitted At (PT)",
+  "Success",
+  "Submission ID",
+  "Team ID",
+  "Team Lead Discord",
+  "Team Lead Email",
+  "Film Title",
+  "Description",
+  "Primary Tool",
+  "Drive File Name",
+  "Drive View Link",
+  "Resolution",
+  "Frame Rate",
+  "Duration",
+  "File Size",
+  "Client IP",
+  "User Agent",
+] as const;
 
 export class GoogleApiError extends Error {
   constructor(
@@ -281,6 +306,92 @@ export async function listMetadataFiles(
   }
   const data = (await res.json()) as { files?: DriveFileMetadata[] };
   return data.files ?? [];
+}
+
+/**
+ * Append a single row to a Google Sheet via the Sheets API. If the sheet
+ * appears empty (no data in A1), we first write the SUBMISSION_SHEET_HEADERS
+ * row, then append the data row. The Drive scope is sufficient for the
+ * Sheets API, so no separate OAuth scope is required.
+ *
+ * This is best-effort: if writing to the sheet fails, the caller should log
+ * the error but NOT reject the submission, since the authoritative record is
+ * the metadata.json sidecar we write in the Drive folder.
+ */
+export async function appendSubmissionRow(
+  accessToken: string,
+  sheetId: string,
+  row: (string | number | null | undefined)[],
+): Promise<void> {
+  // Step 1: read A1 to see if headers exist
+  const a1Url = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/A1?majorDimension=ROWS`;
+  let needsHeaders = false;
+  const a1Res = await fetch(a1Url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (a1Res.ok) {
+    const a1Data = (await a1Res.json()) as { values?: string[][] };
+    needsHeaders = !a1Data.values || a1Data.values.length === 0;
+  } else if (a1Res.status === 404) {
+    throw new GoogleApiError(
+      `Sheet ${sheetId} not found — check GOOGLE_SHEET_ID env var`,
+      404,
+      await a1Res.text(),
+    );
+  } else {
+    // 403, etc — probably scope issue
+    throw new GoogleApiError(
+      `Sheets API read failed (${a1Res.status}) — make sure the Sheets API is enabled in Google Cloud Console`,
+      a1Res.status,
+      await a1Res.text(),
+    );
+  }
+
+  // Step 2: if empty, write the header row first via values.update (not append)
+  // so it lands in row 1 deterministically
+  if (needsHeaders) {
+    const headerUrl = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/A1?valueInputOption=RAW`;
+    const headerRes = await fetch(headerUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        range: "A1",
+        majorDimension: "ROWS",
+        values: [SUBMISSION_SHEET_HEADERS.slice()],
+      }),
+    });
+    if (!headerRes.ok) {
+      throw new GoogleApiError(
+        `Sheets API header write failed (${headerRes.status})`,
+        headerRes.status,
+        await headerRes.text(),
+      );
+    }
+  }
+
+  // Step 3: append the data row (Sheets auto-picks the first empty row)
+  const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(sheetId)}/values/A:A:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
+  const appendRes = await fetch(appendUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      majorDimension: "ROWS",
+      values: [row.map((v) => (v == null ? "" : String(v)))],
+    }),
+  });
+  if (!appendRes.ok) {
+    throw new GoogleApiError(
+      `Sheets API append failed (${appendRes.status})`,
+      appendRes.status,
+      await appendRes.text(),
+    );
+  }
 }
 
 /**

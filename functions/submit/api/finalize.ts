@@ -16,6 +16,7 @@
 
 import {
   GoogleApiError,
+  appendSubmissionRow,
   createJsonFile,
   findFileByName,
   getAccessToken,
@@ -36,7 +37,7 @@ interface FinalizeRequest {
     discord?: string;
     email?: string;
     title?: string;
-    logline?: string;
+    description?: string;
     tool?: string;
     filename?: string;
     specs?: {
@@ -159,7 +160,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       },
       film: {
         title: String(metadata.title).trim(),
-        logline: metadata.logline ? String(metadata.logline).trim() : "",
+        description: metadata.description ? String(metadata.description).trim() : "",
         primaryTool: String(metadata.tool).trim(),
       },
       source: {
@@ -179,6 +180,70 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       manifest,
     );
 
+    // Best-effort: append a row to the submissions sheet if GOOGLE_SHEET_ID
+    // is configured. Failure here does NOT fail the submission — the video
+    // and metadata.json are the authoritative record.
+    let sheetStatus: "skipped" | "ok" | string = "skipped";
+    if (env.GOOGLE_SHEET_ID) {
+      try {
+        const specs = metadata.specs ?? {};
+        const submittedAtPT = new Date(submittedAt).toLocaleString("en-US", {
+          timeZone: "America/Los_Angeles",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        });
+        const fpsStr =
+          typeof specs.fps === "number" ? specs.fps.toFixed(2) + "p" : "";
+        const durStr =
+          typeof specs.duration === "number"
+            ? Math.floor(specs.duration / 60) +
+              ":" +
+              String(Math.floor(specs.duration % 60)).padStart(2, "0")
+            : "";
+        const resStr =
+          specs.width && specs.height ? `${specs.width}×${specs.height}` : "";
+        const sizeStr =
+          typeof specs.size === "number"
+            ? specs.size > 1024 * 1024 * 1024
+              ? (specs.size / 1024 ** 3).toFixed(2) + " GB"
+              : Math.round(specs.size / 1024 ** 2) + " MB"
+            : "";
+
+        // Row order MUST match SUBMISSION_SHEET_HEADERS in _shared/google.ts
+        const row: (string | number | null)[] = [
+          submittedAtPT + " PT", // Submitted At (PT)
+          "✓ Success", // Success
+          submissionId, // Submission ID
+          String(metadata.teamId).trim(), // Team ID
+          String(metadata.discord).trim(), // Team Lead Discord
+          String(metadata.email).trim(), // Team Lead Email
+          String(metadata.title).trim(), // Film Title
+          metadata.description ? String(metadata.description).trim() : "", // Description
+          String(metadata.tool).trim(), // Primary Tool
+          renamed.name ?? "", // Drive File Name
+          renamed.webViewLink ?? "", // Drive View Link
+          resStr, // Resolution
+          fpsStr, // Frame Rate
+          durStr, // Duration
+          sizeStr, // File Size
+          request.headers.get("cf-connecting-ip") ?? "", // Client IP
+          (request.headers.get("user-agent") ?? "").slice(0, 200), // User Agent (truncated)
+        ];
+
+        await appendSubmissionRow(accessToken, env.GOOGLE_SHEET_ID, row);
+        sheetStatus = "ok";
+      } catch (sheetErr) {
+        console.error("[finalize] Sheet append failed:", sheetErr);
+        sheetStatus =
+          sheetErr instanceof Error ? sheetErr.message : String(sheetErr);
+      }
+    }
+
     return json({
       ok: true,
       submissionId,
@@ -187,6 +252,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       driveFileName: renamed.name,
       metadataFileId: metadataFile.id,
       viewUrl: renamed.webViewLink ?? null,
+      sheetStatus,
     });
   } catch (err) {
     return handleError(err);
