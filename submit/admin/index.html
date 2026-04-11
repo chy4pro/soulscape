@@ -475,14 +475,14 @@ function filterRows() {
 function exportCsv() {
   const valid = allRows.filter(r => !r.error);
   if (!valid.length) { alert('Nothing to export'); return; }
-  const headers = ['submittedAt', 'teamId', 'title', 'logline', 'primaryTool', 'discord', 'email', 'submissionId', 'driveFileId', 'driveFileName', 'driveViewLink', 'videoSize', 'videoMd5', 'width', 'height', 'fps', 'duration'];
+  const headers = ['submittedAt', 'teamId', 'title', 'description', 'primaryTool', 'discord', 'email', 'submissionId', 'driveFileId', 'driveFileName', 'driveViewLink', 'videoSize', 'videoMd5', 'width', 'height', 'fps', 'duration'];
   const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const lines = [headers.join(',')];
   for (const r of valid) {
     const team = r.team || {}, film = r.film || {}, specs = (r.source && r.source.specs) || {};
     const driveViewLink = r.driveViewLink || (r.driveFileId ? `https://drive.google.com/file/d/${r.driveFileId}/view` : '');
     lines.push([
-      r.submittedAt, team.teamId, film.title, film.logline, film.primaryTool,
+      r.submittedAt, team.teamId, film.title, film.description, film.primaryTool,
       team.discord, team.email, r.submissionId, r.driveFileId, r.driveFileName, driveViewLink,
       r.videoSize, r.videoMd5,
       specs.width, specs.height, specs.fps ? specs.fps.toFixed(3) : '', specs.duration ? specs.duration.toFixed(2) : ''
