@@ -222,6 +222,18 @@ tr.hidden { display: none; }
   white-space: normal;
   line-height: 1.3;
 }
+.description {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--text-mid);
+  max-width: 320px;
+  min-width: 200px;
+  white-space: normal;
+  line-height: 1.45;
+  vertical-align: top;
+  padding-top: 18px;
+}
 .ok { color: var(--success); }
 .bad { color: var(--error); }
 .dim { color: var(--text-faint); }
@@ -334,6 +346,7 @@ details.json pre {
         <th>Submitted (PT)</th>
         <th>Team ID</th>
         <th>Film Title</th>
+        <th>Description</th>
         <th>Specs</th>
         <th>Size</th>
         <th>Tool</th>
@@ -345,7 +358,7 @@ details.json pre {
       </tr>
     </thead>
     <tbody id="tbody">
-      <tr><td colspan="11" class="loading">Loading submissions…</td></tr>
+      <tr><td colspan="12" class="loading">Loading submissions…</td></tr>
     </tbody>
   </table>
 </div>
@@ -379,7 +392,7 @@ function authHeader() {
 
 async function loadSubmissions() {
   const tbody = document.getElementById('tbody');
-  tbody.innerHTML = '<tr><td colspan="11" class="loading">Loading submissions…</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="12" class="loading">Loading submissions…</td></tr>';
 
   const headers = authHeader();
   if (!headers) return;
@@ -388,7 +401,7 @@ async function loadSubmissions() {
     const res = await fetch('/submit/api/admin/list', { headers });
     if (res.status === 401) {
       sessionStorage.removeItem(AUTH_KEY);
-      tbody.innerHTML = '<tr><td colspan="11" class="error-box">Authentication failed — refresh to retry</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="12" class="error-box">Authentication failed — refresh to retry</td></tr>';
       return;
     }
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -403,14 +416,14 @@ async function loadSubmissions() {
     renderRows(allRows);
     updateStats(allRows);
   } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="11" class="error-box">Failed to load: ' + (err.message || err) + '</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="12" class="error-box">Failed to load: ' + (err.message || err) + '</td></tr>';
   }
 }
 
 function renderRows(rows) {
   const tbody = document.getElementById('tbody');
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="11" class="empty">No submissions yet</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="12" class="empty">No submissions yet</td></tr>';
     return;
   }
 
@@ -418,7 +431,7 @@ function renderRows(rows) {
     if (r.error) {
       return `<tr>
         <td class="dim">—</td>
-        <td colspan="10" class="bad mono">⚠ ${escape(r.submissionId || r._metadataFileName || 'unknown')}: ${escape(r.error)}</td>
+        <td colspan="11" class="bad mono">⚠ ${escape(r.submissionId || r._metadataFileName || 'unknown')}: ${escape(r.error)}</td>
       </tr>`;
     }
     const team = r.team || {};
@@ -435,10 +448,13 @@ function renderRows(rows) {
     const videoViewUrl = r.driveViewLink || (r.driveFileId ? `https://drive.google.com/file/d/${r.driveFileId}/view` : null);
     const metadataViewUrl = r._metadataFileId ? `https://drive.google.com/file/d/${r._metadataFileId}/view` : null;
 
-    return `<tr data-search="${escape([team.teamId, film.title, team.discord, team.email, r.submissionId].join(' ').toLowerCase())}">
+    const description = film.description || '';
+
+    return `<tr data-search="${escape([team.teamId, film.title, description, team.discord, team.email, r.submissionId].join(' ').toLowerCase())}">
       <td class="mono">${escape(submitted)}</td>
       <td class="mono id">${escape(team.teamId || '—')}</td>
       <td class="title">${escape(film.title || '—')}</td>
+      <td class="description">${description ? escape(description) : '<span class="dim">—</span>'}</td>
       <td class="mono">${escape(specStr)}</td>
       <td class="mono">${escape(size)}</td>
       <td class="mono">${escape(film.primaryTool || '—')}</td>
