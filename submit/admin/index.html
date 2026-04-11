@@ -384,7 +384,7 @@ async function loadSubmissions() {
   if (!headers) return;
 
   try {
-    const res = await fetch('/submission/api/admin/list', { headers });
+    const res = await fetch('/submit/api/admin/list', { headers });
     if (res.status === 401) {
       sessionStorage.removeItem(AUTH_KEY);
       tbody.innerHTML = '<tr><td colspan="11" class="error-box">Authentication failed — refresh to retry</td></tr>';
