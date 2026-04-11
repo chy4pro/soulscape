@@ -140,6 +140,47 @@ export async function getFileMetadata(
 }
 
 /**
+ * Look up a Drive file by exact name within a parent folder.
+ * Used as a fallback when the browser's upload XHR errors at 100 % (CORS
+ * on Google's final response): even though the browser can't read the
+ * response body, the file actually exists in Drive and we can find it by
+ * the pending name we assigned during initiate.
+ */
+export async function findFileByName(
+  accessToken: string,
+  folderId: string,
+  name: string,
+): Promise<DriveFileMetadata | null> {
+  // Escape single quotes per Drive query syntax
+  const escapedName = name.replace(/'/g, "\\'");
+  const q = encodeURIComponent(
+    `'${folderId}' in parents and name = '${escapedName}' and trashed = false`,
+  );
+  const fields = encodeURIComponent(
+    "files(id,name,mimeType,size,parents,createdTime,md5Checksum,webViewLink)",
+  );
+  const url = `https://www.googleapis.com/drive/v3/files?q=${q}&pageSize=5&supportsAllDrives=true&includeItemsFromAllDrives=true&fields=${fields}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new GoogleApiError(
+      `Drive files.list (lookup by name) failed (${res.status})`,
+      res.status,
+      body,
+    );
+  }
+  const data = (await res.json()) as { files?: DriveFileMetadata[] };
+  if (!data.files || data.files.length === 0) return null;
+  // If there are multiple matches (shouldn't happen with our naming scheme),
+  // return the most recent by createdTime
+  return data.files.sort((a, b) =>
+    String(b.createdTime ?? "").localeCompare(String(a.createdTime ?? "")),
+  )[0];
+}
+
+/**
  * Rename a Drive file (changes its `name` field, keeps ID/content/parents).
  */
 export async function renameFile(

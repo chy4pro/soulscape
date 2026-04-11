@@ -1,15 +1,23 @@
 // POST /api/finalize
-// Body: { submissionId, driveFileId, metadata }
+// Body: { submissionId, driveFileId?, pendingName?, metadata }
 // Returns: { ok, submissionId, submittedAt, driveFileId, metadataFileId, viewUrl }
 //
 // Runs after the browser's direct PUT to the Drive resumable upload URL
 // completes. We verify the file exists, rename it to include team info
 // (so the Drive folder is browsable by humans), and write a metadata.json
 // sidecar file in the same folder capturing team/specs/attestations.
+//
+// The client passes driveFileId (parsed from the Drive PUT response body)
+// when available. If the browser's XHR fired .onerror at the end of
+// upload (known CORS edge case where the bytes were delivered but the
+// response couldn't be read), driveFileId may be missing; we then fall
+// back to pendingName lookup against the folder to find the just-
+// uploaded file.
 
 import {
   GoogleApiError,
   createJsonFile,
+  findFileByName,
   getAccessToken,
   getFileMetadata,
   renameFile,
@@ -22,6 +30,7 @@ type Env = GoogleEnv;
 interface FinalizeRequest {
   submissionId?: string;
   driveFileId?: string;
+  pendingName?: string;
   metadata?: {
     teamId?: string;
     discord?: string;
@@ -62,14 +71,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const submissionId = (body.submissionId ?? "").trim();
-  const driveFileId = (body.driveFileId ?? "").trim();
+  let driveFileId = (body.driveFileId ?? "").trim();
+  const pendingName = (body.pendingName ?? "").trim();
   const metadata = body.metadata ?? {};
 
   if (!SUBMISSION_ID_RE.test(submissionId)) {
     return jsonError("Invalid submission ID format", 400);
   }
-  if (!driveFileId) {
-    return jsonError("driveFileId required", 400);
+  if (!driveFileId && !pendingName) {
+    return jsonError("driveFileId or pendingName required", 400);
   }
 
   const required: Array<[string, string | undefined]> = [
@@ -90,6 +100,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   try {
     const accessToken = await getAccessToken(env);
+
+    // Fallback path: if driveFileId is missing (because browser XHR
+    // fired .onerror at 100% due to Drive response CORS), look up the
+    // file by the pending name we gave it during initiate.
+    if (!driveFileId && pendingName) {
+      const found = await findFileByName(
+        accessToken,
+        env.GOOGLE_DRIVE_FOLDER_ID,
+        pendingName,
+      );
+      if (!found) {
+        return jsonError(
+          "Could not find uploaded file in Drive by pending name. The upload may have failed before any bytes were written.",
+          404,
+        );
+      }
+      driveFileId = found.id;
+    }
 
     // Verify the uploaded file exists in the correct folder
     const fileMeta = await getFileMetadata(accessToken, driveFileId);

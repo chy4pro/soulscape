@@ -2060,47 +2060,65 @@ async function handleSubmit() {
       throw new Error(`Reservation failed (${initRes.status}): ${errText}`);
     }
     const init = await initRes.json();
-    const { submissionId, uploadUrl } = init;
+    const { submissionId, uploadUrl, pendingName } = init;
     lastSubmissionId = submissionId;
 
     // ===== STEP 2: Upload to Google Drive resumable session =====
     btn.textContent = 'Transmitting…';
     const uploadStartTs = Date.now();
-    const uploadResponse = await uploadWithProgress(
-      uploadUrl,
-      selectedFile,
-      (pct, loaded, total) => {
-        progressFill.style.right = (100 - pct) + '%';
-        progressPct.textContent = pct + '%';
-        progressBytes.textContent = fmtBytes(loaded) + ' / ' + fmtBytes(total);
-
-        // ETA calculation based on bytes per second
-        const elapsedSec = (Date.now() - uploadStartTs) / 1000;
-        if (elapsedSec > 1.5 && loaded > 0) {
-          const bytesPerSec = loaded / elapsedSec;
-          const remainingBytes = total - loaded;
-          const remainingSec = Math.ceil(remainingBytes / bytesPerSec);
-          progressEta.textContent = fmtDuration(remainingSec);
-        }
-
-        progressLabel.textContent = `STEP 2 / 3 · TRANSMITTING · KEEP THIS TAB OPEN`;
-        btn.textContent = `Transmitting ${pct}%`;
-      },
-      selectedFile.type || 'video/mp4',
-    );
-
-    // Drive's resumable PUT returns the new file's metadata as JSON
-    let driveFileId = null;
+    let lastPct = 0;
+    let uploadResponse = null;
     try {
-      const driveMeta = JSON.parse(uploadResponse);
-      driveFileId = driveMeta.id;
-    } catch (parseErr) {
-      throw new Error(
-        'Upload completed but Drive response was unreadable — contact staff with your submission ID: ' + submissionId,
+      uploadResponse = await uploadWithProgress(
+        uploadUrl,
+        selectedFile,
+        (pct, loaded, total) => {
+          lastPct = pct;
+          progressFill.style.right = (100 - pct) + '%';
+          progressPct.textContent = pct + '%';
+          progressBytes.textContent = fmtBytes(loaded) + ' / ' + fmtBytes(total);
+
+          // ETA calculation based on bytes per second
+          const elapsedSec = (Date.now() - uploadStartTs) / 1000;
+          if (elapsedSec > 1.5 && loaded > 0) {
+            const bytesPerSec = loaded / elapsedSec;
+            const remainingBytes = total - loaded;
+            const remainingSec = Math.ceil(remainingBytes / bytesPerSec);
+            progressEta.textContent = fmtDuration(remainingSec);
+          }
+
+          progressLabel.textContent = `STEP 2 / 3 · TRANSMITTING · KEEP THIS TAB OPEN`;
+          btn.textContent = `Transmitting ${pct}%`;
+        },
+        selectedFile.type || 'video/mp4',
       );
+    } catch (uploadErr) {
+      // If we got to 95%+ before the XHR errored, it's almost certainly
+      // the Google Drive CORS edge case — bytes were transmitted, but
+      // the browser couldn't read the response body. We'll finalize by
+      // pendingName lookup instead of parsing the response.
+      if (lastPct >= 95) {
+        console.warn('[SOULSCAPE] XHR errored at ' + lastPct + '% — falling back to pendingName lookup', uploadErr);
+        progressLabel.textContent = 'RESPONSE UNREADABLE · VERIFYING UPLOAD…';
+        uploadResponse = null; // signal fallback path
+      } else {
+        // Real upload failure below 95% — rethrow
+        throw uploadErr;
+      }
     }
-    if (!driveFileId) {
-      throw new Error('Drive did not return a file ID — upload may have silently failed');
+
+    // Try to parse Drive's response for the file ID. If we're on the
+    // CORS-fallback path (uploadResponse === null), skip parsing and let
+    // finalize look it up by pendingName.
+    let driveFileId = null;
+    if (uploadResponse) {
+      try {
+        const driveMeta = JSON.parse(uploadResponse);
+        driveFileId = driveMeta.id || null;
+      } catch (parseErr) {
+        // Response body wasn't valid JSON — fall back to pendingName
+        console.warn('[SOULSCAPE] Drive response body not parseable, using pendingName fallback');
+      }
     }
 
     // ===== STEP 3: Finalize =====
@@ -2133,7 +2151,12 @@ async function handleSubmit() {
     const finalRes = await fetch('/submit/api/finalize', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ submissionId, driveFileId, metadata: metadataPayload }),
+      body: JSON.stringify({
+        submissionId,
+        driveFileId,          // may be null if CORS fallback
+        pendingName,          // always sent; finalize uses this if driveFileId is null
+        metadata: metadataPayload,
+      }),
     });
     if (!finalRes.ok) {
       const errText = await finalRes.text();
