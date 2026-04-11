@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soulscape 2026 · Cinema Lab Submission Portal</title>
+<meta name="description" content="Official submission portal for the Soulscape 2026 AI Cinema Lab. Deliver your 48-hour masterpiece. Soul over Slop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Geist+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --void: #020204;
+  --void-2: #07070b;
+  --void-3: #0d0d12;
+  --text: #ffffff;
+  --text-mid: rgba(255, 255, 255, 0.90);
+  --text-dim: rgba(255, 255, 255, 0.70);
+  --text-faint: rgba(255, 255, 255, 0.48);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.20);
+  --glass: rgba(255, 255, 255, 0.025);
+  --glass-hover: rgba(255, 255, 255, 0.05);
+  --warm: #ff781e;
+  --warm-soft: rgba(255, 120, 30, 0.08);
+  --warm-mid: rgba(255, 120, 30, 0.25);
+  --warm-glow: rgba(255, 120, 30, 0.4);
+  --cool: #4a30ff;
+  --cool-soft: rgba(74, 48, 255, 0.08);
+  --cool-glow: rgba(74, 48, 255, 0.3);
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.10);
+  --error: #ff4d4d;
+  --error-soft: rgba(255, 77, 77, 0.10);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.10);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'Inter', -apple-system, system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; background: var(--void); }
+
+body {
+  font-family: var(--sans);
+  background: var(--void);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Cursor flare */
+#cursor-flare {
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  pointer-events: none;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 120, 30, 0.09) 0%, transparent 60%);
+  mix-blend-mode: screen;
+  transition: opacity 0.4s;
+  will-change: transform;
+}
+@media (pointer: coarse), (max-width: 768px) {
+  #cursor-flare { display: none; }
+}
+
+/* Grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  animation: grainShift 4s steps(6) infinite;
+}
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  16% { transform: translate(-5%, -5%); }
+  33% { transform: translate(-10%, 5%); }
+  50% { transform: translate(5%, -10%); }
+  66% { transform: translate(-5%, 10%); }
+  83% { transform: translate(10%, 5%); }
+}
+
+/* Light leaks */
+.leak {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+  will-change: transform, opacity;
+}
+.leak-warm {
+  top: -240px;
+  right: -200px;
+  width: 820px;
+  height: 820px;
+  background: radial-gradient(circle, var(--warm-glow) 0%, transparent 60%);
+  animation: breathe-a 18s ease-in-out infinite;
+}
+.leak-cool {
+  bottom: -320px;
+  left: -280px;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, var(--cool-glow) 0%, transparent 60%);
+  animation: breathe-b 22s ease-in-out infinite;
+}
+.leak-mid {
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 120, 30, 0.14) 0%, transparent 65%);
+  animation: breathe-c 26s ease-in-out infinite;
+}
+@keyframes breathe-a {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.85; }
+  50% { transform: scale(1.15) translate(-5%, 3%); opacity: 1; }
+}
+@keyframes breathe-b {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.72; }
+  50% { transform: scale(1.2) translate(3%, -5%); opacity: 1; }
+}
+@keyframes breathe-c {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-45%, -55%) scale(1.1); opacity: 0.5; }
+}
+
+/* Intro overlay */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--void);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.05em;
+  animation: introFade 1.4s 2.2s forwards;
+}
+.intro-word {
+  font-family: var(--serif);
+  font-size: clamp(42px, 10vw, 140px);
+  font-weight: 300;
+  letter-spacing: -3px;
+  line-height: 0.9;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: introWord 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.intro-word.italic {
+  font-style: italic;
+  color: var(--warm);
+}
+.intro-word:nth-child(1) { animation-delay: 0.3s; }
+.intro-word:nth-child(2) { animation-delay: 0.6s; }
+.intro-word:nth-child(3) { animation-delay: 0.9s; }
+@keyframes introWord {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes introFade {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Top bar */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(2, 2, 4, 0.75);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeDown 1s 2.8s ease both;
+}
+.tb-brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  font-weight: 500;
+}
+.tb-brand::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--warm);
+  box-shadow: 0 0 14px var(--warm);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.tb-center {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  font-weight: 500;
+}
+.tb-countdown .val {
+  color: var(--warm);
+  font-weight: 500;
+  margin-left: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.tb-right {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  color: var(--success);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.tb-right::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--success);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+/* Content wrapper */
+.wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero */
+.hero {
+  padding: 180px 40px 100px;
+  text-align: center;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 4.5px;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeDown 1s 2.9s ease both;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 500;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--warm);
+  opacity: 0.6;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 9vw, 128px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -3px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeDown 1.2s 3.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--warm);
+  display: block;
+  position: relative;
+}
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-mid);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.75;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeDown 1s 3.3s ease both;
+}
+.hero-meta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeDown 1s 3.5s ease both;
+}
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  padding: 13px 20px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+}
+.meta-chip.warn {
+  color: var(--warm);
+  border-color: var(--warm-mid);
+  background: var(--warm-soft);
+}
+.meta-chip .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulseDot 2s infinite;
+}
+
+/* Progress rail */
+.rail {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  opacity: 0;
+  animation: fadeIn 1s 3.6s both;
+}
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  transition: color 0.3s;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+.rail-item::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.rail-item:hover { color: var(--text-mid); }
+.rail-item.active { color: var(--warm); }
+.rail-item.active::before {
+  background: var(--warm);
+  box-shadow: 0 0 12px var(--warm);
+}
+.rail-item.done { color: var(--success); }
+.rail-item.done::before {
+  background: var(--success);
+  border-color: var(--success);
+}
+@media (max-width: 1200px) {
+  .rail { display: none; }
+}
+
+/* Form container */
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 32px 140px;
+  position: relative;
+}
+
+.section {
+  margin-bottom: 72px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.section.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.sec-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 60px;
+  height: 1px;
+  background: var(--warm);
+}
+.sec-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--warm);
+  letter-spacing: 2.5px;
+  font-weight: 500;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1;
+}
+.sec-title em {
+  font-style: italic;
+  color: var(--warm);
+}
+.sec-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-left: auto;
+  font-weight: 400;
+}
+
+/* Fields */
+.field {
+  margin-bottom: 24px;
+  position: relative;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 0;
+}
+.field-row .field { margin-bottom: 24px; }
+@media (max-width: 620px) {
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+}
+.field label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.field label .req {
+  color: var(--warm);
+  margin-left: 4px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 17px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.3s;
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 400;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-faint);
+  font-weight: 400;
+  font-style: normal;
+  font-family: var(--sans);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--warm);
+  background: var(--glass-hover);
+  box-shadow: 0 0 0 1px var(--warm), 0 0 28px var(--warm-soft);
+}
+.field .hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: var(--text-dim);
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+.field .hint a {
+  color: var(--warm);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 120, 30, 0.35);
+  padding-bottom: 1px;
+  transition: all 0.25s;
+}
+.field .hint a:hover {
+  border-bottom-color: var(--warm);
+  text-shadow: 0 0 12px var(--warm-glow);
+}
+.field .err {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: var(--error);
+  margin-top: 10px;
+  text-transform: uppercase;
+  display: none;
+}
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error select {
+  border-color: var(--error);
+  background: var(--error-soft);
+}
+.field.has-error .err { display: block; }
+.field.valid input,
+.field.valid textarea {
+  border-color: rgba(74, 222, 128, 0.4);
+}
+.char-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.char-count.over { color: var(--error); }
+
+/* Toggle */
+.toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+.toggle button {
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  color: var(--text-mid);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  font-weight: 500;
+}
+.toggle button:hover { color: var(--text); }
+.toggle button.active {
+  color: var(--void);
+  background: var(--text);
+}
+.toggle button.active::before {
+  content: '▸';
+  margin-right: 8px;
+  color: var(--warm);
+}
+
+/* Dropzone */
+.dropzone {
+  border: 1.5px dashed var(--border);
+  padding: 80px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+.dropzone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--warm-soft) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.dropzone:hover {
+  border-color: var(--warm);
+}
+.dropzone:hover::before { opacity: 1; }
+.dropzone.dragover {
+  border-color: var(--warm);
+  border-style: solid;
+  transform: scale(1.01);
+}
+.dropzone.dragover::before { opacity: 1; }
+.dz-icon {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 54px;
+  color: var(--warm);
+  margin-bottom: 20px;
+  opacity: 0.85;
+  font-weight: 300;
+  position: relative;
+}
+.dz-text {
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 12px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  position: relative;
+}
+.dz-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  font-weight: 400;
+}
+.dropzone input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* File info */
+.file-info {
+  display: none;
+  margin-top: 22px;
+  padding: 26px 28px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.file-info.show {
+  display: block;
+  animation: fadeUp 0.5s both;
+}
+.file-info-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.file-name {
+  font-size: 16px;
+  font-weight: 400;
+  word-break: break-all;
+  line-height: 1.4;
+}
+.file-remove {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--error);
+  background: none;
+  border: 1px solid var(--error);
+  padding: 8px 14px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.file-remove:hover {
+  background: var(--error-soft);
+}
+.file-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.meta-item {
+  font-family: var(--mono);
+}
+.meta-item .k {
+  color: var(--text-dim);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10.5px;
+  font-weight: 400;
+}
+.meta-item .v {
+  color: var(--text);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Checklist */
+.checklist {
+  margin-top: 28px;
+  padding: 26px 30px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.checklist-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.checklist-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.checklist-title::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--warm);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.checklist-status {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+.checklist-status.pass {
+  color: var(--success);
+  border-color: rgba(74, 222, 128, 0.3);
+  background: var(--success-soft);
+}
+.checklist-status.fail {
+  color: var(--error);
+  border-color: rgba(255, 77, 77, 0.3);
+  background: var(--error-soft);
+}
+.checklist-status.working {
+  color: var(--warm);
+  border-color: var(--warm-mid);
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  font-size: 14px;
+  color: var(--text-mid);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 400;
+}
+.check:last-child {
+  border: none;
+  padding-bottom: 0;
+}
+.check-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: all 0.3s;
+  font-family: var(--mono);
+}
+.check-label {
+  flex: 1;
+}
+.check-value {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-align: right;
+  font-weight: 500;
+}
+.check.pass { color: var(--text-mid); }
+.check.pass .check-box {
+  border-color: var(--success);
+  background: var(--success-soft);
+  color: var(--success);
+}
+.check.pass .check-value { color: var(--success); }
+.check.fail { color: var(--error); }
+.check.fail .check-box {
+  border-color: var(--error);
+  background: var(--error-soft);
+  color: var(--error);
+}
+.check.fail .check-value { color: var(--error); }
+.check.pending .check-box {
+  border-style: dashed;
+}
+.check.manual .check-box {
+  border-color: var(--warning);
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+.check.manual .check-value { color: var(--warning); }
+
+.warnings {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--warning);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+.warnings:empty {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+.warnings-item {
+  padding: 5px 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.warnings-item::before { content: '⚠'; flex-shrink: 0; }
+
+/* Google Drive field */
+.gdrive-wrap { display: none; }
+.gdrive-wrap.show { display: block; animation: fadeUp 0.4s both; }
+
+/* Attestation */
+.attest {
+  padding: 28px 32px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-mid);
+  font-weight: 400;
+  line-height: 1.7;
+  user-select: none;
+}
+.check-row input { display: none; }
+.check-row .box {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--text-faint);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.check-row input:checked + .box {
+  background: var(--warm);
+  border-color: var(--warm);
+  color: var(--void);
+  box-shadow: 0 0 18px var(--warm-mid);
+}
+.check-row input:checked + .box::after { content: '✓'; }
+.check-row:hover .box { border-color: var(--warm); }
+.check-row strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Submit */
+.submit-area {
+  text-align: center;
+  margin-top: 64px;
+}
+.submit {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 24px 76px;
+  background: var(--text);
+  color: var(--void);
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+}
+.submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 120, 30, 0.5) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.8s;
+}
+.submit:hover:not(:disabled) {
+  transform: scale(1.04);
+  box-shadow: 0 0 56px rgba(255, 255, 255, 0.3), 0 0 120px var(--warm-glow);
+}
+.submit:hover:not(:disabled)::before {
+  transform: translateX(100%);
+}
+.submit:disabled {
+  opacity: 0.22;
+  cursor: not-allowed;
+}
+.submit-note {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+/* Progress bar */
+.progress {
+  display: none;
+  margin-top: 28px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.progress.show { display: block; animation: fadeUp 0.4s both; }
+.progress-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.progress-fill {
+  position: absolute;
+  inset: 0 100% 0 0;
+  background: var(--warm);
+  transition: right 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 24px var(--warm-glow), 0 0 48px var(--warm-glow);
+}
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 3px;
+  background: #fff;
+  box-shadow: 0 0 12px #fff, 0 0 28px var(--warm);
+}
+.progress-label {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  font-weight: 500;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.submit-error {
+  display: none;
+  margin-top: 22px;
+  padding: 16px 22px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--error);
+  background: var(--error-soft);
+  color: var(--error);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: left;
+}
+.submit-error.show { display: block; animation: fadeUp 0.4s both; }
+
+/* Success overlay */
+.success {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(2, 2, 4, 0.96);
+  backdrop-filter: blur(32px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  text-align: center;
+}
+.success.show { display: flex; }
+.success-badge {
+  width: 108px;
+  height: 108px;
+  border: 1.5px solid var(--warm);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 60px;
+  color: var(--warm);
+  margin-bottom: 44px;
+  animation: successPop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  position: relative;
+}
+.success-badge::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border: 1px solid var(--warm);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: successRing 1.8s ease-out infinite;
+}
+@keyframes successPop {
+  0% { opacity: 0; transform: scale(0.5) rotate(-30deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes successRing {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.4); opacity: 0; }
+}
+.success h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 68px);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s ease both;
+  line-height: 1;
+}
+.success h2 em {
+  font-style: italic;
+  color: var(--warm);
+}
+.success-sub {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 480px;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s ease both;
+}
+.success-card {
+  padding: 26px 34px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  max-width: 440px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 1s 0.7s ease both;
+  text-align: left;
+}
+.success-card .k {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--text-faint);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.success-card .v {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--warm);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  word-break: break-all;
+  font-variant-numeric: tabular-nums;
+}
+.success-card .v:last-child { margin-bottom: 0; }
+.success-motto {
+  margin-top: 48px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-faint);
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s ease both;
+}
+.success-motto em {
+  color: var(--warm);
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 2;
+  padding: 48px 40px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  font-weight: 500;
+}
+.footer em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--warm);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  font-weight: 400;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile */
+@media (max-width: 620px) {
+  .topbar { padding: 14px 20px; }
+  .tb-center { display: none; }
+  .tb-right span { display: none; }
+  .hero { padding: 140px 24px 70px; }
+  .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; }
+  .container { padding: 0 22px 80px; }
+  .submit { width: 100%; padding: 22px 20px; }
+  .sec-head { flex-wrap: wrap; }
+  .sec-sub { margin-left: 0; width: 100%; margin-top: 8px; }
+  .dropzone { padding: 56px 24px; }
+  .checklist, .attest, .file-info { padding: 22px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor-flare"></div>
+<div class="grain"></div>
+<div class="leak leak-warm"></div>
+<div class="leak leak-cool"></div>
+<div class="leak leak-mid"></div>
+
+<div class="intro" id="intro">
+  <div class="intro-word">soul</div>
+  <div class="intro-word">over</div>
+  <div class="intro-word italic">slop.</div>
+</div>
+
+<div class="topbar">
+  <div class="tb-brand">Soulscape &bull; 2026</div>
+  <div class="tb-center">
+    <span class="tb-countdown" id="countdown">T-MINUS <span class="val">--:--:--</span></span>
+    <span>SYS.LOG / SUBMISSION_PORTAL</span>
+  </div>
+  <div class="tb-right"><span>STATUS&nbsp;/&nbsp;</span>LIVE</div>
+</div>
+
+<div class="wrap">
+
+  <div class="rail">
+    <div class="rail-item" data-step="1">01 &mdash; Identify</div>
+    <div class="rail-item" data-step="2">02 &mdash; Film</div>
+    <div class="rail-item" data-step="3">03 &mdash; Upload</div>
+    <div class="rail-item" data-step="4">04 &mdash; Attest</div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Cinema Lab &middot; Final Submission</div>
+    <h1>
+      Deliver the
+      <em>Resonance.</em>
+    </h1>
+    <p class="hero-sub">
+      You survived the 48. Now drop the pen. Every frame you upload will be verified against our broadcast spec before it reaches the Executive Jury. Soul over Slop.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-chip warn"><span class="dot"></span>Hard deadline &bull; Sat April 11 &bull; 23:59 PT</div>
+      <div class="meta-chip">1920 &times; 1080 &bull; 29.97 / 59.94p &bull; Max 5:00</div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- 01: IDENTIFICATION -->
+    <section class="section" id="sec-1">
+      <div class="sec-head">
+        <div class="sec-num">01</div>
+        <div class="sec-title"><em>Identification</em></div>
+        <div class="sec-sub">Who ships this film</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" id="f-team">
+          <label>Team ID<span class="req">*</span></label>
+          <input type="text" id="team" placeholder="e.g. TEAM-042" autocomplete="off">
+          <div class="hint">Find your Team ID in column <strong>#</strong> of the <a href="https://docs.google.com/spreadsheets/d/1nYMUJTUwWb4a-OgNk6M37fRRu2GQSuhGW8-iG1UX2xY/edit?gid=483712282#gid=483712282" target="_blank" rel="noopener">Official Team Registration Sheet &#x2197;</a></div>
+          <div class="err">Team ID is required</div>
+        </div>
+
+        <div class="field" id="f-discord">
+          <label>Team Lead Discord<span class="req">*</span></label>
+          <input type="text" id="discord" placeholder="@director_jane or director_jane#1234" autocomplete="off">
+          <div class="hint">The team lead's handle &mdash; must hold the Lab Finalist role</div>
+          <div class="err">Valid Discord handle is required</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-email">
+        <label>Team Lead Email<span class="req">*</span></label>
+        <input type="email" id="email" placeholder="team-lead@example.com" autocomplete="email">
+        <div class="hint">The team lead's email &mdash; we send your submission receipt and Greenlight slot here</div>
+        <div class="err">Please enter a valid email address</div>
+      </div>
+    </section>
+
+    <!-- 02: THE FILM -->
+    <section class="section" id="sec-2">
+      <div class="sec-head">
+        <div class="sec-num">02</div>
+        <div class="sec-title">The <em>Film</em></div>
+        <div class="sec-sub">Name your masterpiece</div>
+      </div>
+
+      <div class="field" id="f-title">
+        <label>
+          <span>Film Title<span class="req">*</span></span>
+          <span class="char-count" id="title-count">0 / 80</span>
+        </label>
+        <input type="text" id="title" placeholder="The name that will appear on the marquee" maxlength="80" data-maxlen="80">
+        <div class="err">Your film needs a title</div>
+      </div>
+
+      <div class="field" id="f-logline">
+        <label>
+          <span>Logline <span style="color:var(--text-faint);font-size:9px;">&bull; Optional</span></span>
+          <span class="char-count" id="logline-count">0 / 240</span>
+        </label>
+        <textarea id="logline" placeholder="In one breath — what world did you build?" maxlength="240" data-maxlen="240"></textarea>
+        <div class="hint">Used in the Grand Premiere program &bull; Keep it tight</div>
+      </div>
+
+      <div class="field" id="f-tool">
+        <label>Primary AI Engine<span class="req">*</span></label>
+        <select id="tool">
+          <option value="">— Select your primary generation tool —</option>
+          <option value="tapnow">Tapnow &bull; Seedance 2.0 / Kling 3.0</option>
+          <option value="pixero">Pixero.ai &bull; Nano Banana / Sora 2 / Veo 3</option>
+          <option value="youart">YouArt &bull; Agentic Workflow Studio</option>
+          <option value="minimax">Minimax &bull; Native Video Models</option>
+          <option value="mixed">Mixed &bull; Multiple Partner Tools</option>
+        </select>
+        <div class="hint">Jury uses this for the Resonance Iris &amp; Craft track evaluation</div>
+        <div class="err">Please select a primary tool</div>
+      </div>
+    </section>
+
+    <!-- 03: UPLOAD -->
+    <section class="section" id="sec-3">
+      <div class="sec-head">
+        <div class="sec-num">03</div>
+        <div class="sec-title"><em>Upload</em> &amp; Verify</div>
+        <div class="sec-sub">Broadcast-spec compliance</div>
+      </div>
+
+      <label class="dropzone" id="dropzone">
+        <div class="dz-icon">&#x2767;</div>
+        <div class="dz-text">Drop your film here or click to browse</div>
+        <div class="dz-sub">.mp4 H.264 or .mov &nbsp;&bull;&nbsp; 1920&times;1080 &nbsp;&bull;&nbsp; 29.97 / 59.94p &nbsp;&bull;&nbsp; Max 5:00 &nbsp;&bull;&nbsp; Up to 5 GB</div>
+        <input type="file" id="file-input" accept=".mp4,.mov,video/mp4,video/quicktime">
+      </label>
+
+      <div class="file-info" id="file-info">
+        <div class="file-info-head">
+          <div class="file-name" id="file-name"></div>
+          <button type="button" class="file-remove" onclick="removeFile()">&times; Remove</button>
+        </div>
+        <div class="file-meta" id="file-meta"></div>
+      </div>
+
+      <div class="checklist" id="checklist">
+        <div class="checklist-head">
+          <div class="checklist-title">Broadcast Compliance Pre-Check</div>
+          <div class="checklist-status" id="checklist-status">Awaiting File</div>
+        </div>
+        <div class="check pending" id="chk-format">
+          <div class="check-box">&mdash;</div>
+          <div class="check-label">Container &bull; H.264 (.mp4) or .mov</div>
+          <div class="check-value"></div>
+        </div>
+        <div class="check pending" id="chk-resolution">
+          <div class="check-box">&mdash;</div>
+          <div class="check-label">Resolution &bull; 1920 &times; 1080</div>
+          <div class="check-value"></div>
+        </div>
+        <div class="check pending" id="chk-fps">
+          <div class="check-box">&mdash;</div>
+          <div class="check-label">Frame Rate &bull; 29.97p or 59.94p</div>
+          <div class="check-value"></div>
+        </div>
+        <div class="check pending" id="chk-duration">
+          <div class="check-box">&mdash;</div>
+          <div class="check-label">Duration &bull; Max 5:00</div>
+          <div class="check-value"></div>
+        </div>
+        <div class="warnings" id="warnings"></div>
+      </div>
+    </section>
+
+    <!-- 04: ATTESTATION -->
+    <section class="section" id="sec-4">
+      <div class="sec-head">
+        <div class="sec-num">04</div>
+        <div class="sec-title">Fair Play <em>Attestation</em></div>
+        <div class="sec-sub">Sign in blood</div>
+      </div>
+
+      <div class="attest">
+        <label class="check-row">
+          <input type="checkbox" id="att-1">
+          <span class="box"></span>
+          <span>We confirm that <strong>all footage was generated after the Secret Prompt drop</strong> at 18:45 PT on April 9th. No pre-existing assets, no pre-generation, no recycled personal projects.</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="att-2">
+          <span class="box"></span>
+          <span>Every team member was <strong>physically onsite in San Francisco</strong> for the duration of the Lab. No remote collaborators.</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="att-3">
+          <span class="box"></span>
+          <span>We understand that <strong>submission is final</strong>. No re-uploads, no extensions, no exceptions. If it's rendering, it's late.</span>
+        </label>
+      </div>
+
+      <div class="submit-area">
+        <button type="button" class="submit" id="submit" disabled onclick="handleSubmit()">
+          Transmit Film
+        </button>
+
+        <div class="progress" id="progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-label" id="progress-label">INITIALIZING</div>
+        </div>
+
+        <div class="submit-error" id="submit-error"></div>
+
+        <div class="submit-note">Portal closes at 23:59 PT sharp &bull; Zero tolerance policy active</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="success" id="success">
+  <div class="success-badge">&#x2767;</div>
+  <h2>Film <em>Received.</em></h2>
+  <p class="success-sub">Your submission has been logged against the Day 0 Secret Prompt. The Executive Jury will screen it during the closed-door Greenlight Session on Sunday morning.</p>
+  <div class="success-card">
+    <div class="k">Submission ID</div>
+    <div class="v" id="submit-id">&mdash;</div>
+    <div class="k">Film</div>
+    <div class="v" id="submit-title">&mdash;</div>
+    <div class="k">Timestamp</div>
+    <div class="v" id="submit-ts">&mdash;</div>
+  </div>
+  <div class="success-motto">&mdash; <em>Good luck.</em> &mdash;</div>
+</div>
+
+<footer class="footer">
+  <div>&copy; 2026 Soulscape AI Cinema Lab &bull; San Francisco</div>
+  <div><em>Soul over Slop</em></div>
+</footer>
+
+<script>
+// -------------------- Cursor flare --------------------
+const flare = document.getElementById('cursor-flare');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let fx = mx, fy = my;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateFlare() {
+  fx += (mx - fx) * 0.12;
+  fy += (my - fy) * 0.12;
+  flare.style.transform = `translate(${fx - 260}px, ${fy - 260}px)`;
+  requestAnimationFrame(animateFlare);
+}
+animateFlare();
+
+// -------------------- Countdown --------------------
+// Hard deadline: Sat April 11, 2026 23:59 PT (UTC-7 DST)
+const DEADLINE = new Date('2026-04-11T23:59:00-07:00').getTime();
+const countdownEl = document.getElementById('countdown');
+function tickCountdown() {
+  const now = Date.now();
+  const diff = DEADLINE - now;
+  if (diff <= 0) {
+    countdownEl.innerHTML = '<span class="val" style="color:var(--error)">DEADLINE PASSED</span>';
+    return;
+  }
+  const hrs = Math.floor(diff / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  countdownEl.innerHTML = 'T-MINUS <span class="val">' +
+    String(hrs).padStart(2, '0') + ':' +
+    String(mins).padStart(2, '0') + ':' +
+    String(secs).padStart(2, '0') + '</span>';
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+// -------------------- Section reveal --------------------
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// -------------------- Rail nav --------------------
+document.querySelectorAll('.rail-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const step = item.dataset.step;
+    const target = document.getElementById('sec-' + step);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// -------------------- Character counters --------------------
+document.querySelectorAll('[data-maxlen]').forEach(el => {
+  const max = parseInt(el.dataset.maxlen);
+  const counterId = el.id + '-count';
+  const counter = document.getElementById(counterId);
+  if (!counter) return;
+  const update = () => {
+    counter.textContent = el.value.length + ' / ' + max;
+    counter.classList.toggle('over', el.value.length > max);
+  };
+  el.addEventListener('input', update);
+  update();
+});
+
+// -------------------- Upload state --------------------
+let selectedFile = null;
+let videoMeta = { duration: null, width: null, height: null, fps: null, size: null };
+let warnings = [];
+
+function resetChecklist() {
+  ['format', 'resolution', 'fps', 'duration'].forEach(k => setCheck(k, 'pending', ''));
+  const s = document.getElementById('checklist-status');
+  s.textContent = 'Awaiting File';
+  s.className = 'checklist-status';
+  warnings = [];
+  renderWarnings();
+}
+
+function setCheck(id, status, value) {
+  const el = document.getElementById('chk-' + id);
+  if (!el) return;
+  el.className = 'check ' + status;
+  const box = el.querySelector('.check-box');
+  box.innerHTML = status === 'pass' ? '&check;' :
+    status === 'fail' ? '&times;' :
+      status === 'manual' ? '&#x26A0;' : '&mdash;';
+  const v = el.querySelector('.check-value');
+  if (v) v.textContent = value || '';
+}
+
+function renderWarnings() {
+  const w = document.getElementById('warnings');
+  if (!warnings.length) { w.innerHTML = ''; return; }
+  w.innerHTML = warnings.map(x => '<div class="warnings-item">' + x + '</div>').join('');
+}
+
+function updateChecklistStatus() {
+  const items = document.querySelectorAll('#checklist .check');
+  let hasFail = false, allPass = true, anyDone = false, allPending = true;
+  items.forEach(el => {
+    if (el.classList.contains('fail')) hasFail = true;
+    if (!el.classList.contains('pass') && !el.classList.contains('manual')) allPass = false;
+    if (!el.classList.contains('pending')) { anyDone = true; allPending = false; }
+  });
+  const s = document.getElementById('checklist-status');
+  if (hasFail) {
+    s.textContent = 'Rejected';
+    s.className = 'checklist-status fail';
+  } else if (allPass && anyDone) {
+    s.textContent = 'All Clear';
+    s.className = 'checklist-status pass';
+  } else if (anyDone && !allPending) {
+    s.textContent = 'Verifying';
+    s.className = 'checklist-status working';
+  } else {
+    s.textContent = 'Awaiting File';
+    s.className = 'checklist-status';
+  }
+}
+
+// -------------------- Drop zone --------------------
+const dz = document.getElementById('dropzone');
+const fileInput = document.getElementById('file-input');
+
+['dragenter', 'dragover'].forEach(evt => {
+  dz.addEventListener(evt, e => {
+    e.preventDefault();
+    dz.classList.add('dragover');
+  });
+});
+['dragleave', 'drop'].forEach(evt => {
+  dz.addEventListener(evt, e => {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+  });
+});
+dz.addEventListener('drop', e => {
+  const f = e.dataTransfer.files[0];
+  if (f) processFile(f);
+});
+fileInput.addEventListener('change', e => {
+  if (e.target.files[0]) processFile(e.target.files[0]);
+});
+
+function processFile(file) {
+  selectedFile = file;
+  videoMeta = { duration: null, width: null, height: null, fps: null, size: file.size };
+  warnings = [];
+
+  console.group('%c[SOULSCAPE] Compliance Pre-Check', 'color:#ff781e;font-weight:bold');
+  console.log('File:', file.name);
+  console.log('Size:', (file.size / 1024 / 1024).toFixed(2), 'MB');
+  console.log('MIME type:', file.type || '(empty)');
+
+  document.getElementById('file-name').textContent = file.name;
+  document.getElementById('file-info').classList.add('show');
+  updateMetaDisplay();
+
+  // Extension check
+  const ext = (file.name.split('.').pop() || '').toLowerCase();
+  const validExt = ['mp4', 'mov'].includes(ext);
+  console.log('Extension:', '.' + ext, validExt ? '✓' : '✕ REJECTED');
+  setCheck('format', validExt ? 'pass' : 'fail',
+    validExt ? '.' + ext.toUpperCase() : '.' + (ext || 'UNKNOWN').toUpperCase() + ' NOT ALLOWED');
+
+  // File size sanity checks (non-blocking)
+  const sizeMB = file.size / (1024 * 1024);
+  if (sizeMB < 10) warnings.push('File size unusually small (' + sizeMB.toFixed(1) + ' MB) &mdash; verify bitrate is broadcast-grade');
+  if (sizeMB > 3072) warnings.push('File exceeds 3 GB &mdash; upload may time out on Drive');
+
+  if (!validExt) {
+    setCheck('resolution', 'fail', '&mdash;');
+    setCheck('fps', 'fail', '&mdash;');
+    setCheck('duration', 'fail', '&mdash;');
+    renderWarnings();
+    validateForm();
+    return;
+  }
+
+  // Extract metadata via HTMLVideoElement
+  const url = URL.createObjectURL(file);
+  const video = document.createElement('video');
+  video.preload = 'metadata';
+  video.muted = true;
+  video.playsInline = true;
+
+  video.onloadedmetadata = () => {
+    const dur = video.duration;
+    const w = video.videoWidth;
+    const h = video.videoHeight;
+    videoMeta.duration = dur;
+    videoMeta.width = w;
+    videoMeta.height = h;
+
+    // Duration check: max 5 min with 5-second tolerance
+    const durOk = dur > 0 && dur <= 305;
+    const m = Math.floor(dur / 60);
+    const s = Math.floor(dur % 60);
+    const durStr = m + ':' + String(s).padStart(2, '0');
+    console.log('Duration:', dur.toFixed(3), 's (' + durStr + ')', durOk ? '✓' : '✕ REJECTED (MAX 305s)');
+    setCheck('duration', durOk ? 'pass' : 'fail', durStr + (durOk ? '' : ' / MAX 5:00'));
+
+    // Resolution check
+    const resOk = (w === 1920 && h === 1080);
+    console.log('Resolution:', w + '×' + h, resOk ? '✓' : '✕ REJECTED (REQ 1920×1080)');
+    setCheck('resolution', resOk ? 'pass' : 'fail',
+      w + '×' + h + (resOk ? '' : ' / REQ 1920×1080'));
+
+    // Aspect ratio warning
+    if (w && h && Math.abs((w / h) - (16 / 9)) > 0.01) {
+      warnings.push('Aspect ratio ≠ 16:9 &mdash; film will be letterboxed/pillarboxed on main stage');
+    }
+
+    // FPS detection
+    if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
+      detectFps(video, url);
+    } else {
+      setCheck('fps', 'manual', 'MANUAL REVIEW');
+      warnings.push('Frame rate detection unavailable in this browser &mdash; will be verified server-side');
+      URL.revokeObjectURL(url);
+      updateMetaDisplay();
+      renderWarnings();
+      validateForm();
+    }
+
+    updateMetaDisplay();
+    renderWarnings();
+    validateForm();
+  };
+
+  video.onerror = () => {
+    setCheck('format', 'fail', 'UNREADABLE');
+    setCheck('resolution', 'fail', '&mdash;');
+    setCheck('fps', 'fail', '&mdash;');
+    setCheck('duration', 'fail', '&mdash;');
+    warnings.push('Video file could not be decoded by the browser &mdash; unsupported codec or corrupt file');
+    renderWarnings();
+    validateForm();
+  };
+
+  video.src = url;
+}
+
+function detectFps(video, url) {
+  const samples = [];
+  let count = 0;
+  const TARGET = 20;
+
+  const cb = (now, metadata) => {
+    samples.push(metadata.mediaTime);
+    count++;
+    if (count < TARGET) {
+      video.requestVideoFrameCallback(cb);
+    } else {
+      const intervals = [];
+      for (let i = 1; i < samples.length; i++) {
+        intervals.push(samples[i] - samples[i - 1]);
+      }
+      // Trim outliers (drop smallest 2 and largest 2)
+      intervals.sort((a, b) => a - b);
+      const trimmed = intervals.slice(2, -2).filter(x => x > 0);
+      if (trimmed.length === 0) {
+        setCheck('fps', 'manual', 'UNDETERMINED');
+        videoMeta.fps = null;
+      } else {
+        const avg = trimmed.reduce((a, b) => a + b, 0) / trimmed.length;
+        const estFps = 1 / avg;
+        videoMeta.fps = estFps;
+
+        const is2997 = Math.abs(estFps - 29.97) < 0.6;
+        const is5994 = Math.abs(estFps - 59.94) < 0.6;
+        const fpsOk = is2997 || is5994;
+
+        const display = estFps.toFixed(2) + 'p' + (fpsOk ? '' : ' / REQ 29.97 OR 59.94');
+        setCheck('fps', fpsOk ? 'pass' : 'fail', display);
+      }
+
+      try { video.pause(); } catch (e) {}
+      URL.revokeObjectURL(url);
+      updateMetaDisplay();
+      renderWarnings();
+      validateForm();
+    }
+  };
+
+  video.requestVideoFrameCallback(cb);
+  const p = video.play();
+  if (p && p.catch) {
+    p.catch(() => {
+      setCheck('fps', 'manual', 'AUTOPLAY BLOCKED');
+      warnings.push('Autoplay blocked &mdash; click the video area in settings or re-select file to enable frame rate detection');
+      URL.revokeObjectURL(url);
+      renderWarnings();
+      validateForm();
+    });
+  }
+}
+
+function updateMetaDisplay() {
+  const parts = [];
+  if (videoMeta.size != null) {
+    const mb = videoMeta.size / (1024 * 1024);
+    parts.push(['Size', mb < 1000 ? mb.toFixed(1) + ' MB' : (mb / 1024).toFixed(2) + ' GB']);
+  }
+  if (videoMeta.width) parts.push(['Resolution', videoMeta.width + '×' + videoMeta.height]);
+  if (videoMeta.duration != null) {
+    const m = Math.floor(videoMeta.duration / 60);
+    const s = Math.floor(videoMeta.duration % 60);
+    parts.push(['Duration', m + ':' + String(s).padStart(2, '0')]);
+  }
+  if (videoMeta.fps != null) parts.push(['Frame Rate', '~' + videoMeta.fps.toFixed(2) + 'p']);
+
+  document.getElementById('file-meta').innerHTML = parts.map(p =>
+    '<div class="meta-item"><span class="k">' + p[0] + '</span><span class="v">' + p[1] + '</span></div>'
+  ).join('');
+}
+
+function removeFile() {
+  selectedFile = null;
+  videoMeta = { duration: null, width: null, height: null, fps: null, size: null };
+  fileInput.value = '';
+  document.getElementById('file-info').classList.remove('show');
+  resetChecklist();
+  validateForm();
+}
+
+// -------------------- Form validation --------------------
+function validateForm() {
+  if (isSubmitting) return;
+  updateChecklistStatus();
+
+  const team = document.getElementById('team').value.trim();
+  const discord = document.getElementById('discord').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const title = document.getElementById('title').value.trim();
+  const tool = document.getElementById('tool').value;
+
+  const hasTeam = team.length > 0;
+  const hasDiscord = discord.length >= 2;
+  const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const hasTitle = title.length > 0;
+  const hasTool = tool.length > 0;
+
+  const hasMedia = !!selectedFile;
+  let checksOk = true;
+  document.querySelectorAll('#checklist .check').forEach(el => {
+    if (el.classList.contains('fail')) checksOk = false;
+  });
+
+  const atts = document.querySelectorAll('.attest input[type=checkbox]');
+  const allAttested = Array.from(atts).every(c => c.checked);
+
+  // Rail progress
+  const rail = document.querySelectorAll('.rail-item');
+  if (rail.length >= 4) {
+    rail[0].classList.toggle('done', hasTeam && hasDiscord && hasEmail);
+    rail[1].classList.toggle('done', hasTitle && hasTool);
+    rail[2].classList.toggle('done', hasMedia && checksOk);
+    rail[3].classList.toggle('done', allAttested);
+  }
+
+  const canSubmit = hasTeam && hasDiscord && hasEmail && hasTitle && hasTool && hasMedia && checksOk && allAttested;
+  document.getElementById('submit').disabled = !canSubmit;
+}
+
+// Input listeners
+['team', 'discord', 'email', 'title', 'logline', 'tool'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('input', validateForm);
+    el.addEventListener('change', validateForm);
+  }
+});
+document.querySelectorAll('.attest input[type=checkbox]').forEach(c => {
+  c.addEventListener('change', validateForm);
+});
+
+// -------------------- Submit --------------------
+let isSubmitting = false;
+let lastSubmissionId = null;
+
+async function handleSubmit() {
+  if (isSubmitting) return;
+
+  // Field-level final gate
+  const fields = [
+    { id: 'f-team', input: 'team', test: v => v.length > 0 },
+    { id: 'f-discord', input: 'discord', test: v => v.length >= 2 },
+    { id: 'f-email', input: 'email', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+    { id: 'f-title', input: 'title', test: v => v.length > 0 },
+    { id: 'f-tool', input: 'tool', test: v => v.length > 0 },
+  ];
+  let ok = true;
+  fields.forEach(f => {
+    const val = document.getElementById(f.input).value.trim();
+    const el = document.getElementById(f.id);
+    if (!f.test(val)) { el.classList.add('has-error'); el.classList.remove('valid'); ok = false; }
+    else { el.classList.remove('has-error'); el.classList.add('valid'); }
+  });
+  if (!ok) return;
+  if (!selectedFile) return;
+
+  isSubmitting = true;
+  const btn = document.getElementById('submit');
+  const progress = document.getElementById('progress');
+  const progressFill = document.getElementById('progress-fill');
+  const progressLabel = document.getElementById('progress-label');
+  const errorBox = document.getElementById('submit-error');
+
+  btn.disabled = true;
+  errorBox.textContent = '';
+  errorBox.classList.remove('show');
+  progress.classList.add('show');
+
+  try {
+    // ===== STEP 1: Request presigned upload URL =====
+    btn.textContent = 'Requesting upload slot…';
+    progressLabel.textContent = 'STEP 1 / 3 · RESERVING TRANSMISSION SLOT';
+    progressFill.style.right = '100%';
+
+    const initRes = await fetch('/submission/api/upload-url', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        filename: selectedFile.name,
+        contentType: selectedFile.type || 'video/mp4',
+        size: selectedFile.size,
+      }),
+    });
+
+    if (!initRes.ok) {
+      const errText = await initRes.text();
+      throw new Error(`Reservation failed (${initRes.status}): ${errText}`);
+    }
+    const init = await initRes.json();
+    const { submissionId, uploadUrl } = init;
+    lastSubmissionId = submissionId;
+
+    // ===== STEP 2: Upload to Google Drive resumable session =====
+    btn.textContent = 'Transmitting…';
+    const uploadResponse = await uploadWithProgress(
+      uploadUrl,
+      selectedFile,
+      (pct, loaded, total) => {
+        progressFill.style.right = (100 - pct) + '%';
+        const loadedStr = fmtBytes(loaded);
+        const totalStr = fmtBytes(total);
+        progressLabel.textContent = `STEP 2 / 3 · TRANSMITTING · ${pct}% · ${loadedStr} / ${totalStr}`;
+        btn.textContent = `Transmitting ${pct}%`;
+      },
+      selectedFile.type || 'video/mp4',
+    );
+
+    // Drive's resumable PUT returns the new file's metadata as JSON
+    let driveFileId = null;
+    try {
+      const driveMeta = JSON.parse(uploadResponse);
+      driveFileId = driveMeta.id;
+    } catch (parseErr) {
+      throw new Error(
+        'Upload completed but Drive response was unreadable — contact staff with your submission ID: ' + submissionId,
+      );
+    }
+    if (!driveFileId) {
+      throw new Error('Drive did not return a file ID — upload may have silently failed');
+    }
+
+    // ===== STEP 3: Finalize =====
+    btn.textContent = 'Finalizing…';
+    progressLabel.textContent = 'STEP 3 / 3 · WRITING MANIFEST';
+
+    const attestations = {};
+    document.querySelectorAll('.attest input[type=checkbox]').forEach(c => {
+      attestations[c.id] = c.checked;
+    });
+
+    const metadataPayload = {
+      teamId: document.getElementById('team').value.trim(),
+      discord: document.getElementById('discord').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      title: document.getElementById('title').value.trim(),
+      logline: document.getElementById('logline').value.trim(),
+      tool: document.getElementById('tool').value,
+      filename: selectedFile.name,
+      specs: {
+        size: videoMeta.size,
+        width: videoMeta.width,
+        height: videoMeta.height,
+        duration: videoMeta.duration,
+        fps: videoMeta.fps,
+      },
+      attestations,
+    };
+
+    const finalRes = await fetch('/submission/api/finalize', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ submissionId, driveFileId, metadata: metadataPayload }),
+    });
+    if (!finalRes.ok) {
+      const errText = await finalRes.text();
+      throw new Error(`Finalize failed (${finalRes.status}): ${errText}`);
+    }
+    const final = await finalRes.json();
+
+    // Success
+    progressFill.style.right = '0%';
+    progressLabel.textContent = 'TRANSMISSION COMPLETE';
+    btn.textContent = 'Transmitted ✓';
+
+    const ts = new Date(final.submittedAt).toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
+      year: 'numeric', month: 'short', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+    document.getElementById('submit-id').textContent = submissionId;
+    document.getElementById('submit-ts').textContent = ts + ' PT';
+    document.getElementById('submit-title').textContent = metadataPayload.title;
+    document.getElementById('success').classList.add('show');
+
+    // Leave button disabled after success — prevent double-submit
+  } catch (err) {
+    console.error('[SOULSCAPE] Submission failed:', err);
+    progress.classList.remove('show');
+    errorBox.textContent = '⚠ ' + (err.message || String(err)) + ' — Click "Retry Transmission" to try again. Your file and form are preserved.';
+    errorBox.classList.add('show');
+    btn.textContent = 'Retry Transmission';
+    btn.disabled = false;
+    isSubmitting = false;
+  }
+}
+
+function uploadWithProgress(url, file, onProgress, contentType) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    if (contentType) xhr.setRequestHeader('Content-Type', contentType);
+    xhr.upload.onprogress = e => {
+      if (e.lengthComputable) {
+        const pct = Math.floor((e.loaded / e.total) * 100);
+        onProgress(pct, e.loaded, e.total);
+      }
+    };
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText || '');
+      else reject(new Error(`Upload rejected by Drive (HTTP ${xhr.status}): ${xhr.responseText || 'no body'}`));
+    };
+    xhr.onerror = () => reject(new Error('Network error during upload — check your connection and retry'));
+    xhr.onabort = () => reject(new Error('Upload aborted'));
+    xhr.send(file);
+  });
+}
+
+function fmtBytes(bytes) {
+  if (!bytes) return '0 MB';
+  const mb = bytes / (1024 * 1024);
+  if (mb < 1024) return mb.toFixed(0) + ' MB';
+  return (mb / 1024).toFixed(2) + ' GB';
+}
+
+// Close success on background click
+document.getElementById('success').addEventListener('click', e => {
+  if (e.target.id === 'success') {
+    document.getElementById('success').classList.remove('show');
+  }
+});
+
+// -------------------- Init --------------------
+setTimeout(() => {
+  resetChecklist();
+  validateForm();
+}, 100);
+
+// Remove intro overlay from DOM after animation
+setTimeout(() => {
+  const intro = document.getElementById('intro');
+  if (intro) intro.remove();
+}, 4200);
+</script>
+
+</body>
+</html>

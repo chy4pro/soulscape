@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soulscape 2026 · Admin Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Geist+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --void: #020204;
+  --text: #ffffff;
+  --text-mid: rgba(255, 255, 255, 0.90);
+  --text-dim: rgba(255, 255, 255, 0.70);
+  --text-faint: rgba(255, 255, 255, 0.46);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.22);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-hover: rgba(255, 255, 255, 0.055);
+  --warm: #ff781e;
+  --warm-soft: rgba(255, 120, 30, 0.08);
+  --warm-glow: rgba(255, 120, 30, 0.4);
+  --success: #4ade80;
+  --error: #ff4d4d;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--void);
+  color: var(--text);
+  min-height: 100vh;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: var(--warm);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--warm);
+}
+.topbar .right {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 1.8px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+h1 em { font-style: italic; color: var(--warm); }
+
+.sub {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.stat {
+  padding: 22px 24px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+}
+.stat .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.stat .v {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 500;
+  color: var(--warm);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search {
+  flex: 1;
+  min-width: 260px;
+  padding: 13px 18px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.3s;
+}
+.search::placeholder { color: var(--text-faint); }
+.search:focus {
+  border-color: var(--warm);
+  box-shadow: 0 0 0 1px var(--warm);
+}
+.btn {
+  padding: 13px 22px;
+  background: none;
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.btn:hover {
+  border-color: var(--warm);
+  background: var(--warm-soft);
+  color: var(--warm);
+}
+
+.table-wrap {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th, td {
+  text-align: left;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.02);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+td {
+  color: var(--text-mid);
+  font-weight: 400;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--glass-hover); }
+tr.hidden { display: none; }
+
+.mono {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+.id {
+  color: var(--warm);
+  font-weight: 500;
+}
+.title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 280px;
+  white-space: normal;
+  line-height: 1.3;
+}
+.ok { color: var(--success); }
+.bad { color: var(--error); }
+.dim { color: var(--text-faint); }
+
+.dl-btn {
+  padding: 7px 14px;
+  background: none;
+  border: 1px solid var(--border-hover);
+  color: var(--text-mid);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s;
+}
+.dl-btn:hover {
+  border-color: var(--warm);
+  background: var(--warm-soft);
+  color: var(--warm);
+}
+
+.loading, .empty, .error-box {
+  padding: 80px 30px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.error-box { color: var(--error); }
+
+.footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+  font-weight: 500;
+}
+
+details.json {
+  cursor: pointer;
+}
+details.json summary {
+  color: var(--warm);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  list-style: none;
+}
+details.json summary::-webkit-details-marker { display: none; }
+details.json summary::before { content: '▸ '; }
+details.json[open] summary::before { content: '▾ '; }
+details.json pre {
+  margin-top: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-width: 520px;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Soulscape · 2026 · Admin Console</div>
+  <div class="right">
+    <span id="clock">—</span>
+    <a class="btn" id="drive-folder-link" href="#" target="_blank" style="display:none;text-decoration:none">▸ Drive Folder</a>
+    <button class="btn" onclick="logout()">Lock</button>
+  </div>
+</div>
+
+<h1><em>Submissions</em> Log</h1>
+<p class="sub">Live view of every film that's been transmitted to R2. Newest first. Click a row's download button to pull the MP4 via a short-lived signed URL.</p>
+
+<div class="stats">
+  <div class="stat"><div class="k">Total Submissions</div><div class="v" id="stat-total">—</div></div>
+  <div class="stat"><div class="k">Unique Teams</div><div class="v" id="stat-teams">—</div></div>
+  <div class="stat"><div class="k">Total Size</div><div class="v" id="stat-size">—</div></div>
+  <div class="stat"><div class="k">Last Submission</div><div class="v" id="stat-last">—</div></div>
+</div>
+
+<div class="controls">
+  <input type="text" class="search" id="search" placeholder="Filter by team ID, title, email, discord..." oninput="filterRows()">
+  <button class="btn" onclick="loadSubmissions()">↻ Refresh</button>
+  <button class="btn" onclick="exportCsv()">⇩ Export CSV</button>
+</div>
+
+<div class="table-wrap">
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th>Submitted (PT)</th>
+        <th>Team ID</th>
+        <th>Film Title</th>
+        <th>Specs</th>
+        <th>Size</th>
+        <th>Tool</th>
+        <th>Discord</th>
+        <th>Email</th>
+        <th>Submission ID</th>
+        <th>Metadata</th>
+        <th>Film</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr><td colspan="11" class="loading">Loading submissions…</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">Soul over Slop &bull; Authorized personnel only &bull; All downloads signed and logged</div>
+
+<script>
+const AUTH_KEY = 'soulscape_admin_token';
+let allRows = [];
+
+function getToken() {
+  let token = sessionStorage.getItem(AUTH_KEY);
+  if (!token) {
+    token = prompt('Admin password:');
+    if (!token) return null;
+    sessionStorage.setItem(AUTH_KEY, token);
+  }
+  return token;
+}
+
+function logout() {
+  sessionStorage.removeItem(AUTH_KEY);
+  location.reload();
+}
+
+function authHeader() {
+  const token = getToken();
+  if (!token) return null;
+  return { 'Authorization': 'Bearer ' + token };
+}
+
+async function loadSubmissions() {
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '<tr><td colspan="11" class="loading">Loading submissions…</td></tr>';
+
+  const headers = authHeader();
+  if (!headers) return;
+
+  try {
+    const res = await fetch('/submission/api/admin/list', { headers });
+    if (res.status === 401) {
+      sessionStorage.removeItem(AUTH_KEY);
+      tbody.innerHTML = '<tr><td colspan="11" class="error-box">Authentication failed — refresh to retry</td></tr>';
+      return;
+    }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    const data = await res.json();
+    allRows = data.submissions || [];
+    if (data.folderUrl) {
+      const link = document.getElementById('drive-folder-link');
+      link.href = data.folderUrl;
+      link.style.display = 'inline-block';
+    }
+    renderRows(allRows);
+    updateStats(allRows);
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="11" class="error-box">Failed to load: ' + (err.message || err) + '</td></tr>';
+  }
+}
+
+function renderRows(rows) {
+  const tbody = document.getElementById('tbody');
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="11" class="empty">No submissions yet</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = rows.map(r => {
+    if (r.error) {
+      return `<tr>
+        <td class="dim">—</td>
+        <td colspan="10" class="bad mono">⚠ ${escape(r.submissionId || r._metadataFileName || 'unknown')}: ${escape(r.error)}</td>
+      </tr>`;
+    }
+    const team = r.team || {};
+    const film = r.film || {};
+    const specs = (r.source && r.source.specs) || {};
+    const size = r.videoSize ? fmtSize(r.videoSize) : '—';
+    const submitted = r.submittedAt ? fmtDate(r.submittedAt) : '—';
+
+    const specStr = specs.width
+      ? `${specs.width}×${specs.height} · ${specs.fps ? specs.fps.toFixed(2) + 'p' : '?fps'} · ${fmtDur(specs.duration)}`
+      : '—';
+
+    // Drive file links — open in Drive native viewer (video preview + comments)
+    const videoViewUrl = r.driveViewLink || (r.driveFileId ? `https://drive.google.com/file/d/${r.driveFileId}/view` : null);
+    const metadataViewUrl = r._metadataFileId ? `https://drive.google.com/file/d/${r._metadataFileId}/view` : null;
+
+    return `<tr data-search="${escape([team.teamId, film.title, team.discord, team.email, r.submissionId].join(' ').toLowerCase())}">
+      <td class="mono">${escape(submitted)}</td>
+      <td class="mono id">${escape(team.teamId || '—')}</td>
+      <td class="title">${escape(film.title || '—')}</td>
+      <td class="mono">${escape(specStr)}</td>
+      <td class="mono">${escape(size)}</td>
+      <td class="mono">${escape(film.primaryTool || '—')}</td>
+      <td class="mono">${escape(team.discord || '—')}</td>
+      <td class="mono">${escape(team.email || '—')}</td>
+      <td class="mono dim">${escape(r.submissionId || '—')}</td>
+      <td>${metadataViewUrl ? `<a class="dl-btn" href="${metadataViewUrl}" target="_blank">JSON</a>` : '<span class="dim">—</span>'}</td>
+      <td>${videoViewUrl ? `<a class="dl-btn" href="${videoViewUrl}" target="_blank">▸ Play</a>` : '<span class="dim">—</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function updateStats(rows) {
+  const valid = rows.filter(r => !r.error);
+  document.getElementById('stat-total').textContent = valid.length;
+
+  const teams = new Set(valid.map(r => (r.team && r.team.teamId) || '').filter(Boolean));
+  document.getElementById('stat-teams').textContent = teams.size;
+
+  const totalBytes = valid.reduce((acc, r) => acc + (r.videoSize || 0), 0);
+  document.getElementById('stat-size').textContent = fmtSize(totalBytes) || '0';
+
+  const last = valid[0] && valid[0].submittedAt ? fmtShort(valid[0].submittedAt) : '—';
+  document.getElementById('stat-last').textContent = last;
+}
+
+function filterRows() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('#tbody tr').forEach(tr => {
+    const d = tr.getAttribute('data-search') || '';
+    tr.classList.toggle('hidden', !!q && !d.includes(q));
+  });
+}
+
+function exportCsv() {
+  const valid = allRows.filter(r => !r.error);
+  if (!valid.length) { alert('Nothing to export'); return; }
+  const headers = ['submittedAt', 'teamId', 'title', 'logline', 'primaryTool', 'discord', 'email', 'submissionId', 'driveFileId', 'driveFileName', 'driveViewLink', 'videoSize', 'videoMd5', 'width', 'height', 'fps', 'duration'];
+  const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const lines = [headers.join(',')];
+  for (const r of valid) {
+    const team = r.team || {}, film = r.film || {}, specs = (r.source && r.source.specs) || {};
+    const driveViewLink = r.driveViewLink || (r.driveFileId ? `https://drive.google.com/file/d/${r.driveFileId}/view` : '');
+    lines.push([
+      r.submittedAt, team.teamId, film.title, film.logline, film.primaryTool,
+      team.discord, team.email, r.submissionId, r.driveFileId, r.driveFileName, driveViewLink,
+      r.videoSize, r.videoMd5,
+      specs.width, specs.height, specs.fps ? specs.fps.toFixed(3) : '', specs.duration ? specs.duration.toFixed(2) : ''
+    ].map(esc).join(','));
+  }
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `soulscape-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function fmtSize(bytes) {
+  if (!bytes || bytes <= 0) return '—';
+  const mb = bytes / (1024 * 1024);
+  if (mb < 1024) return mb.toFixed(0) + ' MB';
+  return (mb / 1024).toFixed(2) + ' GB';
+}
+function fmtDur(sec) {
+  if (!sec || sec <= 0) return '—';
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ':' + String(s).padStart(2, '0');
+}
+function fmtDate(iso) {
+  try {
+    return new Date(iso).toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
+      month: 'short', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+  } catch { return iso; }
+}
+function fmtShort(iso) {
+  try {
+    return new Date(iso).toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    });
+  } catch { return iso; }
+}
+function escape(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function tickClock() {
+  const now = new Date().toLocaleString('en-US', {
+    timeZone: 'America/Los_Angeles',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+  });
+  document.getElementById('clock').textContent = now + ' PT';
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+loadSubmissions();
+// Auto-refresh every 60s
+setInterval(loadSubmissions, 60000);
+</script>
+
+</body>
+</html>
