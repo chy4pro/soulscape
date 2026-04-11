@@ -1159,6 +1159,180 @@ body.uploading .hero {
   transition: opacity 0.3s, filter 0.3s;
 }
 
+/* Section 05 — NOTES / prize-claim reminder */
+.notes-card {
+  position: relative;
+  padding: 40px 44px 44px;
+  background: rgba(255, 120, 30, 0.045);
+  border: 1px solid rgba(255, 120, 30, 0.35);
+}
+.notes-card::before,
+.notes-card::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--warm);
+  pointer-events: none;
+}
+.notes-card::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+.notes-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.notes-tapnow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 26px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.notes-tapnow img {
+  height: 44px;
+  width: auto;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+.notes-tapnow-text {
+  flex: 1;
+  min-width: 0;
+}
+.notes-tapnow-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.notes-tapnow-headline {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.notes-callout {
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--warm);
+  margin-bottom: 24px;
+}
+.notes-callout-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.notes-callout-label::before {
+  content: '▲';
+  font-size: 9px;
+}
+.notes-callout-body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-mid);
+  font-weight: 400;
+}
+.notes-callout-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.notes-callout-body a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 18px;
+  background: var(--warm);
+  color: var(--void);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s;
+}
+.notes-callout-body a:hover {
+  background: #fff;
+  box-shadow: 0 0 32px var(--warm-glow);
+  transform: translateY(-1px);
+}
+.notes-callout-body a::after {
+  content: ' ↗';
+}
+
+.notes-body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+/* Partners strip — mirror main site visual language */
+.notes-partners {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.notes-partners-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+.notes-partners-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  row-gap: 28px;
+}
+.notes-partners-row img {
+  height: 34px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+  transition: all 0.4s ease;
+}
+.notes-partners-row img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+@media (max-width: 620px) {
+  .notes-tapnow { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .notes-tapnow img { height: 38px; }
+  .notes-tapnow-headline { font-size: 20px; }
+  .notes-partners-row { gap: 32px; }
+  .notes-partners-row img { height: 28px; }
+  .notes-card { padding: 32px 26px; }
+}
+
 .submit-error {
   display: none;
   margin-top: 22px;
@@ -1372,6 +1546,7 @@ body.uploading .hero {
     <div class="rail-item" data-step="2">02 &mdash; Film</div>
     <div class="rail-item" data-step="3">03 &mdash; Upload</div>
     <div class="rail-item" data-step="4">04 &mdash; Attest</div>
+    <div class="rail-item" data-step="5">05 &mdash; Notes</div>
   </div>
 
   <section class="hero">
@@ -1575,6 +1750,50 @@ body.uploading .hero {
         <div class="submit-error" id="submit-error"></div>
 
         <div class="submit-note">Portal closes at 23:59 PT sharp &bull; Zero tolerance policy active</div>
+      </div>
+    </section>
+
+    <!-- 05: NOTES -->
+    <section class="section" id="sec-5">
+      <div class="sec-head">
+        <div class="sec-num">05</div>
+        <div class="sec-title"><em>Notes</em></div>
+        <div class="sec-sub">Read before you leave</div>
+      </div>
+
+      <div class="notes-card">
+        <div class="notes-tapnow">
+          <img src="https://soulscapefilm.com/logos/tapnow-white.png" alt="Tapnow">
+          <div class="notes-tapnow-text">
+            <div class="notes-tapnow-kicker">Special Thanks To Our Grand Prize Partner</div>
+            <div class="notes-tapnow-headline">Tapnow &mdash; powering the Resonance Iris &amp; Viral Pioneer awards</div>
+          </div>
+        </div>
+
+        <div class="notes-callout">
+          <div class="notes-callout-label">Prize Winners &mdash; Mandatory Step Before Claiming Reward</div>
+          <div class="notes-callout-body">
+            If your film is selected for <strong>any Tapnow-presented award</strong> (The Resonance Iris, The Viral Pioneer, etc.), you <strong>must publish the winning film to TapTV before your prize can be claimed</strong>. This is a hard requirement from the Grand Prize partner and is non-negotiable.
+            <br>
+            <a href="https://app.tapnow.ai/home/taptv" target="_blank" rel="noopener">Publish to TapTV</a>
+          </div>
+        </div>
+
+        <div class="notes-body">
+          We'll reach out to selected teams directly via the Team Lead email on file once Greenlight Sessions conclude on Sunday. Make sure your inbox and Discord DMs are open.
+        </div>
+
+        <div class="notes-partners">
+          <div class="notes-partners-label">Presented in Partnership With</div>
+          <div class="notes-partners-row">
+            <img src="https://soulscapefilm.com/logos/tapnow-white.png" alt="Tapnow">
+            <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/2.png" alt="YouArt">
+            <img src="https://soulscapefilm.com/logos/Gleam.png" alt="GLeam">
+            <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/logos/12.png" alt="Minimax">
+            <img src="https://soulscapefilm.com/logos/escape_white.svg" alt="Escape AI">
+            <img src="https://soulscapefilm.com/logos/fumoro.png" alt="Fumoro">
+          </div>
+        </div>
       </div>
     </section>
 
