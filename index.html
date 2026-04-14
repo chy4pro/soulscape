@@ -59,7 +59,7 @@
           "keywords": "AI film festival, AI movie festival, AI cinema lab, AI filmmaking summit, San Francisco",
           "offers": {
             "@type": "Offer",
-            "url": "https://soulscapefilm.com/join-us.html",
+            "url": "https://soulscapefilm.com/winners.html",
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
@@ -531,65 +531,7 @@
             <a href="#tracks" class="hover:text-orange-300 transition-colors">Lab & Summit</a>
             <a href="KQED_Attendee_Guide.html" class="hover:text-orange-300 transition-colors text-orange-200">Attendee Guide</a>
 
-            <!-- Get Involved Dropdown -->
-            <div class="relative group" x-data="{ open: false }">
-                <button @mouseenter="open = true" @mouseleave="open = false"
-                    class="flex items-center gap-1 hover:text-orange-300 transition-colors py-4">
-                    GET INVOLVED <i class="fas fa-chevron-down text-[8px] opacity-70 transition-transform"
-                        :class="open ? 'rotate-180' : ''"></i>
-                </button>
-
-                <div x-show="open" @mouseenter="open = true" @mouseleave="open = false"
-                    x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 translate-y-2"
-                    x-transition:enter-end="opacity-100 translate-y-0"
-                    x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 translate-y-0"
-                    x-transition:leave-end="opacity-0 translate-y-2"
-                    class="absolute left-1/2 -translate-x-1/2 top-[80%] pt-4 z-50 min-w-[240px]">
-                    <div class="bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl p-2 shadow-2xl">
-                        <!-- Partner -->
-                        <a href="sponsor.html" target="_blank"
-                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
-                            <div
-                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
-                                Partner with Us</div>
-                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">For
-                                Brands & Studios</div>
-                        </a>
-
-                        <!-- Council -->
-                        <a href="speaker-application.html" target="_blank"
-                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
-                            <div
-                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
-                                Join the Council</div>
-                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">
-                                Speakers, Mentors & Jurors</div>
-                        </a>
-
-                        <!-- Alliance -->
-                        <a href="alliance.html" target="_blank"
-                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors text-left">
-                            <div
-                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
-                                Global Alliance</div>
-                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">
-                                Festivals & Communities</div>
-                        </a>
-
-                        <!-- Volunteer -->
-                        <a href="join-us.html" target="_blank"
-                            class="block px-4 py-3 hover:bg-white/5 rounded-lg group/item transition-colors border-t border-white/5 mt-1 pt-3 text-left">
-                            <div
-                                class="text-white font-serif-italic text-lg leading-none mb-1 group-hover/item:text-orange-300 transition-colors">
-                                Volunteer / Crew</div>
-                            <div class="text-[11px] text-white/40 font-mono-technical uppercase tracking-wider">Join the
-                                Team</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <a href="winners.html" class="hover:text-pink-300 transition-colors font-bold tracking-widest uppercase">Winners</a>
         </div>
 
         <div class="pointer-events-auto flex items-center gap-2 md:gap-4">
@@ -605,7 +547,7 @@
                 class="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all">
                 <i class="fa-brands fa-x-twitter text-xs"></i>
             </a>
-            <a href="#tracks" class="btn-primary py-1.5 px-4 md:py-2 md:px-6 text-[10px] md:text-xs font-bold">Register</a>
+            <a href="winners.html" class="btn-primary py-1.5 px-4 md:py-2 md:px-6 text-[10px] md:text-xs font-bold bg-gradient-to-r from-pink-500/80 to-purple-500/80 border-none hover:from-pink-400 hover:to-purple-400">View Winners</a>
         </div>
     </nav>
 
@@ -650,7 +592,7 @@
 
             <div
                 class="hero-element flex flex-col md:flex-row justify-center items-center gap-3 md:gap-5 opacity-0 translate-y-8">
-                <a href="#tracks" class="btn-primary py-3 px-8 text-xs hover-target">Join the Movement</a>
+                <a href="winners.html" class="btn-primary py-3 px-8 text-xs hover-target bg-gradient-to-r from-pink-500/80 to-purple-500/80 border-none hover:from-pink-400 hover:to-purple-400">View Winners</a>
                 <a href="https://discord.gg/75QUdbYY9B" target="_blank"
                     class="btn-secondary py-3 px-8 text-xs hover-target">
                     <i class="fab fa-discord mr-2"></i> Community
@@ -765,10 +707,10 @@
                         <img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/Soulscape_Gallery/DSC00173-122.jpg"
                             alt="Community" class="rounded-xl w-full">
                         <!-- Persistent Floating CTA -->
-                        <a href="join-us.html" target="_blank"
+                        <a href="winners.html"
                             class="absolute bottom-6 right-6 px-6 py-3 bg-black/60 backdrop-blur-md border border-white/20 rounded-full flex items-center gap-3 group/btn hover:bg-white hover:text-black transition-all duration-300 shadow-2xl z-20">
-                            <span class="font-mono-technical text-[10px] tracking-widest uppercase">Join the Team</span>
-                            <i class="fas fa-plus text-[10px] transition-transform group-hover/btn:rotate-90"></i>
+                            <span class="font-mono-technical text-[10px] tracking-widest uppercase">View Winners</span>
+                            <i class="fas fa-arrow-right text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
                         </a>
                     </div>
                 </div>
@@ -2531,43 +2473,11 @@
                     <span class="font-serif-italic text-4xl text-emerald-400 active:text-orange-300 transition-colors">Attendee Guide</span>
                 </a>
 
-                <!-- Get Involved Accordion -->
-                <div class="flex flex-col">
-                    <button @click="getInvolvedOpen = !getInvolvedOpen" class="group flex flex-col text-left">
-                        <span
-                            class="font-mono-technical text-[9px] text-orange-400 tracking-[0.3em] mb-1 opacity-100">[05]
-                            CONNECT</span>
-                        <div class="flex items-center gap-3">
-                            <span class="font-serif-italic text-4xl text-white">Get Involved</span>
-                            <i class="fas fa-chevron-down text-sm text-orange-400 transition-transform duration-300"
-                                :class="getInvolvedOpen ? 'rotate-180' : ''"></i>
-                        </div>
-                    </button>
-
-                    <div x-show="getInvolvedOpen" x-collapse
-                        class="mt-4 space-y-4 pl-4 border-l border-white/10 bg-white/5 py-4 rounded-r-xl">
-                        <a href="sponsor.html" target="_blank" class="block px-2">
-                            <div class="text-white font-serif-italic text-xl">Partner with Us</div>
-                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Brands &
-                                Studios</div>
-                        </a>
-                        <a href="speaker-application.html" target="_blank" class="block px-2">
-                            <div class="text-white font-serif-italic text-xl">Join the Council</div>
-                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Speakers
-                                & Mentors</div>
-                        </a>
-                        <a href="join-us.html" target="_blank" class="block px-2">
-                            <div class="text-white font-serif-italic text-xl">Global Alliance</div>
-                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Festivals
-                                & Communities</div>
-                        </a>
-                        <a href="join-us.html" target="_blank" class="block px-2">
-                            <div class="text-white font-serif-italic text-xl">Volunteer / Crew</div>
-                            <div class="text-[9px] text-white/40 font-mono-technical uppercase tracking-wider">Join the
-                                Team</div>
-                        </a>
-                    </div>
-                </div>
+                <a href="winners.html" @click="mobileNavOpen = false" class="group flex flex-col">
+                    <span class="font-mono-technical text-[9px] text-pink-400 tracking-[0.3em] mb-1 opacity-100">[06]
+                        AWARDS</span>
+                    <span class="font-serif-italic text-4xl text-white active:text-pink-300 transition-colors">Winners</span>
+                </a>
             </nav>
 
             <!-- Terminal Readout Accents -->
