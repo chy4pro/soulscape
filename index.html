@@ -2083,8 +2083,52 @@
         // Gallery Image Injection
         const galleryScroll = document.getElementById('galleryScroll');
         if (galleryScroll) {
-            const imageFiles = ['10.jpg', '11.jpg', '12.jpg', '200.jpg', 'DSC00173-122.jpg', 'DSC00010-78.jpg', 'DSC00029-88.jpg', 'DSC09971-57.jpg'];
-
+            const imageFiles = ['DSC00173-122.jpg'];
+            const imageFilesSFImages = [
+                'DSC00173-122.jpg',
+                '1775885346707.jpeg',
+                '1775885346732.jpeg',
+                '1775885346739.jpeg',
+                '1775885346751.jpeg',
+                '1775885346800.jpeg',
+                '1775885346836.jpeg',
+                '1776143732955.jpeg',
+                '1776143733041.jpeg',
+                '1776143733094.jpeg',
+                '1776143733102.jpeg',
+                '1776143733104.jpeg',
+                '1776143736076.jpeg',
+                'DSC00032ccc.JPG',
+                'DSC00237.JPG',
+                'DSC00250.JPG',
+                'DSC00255.JPG',
+                'DSC00259.JPG',
+                'DSC00366.JPG',
+                'DSC00382-opq3018972222.jpg',
+                'DSC00530.JPG',
+                'DSC00600.JPG',
+                'DSC00612.JPG',
+                'DSC00706.JPG',
+                'DSC01167.JPG',
+                'DSC01232.JPG',
+                'DSC01266.JPG',
+                'DSC09064.JPG',
+                'DSC09079.JPG',
+                'DSC09174.JPG',
+                'DSC09204.JPG',
+                'DSC09238.JPG',
+                'DSC09301.JPG',
+                'DSC09307.JPG',
+                'DSC09477.JPG',
+                'DSC09576.JPG',
+                'DSC09591.JPG',
+                'DSC09777-opq3018859414.jpg',
+                'DSC09801.JPG',
+                'DSC09825.JPG',
+                'DSC09926.JPG',
+                'DSC09995.JPG',
+                'DSC09997.JPG'
+            ];
             // Generate cards function
             const createCard = (src) => {
                 const div = document.createElement('div');
@@ -2092,18 +2136,18 @@
                 div.innerHTML = `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/image/Soulscape_Gallery/${src}" alt="Soulscape gallery image ${src}" class="w-full h-full object-cover rounded-lg pointer-events-none" loading="lazy">`;
                 return div;
             };
-
-            // Needs 2 sets for infinite scroll (0 to -50%)
-            // We'll duplicate the original set enough times to look good, then double THAT whole block.
-            // Let's make one "block" be 2 sets of images, then double that block to get 4 total sets.
-            // setA = images * 2
-            // total = setA + setA
-
-            const singleSet = [...imageFiles, ...imageFiles];
-            const doubleSet = [...singleSet, ...singleSet];
-
-            doubleSet.forEach(src => {
-                galleryScroll.appendChild(createCard(src));
+            const createCardSF = (src) => {
+                const div = document.createElement('div');
+                div.className = 'w-64 h-48 md:w-80 md:h-56 flex-shrink-0 rounded-xl overflow-hidden glass-card p-1 hover:scale-105 transition-transform duration-500 cursor-pointer';
+                div.innerHTML = `<img src="https://d33e382l66m7o1.cloudfront.net/soulscape/2026sfevent/${src}" alt="Soulscape gallery image ${src}" class="w-full h-full object-cover rounded-lg pointer-events-none" loading="lazy">`;
+                return div;
+            };
+            
+            // Merge and populate gallery with both image sources
+            const allGalleryImages = [...imageFilesSFImages, ...imageFiles];
+            allGalleryImages.forEach((src, index) => {
+                const card = index < imageFilesSFImages.length ? createCardSF(src) : createCard(src);
+                galleryScroll.appendChild(card);
             });
         }
 
